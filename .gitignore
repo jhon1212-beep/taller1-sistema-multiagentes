@@ -20,3 +20,10 @@ Thumbs.db
 .idea/
 .vscode/
 *.log
+
+# Archivos de credenciales (RN-001)
+*.pem
+*.key
+*service-account*.json
+*credentials*.json
+
