@@ -1,0 +1,15 @@
+{
+  "modelo": "gemini-3.8-flash",
+  "resumen": "El 28 de septiembre se estableció la estructura base del repositorio. Al día siguiente, se definió el modelo de datos inicial del proyecto.",
+  "tokens": {
+    "input_tokens": 60,
+    "output_tokens": 456,
+    "total_tokens": 516,
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "output_token_details": {
+      "reasoning": 427
+    }
+  }
+}

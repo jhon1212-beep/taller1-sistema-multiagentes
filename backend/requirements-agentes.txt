@@ -1,0 +1,6 @@
+-r requirements.txt
+langgraph
+langchain-google-genai
+google-genai
+langsmith
+requests
