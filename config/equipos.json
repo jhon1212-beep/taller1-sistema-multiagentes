@@ -1,0 +1,12 @@
+{
+  "_comentario": "HU-001 · Mapeo equipo → repositorio. Cambia 'repositorio' por los repos reales del curso. Si el nombre no lleva 'owner/', se usa GITHUB_ORG del .env.",
+  "curso": "Ingeniería de Software 2026-II",
+  "equipos": [
+    { "nombre": "Equipo Alfa",    "repositorio": "alfa-proyecto",    "deadline_sprint": "2026-10-16T23:59:00Z" },
+    { "nombre": "Equipo Beta",    "repositorio": "beta-reservas",    "deadline_sprint": "2026-10-16T23:59:00Z" },
+    { "nombre": "Equipo Gamma",   "repositorio": "gamma-proyecto",   "deadline_sprint": "2026-10-16T23:59:00Z" },
+    { "nombre": "Equipo Delta",   "repositorio": "delta-proyecto",   "deadline_sprint": "2026-10-16T23:59:00Z" },
+    { "nombre": "Equipo Epsilon", "repositorio": "epsilon-proyecto", "deadline_sprint": "2026-10-16T23:59:00Z" },
+    { "nombre": "Equipo Zeta",    "repositorio": "zeta-proyecto",    "deadline_sprint": "2026-10-16T23:59:00Z" }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "_comentario": "Configuración de PRUEBA con repositorios públicos reales. Sirve para verificar que la integración funciona sin necesidad de token (acceso anónimo: 60 peticiones/hora). Para usarla: copia este archivo sobre equipos.json o ejecuta la prueba de humo.",
+  "curso": "Prueba de integración",
+  "equipos": [
+    { "nombre": "Demo Octocat", "repositorio": "octocat/Hello-World", "deadline_sprint": "2026-10-16T23:59:00Z" }
+  ]
+}
