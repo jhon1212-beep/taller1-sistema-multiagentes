@@ -1,0 +1,21 @@
+{
+  "notion_version": "2025-09-03",
+  "http": {
+    "database": 200,
+    "data_source": 200,
+    "query": 200
+  },
+  "propiedades": {
+    "Responsable": "people",
+    "Fecha límite": "date",
+    "Estado": "status",
+    "Tarea": "title"
+  },
+  "chequeo": {
+    "Tarea": "ok",
+    "Responsable": "ok",
+    "Estado": "ok",
+    "Fecha límite": "ok"
+  },
+  "filas_leidas": 4
+}
