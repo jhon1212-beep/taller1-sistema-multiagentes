@@ -1,28 +1,10 @@
-# Secretos: nunca se suben (RN-001)
+# EN-001 · Nunca versionar credenciales reales
 .env
-.env.*
-!.env.example
 
-# Python
-.venv/
-venv/
+# Datos generados por el agente recolector
+data/
+
+# Temporales
 __pycache__/
 *.pyc
-.pytest_cache/
-
-# Node / Vite
-node_modules/
-dist/
-
-# Sistema y editores
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
-*.log
-
-# Archivos de credenciales (RN-001)
-*.pem
-*.key
-*service-account*.json
-*credentials*.json
+_tmp*.html
