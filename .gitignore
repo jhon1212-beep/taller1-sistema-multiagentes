@@ -1,10 +1,26 @@
-# EN-001 · Nunca versionar credenciales reales
+# Secretos: nunca se suben (RN-001)
 .env
+.env.*
+!.env.example
 
-# Datos generados por el agente recolector
+# Datos generados por el agente recolector (scripts/sync_github.py)
 data/
 
-# Temporales
+# Python
+.venv/
+venv/
 __pycache__/
 *.pyc
+.pytest_cache/
+
+# Node / Vite
+node_modules/
+dist/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
 _tmp*.html
