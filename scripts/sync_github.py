@@ -20,8 +20,10 @@ import os
 import sys
 from datetime import datetime, timedelta, timezone
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from github_client import GitHubClient, GitHubError, RateLimitError, cargar_env  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backend"))
+from app.modulos.evidencias.adaptadores.github.cliente import (  # noqa: E402
+    GitHubClient, GitHubError, RateLimitError, cargar_env,
+)
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIR_CONFIG = os.path.join(RAIZ, "config")
