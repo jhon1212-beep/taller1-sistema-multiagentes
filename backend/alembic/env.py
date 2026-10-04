@@ -8,8 +8,8 @@ from sqlalchemy import create_engine, pool
 # Permite importar el paquete "app" al ejecutar alembic desde /backend
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from app.config import obtener_database_url  # noqa: E402
-from app.models import Base  # noqa: E402
+from app.compartido.config import obtener_database_url  # noqa: E402
+from app.compartido.modelos_orm import Base  # noqa: E402
 
 config = context.config
 if config.config_file_name is not None:
