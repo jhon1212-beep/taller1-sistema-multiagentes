@@ -1,6 +1,6 @@
 # Agentes inteligentes para el seguimiento y supervisión de proyectos de software académicos
 
-Taller Integrador 1 · Grupo 8 · UPAO. Aplicación web para el docente: agentes que extraen la evidencia de GitHub, Notion y Google Drive, calculan los indicadores I1–I4 y generan alertas R1–R4.
+Taller Integrador 1 · Grupo 12 · UPAO. Aplicación web para el docente: agentes que extraen la evidencia de GitHub, Notion y Google Drive, calculan los indicadores I1–I4 y generan alertas R1–R4.
 
 ## Estructura
 
