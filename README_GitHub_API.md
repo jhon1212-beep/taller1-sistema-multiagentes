@@ -1,23 +1,50 @@
 # EN-001 · Configuración de la GitHub API
 
 Integración real de solo lectura con la GitHub API para el agente recolector (HU-001).
-Sin dependencias externas: usa solo la librería estándar de Python 3.11+.
+El cliente usa la librería estándar de Python 3.11+ y la configuración
+compartida del backend, que requiere `python-dotenv`.
 
 ## Estructura
 
-```
+```text
 ProyectoAgente/
 ├── .env                      ← TU token (no se versiona)
 ├── .env.example              ← plantilla sin credenciales
+├── backend/
+│   └── app/
+│       ├── compartido/
+│       │   ├── config.py      ← configuración compartida
+│       │   ├── db.py          ← conexión y sesiones de base de datos
+│       │   └── modelos_orm.py ← modelos de base de datos
+│       └── modulos/
+│           └── evidencias/
+│               ├── dominio.py ← contrato común de evidencia
+│               ├── puertos.py ← interfaces de fuentes de evidencia
+│               ├── adaptadores/
+│               │   ├── falso.py ← fuente de evidencia simulada
+│               │   └── github/
+│               │       ├── cliente.py ← cliente de la API (commits, ramas, PRs, issues)
+│               │       └── adaptador.py ← normalización de commits
+│               └── agentes/
+│                   └── agente_github.py ← nodo del agente GitHub
 ├── config/
 │   ├── equipos.json          ← mapeo equipo → repositorio
 │   └── equipos.ejemplo.json  ← repos públicos, para probar sin token
 ├── scripts/
-│   ├── github_client.py      ← cliente de la API (commits, ramas, PRs, issues)
 │   ├── sync_github.py        ← agente recolector + indicadores
 │   └── test_indicadores.py   ← pruebas (CP-01 / CP-02)
+├── tests/
+│   ├── test_agente_github.py ← pruebas del adaptador y del agente
+│   ├── test_modelo_datos.py  ← pruebas de tablas y relaciones
+│   └── test_health.py        ← prueba del endpoint de salud
 └── data/                     ← salida JSON (no se versiona)
 ```
+
+Se muestran las rutas relevantes para esta integración, no el listado
+completo del repositorio.
+
+Los scripts `sync_github.py` y `test_indicadores.py` utilizan el cliente
+ubicado en `backend/app/modulos/evidencias/adaptadores/github/cliente.py`.
 
 ## Paso 1 · Crear el token (lo haces tú, en GitHub)
 
@@ -39,11 +66,14 @@ ProyectoAgente/
 
 Copia `.env.example` a `.env` y pega tu token:
 
-```
+```dotenv
 GITHUB_TOKEN=github_pat_tu_token_real
 GITHUB_ORG=curso-ingsoft-2026-II
 GITHUB_API_URL=https://api.github.com
 ```
+
+Si ya tienes un archivo `.env`, agrega o actualiza estas variables
+sin reemplazar la configuración de los demás servicios.
 
 `.env` ya está en `.gitignore`. **Nunca lo subas al repositorio.**
 
@@ -59,6 +89,119 @@ Edita `config/equipos.json` con los repos reales de cada equipo:
 Si el repo está en otra cuenta, escribe `owner/repo`.
 
 ## Paso 4 · Usar
+
+Ejecuta los comandos desde la raíz del repositorio con el entorno
+del proyecto activado.
+
+```bash
+# Probar la conexión y ver el límite de peticiones
+python scripts/sync_github.py --check
+
+# Sincronizar todos los equipos
+python scripts/sync_github.py
+
+# Un solo equipo
+python scripts/sync_github.py --equipo Beta
+
+# Prueba de humo sin token (repositorio público)
+python scripts/sync_github.py --config equipos.ejemplo.json
+
+# Pruebas de los indicadores
+python scripts/test_indicadores.py
+# EN-001 · Configuración de la GitHub API
+
+Integración real de solo lectura con la GitHub API para el agente recolector (HU-001).
+El cliente usa la librería estándar de Python 3.11+ y la configuración
+compartida del backend, que requiere `python-dotenv`.
+
+## Estructura
+
+```text
+ProyectoAgente/
+├── .env                      ← TU token (no se versiona)
+├── .env.example              ← plantilla sin credenciales
+├── backend/
+│   └── app/
+│       ├── compartido/
+│       │   ├── config.py      ← configuración compartida
+│       │   ├── db.py          ← conexión y sesiones de base de datos
+│       │   └── modelos_orm.py ← modelos de base de datos
+│       └── modulos/
+│           └── evidencias/
+│               ├── dominio.py ← contrato común de evidencia
+│               ├── puertos.py ← interfaces de fuentes de evidencia
+│               ├── adaptadores/
+│               │   ├── falso.py ← fuente de evidencia simulada
+│               │   └── github/
+│               │       ├── cliente.py ← cliente de la API (commits, ramas, PRs, issues)
+│               │       └── adaptador.py ← normalización de commits
+│               └── agentes/
+│                   └── agente_github.py ← nodo del agente GitHub
+├── config/
+│   ├── equipos.json          ← mapeo equipo → repositorio
+│   └── equipos.ejemplo.json  ← repos públicos, para probar sin token
+├── scripts/
+│   ├── sync_github.py        ← agente recolector + indicadores
+│   └── test_indicadores.py   ← pruebas (CP-01 / CP-02)
+├── tests/
+│   ├── test_agente_github.py ← pruebas del adaptador y del agente
+│   ├── test_modelo_datos.py  ← pruebas de tablas y relaciones
+│   └── test_health.py        ← prueba del endpoint de salud
+└── data/                     ← salida JSON (no se versiona)
+```
+
+Se muestran las rutas relevantes para esta integración, no el listado
+completo del repositorio.
+
+Los scripts `sync_github.py` y `test_indicadores.py` utilizan el cliente
+ubicado en `backend/app/modulos/evidencias/adaptadores/github/cliente.py`.
+
+## Paso 1 · Crear el token (lo haces tú, en GitHub)
+
+1. GitHub → **Settings → Developer settings → Fine-grained tokens → Generate new token**
+2. **Resource owner:** la organización del curso
+3. **Repository access:** *Only select repositories* → los repos de los equipos
+4. **Permissions**, todos en **Read-only**:
+
+| Permiso | Para qué |
+|---|---|
+| Contents | Leer commits y ramas |
+| Pull requests | Leer PRs y su estado |
+| Issues | Leer issues y etiquetas |
+| Metadata | Obligatorio |
+
+> Nunca se piden permisos de escritura.
+
+## Paso 2 · Crear el archivo `.env`
+
+Copia `.env.example` a `.env` y pega tu token:
+
+```dotenv
+GITHUB_TOKEN=github_pat_tu_token_real
+GITHUB_ORG=curso-ingsoft-2026-II
+GITHUB_API_URL=https://api.github.com
+```
+
+Si ya tienes un archivo `.env`, agrega o actualiza estas variables
+sin reemplazar la configuración de los demás servicios.
+
+`.env` ya está en `.gitignore`. **Nunca lo subas al repositorio.**
+
+## Paso 3 · Registrar los repositorios
+
+Edita `config/equipos.json` con los repos reales de cada equipo:
+
+```json
+{ "nombre": "Equipo Beta", "repositorio": "beta-reservas",
+  "deadline_sprint": "2026-10-16T23:59:00Z" }
+```
+
+Si el repo está en otra cuenta, escribe `owner/repo`.
+
+## Paso 4 · Usar
+
+Ejecuta los comandos desde la raíz del repositorio con el entorno
+del proyecto activado.
 
 ```bash
 # Probar la conexión y ver el límite de peticiones
