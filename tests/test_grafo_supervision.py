@@ -1,6 +1,8 @@
 """TA-012: pruebas locales del grafo de supervision."""
 
 import pytest
+pytest.importorskip("langgraph")
+pytest.importorskip("langsmith")
 from langsmith import tracing_context
 
 from app.modulos.evidencias.adaptadores.falso import (
