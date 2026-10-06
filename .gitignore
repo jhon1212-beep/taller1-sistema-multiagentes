@@ -24,3 +24,9 @@ Thumbs.db
 .vscode/
 *.log
 _tmp*.html
+
+# Claves y credenciales de cuentas de servicio
+*.pem
+*.key
+*service-account*.json
+*credentials*.json
