@@ -1,0 +1,27 @@
+Fecha: 2026-10-06T21:30:02+00:00
+GET https://api.github.com/rate_limit -> HTTP 200
+Autenticado: False
+core: limite=60 restantes=60
+
+Cabeceras de la respuesta:
+  Access-Control-Allow-Origin: *
+  Access-Control-Expose-Headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, Deprecation, Sunset
+  Cache-Control: no-cache
+  Content-Length: 424
+  Content-Security-Policy: default-src 'none'
+  Content-Type: application/json; charset=utf-8
+  Date: Tue, 06 Oct 2026 21:30:00 GMT
+  Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+  Server: fasthttp
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: deny
+  X-GitHub-Media-Type: github.v3; format=json
+  X-GitHub-Request-Id: D301:215959:3DD589:CA5464:6AC56859
+  X-RateLimit-Limit: 60
+  X-RateLimit-Remaining: 60
+  X-RateLimit-Reset: 1791325801
+  X-RateLimit-Resource: core
+  X-RateLimit-Used: 0
+  X-XSS-Protection: 1; mode=block
+  connection: close
+  x-github-edge-region: iad
