@@ -1,0 +1,47 @@
+{
+  "proyecto_id": 1,
+  "fecha_corte": "2026-10-06T00:00:00Z",
+  "evidencias": [
+    {
+      "fuente": "github",
+      "id_externo": "e3a1c9f2b7d4a0158e6f2c9b1d7a4e8f3c2b1a90",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-09-28T14:02:11Z",
+      "descripcion": "TA-001: repositorio y entorno base",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "pagina-demo-001",
+      "autor": "Henry Mondragón",
+      "fecha": "2026-09-29T10:00:00Z",
+      "descripcion": "Diseñar prototipo de Figma",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-demo-001",
+      "autor": "Jhon Castro",
+      "fecha": "2026-09-30T16:30:00Z",
+      "descripcion": "Plan de pruebas Sprint 1.pdf",
+      "proyecto_id": 1
+    }
+  ],
+  "estado_fuentes": {
+    "github": "ok",
+    "notion": "ok",
+    "drive": "ok"
+  },
+  "errores_fuentes": {
+    "github": null,
+    "notion": null,
+    "drive": null
+  },
+  "indicadores": {
+    "I1": null,
+    "I2": null,
+    "I3": null,
+    "I4": null
+  },
+  "alertas": []
+}
