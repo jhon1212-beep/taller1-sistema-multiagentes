@@ -1,4 +1,4 @@
-from app.models import Base
+from app.compartido.modelos_orm import Base
 
 TABLAS = {
     "docente", "proyecto", "integrante", "fuente",
