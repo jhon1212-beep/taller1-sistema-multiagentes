@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /home/claude/revisar/.venv_v6/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/claude/revisar
+configfile: pytest.ini
+plugins: langsmith-0.14.4, anyio-4.15.1
+collecting ... collected 4 items
+
+tests/test_contrato_evidencias.py::test_fuente_falsa_devuelve_evidencias_del_proyecto_pedido PASSED [ 25%]
+tests/test_contrato_evidencias.py::test_fuente_falsa_respeta_el_limite PASSED [ 50%]
+tests/test_contrato_evidencias.py::test_fuente_falsa_no_devuelve_evidencias_de_otro_proyecto PASSED [ 75%]
+tests/test_contrato_evidencias.py::test_evidencia_se_serializa_a_diccionario PASSED [100%]
+
+============================== 4 passed in 0.01s ===============================

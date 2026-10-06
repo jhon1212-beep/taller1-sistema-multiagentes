@@ -6,14 +6,16 @@
       "id_externo": "e3a1c9f2b7d4a0158e6f2c9b1d7a4e8f3c2b1a90",
       "autor": "jhon1212-beep",
       "fecha": "2026-09-28T14:02:11Z",
-      "descripcion": "TA-001: repositorio y entorno base"
+      "descripcion": "TA-001: repositorio y entorno base",
+      "proyecto_id": 1
     },
     {
       "fuente": "github",
       "id_externo": "9b4d2f7a1c8e3b6d0f5a7c2e9b1d4f6a8c3e0b72",
       "autor": "jhon1212-beep",
       "fecha": "2026-09-28T19:47:33Z",
-      "descripcion": "TA-004: modelo de datos y migracion inicial"
+      "descripcion": "TA-004: modelo de datos y migracion inicial",
+      "proyecto_id": 1
     }
   ],
   "error": null

@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0 -- /home/claude/revisar/.venv_v6/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/claude/revisar
+configfile: pytest.ini
+plugins: langsmith-0.14.4, anyio-4.15.1
+collecting ... collected 5 items
+
+tests/test_agente_github.py::test_normalizar_commit_mapea_los_campos_al_esquema_comun PASSED [ 20%]
+tests/test_agente_github.py::test_normalizar_commit_usa_desconocido_si_falta_el_autor PASSED [ 40%]
+tests/test_agente_github.py::test_adaptador_pide_como_maximo_20_commits PASSED [ 60%]
+tests/test_agente_github.py::test_agente_github_devuelve_error_si_la_api_falla PASSED [ 80%]
+tests/test_agente_github.py::test_agente_github_normaliza_y_serializa PASSED [100%]
+
+============================== 5 passed in 0.02s ===============================
