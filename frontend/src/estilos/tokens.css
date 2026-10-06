@@ -1,0 +1,61 @@
+/* ============================================================
+   tokens.css — Sistema visual (Design Tokens)
+   PBI: EN-UI-001 · Equipo MONDRAGÓN
+   Proyecto: Agentes inteligentes para el seguimiento y
+   supervisión de proyectos de software en entornos académicos
+   ------------------------------------------------------------
+   Fuente única de verdad para color, tipografía, espaciado,
+   radios y sombras. Toda la UI del prototipo consume estas
+   variables; no debe haber valores "hardcodeados" en la vista.
+   ============================================================ */
+
+:root{
+  /* --- 1. Color · marca ------------------------------------ */
+  --brand:      #1f4e78;   /* azul institucional (primario)  */
+  --brand2:     #2e75b6;   /* azul de acción / enlaces       */
+  --soft:       #eaf2fb;   /* fondo azul tenue (hover, chips) */
+
+  /* --- 2. Color · superficie y texto ---------------------- */
+  --bg:         #f4f6fa;   /* fondo de la aplicación         */
+  --panel:      #ffffff;   /* tarjetas y paneles             */
+  --ink:        #1b2333;   /* texto principal                */
+  --muted:      #6b7488;   /* texto secundario               */
+  --line:       #e2e6ee;   /* bordes y separadores           */
+
+  /* --- 3. Color · estado (semáforo de riesgo) ------------- */
+  --ok:         #1f9d55;   /* verde  · en curso              */
+  --warn:       #e0a100;   /* amarillo · atención            */
+  --bad:        #d64545;   /* rojo · riesgo                  */
+  --okbg:       #e6f6ec;   /* fondo verde   (badges)         */
+  --warnbg:     #fff6da;   /* fondo amarillo(badges)         */
+  --badbg:      #fde9e9;   /* fondo rojo    (badges)         */
+  --infobg:     var(--soft);
+
+  /* --- 4. Tipografía -------------------------------------- */
+  --font-sans:  "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono:  Consolas, "SFMono-Regular", Menlo, monospace;
+  --fs-xs:      11.5px;     /* etiquetas, leyendas            */
+  --fs-sm:      12.5px;     /* texto de apoyo                 */
+  --fs-base:    14px;       /* cuerpo                         */
+  --fs-lg:      15px;       /* subtítulos                     */
+  --fs-h3:      14.5px;     /* título de tarjeta              */
+  --fs-h2:      21px;       /* título de sección              */
+  --fs-kpi:     26px;       /* cifras KPI                     */
+  --fw-regular: 400;
+  --fw-semibold:600;
+  --fw-bold:    700;
+
+  /* --- 5. Espaciado (escala de 4 px) --------------------- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px;
+  --sp-4: 16px; --sp-5: 24px; --sp-6: 32px;
+
+  /* --- 6. Radios ----------------------------------------- */
+  --r-sm:  8px;    /* botones, inputs, chips                 */
+  --r-md:  10px;   /* alertas, columnas                     */
+  --r-lg:  12px;   /* tarjetas                              */
+  --r-pill:99px;   /* badges/pills                          */
+
+  /* --- 7. Sombras y foco --------------------------------- */
+  --shadow-focus: 0 0 0 3px var(--soft);
+  --shadow-card:  0 1px 2px rgba(27,35,51,.04);
+}
