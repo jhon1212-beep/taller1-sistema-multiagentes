@@ -83,3 +83,9 @@ pytest
 
 - Los secretos (tokens, claves, credenciales) viven solo en `.env` local y en los *Repository secrets* de GitHub. Nunca se hacen commit.
 - Un commit por PBI, con su ID en el mensaje. Ejemplo: `TA-004: modelo de datos y migración inicial`.
+
+## Entregables TA-003, TA-035 y RN-001
+
+- [TA-003: plan CP-01 a CP-08 y plantilla de horas](docs/sprint1/TA-003.md).
+- [TA-035: integración continua y verificación](docs/sprint1/TA-035.md).
+- [RN-001: reglas de seguridad y evidencias](docs/sprint1/RN-001.md).
