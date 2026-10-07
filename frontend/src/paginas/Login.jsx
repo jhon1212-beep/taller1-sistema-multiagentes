@@ -10,12 +10,20 @@ export default function Login({ bloqueado = false, onEntrar }) {
 
   function enviar(e) {
     e.preventDefault()
+
+    // Se distingue «faltan datos» de «credenciales incorrectas»: decirle a
+    // alguien que su contraseña es incorrecta cuando ni siquiera la escribió
+    // es confuso y manda a revisar donde no toca.
+    if (!correo.trim() || !clave) {
+      setError('Completa el correo y la contraseña para continuar.')
+      return
+    }
     if (CUENTAS.includes(correo.trim()) && clave === CLAVE_DEMO) {
       setError('')
       onEntrar(correo.trim())
-    } else {
-      setError('Correo o contraseña incorrectos.')
+      return
     }
+    setError('Correo o contraseña incorrectos.')
   }
 
   return (
@@ -45,12 +53,13 @@ export default function Login({ bloqueado = false, onEntrar }) {
           </Aviso>
         )}
 
-        <form onSubmit={enviar} noValidate>
+        <form onSubmit={enviar} noValidate aria-label="Inicio de sesión del docente">
           <Campo
             etiqueta="Correo del docente"
             type="email"
             autoComplete="username"
             required
+            autoFocus
             placeholder="docente1@demo.test"
             value={correo}
             onChange={e => setCorreo(e.target.value)}

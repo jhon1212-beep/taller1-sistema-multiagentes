@@ -31,8 +31,11 @@ const SECCION = {
   historial: 'historial', sistema: 'sistema',
 }
 
+/** La ruta vive en el hash de la URL; esta es la única lectura de esa fuente. */
+const rutaDeHash = () => window.location.hash.slice(1) || 'login'
+
 export default function App() {
-  const [ruta, setRuta] = useState(() => window.location.hash.slice(1) || 'login')
+  const [ruta, setRuta] = useState(rutaDeHash)
   const [sesion, setSesion] = useState(null)
   const [proyectos, setProyectos] = useState(PROYECTOS_INICIALES)
   const [actual, setActual] = useState(1)
@@ -41,17 +44,28 @@ export default function App() {
   const [ultimaCorrida, setUltimaCorrida] = useState('Sin ejecución en esta sesión')
   const [aviso, setAviso] = useState('')
 
-  // Sincroniza la ruta con el hash del navegador (atrás/adelante incluidos).
+  // El hash manda: cualquier cambio (navegación, atrás/adelante, enlace
+  // directo) entra por aquí.
   useEffect(() => {
-    const alCambiar = () => setRuta(window.location.hash.slice(1) || 'login')
+    const alCambiar = () => setRuta(rutaDeHash())
     window.addEventListener('hashchange', alCambiar)
     return () => window.removeEventListener('hashchange', alCambiar)
   }, [])
 
-  useEffect(() => {
-    if (window.location.hash.slice(1) !== ruta) window.location.hash = ruta
-    window.scrollTo(0, 0)
-  }, [ruta])
+  useEffect(() => { window.scrollTo(0, 0) }, [ruta])
+
+  /**
+   * Navega cambiando el hash, que a su vez actualiza el estado.
+   *
+   * Antes el estado se escribía primero y un efecto reescribía el hash para
+   * igualarlo. Eso abría una carrera: si el hash cambiaba por fuera (abrir
+   * una URL directa) antes de que ese efecto corriera, el efecto lo devolvía
+   * al valor anterior y la navegación se perdía. Lo detectó la prueba CP-L6.
+   */
+  function navegar(destino) {
+    if (rutaDeHash() === destino) setRuta(destino)
+    else window.location.hash = destino
+  }
 
   // El aviso flotante se oculta solo.
   useEffect(() => {
@@ -65,7 +79,7 @@ export default function App() {
 
   function salir() {
     setSesion(null)
-    setRuta('login')
+    navegar('login')
   }
 
   function guardarProyecto(datos) {
@@ -74,7 +88,7 @@ export default function App() {
     } else {
       setProyectos(ps => [...ps, { ...datos, id: Date.now(), activo: true }])
     }
-    setRuta('proyectos')
+    navegar('proyectos')
     setAviso('Proyecto guardado en memoria. Se reinicia al recargar la página.')
   }
 
@@ -117,7 +131,7 @@ export default function App() {
           bloqueado={requiereSesion}
           onEntrar={correo => {
             setSesion(correo)
-            setRuta('proyectos')
+            navegar('proyectos')
           }}
         />
       </>
@@ -129,18 +143,18 @@ export default function App() {
     proyectos: (
       <Proyectos
         proyectos={proyectos}
-        onAbrir={id => { setActual(id); setRuta('detalle') }}
-        onEditar={id => { setActual(id); setRuta('editar') }}
-        onNuevo={() => setRuta('nuevo')}
+        onAbrir={id => { setActual(id); navegar('detalle') }}
+        onEditar={id => { setActual(id); navegar('editar') }}
+        onNuevo={() => navegar('nuevo')}
         onAlternar={alternarProyecto}
       />
     ),
-    nuevo: <Formulario onGuardar={guardarProyecto} onCancelar={() => setRuta('proyectos')} />,
+    nuevo: <Formulario onGuardar={guardarProyecto} onCancelar={() => navegar('proyectos')} />,
     editar: (
       <Formulario
         proyecto={proyecto}
         onGuardar={guardarProyecto}
-        onCancelar={() => setRuta('proyectos')}
+        onCancelar={() => navegar('proyectos')}
       />
     ),
     detalle: (
@@ -148,8 +162,8 @@ export default function App() {
         proyecto={proyecto}
         notionFallo={notionFallo}
         onNotionFallo={setNotionFallo}
-        onVolver={() => setRuta('proyectos')}
-        onDashboard={() => setRuta('dashboard')}
+        onVolver={() => navegar('proyectos')}
+        onDashboard={() => navegar('dashboard')}
       />
     ),
     dashboard: (
@@ -158,18 +172,18 @@ export default function App() {
         notionFallo={notionFallo}
         ultimaCorrida={ultimaCorrida}
         onSimular={registrarCorrida}
-        onAlerta={() => setRuta('alerta')}
+        onAlerta={() => navegar('alerta')}
       />
     ),
-    alerta: <Alerta proyecto={proyecto} onVolver={() => setRuta('dashboard')} />,
-    historial: <Historial corridas={corridas} onDashboard={() => setRuta('dashboard')} />,
+    alerta: <Alerta proyecto={proyecto} onVolver={() => navegar('dashboard')} />,
+    historial: <Historial corridas={corridas} onDashboard={() => navegar('dashboard')} />,
     sistema: <SistemaVisual onEjemplo={() => setAviso('Ejemplo del componente botón')} />,
   }
 
   return (
     <>
       {bandaDemo}
-      <Shell ruta={SECCION[ruta] ?? 'proyectos'} email={sesion} onNavegar={setRuta} onSalir={salir}>
+      <Shell ruta={SECCION[ruta] ?? 'proyectos'} email={sesion} onNavegar={navegar} onSalir={salir}>
         {vistas[ruta] ?? vistas.proyectos}
       </Shell>
       {aviso && (
