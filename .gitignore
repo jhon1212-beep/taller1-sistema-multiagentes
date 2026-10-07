@@ -30,3 +30,9 @@ _tmp*.html
 *.key
 *service-account*.json
 *credentials*.json
+
+# RN-001: credenciales OAuth y resultados locales
+client_secret_*.json
+credentials.json
+token.json
+test-results/
