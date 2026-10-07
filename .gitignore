@@ -36,3 +36,8 @@ client_secret_*.json
 credentials.json
 token.json
 test-results/
+
+# TA-008 - artefactos de las pruebas E2E
+frontend/test-results/
+frontend/playwright-report/
+test-results/

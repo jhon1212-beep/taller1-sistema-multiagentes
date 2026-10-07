@@ -1,0 +1,396 @@
+{
+  "tokens_declarados": 39,
+  "tokens_usados": 39,
+  "archivos_revisados": 15,
+  "tokens_sin_usar": [],
+  "tokens_sin_declarar": [],
+  "colores_hardcodeados": [
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 21,
+      "valor": "#fff3cd"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 21,
+      "valor": "#664d03"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 21,
+      "valor": "#ffe69c"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 26,
+      "valor": "#dbe8f5"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 50,
+      "valor": "#8a6500"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 80,
+      "valor": "#f0f2f7"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 83,
+      "valor": "#fff7f7"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 87,
+      "valor": "#e8ecf3"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 91,
+      "valor": "#0f1726"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 91,
+      "valor": "#c8d6ee"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 96,
+      "valor": "#1b2333"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 145,
+      "valor": "#1f4e78"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 146,
+      "valor": "#2e75b6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 147,
+      "valor": "#eaf2fb"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 151,
+      "valor": "#f4f6fa"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 152,
+      "valor": "#1b2333"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 153,
+      "valor": "#6b7488"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 157,
+      "valor": "#1f9d55"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 158,
+      "valor": "#e0a100"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 159,
+      "valor": "#d64545"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 362,
+      "valor": "#6b7488"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 363,
+      "valor": "#e2e6ee"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 364,
+      "valor": "#b7cde6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 364,
+      "valor": "#2e75b6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 365,
+      "valor": "#b7cde6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 365,
+      "valor": "#2e75b6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 366,
+      "valor": "#b7cde6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 366,
+      "valor": "#2e75b6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 367,
+      "valor": "#b7cde6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 368,
+      "valor": "#2e75b6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 393,
+      "valor": "#2e75b6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 393,
+      "valor": "#d64545"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 393,
+      "valor": "#d64545"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 393,
+      "valor": "#6b7488"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 530,
+      "valor": "#e8ecf3"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 530,
+      "valor": "#c4dbf2"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 530,
+      "valor": "#7fb0e0"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 530,
+      "valor": "#2e75b6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 530,
+      "valor": "#1f4e78"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 534,
+      "valor": "#e2e6ee"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 535,
+      "valor": "#d64545"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 535,
+      "valor": "#2e75b6"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 536,
+      "valor": "#d64545"
+    }
+  ],
+  "font_size_hardcodeado": [
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 12,
+      "valor": "12.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 18,
+      "valor": "12.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 20,
+      "valor": "14px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 21,
+      "valor": "12px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 24,
+      "valor": "15px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 25,
+      "valor": "11px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 26,
+      "valor": "13.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 30,
+      "valor": "10.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 31,
+      "valor": "12px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 35,
+      "valor": "21px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 38,
+      "valor": "14.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 46,
+      "valor": "26px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 47,
+      "valor": "12px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 48,
+      "valor": "12px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 49,
+      "valor": "11.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 53,
+      "valor": "11.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 55,
+      "valor": "13px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 58,
+      "valor": "12px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 62,
+      "valor": "13.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 68,
+      "valor": "12px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 73,
+      "valor": "22px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 81,
+      "valor": "12.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 82,
+      "valor": "12.5px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 91,
+      "valor": "12px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 93,
+      "valor": "20px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 94,
+      "valor": "13px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 95,
+      "valor": "12px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 96,
+      "valor": "13px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 103,
+      "valor": "34px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 105,
+      "valor": "12px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 199,
+      "valor": "34px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 200,
+      "valor": "34px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 201,
+      "valor": "34px"
+    },
+    {
+      "archivo": "docs/Prototipo_Agentes_Seguimiento.html",
+      "linea": 202,
+      "valor": "34px"
+    }
+  ]
+}

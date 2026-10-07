@@ -1,0 +1,310 @@
+/* ============================================================
+   base.css — Estilos base de la aplicación (TA-005)
+   Consume exclusivamente los tokens de tokens.css.
+   Regla del sistema visual: aquí no se escriben colores,
+   tamaños de fuente, radios ni espaciados "a mano".
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.55;
+}
+
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+a { color: var(--brand2); }
+:where(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--brand2);
+  outline-offset: 2px;
+}
+
+h1 { font-size: var(--fs-kpi); line-height: 1.25; margin: 0 0 var(--sp-3); }
+h2 { font-size: var(--fs-h2);  margin: 0 0 var(--sp-3); }
+h3 { font-size: var(--fs-h3);  margin: 0 0 var(--sp-3); }
+p  { margin: 0 0 var(--sp-4); }
+code { font-family: var(--font-mono); font-size: var(--fs-sm); }
+
+.muted  { color: var(--muted); }
+.small  { font-size: var(--fs-sm); }
+.hidden { display: none !important; }
+
+/* --- Aviso de demostración ------------------------------- */
+.demo {
+  background: var(--warnbg);
+  color: var(--ink);
+  padding: var(--sp-2) var(--sp-5);
+  text-align: center;
+  font-size: var(--fs-sm);
+  border-bottom: 1px solid var(--line);
+}
+
+/* --- Layout ---------------------------------------------- */
+.shell { display: grid; grid-template-columns: 238px 1fr; min-height: 100vh; }
+
+aside {
+  background: var(--brand);
+  color: var(--panel);
+  padding: var(--sp-6) var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+.brand { font-weight: var(--fw-bold); font-size: var(--fs-lg); }
+.brand small {
+  display: block;
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-xs);
+  margin-top: var(--sp-1);
+}
+nav { display: grid; gap: var(--sp-2); }
+nav button {
+  border: 0;
+  text-align: left;
+  background: transparent;
+  color: var(--panel);
+  padding: var(--sp-3);
+  border-radius: var(--r-sm);
+}
+nav button:hover { background: rgb(255 255 255 / .12); }
+nav button[aria-current="page"] {
+  background: var(--panel);
+  color: var(--brand);
+  font-weight: var(--fw-bold);
+}
+.perfil {
+  border-top: 1px solid var(--brand2);
+  padding-top: var(--sp-4);
+  margin-top: auto;
+}
+.perfil small { display: block; }
+
+main { max-width: 1500px; width: 100%; padding: var(--sp-6) var(--sp-6); }
+
+/* --- Encabezados de página ------------------------------- */
+.eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--brand2);
+  margin-bottom: var(--sp-2);
+}
+.head {
+  display: flex;
+  gap: var(--sp-5);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-5);
+  flex-wrap: wrap;
+}
+
+/* --- Tarjetas y rejillas --------------------------------- */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: var(--sp-5);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
+  margin-bottom: var(--sp-4);
+}
+.grid  { display: grid; gap: var(--sp-4); }
+.dos   { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cuatro{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.stat strong { display: block; font-size: var(--fs-kpi); color: var(--brand); }
+.stat small  { color: var(--muted); }
+
+/* --- Indicadores (pill) ---------------------------------- */
+.pill {
+  display: inline-block;
+  border-radius: var(--r-pill);
+  padding: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  background: var(--soft);
+  color: var(--brand);
+  white-space: nowrap;
+}
+.pill-ok   { background: var(--okbg);   color: var(--ok); }
+.pill-warn { background: var(--warnbg); color: var(--warn); }
+.pill-bad  { background: var(--badbg);  color: var(--bad); }
+
+/* --- Botones --------------------------------------------- */
+.btn {
+  border: 1px solid var(--brand2);
+  border-radius: var(--r-sm);
+  background: var(--brand2);
+  color: var(--panel);
+  padding: var(--sp-3) var(--sp-4);
+  font-weight: var(--fw-semibold);
+}
+.btn-sec    { background: var(--panel); color: var(--brand); border-color: var(--line); }
+.btn-danger { background: var(--badbg); color: var(--bad);   border-color: var(--bad); }
+.acciones   { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+
+/* --- Formularios ----------------------------------------- */
+label { display: block; font-weight: var(--fw-semibold); margin: 0 0 var(--sp-4); }
+input, textarea, select {
+  display: block;
+  width: 100%;
+  padding: var(--sp-3);
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  margin-top: var(--sp-1);
+}
+textarea { resize: vertical; min-height: 75px; }
+input:focus, textarea:focus, select:focus {
+  box-shadow: var(--shadow-focus);
+  border-color: var(--brand2);
+}
+
+/* --- Mensajes -------------------------------------------- */
+.error {
+  background: var(--badbg);
+  border-left: 4px solid var(--bad);
+  padding: var(--sp-4);
+  margin-bottom: var(--sp-4);
+  color: var(--bad);
+  border-radius: var(--r-md);
+}
+.aviso {
+  background: var(--infobg);
+  padding: var(--sp-4);
+  border-radius: var(--r-md);
+  margin-bottom: var(--sp-4);
+}
+
+/* --- Tablas ---------------------------------------------- */
+.tabla-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+th {
+  text-align: left;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  background: var(--bg);
+}
+th, td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--line); vertical-align: top; }
+
+/* --- Pestañas -------------------------------------------- */
+.tabs {
+  display: flex;
+  gap: var(--sp-1);
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--sp-5);
+}
+.tabs button {
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: var(--sp-3) var(--sp-4);
+  color: var(--muted);
+}
+.tabs button[aria-selected="true"] {
+  border-color: var(--brand2);
+  color: var(--brand);
+  font-weight: var(--fw-bold);
+}
+
+/* --- Barra de progreso ----------------------------------- */
+.barra {
+  background: var(--line);
+  height: var(--sp-2);
+  border-radius: var(--r-pill);
+  margin: var(--sp-3) 0;
+  overflow: hidden;
+}
+.barra span { display: block; background: var(--brand2); height: 100%; }
+
+/* --- Login ----------------------------------------------- */
+.login-wrap {
+  max-width: 1080px;
+  margin: var(--sp-6) auto;
+  padding: 0 var(--sp-5);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-6);
+  align-items: center;
+}
+.login-intro h1 { color: var(--brand); max-width: 410px; }
+.login-intro li { margin-bottom: var(--sp-3); }
+.login-card .btn { width: 100%; }
+.login-foot {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-sm);
+}
+
+/* --- Fuentes / listas ------------------------------------ */
+.fuente {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--line);
+}
+.fuente a { overflow-wrap: anywhere; }
+
+/* --- Sistema visual -------------------------------------- */
+.muestras { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+.muestra {
+  width: 105px;
+  padding: var(--sp-4) var(--sp-2);
+  color: var(--panel);
+  border-radius: var(--r-sm);
+  text-align: center;
+  font-size: var(--fs-sm);
+}
+
+/* --- Traza / consola ------------------------------------- */
+.traza {
+  font-family: var(--font-mono);
+  background: var(--bg);
+  padding: var(--sp-4);
+  border-radius: var(--r-md);
+  line-height: 2;
+  font-size: var(--fs-sm);
+}
+
+/* --- Aviso flotante -------------------------------------- */
+.toast {
+  position: fixed;
+  bottom: var(--sp-5);
+  right: var(--sp-5);
+  background: var(--brand);
+  color: var(--panel);
+  border-radius: var(--r-sm);
+  padding: var(--sp-3) var(--sp-5);
+  z-index: 5;
+  max-width: 90vw;
+}
+
+.pie { margin-top: var(--sp-5); font-size: var(--fs-xs); color: var(--muted); }
+
+/* --- Responsive ------------------------------------------ */
+@media (max-width: 1000px) {
+  .cuatro { grid-template-columns: repeat(2, 1fr); }
+  main { padding: var(--sp-5); }
+}
+@media (max-width: 700px) {
+  .shell { grid-template-columns: 1fr; }
+  aside { padding: var(--sp-4); }
+  nav { display: flex; flex-wrap: wrap; }
+  .perfil { margin: 0; padding-top: var(--sp-2); }
+  .dos, .cuatro, .login-wrap { grid-template-columns: 1fr; }
+  .login-intro { display: none; }
+  .head { align-items: flex-start; flex-direction: column; }
+  main { padding: var(--sp-4); }
+  .card { padding: var(--sp-4); }
+}
