@@ -57,6 +57,50 @@ Un módulo puede importar `compartido/`. Un módulo **no** puede importar direct
 
 Se mantiene la decisión ya evaluada por Reyes en SP-001: el Agente Supervisor se construye como un grafo de LangGraph, no como una cadena, un árbol, un blackboard ni un enjambre — porque necesita paralelizar la lectura de las 3 fuentes y bifurcar según las reglas R1–R4 (¿hay alerta?, ¿responde Gemini o se usa la plantilla?), con trazabilidad de cada paso en LangSmith. El primer nodo real ya construido es `agente_github` (TA-006), dentro del módulo `evidencias`; el grafo completo, con los nodos de Notion, Drive, cálculo de indicadores y reglas, lo arma el módulo `supervision`.
 
+## 5.1 Patrón de orquestación multiagente
+
+Para el núcleo de supervisión se adopta un patrón **supervisor jerárquico** implementado con LangGraph.
+
+Esta sección concreta, para TA-015, la decisión general de arquitectura descrita en la sección 5. El alcance actual se centra en la coordinación de las fuentes de evidencia; los indicadores I1-I4 y las reglas R1-R4 se integrarán posteriormente mediante los componentes correspondientes del módulo `supervision`.
+
+### Alternativas consideradas
+
+| Patrón | Ventaja principal | Limitación para este proyecto | Decisión |
+|---|---|---|---|
+| Swarm | Alta autonomía de los agentes | No existe un coordinador central y dificulta controlar un corte académico determinista | No seleccionado |
+| Mesh | Comunicación flexible entre agentes pares | Aumenta la cantidad de interacciones y la complejidad de coordinación | No seleccionado |
+| Pipeline | Flujo simple y fácil de seguir | Obliga a ejecutar fuentes independientes de forma secuencial y acopla innecesariamente el proceso | No seleccionado |
+| Supervisor jerárquico | Coordinación central, aislamiento de responsabilidades y consolidación controlada | El supervisor se convierte en un punto central que debe mantenerse simple | **Seleccionado** |
+
+### Justificación
+
+GitHub, Notion y Drive son fuentes independientes. Ninguna necesita el resultado de otra para consultar sus evidencias. Por ello, el Supervisor puede coordinarlas como trabajadores separados y posteriormente consolidar sus respuestas.
+
+El patrón jerárquico permite que:
+
+- el Supervisor controle la fecha de corte;
+- cada agente utilice únicamente el contrato `FuenteEvidencia`;
+- las fuentes puedan ejecutarse de forma independiente;
+- un fallo quede aislado en su propia fuente;
+- el resultado final mantenga un estado `ok` o `fallo` por integración;
+- LangSmith permita identificar claramente la ejecución de los nodos.
+
+### Flujo lógico
+
+`START -> supervisor -> [github_agent | notion_agent | drive_agent] -> consolidate -> END`
+
+Responsabilidades:
+
+- `supervisor`: valida la solicitud y prepara la ejecución.
+- `github_agent`: obtiene evidencias de GitHub mediante su adaptador.
+- `notion_agent`: obtiene evidencias de Notion mediante su adaptador.
+- `drive_agent`: obtiene evidencias de Drive mediante su adaptador.
+- `consolidate`: reúne resultados, estados y errores en un único consolidado.
+
+El Supervisor implementado en TA-015 no implementa directamente las APIs externas ni calcula los indicadores I1-I4 o las reglas R1-R4. Estas responsabilidades pertenecen a otros componentes del módulo `supervision` y se integrarán en etapas posteriores del grafo.
+
+Esta separación evita acoplamiento y permite que los adaptadores y componentes de análisis evolucionen sin modificar la lógica principal de orquestación.
+
 ## 6. Decisiones registradas (SP-001 y SP-002)
 
 - **SP-001 (Reyes):** LangGraph sobre CrewAI para orquestar los agentes, por su soporte de grafos con bifurcaciones condicionales y su integración con LangSmith para trazabilidad.
