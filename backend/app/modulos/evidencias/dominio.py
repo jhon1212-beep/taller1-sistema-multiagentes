@@ -24,3 +24,15 @@ class Evidencia:
 
     def to_dict(self) -> dict:
         return asdict(self)
+
+@dataclass
+class EvidenciaNotion(Evidencia):
+    """TA-007: Evidencia + los dos atributos propios de Notion.
+
+    Estado y fecha límite no caben en los 6 campos comunes, pero I1–I3 y
+    R1–R2 los necesitan (ver docs/modelo-de-datos.md). GitHub sigue
+    usando Evidencia con sus 6 campos.
+    """
+
+    estado: str | None = None
+    fecha_limite: str | None = None
