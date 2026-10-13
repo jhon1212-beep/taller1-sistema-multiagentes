@@ -1,0 +1,194 @@
+{
+  "proyecto_id": 1,
+  "fecha_corte": "2026-10-12T23:59:59-05:00",
+  "fuentes": {
+    "github": {
+      "estado": "ok",
+      "error": null,
+      "evidencias": 18,
+      "fuera_de_corte": 2
+    },
+    "notion": {
+      "estado": "ok",
+      "error": null,
+      "evidencias": 1,
+      "fuera_de_corte": 0
+    },
+    "drive": {
+      "estado": "ok",
+      "error": null,
+      "evidencias": 1,
+      "fuera_de_corte": 0
+    }
+  },
+  "total_evidencias": 20,
+  "evidencias": [
+    {
+      "fuente": "github",
+      "id_externo": "7a22e0274fd19c2eab0c210d3e41c4143cde8e0c",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T06:09:03Z",
+      "descripcion": "HU-001 + TA-008: documento inicio de sesion docente y su prueba E2E",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ab14d6e8e747057f819a7f26894555d3e7549910",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T06:07:43Z",
+      "descripcion": "Delete docs/sprint1/HU-001_Inicio_Sesion_Docente.docx",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "de4bf86daa82cca2ec8d1e2d518fd26c51803946",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T06:06:45Z",
+      "descripcion": "Delete docs/sprint1/TA-011_Revision_Consistencia_UI.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "e241f84cdb9a3f609fb6ab79a804d24b522f9162",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T05:55:38Z",
+      "descripcion": "Delete docs/sprint1/TA-011_Revision_Consistencia_UI.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "de32a631e95c0e722a44c8d03addd1726e95cbaa",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T05:55:00Z",
+      "descripcion": "TA-011: Revision de la Consistencia",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "9c7a6f54c922357f474afc94beb4372a9316c44c",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T05:54:14Z",
+      "descripcion": "Delete TA-011_Revision_Consistencia_UI.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "341b4e203f0a757a6292b7a1000da37c4d28646d",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T05:53:49Z",
+      "descripcion": "TA-011: Revision de la Consistencia",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "821e29bca364121b762fc41a6606be397c018e66",
+      "autor": "LuiggiStefano",
+      "fecha": "2026-10-07T05:39:26Z",
+      "descripcion": "HU-001 y TA-008: documentos de evidencia",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "efe6e5417a6025d67a58bea08fffab94ebc5a268",
+      "autor": "LuiggiStefano",
+      "fecha": "2026-10-07T05:25:05Z",
+      "descripcion": "HU-001 + TA-008: inicio de sesion docente y su prueba E2E",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "6b7ab8a0c94fce70579130e5c290efbcd9fc960d",
+      "autor": "LuiggiStefano",
+      "fecha": "2026-10-07T05:17:19Z",
+      "descripcion": "TA-005: documento de evidencia con las capturas de la base React",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "24953fe29ce68116e3d97f5039607d56acf6a700",
+      "autor": "LuiggiStefano",
+      "fecha": "2026-10-07T05:06:46Z",
+      "descripcion": "TA-011: informe de consistencia UI en Word con la evidencia visual",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "6c51b8a717da24562860459f6f54c1da789775ae",
+      "autor": "LuiggiStefano",
+      "fecha": "2026-10-07T04:58:21Z",
+      "descripcion": "TA-005: frontend base en React · TA-011: revision de consistencia UI",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2a239af19e1cb3bdefe04eea0fdda5d65af4e59a",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:35:28Z",
+      "descripcion": "Update TA-003.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "8af8219ae578ea3d6f23b786e7aed3cec1addc85",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:34:35Z",
+      "descripcion": "RN-001: explicitar reglas de secretos y conservar evidencias",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "8bce71f57742b49d30b9971f3d72f7ca73a3593e",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:24:41Z",
+      "descripcion": "Delete docs/sprint1/TA-003_Plan_de_pruebas_y_horas.xlsx",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "70538fac17cf3db54f7f01fdbf6ed67b64dab991",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:22:20Z",
+      "descripcion": "TA-035: Workflow que configura de pruebas y frontend",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2ce207d296dc0cf0a36ad69499029e103151bf10",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:20:09Z",
+      "descripcion": "Delete docs/sprint1/TA-035.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "93a25778f8816747fa22774a1dcfc1fc36d67870",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:18:29Z",
+      "descripcion": "TA-003: publicar plan de pruebas y plantilla de horas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-demo-001",
+      "autor": "Jhon Castro",
+      "fecha": "2026-09-30T16:30:00Z",
+      "descripcion": "Plan de pruebas Sprint 1.pdf",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "pagina-demo-001",
+      "autor": "Henry Mondragón",
+      "fecha": "2026-09-29T10:00:00Z",
+      "descripcion": "Diseñar prototipo de Figma",
+      "proyecto_id": 1
+    }
+  ],
+  "indicadores": {
+    "I1": null,
+    "I2": null,
+    "I3": null,
+    "I4": null
+  },
+  "alertas": []
+}
