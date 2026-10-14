@@ -1,0 +1,14 @@
+# Despliegue del frontend (React + Vite) en Netlify.
+# En Netlify, definir "Base directory" = frontend (o desplegar con la CLI desde esta carpeta).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# La app es de una sola página: cualquier ruta devuelve index.html.
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
