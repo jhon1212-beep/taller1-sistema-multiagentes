@@ -1,5 +1,6 @@
 /** HU-003 / HU-004 · Detalle del proyecto con sus fuentes de evidencia. */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { API_ACTIVA, obtenerTareas } from '../api.js'
 import { Aviso, Boton, Encabezado, Estadistica, Pill, Tabla, Tabs } from '../componentes/UI.jsx'
 import { COMMITS, DOCUMENTOS, TAREAS, tonoEstado } from '../datos/demo.js'
 
@@ -17,6 +18,75 @@ const NOTA_DEMO = (
     verifica en integración.
   </p>
 )
+
+/** HU-004 · Tareas de Notion leídas de la API del backend (GET /proyectos/{id}/tareas). */
+function TareasNotionApi({ proyecto }) {
+  const [datos, setDatos] = useState(null)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const control = new AbortController()
+    setDatos(null)
+    setError(null)
+    obtenerTareas(proyecto.id, { senal: control.signal })
+      .then(setDatos)
+      .catch(e => {
+        if (e.name !== 'AbortError') setError(e.message)
+      })
+    return () => control.abort()
+  }, [proyecto.id])
+
+  return (
+    <article className="card">
+      <div className="head">
+        <div>
+          <div className="eyebrow">HU-004 · CP-07 / CP-08</div>
+          <h2>Tareas de Notion</h2>
+          <p className="muted">Responsables, estados y fechas límite del equipo.</p>
+        </div>
+        {datos?.estado === 'ok' && <Pill tono="ok">{datos.total} tareas</Pill>}
+      </div>
+
+      {!datos && !error && <p className="muted">Cargando tareas…</p>}
+
+      {error && (
+        <Aviso tipo="error">
+          <b>No se pudo consultar el servidor</b>
+          <br />
+          {error}
+        </Aviso>
+      )}
+
+      {datos?.estado === 'fallo' && (
+        <Aviso tipo="error">
+          <b>Integración fallida: Notion</b>
+          <br />
+          {datos.error.replace(/^Integración fallida:\s*/, '')}
+        </Aviso>
+      )}
+
+      {datos?.estado === 'ok' && (
+        <>
+          <p className="small muted">
+            Terminadas: {datos.resumen.listo} · En curso: {datos.resumen.en_curso} · Sin empezar:{' '}
+            {datos.resumen.sin_empezar} · Sin responsable: {datos.resumen.sin_responsable}
+          </p>
+          <Tabla
+            columnas={['Tarea', 'Responsable', 'Estado', 'Fecha límite']}
+            filas={datos.tareas.map(t => [
+              t.tarea,
+              t.responsable ?? 'Sin responsable',
+              <Pill key={t.id} tono={t.estado === 'Listo' ? 'ok' : t.estado === 'En curso' ? 'warn' : 'neutro'}>
+                {t.estado ?? 'Sin estado'}
+              </Pill>,
+              t.fecha_limite ?? '—',
+            ])}
+          />
+        </>
+      )}
+    </article>
+  )
+}
 
 export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver, onDashboard }) {
   const [pestana, setPestana] = useState('resumen')
@@ -99,7 +169,9 @@ export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver
         </article>
       )}
 
-      {pestana === 'notion' && (
+      {pestana === 'notion' && API_ACTIVA && <TareasNotionApi proyecto={proyecto} />}
+
+      {pestana === 'notion' && !API_ACTIVA && (
         <article className="card">
           <div className="head">
             <div>
