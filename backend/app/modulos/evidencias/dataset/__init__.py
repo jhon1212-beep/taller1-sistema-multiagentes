@@ -26,3 +26,9 @@ def _a_evidencia(fila: dict) -> Evidencia:
 
 def cargar_evidencias() -> list[Evidencia]:
     return [_a_evidencia(f) for f in cargar_dataset()["evidencias"]]
+
+
+def fecha_corte_demo() -> str:
+    """Fecha de corte del dataset (ISO 8601, UTC). Las alertas e indicadores
+    esperados del JSON están calculados para esta fecha."""
+    return cargar_dataset()["fecha_corte"]
