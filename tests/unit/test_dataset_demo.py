@@ -60,3 +60,24 @@ def test_el_json_coincide_con_el_generador():
 
     assert cargar_dataset() == g.construir()
     assert RUTA_DATASET.exists()
+
+
+def test_fecha_corte_descarta_evidencias_posteriores():
+    from app.modulos.evidencias.dataset import fecha_corte_demo
+
+    corte = "2026-10-06T00:00:00Z"
+    todas = FuenteEvidenciaDataset().obtener_evidencias("x", 1)
+    con_corte = FuenteEvidenciaDataset(fecha_corte=corte).obtener_evidencias("x", 1)
+
+    assert 0 < len(con_corte) < len(todas)
+    assert all(e.fecha <= corte for e in con_corte)
+    # el corte del propio dataset no descarta nada: toda la evidencia es anterior
+    propia = FuenteEvidenciaDataset(fecha_corte=fecha_corte_demo()).obtener_evidencias("x", 1)
+    assert len(propia) == len(todas)
+
+
+def test_fecha_corte_se_combina_con_la_fuente_y_el_limite():
+    f = FuenteEvidenciaDataset("github", fecha_corte="2026-09-29T00:00:00Z")
+    evs = f.obtener_evidencias("x", 1)
+    assert len(evs) == 7 and all(e.fuente == "github" for e in evs)
+    assert len(f.obtener_evidencias("x", 1, limite=3)) == 3
