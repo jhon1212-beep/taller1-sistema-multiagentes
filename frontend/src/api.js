@@ -48,3 +48,13 @@ export const api = {
 
 /** Estado del backend: { status: 'ok' } */
 export const obtenerEstado = (opciones) => api.get('/health', opciones)
+
+/** true si el build define VITE_API_URL; si no, las vistas usan datos de demostración. */
+export const API_ACTIVA = import.meta.env.VITE_API_URL !== undefined
+
+/**
+ * HU-004 · Tareas del proyecto desde Notion.
+ * { estado: 'ok' | 'fallo', error, total, resumen, tareas: [...] }
+ */
+export const obtenerTareas = (proyectoId, opciones) =>
+  api.get(`/proyectos/${proyectoId}/tareas`, opciones)
