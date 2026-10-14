@@ -1,0 +1,783 @@
+{
+  "_comentario": "TA-017. Generado por backend/scripts/generar_dataset_demo.py; no editar a mano.",
+  "fecha_corte": "2026-10-13T04:59:59Z",
+  "proyectos": [
+    {
+      "id": 1,
+      "nombre": "Seguimiento académico",
+      "escenario": "activo: dispara R1 y R2"
+    },
+    {
+      "id": 2,
+      "nombre": "Biblioteca digital",
+      "escenario": "estancado: dispara R3 y R4 (y también R1 y R2)"
+    }
+  ],
+  "evidencias": [
+    {
+      "fuente": "github",
+      "id_externo": "712ef5dd4ca59dfffb1a4b9fc6093f72660e103a",
+      "autor": "Ana Torres",
+      "fecha": "2026-09-22T14:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "0ea6e20f10a08b1a0f678071135b8f861346bac2",
+      "autor": "Luis Vega",
+      "fecha": "2026-09-23T15:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "23976189ab8dec2fbe7cf72d0e981947c9bfbe95",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-09-24T16:00:00Z",
+      "descripcion": "Corregir filtro de fechas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "5de946905f580d5e01fe4e386d62aecbc63738c0",
+      "autor": "Diego Paz",
+      "fecha": "2026-09-25T17:00:00Z",
+      "descripcion": "Documentar ejecución de pruebas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c0bbd3cf5031aa7578141c4f3edbf415cc102a22",
+      "autor": "Ana Torres",
+      "fecha": "2026-09-26T18:00:00Z",
+      "descripcion": "Añadir estados de integración",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "07ba133ffca5860897e39e9a647eb1544d786856",
+      "autor": "Luis Vega",
+      "fecha": "2026-09-27T19:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "21f4abe478a030d52d5a8c12b1f2d0bc1d194cdf",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-09-28T20:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "4c3db25d35405b4489dfa20834b5393bf200652f",
+      "autor": "Diego Paz",
+      "fecha": "2026-09-29T21:00:00Z",
+      "descripcion": "Corregir filtro de fechas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ed2369e5718dd0959483a768a7821a092481feb7",
+      "autor": "Ana Torres",
+      "fecha": "2026-09-30T22:00:00Z",
+      "descripcion": "Documentar ejecución de pruebas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "938280fe83197d982081f979c9587722305746ec",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-01T23:00:00Z",
+      "descripcion": "Añadir estados de integración",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c71e9aa2f844c673c62428a9aa9aae4de69b8d2c",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-10-03T00:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "34ea78605e79e0304f645cf874ea170ff3c5990a",
+      "autor": "Diego Paz",
+      "fecha": "2026-10-04T01:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "bc7d1f59af5b9ba443da4654dae60d5a85b1f8ed",
+      "autor": "Ana Torres",
+      "fecha": "2026-10-05T02:00:00Z",
+      "descripcion": "Corregir filtro de fechas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "61846d49773a9a5269c5db0746becdb2748ef2ad",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-06T03:00:00Z",
+      "descripcion": "Documentar ejecución de pruebas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2f69a378a66ea011f9a89ea643ab6e2daac6309d",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-10-07T04:00:00Z",
+      "descripcion": "Añadir estados de integración",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "f1fc930855e3735d29057635d5f2842bb1cca4e2",
+      "autor": "Diego Paz",
+      "fecha": "2026-10-08T05:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "223218f69881f8b3bae54bb2d6ed7427446131c6",
+      "autor": "Ana Torres",
+      "fecha": "2026-10-09T06:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "3029e14656e4cfb86fa44d7023e98b10eeb8f4d1",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-10T07:00:00Z",
+      "descripcion": "Corregir filtro de fechas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c731d71702c86996ce6d1a1193822e3b052647d6",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-10-11T08:00:00Z",
+      "descripcion": "Documentar ejecución de pruebas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1e7e027a3f1c35d16b35980863da36becb6e5b27",
+      "autor": "Diego Paz",
+      "fecha": "2026-10-12T09:00:00Z",
+      "descripcion": "Añadir estados de integración",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-01",
+      "autor": "Ana Torres",
+      "fecha": "2026-10-01T15:00:00Z",
+      "descripcion": "Inicio de sesión docente · 1",
+      "proyecto_id": 1,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-05"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-02",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-02T15:00:00Z",
+      "descripcion": "Registro de proyecto · 2",
+      "proyecto_id": 1,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-06"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-03",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-10-03T15:00:00Z",
+      "descripcion": "Listado de commits · 3",
+      "proyecto_id": 1,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-07"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-04",
+      "autor": "Diego Paz",
+      "fecha": "2026-10-04T15:00:00Z",
+      "descripcion": "Consulta de tareas · 4",
+      "proyecto_id": 1,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-08"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-05",
+      "autor": "Ana Torres",
+      "fecha": "2026-10-05T15:00:00Z",
+      "descripcion": "Pruebas de integración · 5",
+      "proyecto_id": 1,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-09"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-06",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-06T15:00:00Z",
+      "descripcion": "Inicio de sesión docente · 6",
+      "proyecto_id": 1,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-10"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-07",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-10-07T15:00:00Z",
+      "descripcion": "Registro de proyecto · 7",
+      "proyecto_id": 1,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-11"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-08",
+      "autor": "Diego Paz",
+      "fecha": "2026-10-08T15:00:00Z",
+      "descripcion": "Listado de commits · 8",
+      "proyecto_id": 1,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-11"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-09",
+      "autor": "Ana Torres",
+      "fecha": "2026-10-02T15:00:00Z",
+      "descripcion": "Consulta de tareas · 9",
+      "proyecto_id": 1,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-07"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-10",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-03T15:00:00Z",
+      "descripcion": "Pruebas de integración · 10",
+      "proyecto_id": 1,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-20"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-11",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-10-09T15:00:00Z",
+      "descripcion": "Inicio de sesión docente · 11",
+      "proyecto_id": 1,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-20"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-12",
+      "autor": "Diego Paz",
+      "fecha": "2026-10-10T15:00:00Z",
+      "descripcion": "Registro de proyecto · 12",
+      "proyecto_id": 1,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-09"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-13",
+      "autor": "Ana Torres",
+      "fecha": "2026-10-11T15:00:00Z",
+      "descripcion": "Listado de commits · 13",
+      "proyecto_id": 1,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-21"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-14",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-12T09:00:00Z",
+      "descripcion": "Consulta de tareas · 14",
+      "proyecto_id": 1,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-22"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-15",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-09-28T15:00:00Z",
+      "descripcion": "Pruebas de integración · 15",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-08"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-16",
+      "autor": "Diego Paz",
+      "fecha": "2026-09-29T15:00:00Z",
+      "descripcion": "Inicio de sesión docente · 16",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-10"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-17",
+      "autor": "Ana Torres",
+      "fecha": "2026-10-05T15:00:00Z",
+      "descripcion": "Registro de proyecto · 17",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-25"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-18",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-06T15:00:00Z",
+      "descripcion": "Listado de commits · 18",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-26"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-19",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-10-07T15:00:00Z",
+      "descripcion": "Consulta de tareas · 19",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-27"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p1-20",
+      "autor": null,
+      "fecha": "2026-10-08T15:00:00Z",
+      "descripcion": "Pruebas de integración · 20",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-28"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-01",
+      "autor": "Ana Torres",
+      "fecha": "2026-09-23T13:00:00Z",
+      "descripcion": "Plan del proyecto · 1",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-02",
+      "autor": "Luis Vega",
+      "fecha": "2026-09-25T13:00:00Z",
+      "descripcion": "Arquitectura · 2",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-03",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-09-27T13:00:00Z",
+      "descripcion": "Plan de pruebas · 3",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-04",
+      "autor": "Diego Paz",
+      "fecha": "2026-09-29T13:00:00Z",
+      "descripcion": "Informe de avance · 4",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-05",
+      "autor": "Ana Torres",
+      "fecha": "2026-10-01T13:00:00Z",
+      "descripcion": "Diseño de interfaz · 5",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-06",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-03T13:00:00Z",
+      "descripcion": "Plan del proyecto · 6",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-07",
+      "autor": "Marta Ruiz",
+      "fecha": "2026-10-05T13:00:00Z",
+      "descripcion": "Arquitectura · 7",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-08",
+      "autor": "Diego Paz",
+      "fecha": "2026-10-07T13:00:00Z",
+      "descripcion": "Plan de pruebas · 8",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-09",
+      "autor": "Ana Torres",
+      "fecha": "2026-10-09T13:00:00Z",
+      "descripcion": "Informe de avance · 9",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p1-10",
+      "autor": "Luis Vega",
+      "fecha": "2026-10-11T13:00:00Z",
+      "descripcion": "Diseño de interfaz · 10",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "github",
+      "id_externo": "7ada4385983a76a79a98dcfb3a295b214d6887e4",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-21T15:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1fff6338e8ad8e77eecd9ceedfdab22ab61baa0c",
+      "autor": "Carlos León",
+      "fecha": "2026-09-22T21:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "b92218eeb2ea82e8cfbdd6d0520ae3f8ff94a228",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-24T03:00:00Z",
+      "descripcion": "Corregir filtro de fechas",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "f5b0c2820c2fc7594992bbf704b5ed7c46df2be6",
+      "autor": "Carlos León",
+      "fecha": "2026-09-25T09:00:00Z",
+      "descripcion": "Documentar ejecución de pruebas",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "b20ba74544337069f4d07481b6d5155d29bf7895",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-26T15:00:00Z",
+      "descripcion": "Añadir estados de integración",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "fd489cf11b4e0f1844c666bae5abbe6479685f2e",
+      "autor": "Carlos León",
+      "fecha": "2026-09-27T21:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2795f2486d159f80511145142ed8e812dd319a8f",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-29T03:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "4c9ec7e2b4e35bf587fa1a044270a15e25d545df",
+      "autor": "Carlos León",
+      "fecha": "2026-09-30T09:00:00Z",
+      "descripcion": "Corregir filtro de fechas",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d99002a557b92139768ed46d5fe6e99927a193b3",
+      "autor": "Elena Ríos",
+      "fecha": "2026-10-01T15:00:00Z",
+      "descripcion": "Documentar ejecución de pruebas",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1d869146feab1f99160aad77745e1ec9d977e5f2",
+      "autor": "Carlos León",
+      "fecha": "2026-10-02T21:00:00Z",
+      "descripcion": "Añadir estados de integración",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "a66ec235ac1d0bb77302c293fd27af95c11fa286",
+      "autor": "Elena Ríos",
+      "fecha": "2026-10-04T03:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "31f68efa64c129a123afda04f2f1c97aa737cc46",
+      "autor": "Carlos León",
+      "fecha": "2026-10-05T09:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-01",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-24T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 1",
+      "proyecto_id": 2,
+      "estado": "Listo",
+      "fecha_limite": "2026-09-30"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-02",
+      "autor": "Carlos León",
+      "fecha": "2026-09-25T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 2",
+      "proyecto_id": 2,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-01"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-03",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-26T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 3",
+      "proyecto_id": 2,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-02"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-04",
+      "autor": "Carlos León",
+      "fecha": "2026-09-27T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 4",
+      "proyecto_id": 2,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-04"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-05",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-28T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 5",
+      "proyecto_id": 2,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-30"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-06",
+      "autor": "Carlos León",
+      "fecha": "2026-10-02T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 6",
+      "proyecto_id": 2,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-31"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-07",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-26T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 7",
+      "proyecto_id": 2,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-03"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-08",
+      "autor": "Carlos León",
+      "fecha": "2026-09-27T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 8",
+      "proyecto_id": 2,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-11-05"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-01",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-10T13:00:00Z",
+      "descripcion": "Plan del proyecto · 1",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-02",
+      "autor": "Carlos León",
+      "fecha": "2026-09-13T13:00:00Z",
+      "descripcion": "Arquitectura · 2",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-03",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-16T13:00:00Z",
+      "descripcion": "Plan de pruebas · 3",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-04",
+      "autor": "Carlos León",
+      "fecha": "2026-09-19T13:00:00Z",
+      "descripcion": "Informe de avance · 4",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-05",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-22T13:00:00Z",
+      "descripcion": "Diseño de interfaz · 5",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-06",
+      "autor": "Carlos León",
+      "fecha": "2026-09-25T13:00:00Z",
+      "descripcion": "Plan del proyecto · 6",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    }
+  ],
+  "indicadores_esperados": {
+    "1": {
+      "I1": 40.0,
+      "I2": 30.0,
+      "I3": 4,
+      "I4": 0
+    },
+    "2": {
+      "I1": 37.5,
+      "I2": 25.0,
+      "I3": 2,
+      "I4": 7
+    }
+  },
+  "alertas_esperadas": {
+    "1": [
+      {
+        "regla": "R1",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p1-09"
+      },
+      {
+        "regla": "R2",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p1-09"
+      },
+      {
+        "regla": "R2",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p1-10"
+      },
+      {
+        "regla": "R1",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p1-12"
+      },
+      {
+        "regla": "R1",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p1-15"
+      },
+      {
+        "regla": "R1",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p1-16"
+      }
+    ],
+    "2": [
+      {
+        "regla": "R1",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p2-04"
+      },
+      {
+        "regla": "R2",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p2-04"
+      },
+      {
+        "regla": "R2",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p2-05"
+      },
+      {
+        "regla": "R2",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p2-06"
+      },
+      {
+        "regla": "R1",
+        "fuente": "notion",
+        "evidencia_id": "tarea-p2-07"
+      },
+      {
+        "regla": "R3",
+        "fuente": "github",
+        "evidencia_id": "31f68efa64c129a123afda04f2f1c97aa737cc46"
+      },
+      {
+        "regla": "R4",
+        "fuente": "drive",
+        "evidencia_id": "archivo-p2-06"
+      }
+    ]
+  }
+}
