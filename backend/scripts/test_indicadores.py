@@ -4,7 +4,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # para "sync_github" (mismo directorio)
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backend"))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from app.modulos.evidencias.adaptadores.github.cliente import GitHubClient, GitHubError  # noqa: E402
 from sync_github import gini, gini_normalizado, metricas  # noqa: E402
 

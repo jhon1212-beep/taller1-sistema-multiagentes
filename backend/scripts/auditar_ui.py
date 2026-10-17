@@ -19,7 +19,7 @@ import os
 import re
 import sys
 
-RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RAIZ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TOKENS = os.path.join(RAIZ, "frontend", "src", "estilos", "tokens.css")
 
 # Archivos de interfaz que deben consumir el sistema visual.
