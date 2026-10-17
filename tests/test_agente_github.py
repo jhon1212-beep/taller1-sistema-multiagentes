@@ -13,7 +13,7 @@ RAIZ = Path(__file__).resolve().parents[1]
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
-from scripts.github_client import GitHubClient, GitHubError  # noqa: E402
+from app.modulos.evidencias.adaptadores.github.cliente import GitHubClient, GitHubError # noqa: E402
 
 from app.agentes.nodo_github import (  # noqa: E402
     LIMITE_COMMITS,
