@@ -6,9 +6,9 @@ configfile: pytest.ini
 plugins: langsmith-0.14.4, anyio-4.15.1
 collecting ... collected 4 items
 
-tests/test_contrato_evidencias.py::test_fuente_falsa_devuelve_evidencias_del_proyecto_pedido PASSED [ 25%]
-tests/test_contrato_evidencias.py::test_fuente_falsa_respeta_el_limite PASSED [ 50%]
-tests/test_contrato_evidencias.py::test_fuente_falsa_no_devuelve_evidencias_de_otro_proyecto PASSED [ 75%]
-tests/test_contrato_evidencias.py::test_evidencia_se_serializa_a_diccionario PASSED [100%]
+tests/unit/test_contrato_evidencias.py::test_fuente_falsa_devuelve_evidencias_del_proyecto_pedido PASSED [ 25%]
+tests/unit/test_contrato_evidencias.py::test_fuente_falsa_respeta_el_limite PASSED [ 50%]
+tests/unit/test_contrato_evidencias.py::test_fuente_falsa_no_devuelve_evidencias_de_otro_proyecto PASSED [ 75%]
+tests/unit/test_contrato_evidencias.py::test_evidencia_se_serializa_a_diccionario PASSED [100%]
 
 ============================== 4 passed in 0.01s ===============================
