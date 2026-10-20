@@ -96,7 +96,7 @@ El script genera un consolidado JSON en:
 
 Desde la raíz del repositorio, en PowerShell:
 
-    .\backend\.venv\Scripts\python.exe -m pytest tests/test_supervision_contrato.py -q --tb=short
+    .\backend\.venv\Scripts\python.exe -m pytest tests/unit/test_supervision_contrato.py -q --tb=short
 
 Para ejecutar las pruebas unitarias y de integración por carpetas:
 
