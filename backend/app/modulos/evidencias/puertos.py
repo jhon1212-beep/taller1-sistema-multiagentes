@@ -11,6 +11,7 @@ from __future__ import annotations
 from typing import Protocol
 
 from app.modulos.evidencias.dominio import Evidencia
+from app.modulos.evidencias.esquema import EvidenciaNormalizada  
 
 
 class FuenteEvidencia(Protocol):
@@ -23,3 +24,10 @@ class FuenteEvidencia(Protocol):
         desde: str | None = None,
     ) -> list[Evidencia]:
         ...
+
+class RepositorioEvidencias(Protocol):
+    def guardar(self, evidencias: list[EvidenciaNormalizada]) -> int: ...
+
+    def listar(
+        self, proyecto_id: int, fuente: str | None = None
+    ) -> list[EvidenciaNormalizada]: ...
