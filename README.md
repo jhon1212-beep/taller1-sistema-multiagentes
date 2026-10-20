@@ -5,12 +5,10 @@ Taller Integrador 1 · Grupo 12 · UPAO. Aplicación web para el docente: agente
 ## Estructura
 
 ```
-backend/              API FastAPI (Python 3.12), modelos SQLAlchemy y migraciones Alembic
-frontend/             React + Vite
-tests/                Pruebas con pytest
-docs/                 Documentación (modelo de datos y diagrama ER)
-.github/workflows/    Workflows de GitHub Actions
-.env.example          Nombres de las variables de entorno (sin valores)
+backend/app/modulos/  Módulos hexagonales: evidencias, supervision, proyectos, autenticacion, validacion
+backend/scripts/      Scripts de verificación y recolección (sync_github, verificar_notion, ...)
+backend/config/       Configuración de equipos (legado de HU-001)
+docs/                 Documentación (modelo de datos, diagrama ER y github-api.md)
 ```
 
 ## Requisitos

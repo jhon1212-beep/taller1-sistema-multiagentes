@@ -3,7 +3,7 @@
 .env.*
 !.env.example
 
-# Datos generados por el agente recolector (scripts/sync_github.py)
+# Datos generados por el agente recolector (backend/scripts/sync_github.py).
 data/
 
 # Python
