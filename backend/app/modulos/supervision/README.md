@@ -111,3 +111,9 @@ La persistencia PostgreSQL, Gemini y el grafo ejecutable se implementan
 en los PBIs posteriores.
 
 Los contratos quedan sujetos a revisión de sus consumidores.
+## Motor de indicadores y reglas (TA-019)
+
+`motor_indicadores.py` calcula I1–I4 y evalúa R1–R4 de forma determinista (sin LLM)
+respecto de una fecha de corte configurable. Entrada: evidencias consolidadas y
+`fecha_corte` ISO 8601 con zona horaria. Salida de `evaluar(...)`: indicadores y
+alertas sin explicación. Detalle en `docs/sprint1/TA-019.md`.
