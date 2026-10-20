@@ -3,6 +3,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.modulos.autenticacion.rutas import router as autenticacion_router
 from app.modulos.evidencias.rutas import router as evidencias_router
 from app.modulos.proyectos.rutas import router as proyectos_router
 
@@ -26,6 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(autenticacion_router)
 app.include_router(proyectos_router)
 app.include_router(evidencias_router)
 
