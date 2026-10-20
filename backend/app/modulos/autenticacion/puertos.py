@@ -30,3 +30,16 @@ class ServicioAutenticacion(Protocol):
     def cerrar_sesion(self, token: str) -> None:
         """Invalida el token. Cerrar una sesión inexistente no es un error."""
         ...
+
+
+
+class RepositorioDocentes(Protocol):
+    """HU-001 - Acceso a los docentes registrados (la tabla `docente`)."""
+
+    def buscar_por_correo(self, correo: str) -> tuple[Docente, str] | None:
+        """Devuelve (docente, password_hash) o None si el correo no existe."""
+        ...
+
+    def obtener(self, docente_id: int) -> Docente | None:
+        """Devuelve el docente o None si no existe."""
+        ...
