@@ -1,6 +1,6 @@
 # Modelo de datos (TA-004)
 
-Base de datos: PostgreSQL 16. Migración: `backend/alembic/versions/0001_modelo_de_datos_inicial_8_tablas.py`. Modelos: `backend/app/models.py`.
+Base de datos: PostgreSQL 16. Migración: `backend/alembic/versions/0001_modelo_de_datos_inicial_8_tablas.py`. Modelos: `backend/app/compartido/modelos_orm.py`.
 
 ![Diagrama ER](diagrama-er.png)
 

@@ -20,14 +20,15 @@ import os
 import sys
 from datetime import datetime, timedelta, timezone
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backend"))
+BACKEND = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, BACKEND)
 from app.modulos.evidencias.adaptadores.github.cliente import (  # noqa: E402
     GitHubClient, GitHubError, RateLimitError, cargar_env,
 )
 
-RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DIR_CONFIG = os.path.join(RAIZ, "config")
-DIR_DATOS = os.path.join(RAIZ, "data")
+RAIZ = os.path.dirname(BACKEND)
+DIR_CONFIG = os.path.join(BACKEND, "config")
+DIR_DATOS = os.path.join(RAIZ, "data")  # data/ sigue en la raíz y está en .gitignore
 
 
 def log(etiqueta: str, mensaje: str) -> None:
