@@ -6,25 +6,15 @@
  * módulo se reemplaza por las llamadas a la API sin tocar las vistas.
  */
 
+import { COMMITS_DATASET, DOCUMENTOS_DATASET } from './demo_dataset.js'
+
 export const CUENTAS = Array.from({ length: 5 }, (_, i) => `docente${i + 1}@demo.test`)
 export const CLAVE_DEMO = 'DemoDocente2026!'
 
 export const INTEGRANTES = ['Ana Torres', 'Luis Vega', 'Marta Ruiz', 'Diego Paz']
 
-const MENSAJES = [
-  'Agregar validación del formulario',
-  'Mostrar tareas por proyecto',
-  'Corregir filtro de fechas',
-  'Documentar ejecución de pruebas',
-  'Añadir estados de integración',
-]
-
-export const COMMITS = Array.from({ length: 20 }, (_, i) => ({
-  autor: INTEGRANTES[i % 4],
-  fecha: `2026-10-${String(6 - Math.floor(i / 4)).padStart(2, '0')} 10:${String((i * 3) % 60).padStart(2, '0')}`,
-  mensaje: MENSAJES[i % 5],
-  sha: (0xa1b2c3d + i * 1237).toString(16).slice(0, 7),
-}))
+// HU-003: los commits salen del dataset de TA-017 (ver demo_dataset.js).
+export const COMMITS = COMMITS_DATASET
 
 const TITULOS = [
   'Inicio de sesión docente',
@@ -41,12 +31,8 @@ export const TAREAS = Array.from({ length: 20 }, (_, i) => ({
   vence: `2026-10-${String(7 + (i % 5)).padStart(2, '0')}`,
 }))
 
-export const DOCUMENTOS = Array.from({ length: 10 }, (_, i) => ({
-  nombre: `${['Plan del proyecto', 'Arquitectura', 'Plan de pruebas', 'Informe de avance', 'Diseño de interfaz'][i % 5]} · ${i + 1}`,
-  editor: INTEGRANTES[i % 4],
-  modificado: `2026-10-0${(i % 5) + 1} 14:00`,
-  tipo: i % 2 ? 'Documento' : 'PDF',
-}))
+// HU-005: los documentos salen del dataset de TA-017 (ver demo_dataset.js).
+export const DOCUMENTOS = DOCUMENTOS_DATASET
 
 export const PROYECTOS_INICIALES = [
   {

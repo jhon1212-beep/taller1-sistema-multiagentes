@@ -157,9 +157,12 @@ export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver
             <div>
               <div className="eyebrow">HU-003 · CP-06</div>
               <h2>Commits de GitHub</h2>
-              <p className="muted">Últimos 20 commits del conjunto de demostración.</p>
+              <p className="muted">Últimos {COMMITS.length} commits del dataset de demostración (TA-017). Fechas en UTC.</p>
             </div>
-            <Pill tono="ok">20 de 20 mostrados</Pill>
+            <div>
+              <Pill tono="ok">{COMMITS.length} de {COMMITS.length} mostrados</Pill>{' '}
+              <Pill tono="warn">Integración: datos de demostración (API pendiente)</Pill>
+            </div>
           </div>
           {NOTA_DEMO}
           <Tabla
@@ -222,8 +225,17 @@ export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver
 
       {pestana === 'drive' && (
         <article className="card">
-          <div className="eyebrow">TA-014 · Vista anticipada</div>
-          <h2>Documentación de Google Drive</h2>
+          <div className="head">
+            <div>
+              <div className="eyebrow">HU-005 · CP-04</div>
+              <h2>Documentación de Google Drive</h2>
+              <p className="muted">{DOCUMENTOS.length} documentos del dataset de demostración (TA-017). Fechas en UTC.</p>
+            </div>
+            <div>
+              <Pill tono="ok">{DOCUMENTOS.length} de {DOCUMENTOS.length} mostrados</Pill>{' '}
+              <Pill tono="warn">Integración: datos de demostración (TA-014 pendiente)</Pill>
+            </div>
+          </div>
           {NOTA_DEMO}
           <Tabla
             columnas={['Nombre', 'Último editor', 'Última modificación', 'Tipo']}
