@@ -14,6 +14,7 @@ generar explicaciones y almacenar cortes de supervisión.
 - puertos.py: GeneradorExplicacion y RepositorioSupervision.
 - adaptadores/plantilla.py: explicaciones deterministas sin LLM.
 - adaptadores/memoria.py: almacenamiento temporal de cortes.
+- motor.py: indicadores I1-I4 y reglas R1-R4 (TA-019), funciones puras.
 - grafo/supervisor.py: Agente Supervisor y orquestación paralela de GitHub, Notion y Drive.
 - ../../../scripts/run_supervisor.py: script de ejecución y generación del consolidado TA-015.
 
@@ -80,8 +81,8 @@ por `(fuente, id_externo)` y ordena el resultado por fecha descendente.
 
 Al finalizar, ninguna fuente debe permanecer en estado `pendiente`.
 
-TA-015 no utiliza LLM. Los indicadores I1-I4 y las reglas R1-R4 se integrarán
-en PBIs posteriores.
+TA-015 no utiliza LLM. Los indicadores I1-I4 y las reglas R1-R4 los calcula
+`motor.py` (TA-019, ver docs/sprint1/TA-019.md); aún no está conectado al grafo.
 
 El script de ejecución es:
 

@@ -36,3 +36,10 @@ class EvidenciaNotion(Evidencia):
 
     estado: str | None = None
     fecha_limite: str | None = None
+
+
+@dataclass
+class EvidenciaDrive(Evidencia):
+    """TA-017: Evidencia + el tipo de archivo propio de Drive."""
+
+    tipo_archivo: str | None = None
