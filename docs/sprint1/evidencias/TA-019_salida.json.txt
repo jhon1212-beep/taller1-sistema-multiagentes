@@ -1,0 +1,47 @@
+fecha_corte: 2026-10-12T23:59:59-05:00
+{
+  "indicadores": {
+    "I1": 50.0,
+    "I2": 50.0,
+    "I3": 1,
+    "I4": 1
+  },
+  "alertas": [
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "n2"
+      ],
+      "explicacion": null,
+      "origen_explicacion": null
+    },
+    {
+      "regla": "R2",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "n2"
+      ],
+      "explicacion": null,
+      "origen_explicacion": null
+    },
+    {
+      "regla": "R3",
+      "fuente": "github",
+      "evidencia_ids": [
+        "g1"
+      ],
+      "explicacion": null,
+      "origen_explicacion": null
+    },
+    {
+      "regla": "R4",
+      "fuente": "drive",
+      "evidencia_ids": [
+        "d1"
+      ],
+      "explicacion": null,
+      "origen_explicacion": null
+    }
+  ]
+}
