@@ -1,0 +1,17 @@
+{
+  "_nota": "Dataset de EJEMPLO con el formato esperado. Reemplazar por el export real de TA-017 (evidencias + valores esperados de la hoja).",
+  "fecha_corte": "2026-10-12T23:59:59-05:00",
+  "evidencias": [
+    {"fuente": "notion", "id_externo": "n1", "autor": "A", "fecha": "2026-10-10T10:00:00Z", "descripcion": "t1", "proyecto_id": 1, "estado": "Listo", "fecha_limite": "2026-10-05"},
+    {"fuente": "notion", "id_externo": "n2", "autor": "B", "fecha": "2026-10-01T10:00:00Z", "descripcion": "t2", "proyecto_id": 1, "estado": "En curso", "fecha_limite": "2026-10-08"},
+    {"fuente": "notion", "id_externo": "n3", "autor": "C", "fecha": "2026-10-11T10:00:00Z", "descripcion": "t3", "proyecto_id": 1, "estado": "Sin empezar", "fecha_limite": "2026-10-20"},
+    {"fuente": "notion", "id_externo": "n4", "autor": "D", "fecha": "2026-10-09T10:00:00Z", "descripcion": "t4", "proyecto_id": 1, "estado": "Listo", "fecha_limite": null},
+    {"fuente": "github", "id_externo": "g1", "autor": "A", "fecha": "2026-10-02T10:00:00Z", "descripcion": "c1", "proyecto_id": 1},
+    {"fuente": "drive", "id_externo": "d1", "autor": "A", "fecha": "2026-09-20T10:00:00Z", "descripcion": "doc", "proyecto_id": 1},
+    {"fuente": "github", "id_externo": "g-futuro", "autor": "A", "fecha": "2026-10-20T10:00:00Z", "descripcion": "posterior al corte", "proyecto_id": 1}
+  ],
+  "esperado": {
+    "indicadores": {"I1": 50.0, "I2": 50.0, "I3": 1, "I4": 1},
+    "alertas": [["R1", "n2"], ["R2", "n2"], ["R3", "g1"], ["R4", "d1"]]
+  }
+}
