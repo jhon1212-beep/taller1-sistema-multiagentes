@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """TA-013 · Pruebas de integración CP-01 a CP-08 (plan de pruebas TA-003).
 
 Se ejecutan sin red ni base de datos, sobre el dataset controlado de TA-017
@@ -33,7 +33,7 @@ from app.modulos.evidencias.adaptadores.dataset import FuenteEvidenciaDataset
 from app.modulos.evidencias.adaptadores.github.cliente import RateLimitError
 from app.modulos.evidencias.dataset import cargar_dataset, fecha_corte_demo
 from app.modulos.evidencias.dominio import EvidenciaNotion
-from app.modulos.evidencias.rutas import obtener_fuente_tareas
+from app.modulos.evidencias.rutas_tareas import obtener_fuente_tareas
 from app.modulos.proyectos.adaptadores.memoria import RepositorioProyectosMemoria
 from app.modulos.proyectos.dominio import Integrante, Proyecto, ProyectoNoEncontrado
 from app.modulos.proyectos.rutas import docente_actual, obtener_servicio
