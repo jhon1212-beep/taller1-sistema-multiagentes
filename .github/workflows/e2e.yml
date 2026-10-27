@@ -1,0 +1,72 @@
+name: TA-047 - Validacion E2E
+
+# Lo dispara el Agente de Validacion (TA-021) por la API de GitHub:
+#   POST /repos/{repo}/actions/workflows/e2e.yml/dispatches
+# El nombre del run lleva el codigo de correlacion para que el agente encuentre
+# su ejecucion entre las demas.
+run-name: E2E ${{ inputs.correlacion }} - proyecto ${{ inputs.proyecto_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      url_publica:
+        description: URL publica del proyecto a validar
+        required: true
+        type: string
+      elemento_verificar:
+        description: Selector CSS que debe estar visible
+        required: true
+        type: string
+      proyecto_id:
+        description: Id del proyecto (solo se copia al resultado)
+        required: true
+        type: string
+      correlacion:
+        description: Codigo con el que el agente reconoce este run
+        required: false
+        default: manual
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: e2e-${{ inputs.correlacion }}
+  cancel-in-progress: false
+
+jobs:
+  validar:
+    name: Validar URL con Playwright
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: e2e
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: e2e/package-lock.json
+      - name: Instalar dependencias del lockfile
+        run: npm ci
+      - name: Instalar el navegador de Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Validar la URL (PASS = elemento visible, FAIL = no aparece)
+        # Los parametros entran por env, nunca interpolados en el comando:
+        # asi una URL o un selector con comillas no puede inyectar shell.
+        env:
+          URL_PUBLICA: ${{ inputs.url_publica }}
+          ELEMENTO_VERIFICAR: ${{ inputs.elemento_verificar }}
+          PROYECTO_ID: ${{ inputs.proyecto_id }}
+          SALIDA: resultados
+        run: node validar-url.mjs
+      - name: Guardar artefactos (resultado.json y captura en FAIL)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validacion-${{ inputs.correlacion }}
+          path: e2e/resultados/
+          if-no-files-found: warn
+          retention-days: 14

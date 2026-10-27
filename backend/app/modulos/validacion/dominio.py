@@ -18,6 +18,12 @@ class ValidacionInvalida(ValueError):
     """La solicitud o el resultado de una validación no cumple el contrato."""
 
 
+class ErrorInfraestructuraValidacion(RuntimeError):
+    """No se pudo ejecutar la validación (TA-021): no se disparó el workflow, no se
+    encontró su ejecución, venció el tiempo o terminó sin PASS ni FAIL. No es un FAIL
+    funcional: el Supervisor no debe registrarlo como resultado de la validación."""
+
+
 @dataclass
 class SolicitudValidacion:
     """Qué se verifica: que `elemento_verificar` aparezca en `url_publica`."""
