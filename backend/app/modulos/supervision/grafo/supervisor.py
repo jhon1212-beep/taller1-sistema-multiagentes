@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import operator
 from datetime import datetime, timezone
-from typing import Annotated, Any, Mapping, TypedDict
+from typing import Annotated, Any, Callable, Mapping, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Send
@@ -18,6 +18,20 @@ from app.modulos.supervision.dominio import (
     Indicadores,
 )
 from app.modulos.supervision.grafo.estado import crear_estado_inicial
+from app.modulos.supervision.motor_indicadores import evaluar as evaluate_indicators
+
+EVALUATE_NODE = "evaluate"
+
+# La evaluación se ejecuta después de consolidar las evidencias.
+def evaluate(state: SupervisorState) -> dict:
+    result = run_engine(state.get("evidencias") or [], state["fecha_corte"])
+    failed = {source for source, status in state["estado_fuentes"].items()
+              if status == "fallo"}
+    alerts = [dict(alert) for alert in result["alertas"]
+              if alert["fuente"] not in failed]
+    return {"indicadores": dict(result["indicadores"]), "alertas": alerts}
+
+# Nueva ruta: consolidate -> evaluate -> END.
 
 
 # Bloque A. Imports y constantes
@@ -26,6 +40,9 @@ SOURCES: tuple[Fuente, ...] = ("github", "notion", "drive")
 
 SUPERVISOR_NODE = "supervisor"
 CONSOLIDATE_NODE = "consolidate"
+EVALUATE_NODE = "evaluate"
+
+Engine = Callable[[list[Evidencia], str], Mapping[str, Any]]
 
 AGENT_NODES: dict[Fuente, str] = {
     "github": "github_agent",
@@ -147,8 +164,10 @@ def build_supervisor_input(
 
 def build_supervisor_graph(
     adapters: Mapping[Fuente, FuenteEvidencia],
+    engine: Engine | None = None,
 ):
-    """Construye el Agente Supervisor con un adaptador por fuente."""
+    """Construye el Supervisor con evaluación determinista de evidencias."""
+    run_engine = engine if engine is not None else evaluate_indicators
 
     # Bloque E. Qué fuentes se pueden consultar
     local_adapters = {
@@ -292,6 +311,21 @@ def build_supervisor_graph(
 
         return {"evidencias": ordered}
 
+    # Bloque I2. Calcular los indicadores y reglas sin LLM.
+    def evaluate(state: SupervisorState) -> dict:
+        """Evalúa las evidencias consolidadas sin inferir actividad faltante."""
+        result = run_engine(state.get("evidencias") or [], state["fecha_corte"])
+        failed = {
+            source
+            for source, status in (state.get("estado_fuentes") or {}).items()
+            if status == "fallo"
+        }
+        alerts = [
+            dict(alert) for alert in result["alertas"]
+            if alert["fuente"] not in failed
+        ]
+        return {"indicadores": dict(result["indicadores"]), "alertas": alerts}
+
     # Bloque J. Armado del grafo
     graph = StateGraph(SupervisorState)
 
@@ -333,10 +367,10 @@ def build_supervisor_graph(
         + [CONSOLIDATE_NODE],
     )
 
-    graph.add_edge(
-        CONSOLIDATE_NODE,
-        END,
-    )
+    graph.add_node(EVALUATE_NODE, evaluate)
+
+    graph.add_edge(CONSOLIDATE_NODE, EVALUATE_NODE)
+    graph.add_edge(EVALUATE_NODE, END)
 
     return graph.compile()
 
