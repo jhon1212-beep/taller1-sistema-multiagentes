@@ -1,6 +1,13 @@
-/** TA-002 / TA-016 · Dashboard docente con evidencia y alertas. */
+/** TA-020 · Dashboard consolidado: indicadores, estado de fuentes y alerta. */
 import { useState } from 'react'
 import { Aviso, Barra, Boton, Encabezado, Estadistica, Pill } from '../componentes/UI.jsx'
+
+/** Fuentes de evidencia del prototipo, con lo que aporta cada una. */
+const FUENTES = [
+  { id: 'github', nombre: 'GitHub', aporta: 'Commits', cantidad: 20 },
+  { id: 'notion', nombre: 'Notion', aporta: 'Tareas', cantidad: 20 },
+  { id: 'drive', nombre: 'Google Drive', aporta: 'Documentos', cantidad: 10 },
+]
 
 export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimular, onAlerta }) {
   const [traza, setTraza] = useState(null)
@@ -18,12 +25,14 @@ export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimu
     ])
   }
 
+  const disponibles = FUENTES.filter(f => !(f.id === 'notion' && notionFallo)).length
+
   return (
     <>
       <Encabezado
-        antetitulo="TA-002 / TA-016 · Dashboard docente"
+        antetitulo="Dashboard / Resumen"
         titulo="Dashboard"
-        descripcion={`Una vista de la evidencia y las alertas de ${proyecto.nombre}.`}
+        descripcion={`Una vista consolidada de la evidencia y las alertas de ${proyecto.nombre}.`}
         accion={<Boton onClick={simular}>Simular supervisión</Boton>}
       />
 
@@ -32,37 +41,44 @@ export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimu
         ni las reglas R1–R4.
       </Aviso>
 
-      <div className="grid cuatro">
-        <Estadistica etiqueta="Tareas completadas (ejemplo)" valor="40 %" detalle="8 de 20 tareas">
-          <Barra porcentaje={40} />
-        </Estadistica>
-        <Estadistica etiqueta="Tareas pendientes" valor="12" detalle="Incluye tareas en progreso" />
-        <Estadistica etiqueta="Commits mostrados" valor="20" detalle="Datos de demostración" />
-        <Estadistica etiqueta="Documentos" valor="10" detalle="Datos de demostración" />
-      </div>
+      <section aria-labelledby="dash-indicadores">
+        <h2 id="dash-indicadores" className="seccion">Indicadores del proyecto</h2>
+        <div className="grid cuatro">
+          <Estadistica etiqueta="Tareas completadas" valor="40 %" detalle="8 de 20 tareas · Notion">
+            <Barra porcentaje={40} />
+          </Estadistica>
+          <Estadistica etiqueta="Tareas pendientes" valor="12" detalle="Incluye tareas en progreso · Notion" />
+          <Estadistica etiqueta="Commits registrados" valor="20" detalle="Datos de demostración · GitHub" />
+          <Estadistica etiqueta="Documentos" valor="10" detalle="Datos de demostración · Google Drive" />
+        </div>
+      </section>
 
-      <div className="grid dos">
-        <article className="card">
-          <h3>Estado de las fuentes · Simulado</h3>
-          <div className="fuente">
-            GitHub <Pill tono="ok">Disponible</Pill>
-          </div>
-          <div className="fuente">
-            Notion{' '}
-            <Pill tono={notionFallo ? 'bad' : 'ok'}>
-              {notionFallo ? 'Integración fallida' : 'Disponible'}
-            </Pill>
-          </div>
-          <div className="fuente">
-            Google Drive <Pill tono="ok">Disponible</Pill>
-          </div>
-          <p className="small muted" style={{ marginTop: 'var(--sp-4)' }}>
-            Última simulación: {ultimaCorrida}
-          </p>
-        </article>
+      <section aria-labelledby="dash-fuentes">
+        <h2 id="dash-fuentes" className="seccion">
+          Estado de las fuentes · {disponibles} de {FUENTES.length} disponibles
+        </h2>
+        <div className="grid tres">
+          {FUENTES.map(f => {
+            const caida = f.id === 'notion' && notionFallo
+            return (
+              <article className="card fuente-card" key={f.id}>
+                <div className="fuente-cab">
+                  <h3>{f.nombre}</h3>
+                  <Pill tono={caida ? 'bad' : 'ok'}>{caida ? 'Integración fallida' : 'Disponible'}</Pill>
+                </div>
+                <p className="muted small">
+                  {caida ? 'Sin datos: error de autorización simulado' : `${f.cantidad} ${f.aporta.toLowerCase()} leídos`}
+                </p>
+                <small className="muted">Última lectura: {ultimaCorrida}</small>
+              </article>
+            )
+          })}
+        </div>
+      </section>
 
+      <section aria-labelledby="dash-alerta">
+        <h2 id="dash-alerta" className="seccion">Alertas</h2>
         <article className="card">
-          <h3>Alerta de ejemplo</h3>
           <Pill tono="warn">Requiere revisión docente</Pill>
           <h3 style={{ marginTop: 'var(--sp-4)' }}>Entregable con fecha vencida</h3>
           <p>
@@ -73,7 +89,7 @@ export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimu
             Ver detalle y evidencia
           </Boton>
         </article>
-      </div>
+      </section>
 
       <article className="card">
         <h3>Flujo de supervisión · 5 agentes</h3>

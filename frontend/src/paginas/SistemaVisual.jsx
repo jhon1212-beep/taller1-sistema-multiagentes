@@ -23,7 +23,7 @@ export default function SistemaVisual({ onEjemplo }) {
   return (
     <>
       <Encabezado
-        antetitulo="EN-UI-001 · Sistema visual"
+        antetitulo="Sistema visual / Guía"
         titulo="Diseño compartido"
         descripcion="Tokens y componentes que consumen todas las vistas."
       />

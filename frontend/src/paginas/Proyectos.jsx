@@ -1,6 +1,6 @@
 /** HU-002 · Listado de proyectos académicos supervisados. */
 import { useState } from 'react'
-import { Aviso, Boton, Encabezado, Pill } from '../componentes/UI.jsx'
+import { Aviso, Boton, Encabezado, Pill, fechaCorta } from '../componentes/UI.jsx'
 
 export default function Proyectos({ proyectos, onAbrir, onEditar, onNuevo, onAlternar }) {
   const [filtro, setFiltro] = useState('activos')
@@ -9,7 +9,7 @@ export default function Proyectos({ proyectos, onAbrir, onEditar, onNuevo, onAlt
   return (
     <>
       <Encabezado
-        antetitulo="HU-002 · Proyectos académicos"
+        antetitulo="Mis proyectos / Listado"
         titulo="Mis proyectos"
         descripcion="Organiza las fuentes y supervisa el avance de cada equipo."
         accion={<Boton onClick={onNuevo}>+ Registrar proyecto</Boton>}
@@ -42,7 +42,7 @@ export default function Proyectos({ proyectos, onAbrir, onEditar, onNuevo, onAlt
               <h2>{p.nombre}</h2>
               <p className="muted">{p.integrantes}</p>
               <p className="small">
-                {p.inicio} → {p.fin}
+                {fechaCorta(p.inicio)} → {fechaCorta(p.fin)}
               </p>
 
               <div className="acciones small">

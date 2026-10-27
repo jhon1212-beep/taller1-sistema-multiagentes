@@ -308,3 +308,20 @@ th, td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--line);
   main { padding: var(--sp-4); }
   .card { padding: var(--sp-4); }
 }
+
+/* --- Dashboard consolidado (TA-020) ---------------------- */
+.tres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+h2.seccion {
+  font-size: var(--fs-lg);
+  margin: var(--sp-5) 0 var(--sp-3);
+  color: var(--ink);
+}
+.fuente-card h3 { margin: 0; }
+.fuente-cab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+@media (max-width: 1000px) { .tres { grid-template-columns: 1fr; } }

@@ -16,7 +16,7 @@ export default function Alerta({ proyecto, onVolver }) {
 
   return (
     <>
-      <Encabezado antetitulo="TA-016 · Detalle de alerta" titulo="Entregable con fecha vencida" />
+      <Encabezado antetitulo="Dashboard / Detalle de alerta" titulo="Entregable con fecha vencida" />
 
       <article className="card">
         <Pill tono="warn">Ejemplo ilustrativo</Pill>
