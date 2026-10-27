@@ -6,6 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.modulos.autenticacion.rutas import router as autenticacion_router
 from app.modulos.evidencias.rutas import router as evidencias_router
 from app.modulos.proyectos.rutas import router as proyectos_router
+from app.modulos.evidencias.rutas import router as router_evidencias
+
 
 app = FastAPI(
     title="Agentes inteligentes para el seguimiento de proyectos de software",
@@ -30,6 +32,7 @@ app.add_middleware(
 app.include_router(autenticacion_router)
 app.include_router(proyectos_router)
 app.include_router(evidencias_router)
+app.include_router(router_evidencias)
 
 
 @app.get("/health")

@@ -4,3 +4,4 @@ langchain-google-genai
 google-genai
 langsmith
 requests
+google-auth

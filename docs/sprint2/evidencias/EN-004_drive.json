@@ -1,0 +1,15 @@
+{
+  "api": "Google Drive v3",
+  "alcance": "https://www.googleapis.com/auth/drive.readonly",
+  "http": {
+    "files.list": 200
+  },
+  "archivos_listados": 10,
+  "campos_presentes": [
+    "id",
+    "lastModifyingUser",
+    "mimeType",
+    "modifiedTime",
+    "name"
+  ]
+}
