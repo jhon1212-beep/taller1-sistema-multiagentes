@@ -83,3 +83,68 @@ def tareas_del_proyecto(
         ),
         tareas=[TareaOut(**vars(t)) for t in tareas],
     )
+
+class DocumentoOut(BaseModel):
+    id: str
+    nombre: str
+    editor: str
+    fecha: str
+    tipo: str
+
+class DocumentosOut(BaseModel):
+    proyecto_id: int
+    fuente: str
+    estado: str
+    error: str | None
+    total: int
+    documentos: list[DocumentoOut]
+
+def obtener_fuente_documentos() -> FuenteEvidencia:
+    from app.modulos.evidencias.adaptadores.drive.adaptador import FuenteEvidenciaDrive
+    return FuenteEvidenciaDrive()
+
+@router.get("/{proyecto_id}/documentos", response_model=DocumentosOut)
+def documentos_del_proyecto(
+    proyecto_id: int,
+    limite: int = Query(LIMITE_POR_DEFECTO, ge=1, le=200),
+    docente_id: int = Depends(docente_actual),
+    servicio: ServicioProyectos = Depends(obtener_servicio),
+    fuente: FuenteEvidencia = Depends(obtener_fuente_documentos),
+):
+    try:
+        proyecto = servicio.obtener(docente_id, proyecto_id)
+    except ProyectoNoEncontrado as error:
+        raise HTTPException(status_code=404, detail=str(error))
+        
+    referencia = proyecto.fuentes.get("drive")
+    if not referencia:
+        return DocumentosOut(proyecto_id=proyecto.id, fuente="drive", estado="fallo", error="Sin referencia configurada", total=0, documentos=[])
+        
+    try:
+        evidencias = fuente.obtener_evidencias(referencia, proyecto.id, limite=limite)
+        docs = [
+            DocumentoOut(
+                id=e.id_externo,
+                nombre=e.descripcion,
+                editor=e.autor,
+                fecha=e.fecha or "",
+                tipo=e.tipo_archivo or "desconocido"
+            ) for e in evidencias
+        ]
+        return DocumentosOut(
+            proyecto_id=proyecto.id,
+            fuente="drive",
+            estado="ok",
+            error=None,
+            total=len(docs),
+            documentos=docs
+        )
+    except Exception as e:
+        return DocumentosOut(
+            proyecto_id=proyecto.id,
+            fuente="drive",
+            estado="fallo",
+            error=str(e),
+            total=0,
+            documentos=[]
+        )
