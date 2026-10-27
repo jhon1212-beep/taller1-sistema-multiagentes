@@ -1,120 +1,33 @@
-# Módulo supervision
+# Supervision module
 
-Responsable: Reyes Guerrero Luis Benjamin.
+## TA-015 and TA-023
+`START -> supervisor -> [github_agent | notion_agent | drive_agent] -> consolidate -> evaluate -> explain -> END`.
 
-## Contrato AR-02
+- `supervisor`: valida las referencias de las fuentes y la fecha de corte.
+- `github_agent`, `notion_agent`, `drive_agent`: obtienen evidencias y registran fallos independientes.
+- `consolidate`: une evidencias y elimina duplicados por fuente e identificador.
+- `evaluate`: ejecuta `motor_indicadores.evaluar` sin LLM para I1–I4 y R1–R4.
+- `explain`: construye contexto seudonimizado y usa el contrato `GeneradorExplicacion`.
 
-Este módulo define el estado compartido del grafo y los contratos para
-generar explicaciones y almacenar cortes de supervisión.
+## Modules
+- `motor_indicadores.py`: motor determinista elegido para TA-023; `motor.py` se conserva sin cambiar hasta la decisión del equipo.
+- `pseudonymizer.py`: sustituye autores por `Member N` y limpia nombres conocidos en las descripciones.
+- `adaptadores/gemini.py`: prompt y llamada a Gemini; `max_retries=0`.
+- `adaptadores/resilient.py`: respaldo con plantilla ante 429 u otro error.
+- `adaptadores/plantilla.py`: explicación sin LLM, compatible con `contexto` opcional.
 
-## Archivos
+## Run
+```powershell
+python backend/scripts/run_supervisor.py --source dataset --project 2 --explainer template
+python backend/scripts/run_supervisor.py --source dataset --project 2 --explainer gemini
+python backend/scripts/run_supervisor.py --source dataset --project 2 --explainer gemini-429
+```
 
-- dominio.py: tipos Fuente, EstadoFuente, Indicadores, Alerta y Explicacion.
-- grafo/estado.py: EstadoSupervision y crear_estado_inicial.
-- puertos.py: GeneradorExplicacion y RepositorioSupervision.
-- adaptadores/plantilla.py: explicaciones deterministas sin LLM.
-- adaptadores/memoria.py: almacenamiento temporal de cortes.
-- motor.py: indicadores I1-I4 y reglas R1-R4 (TA-019), funciones puras.
-- grafo/supervisor.py: Agente Supervisor y orquestación paralela de GitHub, Notion y Drive.
-- ../../../scripts/run_supervisor.py: script de ejecución y generación del consolidado TA-015.
+## Test
+```powershell
+python -m pytest -q
+python -m pytest tests/unit/test_pseudonymizer.py tests/unit/test_explanation_generators.py tests/integration/test_explainable_alerts.py -v
+```
 
-## Estado inicial
-
-Cada ejecución comienza con evidencias y alertas vacías, fuentes
-pendientes e indicadores sin calcular (None).
-
-Se reutiliza Evidencia del contrato AR-01.
-Los imports utilizan el paquete app, con backend en la ruta de Python.
-
-## Generador de explicaciones
-
-generar(alerta, fecha_corte) devuelve texto y origen.
-
-La plantilla explica una alerta previamente detectada y menciona
-su regla, fuente, fecha de corte e identificadores de evidencia.
-Rechaza reglas desconocidas y fuentes incompatibles.
-
-No calcula indicadores ni evalúa si una regla se cumple.
-No consulta Gemini ni APIs externas.
-
-## Repositorio de supervisión
-
-- guardar(estado): guarda o reemplaza un corte.
-- obtener(proyecto_id, fecha_corte): devuelve el corte o None.
-- listar(proyecto_id): devuelve sus cortes en orden cronológico ascendente.
-
-Las fechas deben estar en formato ISO 8601 con zona horaria.
-Fechas equivalentes se normalizan a UTC para identificar el mismo corte.
-
-El adaptador en memoria utiliza copias independientes al guardar
-y consultar. Sus datos se pierden al finalizar el proceso.
-
-## Agente Supervisor (TA-015)
-
-El Agente Supervisor utiliza LangGraph con un patrón de supervisor
-jerárquico para coordinar las fuentes de evidencia del proyecto.
-
-El flujo de ejecución es:
-
-`START -> supervisor -> [github_agent | notion_agent | drive_agent] -> consolidate -> END`
-
-El nodo `supervisor` valida la fecha de corte y determina qué fuentes
-pueden consultarse.
-
-Los nodos `github_agent`, `notion_agent` y `drive_agent` reciben únicamente
-la referencia correspondiente a su fuente y pueden ejecutarse en paralelo.
-
-Cada agente utiliza el contrato `FuenteEvidencia`, conserva únicamente las
-evidencias de su fuente y proyecto, y aplica la fecha de corte indicada.
-
-Las evidencias posteriores al corte se descartan y se contabilizan como
-`fuera_de_corte`. Las evidencias sin fecha se conservan.
-
-Si un adaptador genera una excepción, únicamente esa fuente queda en estado
-`fallo`; las demás fuentes continúan su ejecución.
-
-Una fuente sin adaptador o sin referencia también queda en estado `fallo`
-sin ser invocada.
-
-El nodo `consolidate` reúne las evidencias de las fuentes, elimina duplicados
-por `(fuente, id_externo)` y ordena el resultado por fecha descendente.
-
-Al finalizar, ninguna fuente debe permanecer en estado `pendiente`.
-
-TA-015 no utiliza LLM. Los indicadores I1-I4 y las reglas R1-R4 los calcula
-`motor.py` (TA-019, ver docs/sprint1/TA-019.md); aún no está conectado al grafo.
-
-El script de ejecución es:
-
-    python backend\scripts\run_supervisor.py
-
-El script genera un consolidado JSON en:
-
-    docs\sprint1\evidencias\TA-015_consolidado.json
-
-## Verificación
-
-Desde la raíz del repositorio, en PowerShell:
-
-    .\backend\.venv\Scripts\python.exe -m pytest tests/unit/test_supervision_contrato.py -q --tb=short
-
-Para ejecutar las pruebas unitarias y de integración por carpetas:
-
-    python -m pytest tests/unit tests/integration -q
-
-## Límites y trabajo posterior
-
-TypedDict describe tipos, pero no valida los datos en ejecución.
-Los campos específicos de Notion necesarios para calcular indicadores
-y reglas requieren acordarse con el módulo evidencias.
-
-La persistencia PostgreSQL, Gemini y el grafo ejecutable se implementan
-en los PBIs posteriores.
-
-Los contratos quedan sujetos a revisión de sus consumidores.
-## Motor de indicadores y reglas (TA-019)
-
-`motor_indicadores.py` calcula I1–I4 y evalúa R1–R4 de forma determinista (sin LLM)
-respecto de una fecha de corte configurable. Entrada: evidencias consolidadas y
-`fecha_corte` ISO 8601 con zona horaria. Salida de `evaluar(...)`: indicadores y
-alertas sin explicación. Detalle en `docs/sprint1/TA-019.md`.
+## Safety
+No se imprimen claves API. El prompt incluye únicamente campos seleccionados y nombres conocidos sustituidos. La protección es específica de los nombres de los autores detectados; para información real adicional se requiere un control de privacidad más amplio.

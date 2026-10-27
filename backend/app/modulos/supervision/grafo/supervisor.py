@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import operator
 from datetime import datetime, timezone
-from typing import Annotated, Any, Mapping, TypedDict
+from typing import Annotated, Any, Callable, Mapping, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Send
@@ -18,6 +18,10 @@ from app.modulos.supervision.dominio import (
     Indicadores,
 )
 from app.modulos.supervision.grafo.estado import crear_estado_inicial
+from app.modulos.supervision.motor_indicadores import evaluar as evaluate_indicators
+from app.modulos.supervision.pseudonymizer import Pseudonymizer
+from app.modulos.supervision.puertos import GeneradorExplicacion
+from app.modulos.supervision.adaptadores.plantilla import GeneradorExplicacionPlantilla
 
 
 # Bloque A. Imports y constantes
@@ -26,6 +30,10 @@ SOURCES: tuple[Fuente, ...] = ("github", "notion", "drive")
 
 SUPERVISOR_NODE = "supervisor"
 CONSOLIDATE_NODE = "consolidate"
+EVALUATE_NODE = "evaluate"
+EXPLAIN_NODE = "explain"
+
+Engine = Callable[[list[Evidencia], str], Mapping[str, Any]]
 
 AGENT_NODES: dict[Fuente, str] = {
     "github": "github_agent",
@@ -147,8 +155,12 @@ def build_supervisor_input(
 
 def build_supervisor_graph(
     adapters: Mapping[Fuente, FuenteEvidencia],
+    engine: Engine | None = None,
+    explainer: GeneradorExplicacion | None = None,
 ):
-    """Construye el Agente Supervisor con un adaptador por fuente."""
+    """Construye el Supervisor con cálculo de alertas y explicaciones."""
+    run_engine = engine if engine is not None else evaluate_indicators
+    explanation_generator = explainer if explainer is not None else GeneradorExplicacionPlantilla()
 
     # Bloque E. Qué fuentes se pueden consultar
     local_adapters = {
@@ -292,6 +304,40 @@ def build_supervisor_graph(
 
         return {"evidencias": ordered}
 
+    # Bloque I2. Evaluación determinista de indicadores y alertas.
+    def evaluate(state: SupervisorState) -> dict:
+        """Calcula I1-I4 y R1-R4 sin pedir decisiones a un LLM."""
+        result = run_engine(state.get("evidencias") or [], state["fecha_corte"])
+        failed = {
+            source
+            for source, status in (state.get("estado_fuentes") or {}).items()
+            if status == "fallo"
+        }
+        # La falta de datos de una fuente caída no demuestra inactividad.
+        alerts = [
+            dict(alert) for alert in result["alertas"]
+            if alert["fuente"] not in failed
+        ]
+        return {"indicadores": dict(result["indicadores"]), "alertas": alerts}
+
+    # Bloque I3. Explicaciones sin revelar nombres reales a Gemini.
+    def explain(state: SupervisorState) -> dict:
+        """Redacta una explicación para cada alerta mediante el puerto AR-02."""
+        evidences = state.get("evidencias") or []
+        pseudonymizer = Pseudonymizer.from_evidences(evidences)
+        explained = []
+        for alert in state.get("alertas") or []:
+            context = pseudonymizer.alert_context(alert, evidences)
+            explanation = explanation_generator.generar(
+                alert, state["fecha_corte"], contexto=context
+            )
+            explained.append({
+                **alert,
+                "explicacion": explanation["texto"],
+                "origen_explicacion": explanation["origen"],
+            })
+        return {"alertas": explained}
+
     # Bloque J. Armado del grafo
     graph = StateGraph(SupervisorState)
 
@@ -333,10 +379,12 @@ def build_supervisor_graph(
         + [CONSOLIDATE_NODE],
     )
 
-    graph.add_edge(
-        CONSOLIDATE_NODE,
-        END,
-    )
+    graph.add_node(EVALUATE_NODE, evaluate)
+    graph.add_node(EXPLAIN_NODE, explain)
+
+    graph.add_edge(CONSOLIDATE_NODE, EVALUATE_NODE)
+    graph.add_edge(EVALUATE_NODE, EXPLAIN_NODE)
+    graph.add_edge(EXPLAIN_NODE, END)
 
     return graph.compile()
 
