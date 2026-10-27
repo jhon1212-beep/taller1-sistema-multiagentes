@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Protocol
+from typing import Any, Mapping, Protocol, Sequence
 
 from app.modulos.supervision.dominio import Alerta, Explicacion
 from app.modulos.supervision.grafo.estado import EstadoSupervision
@@ -15,6 +15,7 @@ class GeneradorExplicacion(Protocol):
         self,
         alerta: Alerta,
         fecha_corte: str,
+        contexto: Sequence[Mapping[str, Any]] | None = None,
     ) -> Explicacion:
         ...
 

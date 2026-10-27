@@ -1,5 +1,7 @@
 """AR-02: explicaciones deterministas sin llamadas a un LLM."""
 
+from typing import Any, Mapping, Sequence
+
 from app.modulos.supervision.dominio import Alerta, Explicacion
 
 
@@ -25,6 +27,7 @@ class GeneradorExplicacionPlantilla:
         self,
         alerta: Alerta,
         fecha_corte: str,
+        contexto: Sequence[Mapping[str, Any]] | None = None,
     ) -> Explicacion:
         regla = alerta["regla"]
 
