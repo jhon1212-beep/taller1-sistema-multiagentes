@@ -1,0 +1,340 @@
+{
+  "proyecto_id": 2,
+  "fecha_corte": "2026-10-12T23:59:59-05:00",
+  "fuentes": {
+    "github": {
+      "estado": "ok",
+      "error": null,
+      "evidencias": 12,
+      "fuera_de_corte": 0
+    },
+    "notion": {
+      "estado": "ok",
+      "error": null,
+      "evidencias": 8,
+      "fuera_de_corte": 0
+    },
+    "drive": {
+      "estado": "ok",
+      "error": null,
+      "evidencias": 6,
+      "fuera_de_corte": 0
+    }
+  },
+  "total_evidencias": 26,
+  "evidencias": [
+    {
+      "fuente": "github",
+      "id_externo": "31f68efa64c129a123afda04f2f1c97aa737cc46",
+      "autor": "Carlos León",
+      "fecha": "2026-10-05T09:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "a66ec235ac1d0bb77302c293fd27af95c11fa286",
+      "autor": "Elena Ríos",
+      "fecha": "2026-10-04T03:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1d869146feab1f99160aad77745e1ec9d977e5f2",
+      "autor": "Carlos León",
+      "fecha": "2026-10-02T21:00:00Z",
+      "descripcion": "Añadir estados de integración",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-06",
+      "autor": "Carlos León",
+      "fecha": "2026-10-02T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 6",
+      "proyecto_id": 2,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-31"
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d99002a557b92139768ed46d5fe6e99927a193b3",
+      "autor": "Elena Ríos",
+      "fecha": "2026-10-01T15:00:00Z",
+      "descripcion": "Documentar ejecución de pruebas",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "4c9ec7e2b4e35bf587fa1a044270a15e25d545df",
+      "autor": "Carlos León",
+      "fecha": "2026-09-30T09:00:00Z",
+      "descripcion": "Corregir filtro de fechas",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2795f2486d159f80511145142ed8e812dd319a8f",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-29T03:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-05",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-28T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 5",
+      "proyecto_id": 2,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-30"
+    },
+    {
+      "fuente": "github",
+      "id_externo": "fd489cf11b4e0f1844c666bae5abbe6479685f2e",
+      "autor": "Carlos León",
+      "fecha": "2026-09-27T21:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-04",
+      "autor": "Carlos León",
+      "fecha": "2026-09-27T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 4",
+      "proyecto_id": 2,
+      "estado": "En curso",
+      "fecha_limite": "2026-10-04"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-08",
+      "autor": "Carlos León",
+      "fecha": "2026-09-27T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 8",
+      "proyecto_id": 2,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-11-05"
+    },
+    {
+      "fuente": "github",
+      "id_externo": "b20ba74544337069f4d07481b6d5155d29bf7895",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-26T15:00:00Z",
+      "descripcion": "Añadir estados de integración",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-03",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-26T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 3",
+      "proyecto_id": 2,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-02"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-07",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-26T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 7",
+      "proyecto_id": 2,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-03"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-02",
+      "autor": "Carlos León",
+      "fecha": "2026-09-25T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 2",
+      "proyecto_id": 2,
+      "estado": "Listo",
+      "fecha_limite": "2026-10-01"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-06",
+      "autor": "Carlos León",
+      "fecha": "2026-09-25T13:00:00Z",
+      "descripcion": "Plan del proyecto · 6",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "github",
+      "id_externo": "f5b0c2820c2fc7594992bbf704b5ed7c46df2be6",
+      "autor": "Carlos León",
+      "fecha": "2026-09-25T09:00:00Z",
+      "descripcion": "Documentar ejecución de pruebas",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "tarea-p2-01",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-24T15:00:00Z",
+      "descripcion": "Módulo de catálogo · 1",
+      "proyecto_id": 2,
+      "estado": "Listo",
+      "fecha_limite": "2026-09-30"
+    },
+    {
+      "fuente": "github",
+      "id_externo": "b92218eeb2ea82e8cfbdd6d0520ae3f8ff94a228",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-24T03:00:00Z",
+      "descripcion": "Corregir filtro de fechas",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1fff6338e8ad8e77eecd9ceedfdab22ab61baa0c",
+      "autor": "Carlos León",
+      "fecha": "2026-09-22T21:00:00Z",
+      "descripcion": "Mostrar tareas por proyecto",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-05",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-22T13:00:00Z",
+      "descripcion": "Diseño de interfaz · 5",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "github",
+      "id_externo": "7ada4385983a76a79a98dcfb3a295b214d6887e4",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-21T15:00:00Z",
+      "descripcion": "Agregar validación del formulario",
+      "proyecto_id": 2
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-04",
+      "autor": "Carlos León",
+      "fecha": "2026-09-19T13:00:00Z",
+      "descripcion": "Informe de avance · 4",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-03",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-16T13:00:00Z",
+      "descripcion": "Plan de pruebas · 3",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-02",
+      "autor": "Carlos León",
+      "fecha": "2026-09-13T13:00:00Z",
+      "descripcion": "Arquitectura · 2",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/vnd.google-apps.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "archivo-p2-01",
+      "autor": "Elena Ríos",
+      "fecha": "2026-09-10T13:00:00Z",
+      "descripcion": "Plan del proyecto · 1",
+      "proyecto_id": 2,
+      "tipo_archivo": "application/pdf"
+    }
+  ],
+  "indicadores": {
+    "I1": 37.5,
+    "I2": 62.5,
+    "I3": 2,
+    "I4": 7
+  },
+  "alertas": [
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p2-04"
+      ],
+      "explicacion": "Se ha generado una alerta debido a que la tarea \"Módulo de catálogo · 4\", asignada a Member 1, no ha sido completada y su fecha límite era el 4 de octubre de 2026. Se recomienda verificar el estado actual del proyecto, ya que la entrega se encuentra fuera del plazo establecido antes del corte.",
+      "origen_explicacion": "gemini"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p2-07"
+      ],
+      "explicacion": "Se ha generado una alerta debido a que la tarea \"Módulo de catálogo · 7\" asignada a Member 2 no ha sido completada. Se debe verificar el estado de esta actividad, ya que su fecha límite era anterior al corte establecido.",
+      "origen_explicacion": "gemini"
+    },
+    {
+      "regla": "R2",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p2-06"
+      ],
+      "explicacion": "Regla R2: Tarea en curso sin ediciones durante mas de 7 dias. Fuente: notion. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: tarea-p2-06.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R2",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p2-05"
+      ],
+      "explicacion": "Se ha generado una alerta debido a que la tarea \"Módulo de catálogo\" asignada a Member 2 se encuentra en estado \"En curso\" sin registrar ediciones desde el 28 de septiembre de 2026. Se recomienda verificar el progreso del proyecto, ya que han transcurrido más de siete días sin actualizaciones.",
+      "origen_explicacion": "gemini"
+    },
+    {
+      "regla": "R2",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p2-04"
+      ],
+      "explicacion": "Se ha generado una alerta debido a que la tarea \"Módulo de catálogo · 4\", asignada a Member 1, se encuentra en estado \"En curso\" sin registrar ediciones desde el 27 de septiembre de 2026. Se recomienda revisar el progreso de esta actividad, ya que ha superado la fecha límite establecida del 4 de octubre de 2026.",
+      "origen_explicacion": "gemini"
+    },
+    {
+      "regla": "R3",
+      "fuente": "github",
+      "evidencia_ids": [
+        "31f68efa64c129a123afda04f2f1c97aa737cc46"
+      ],
+      "explicacion": "Se ha generado una alerta debido a que el repositorio no presenta nuevos commits en los siete días previos a la fecha de corte. Se recomienda verificar el estado del proyecto, ya que la última actividad registrada por Member 1 fue el 5 de octubre de 2026.",
+      "origen_explicacion": "gemini"
+    },
+    {
+      "regla": "R4",
+      "fuente": "drive",
+      "evidencia_ids": [
+        "archivo-p2-06"
+      ],
+      "explicacion": "Regla R4: Carpeta sin documentos modificados en los 14 dias previos al corte. Fuente: drive. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: archivo-p2-06.",
+      "origen_explicacion": "plantilla"
+    }
+  ],
+  "respaldos_plantilla": [
+    {
+      "regla": "R2",
+      "motivo": "error",
+      "detalle": "GoogleAPIError"
+    },
+    {
+      "regla": "R4",
+      "motivo": "error",
+      "detalle": "GoogleAPIError"
+    }
+  ]
+}
