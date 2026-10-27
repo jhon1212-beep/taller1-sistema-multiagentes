@@ -7,6 +7,7 @@ from app.modulos.autenticacion.rutas import router as autenticacion_router
 from app.modulos.evidencias.rutas import router as evidencias_router
 from app.modulos.proyectos.rutas import router as proyectos_router
 from app.modulos.evidencias.rutas import router as router_evidencias
+from app.modulos.evidencias.rutas_tareas import router as tareas_router
 from app.modulos.validacion.rutas import router as validacion_router
 
 app = FastAPI(
@@ -31,6 +32,9 @@ app.add_middleware(
 
 app.include_router(autenticacion_router)
 app.include_router(proyectos_router)
+# HU-004 va antes que las rutas de TA-038: ambas publican GET /proyectos/{id}/tareas
+# y la primera registrada es la que responde (la vista de Notion ya depende de ella).
+app.include_router(tareas_router)
 app.include_router(evidencias_router)
 app.include_router(router_evidencias)
 app.include_router(validacion_router)

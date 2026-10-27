@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """HU-004: pruebas de la vista de tareas (GET /proyectos/{id}/tareas).
 
 Usan el repositorio de proyectos en memoria y, como fuente de Notion, el
@@ -11,7 +11,7 @@ from fastapi.testclient import TestClient
 from app.main import app
 from app.modulos.evidencias.adaptadores.dataset import FuenteEvidenciaDataset
 from app.modulos.evidencias.adaptadores.notion.cliente import NotionAuthError, NotionError
-from app.modulos.evidencias.rutas import obtener_fuente_tareas
+from app.modulos.evidencias.rutas_tareas import obtener_fuente_tareas
 from app.modulos.proyectos.adaptadores.memoria import RepositorioProyectosMemoria
 from app.modulos.proyectos.rutas import docente_actual, obtener_servicio
 from app.modulos.proyectos.servicio import ServicioProyectos
