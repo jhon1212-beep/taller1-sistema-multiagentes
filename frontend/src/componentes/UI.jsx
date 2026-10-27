@@ -132,3 +132,9 @@ export function Encabezado({ antetitulo, titulo, descripcion, accion }) {
     </div>
   )
 }
+
+/** Convierte una fecha ISO (aaaa-mm-dd) al formato visible dd/mm/aaaa. */
+export function fechaCorta(iso) {
+  const [a, m, d] = String(iso ?? '').split('-')
+  return a && m && d ? `${d}/${m}/${a}` : String(iso ?? '')
+}

@@ -5,7 +5,7 @@ export default function Historial({ corridas, onDashboard }) {
   return (
     <>
       <Encabezado
-        antetitulo="TA-016 · Historial"
+        antetitulo="Historial / Supervisión"
         titulo="Historial de supervisión"
         descripcion="Ejecuciones simuladas durante esta sesión; se reinician al recargar."
       />

@@ -1,7 +1,7 @@
 /** HU-003 / HU-004 · Detalle del proyecto con sus fuentes de evidencia. */
 import { useEffect, useState } from 'react'
 import { API_ACTIVA, obtenerTareas } from '../api.js'
-import { Aviso, Boton, Encabezado, Estadistica, Pill, Tabla, Tabs } from '../componentes/UI.jsx'
+import { Aviso, Boton, Encabezado, Estadistica, Pill, Tabla, Tabs, fechaCorta } from '../componentes/UI.jsx'
 import { COMMITS, DOCUMENTOS, TAREAS, tonoEstado } from '../datos/demo.js'
 
 const PESTANAS = {
@@ -135,7 +135,7 @@ export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver
             <article className="card">
               <h3>Configuración de supervisión</h3>
               <p>
-                <b>Periodo:</b> {proyecto.inicio} a {proyecto.fin}
+                <b>Periodo:</b> {fechaCorta(proyecto.inicio)} a {fechaCorta(proyecto.fin)}
               </p>
               <p>
                 <b>URL pública:</b> {proyecto.url}

@@ -58,7 +58,7 @@ export default function Formulario({ proyecto, onGuardar, onCancelar }) {
   return (
     <>
       <Encabezado
-        antetitulo={`HU-002 · ${editando ? 'Editar' : 'Registrar'} proyecto`}
+        antetitulo={`Mis proyectos / ${editando ? 'Editar' : 'Registrar'} proyecto`}
         titulo={editando ? 'Editar proyecto' : 'Registrar proyecto académico'}
         descripcion="Todos los campos son obligatorios. El equipo se registra como información del proyecto."
         accion={
