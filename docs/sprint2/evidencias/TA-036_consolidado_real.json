@@ -1,0 +1,1417 @@
+{
+  "proyecto_id": 1,
+  "fecha_corte": "2026-10-06T00:00:00Z",
+  "evidencias": [
+    {
+      "fuente": "github",
+      "id_externo": "e456d53724ac267af28f7f3d6a6a091846f2f960",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-27T23:52:09Z",
+      "descripcion": "Merge pull request #27 from jhon1212-beep/mondragon/semana9",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "5d7fd91d12a84ad7c9f9fc4477c90f7ebeea0e48",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-27T23:45:37Z",
+      "descripcion": "TA-016, TA-011, TA-020: Dashboard consolidado, consistencia UI y prototipo Figma (semana 9)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "82ca4a9fdc0a4db3bce658e6f3d60d4d6087526f",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-10-27T22:44:10Z",
+      "descripcion": "Merge pull request #25 from jhon1212-beep/castro/semana9-ta021-ta047",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "9dd3032833ebaff621c0dc718e672a6e30058729",
+      "autor": "jhonk16",
+      "fecha": "2026-10-27T22:32:55Z",
+      "descripcion": "Corregir CI: test_cp01_cp08 importa obtener_fuente_tareas desde rutas_tareas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "4a10f25652c18122859ac144d1e59907e15b044a",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-10-27T22:30:32Z",
+      "descripcion": "Merge pull request #26 from jhon1212-beep/reyes/ta-023-explainable-alerts",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "b1d8627ff45d94e471f40236b886477e5ca30dfd",
+      "autor": "jhonk16",
+      "fecha": "2026-10-27T22:25:54Z",
+      "descripcion": "Corregir CI: servicio.PY a servicio.py y restaurar la ruta HU-004",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "58ce8ee5a424c408ce647685a07a8e5f1898178b",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-27T22:18:20Z",
+      "descripcion": "TA-023: documentacion y resultados observados",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c1511ac3ba905e8250cd42537c72db623edcc61d",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-27T22:06:15Z",
+      "descripcion": "TA-023: evidencias de ejecucion y trazas en LangSmith",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ade5295439e118178f4afd0a9856e33c64c3ca20",
+      "autor": "jhonk16",
+      "fecha": "2026-10-27T17:24:00Z",
+      "descripcion": "TA-021, TA-047: Agente de Validacion y workflow E2E con parametros",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "4e5284dda6a5ca43c971783a73b272dbf3fde939",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-27T19:50:12Z",
+      "descripcion": "TA-023: pruebas de integracion CP-12 a CP-15 y CP-19",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "659447be48afabf7b3e9e2ef36694670955cb538",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-10-27T19:49:42Z",
+      "descripcion": "Merge pull request #24 from jhon1212-beep/chavez/semana9",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "7c69c04368a52150ef66882030695f71f0416434",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-27T17:37:40Z",
+      "descripcion": "TA-038: rutas del módulo evidencias",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2aedb8ef227a383e6895f3a9a908d0cf07db5cbc",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-27T16:45:06Z",
+      "descripcion": "TA-014: adaptador y agente Drive",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "54742d06275fa46b56462c4d55e2329c480fe28a",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-27T10:34:52Z",
+      "descripcion": "TA-023: nodo explain y script de ejecucion",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "91734babd3ade7b5e2c30781ca59ebed2389cf46",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-27T10:16:55Z",
+      "descripcion": "TA-023: generador Gemini y respaldo con plantilla (CP-19)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "a71133ac1f79ab42499095f0bc443bd556524a74",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-27T10:07:39Z",
+      "descripcion": "TA-023: seudonimizar nombres antes de Gemini",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d32693afd4dbaffe72b78a30264119ddbaef1ef8",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-27T09:55:18Z",
+      "descripcion": "TA-023: conectar el motor de indicadores al Supervisor",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "a24e845f29cb55179697f4898b1958dc6c7380fa",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-27T09:48:31Z",
+      "descripcion": "TA-023: spec de alertas explicables",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2fad359d1188220f6b371bf669fcac9757ab349a",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-27T06:49:56Z",
+      "descripcion": "EN-004: configurar Google Drive API v3",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "391bad14002aae6aa93afa969fe86ee43fe916c4",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-22T01:50:28Z",
+      "descripcion": "Merge pull request #23 from jhon1212-beep/mondragon/semana8-correcciones",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d51b9caa43862fc8d0137c695544448d72e86fce",
+      "autor": "jhonk16",
+      "fecha": "2026-10-22T01:49:13Z",
+      "descripcion": "Merge pull request #22 from jhon1212-beep/castro/semana8-correcciones",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "3a245c662e82b442b1a5e3943df21ae21bd384e2",
+      "autor": "jhonk16",
+      "fecha": "2026-10-22T01:46:40Z",
+      "descripcion": "Merge branch 'main' into castro/semana8-correcciones",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "07dd0fd7a33b03f62b5cabd7fe48327a0db1b0fd",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-21T01:58:25Z",
+      "descripcion": "Merge pull request #21 from jhon1212-beep/ta-019-motor-indicadores",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "4a4269951906903dc8dd74b124b6fc86e42e2ed5",
+      "autor": "claude",
+      "fecha": "2026-10-20T16:56:07Z",
+      "descripcion": "HU-001, AR-05, TA-017: login real, contrato de validacion y hoja del dataset",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "b66c7a0dcffd4889236508f82df944e2b0e2d2b9",
+      "autor": "claude",
+      "fecha": "2026-10-20T16:51:25Z",
+      "descripcion": "Merge remote-tracking branch 'origin/main' into castro/semana8-correcciones",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "0f9e0ae39345281a0e8594ad891417fc4f693a34",
+      "autor": "claude",
+      "fecha": "2026-10-20T16:44:47Z",
+      "descripcion": "HU-003/HU-005: datos de GitHub y Drive alineados con el dataset de TA-017",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "931695ad8b19bfa8bac9c114a33aa68d0d98adfd",
+      "autor": "claude",
+      "fecha": "2026-10-20T16:43:31Z",
+      "descripcion": "Merge remote-tracking branch 'origin/main' into mondragon/semana8-correcciones",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "760ba0a4e40921cbf1ff1be9db616b210ff67502",
+      "autor": "jhonk16",
+      "fecha": "2026-10-20T16:23:49Z",
+      "descripcion": "TA-019: motor de indicadores I1-I4 y reglas R1-R4",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "bea29acaf7ea51bc5d8a67de85934fde793ade09",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-20T05:22:25Z",
+      "descripcion": "Merge pull request #20 from jhon1212-beep/chavez/ta-010",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "3b45a1dff8aec72d40e27932d4b7019895350f0a",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-20T04:38:22Z",
+      "descripcion": "TA-010: normalización y repositorio de evidencias",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2ec85e3348ae80459e57f49ebdd8b7176c2c7853",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-17T08:37:43Z",
+      "descripcion": "Merge pull request #19 from jhon1212-beep/chavez/reorganizar-estructura",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "7eee2dd2cd2d87fbe459c22f1ec71785e1c94384",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-17T08:30:41Z",
+      "descripcion": "docs: corregir rutas y referencias tras la reorganización",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "06b1cbf5e668d8ccb54d8439ca09e55c594ba33a",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-17T07:50:11Z",
+      "descripcion": "chore: ajustar rutas de scripts, .gitignore y pruebas de contrato tras la reorganización",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ba1d6edce9df5638c08ce239563208f66993a75c",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-17T06:42:49Z",
+      "descripcion": "chore: mover scripts, config, README de la API y test de contrato a su ubicación en la arquitectura",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d53d41ef2fe5175a24f813d6976c3606dea0914b",
+      "autor": "jhonk16",
+      "fecha": "2026-10-14T05:11:03Z",
+      "descripcion": "docs: documentacion Word de TA-017 y TA-013 con capturas de GitHub y resultado del CI",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "dfc4e37a5b6be9f889fb5623bbd265e5d2608599",
+      "autor": "jhonk16",
+      "fecha": "2026-10-14T05:08:36Z",
+      "descripcion": "TA-013: pruebas de integracion CP-01 a CP-08 (23 pruebas, 6 bloqueadas con motivo)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "0ffa2ffa5ce35f4fa0edeb2c43f9eb932b811419",
+      "autor": "jhonk16",
+      "fecha": "2026-10-14T05:08:36Z",
+      "descripcion": "TA-017: dataset demo con fecha de corte (fecha_corte_demo y fecha_corte en FuenteEvidenciaDataset)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "b7867567b554843cd2115b74a4911f2615da4c56",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:57:31Z",
+      "descripcion": "docs: verificacion de HU-004 con Notion real y subida a mondragon/semana7",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1fc6b9578ad22f9b041dd8705add4113e82b8d4d",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:56:19Z",
+      "descripcion": "docs: documentacion Word de HU-002 y HU-004 con capturas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "0b014453142c146c38a6a2d4c121a34e85721c81",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:56:19Z",
+      "descripcion": "HU-004: vista de tareas de Notion (endpoint GET /proyectos/{id}/tareas, CORS y vista conectada a la API)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d51e5e8e69de66a51d4dd64e71e2e97fb485bcf2",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:18:32Z",
+      "descripcion": "Despliegue del frontend en Netlify: netlify.toml y documentacion con capturas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "78e2e5bddd7990bab86830ab384fa3f6b400bf89",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:06:22Z",
+      "descripcion": "docs: documentacion de la subida a GitHub de la rama mondragon/semana6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "3b9b085c34fa8f5e4f6c05fc29c475eafb809785",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:06:22Z",
+      "descripcion": "docs: pruebas de la API de GitHub por caso (9 documentos)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d599fe6414d0cf53d5195f2dfcd1fe16610bc140",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:06:21Z",
+      "descripcion": "docs: documentacion Word de AR-04, TA-017 y TA-019 con capturas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "20e22107d5a6d386429bcc0e826c0b6d2d4a76e0",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:06:21Z",
+      "descripcion": "TA-019: motor de indicadores I1-I4 y reglas de alerta R1-R4",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "60247100d0ab946a3511cd41e6149cacd5b4ad95",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:06:21Z",
+      "descripcion": "TA-017: dataset controlado del proyecto demo y adaptador FuenteEvidenciaDataset",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2f8bfaf12db3ae73682e851455cc0c795b4bcc52",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T04:06:21Z",
+      "descripcion": "AR-04: contrato del modulo autenticacion (dominio, puerto y adaptador falso)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ddd0bdde48b77e116c3488065656856768a64af0",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T03:06:19Z",
+      "descripcion": "Add files via upload",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "9e5f37bc103c77d23111d31fc042affa34617b05",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T02:55:30Z",
+      "descripcion": "Enlace Prototipo figma",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2faf21704fb7b377157f472c417f5a23f8d1940f",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-14T02:53:49Z",
+      "descripcion": "Create Diseño figma",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "6f4b521d82642edd3e849c7df4b9c7fea809fa02",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-13T17:02:27Z",
+      "descripcion": "Merge pull request #18 from jhon1212-beep/chavez/semana6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "de0dbe910503d229a24d26745126e41506b82f2f",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-13T16:55:28Z",
+      "descripcion": "HU-002: registro de proyectos en PostgreSQL",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d8f610e6eaeba0c96253773065d4b21b560f47d2",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-13T14:11:12Z",
+      "descripcion": "Merge pull request #17 from jhon1212-beep/reyes/ta-015-registro-pr",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "733768771c77f9810454dbd7425c4475d6d0aa36",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-13T14:06:46Z",
+      "descripcion": "TA-015: registrar número de PR",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "043d72961d8caa668af7b3c43fff6a2be73ac4a6",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-13T13:41:34Z",
+      "descripcion": "Merge pull request #16 from jhon1212-beep/reyes/ta-015-agente-supervisor",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c0ce4b6e3e76eabd06d9fedb96a743447a76c05a",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-13T13:41:13Z",
+      "descripcion": "Merge pull request #15 from jhon1212-beep/chavez/semana6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "e55f3095e01d56e5bd48e193872d9cfc22976819",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-13T13:34:20Z",
+      "descripcion": "TA-015: evidencia, consolidados y trazas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "5f3995ba0bd870e19c85ec160d06c276d05318a2",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-13T11:51:36Z",
+      "descripcion": "TA-015: pruebas unitarias e integración; separar pruebas del módulo por tipo",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ca7fb4f10cacdeb8d0edcbed7b2125c7d4959b79",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-13T10:51:17Z",
+      "descripcion": "TA-015: Agente Supervisor con agentes en paralelo y fecha de corte",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "e017383bfb7ffa1676c8296e08a2e48a1511c226",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-13T08:12:30Z",
+      "descripcion": "TA-015: spec y patron de orquestacion supervisor",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "74aaa59589588674cd96e607ebec35fe18c91ccf",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-13T07:34:14Z",
+      "descripcion": "TA-007: adaptador y agente Notion",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "8938b07c9d878db76c2c107157281b0743257354",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-13T06:27:07Z",
+      "descripcion": "Merge pull request #14 from jhon1212-beep/reyes/correcciones-s5-s6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ad389282d9f900901feaacab13a35558e634f289",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-13T06:21:25Z",
+      "descripcion": "RN-001: restaurar verificación y evidencias; AR-06/AR-02: quitar horas duplicadas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "9e046f3f10867aca5ec42d69908adf1c13f39c58",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T06:09:03Z",
+      "descripcion": "HU-001 + TA-008: documento inicio de sesion docente y su prueba E2E",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "65e82a21dcb6f8fada732c59a5e201a19af0a912",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T06:07:43Z",
+      "descripcion": "Delete docs/sprint1/HU-001_Inicio_Sesion_Docente.docx",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "407867473a8af712e35d734b121eb6085ed299f8",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T06:06:45Z",
+      "descripcion": "Delete docs/sprint1/TA-011_Revision_Consistencia_UI.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "75e4a5e22c7391284f144217a6c7d0131c5f0812",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T05:55:38Z",
+      "descripcion": "Delete docs/sprint1/TA-011_Revision_Consistencia_UI.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c8fe463fdef8b5c548a4f0dd7df865ba6b2e9ab8",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T05:55:00Z",
+      "descripcion": "TA-011: Revision de la Consistencia",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c9324464d416dac2d98da5bcdfd77a4635764ac9",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T05:54:14Z",
+      "descripcion": "Delete TA-011_Revision_Consistencia_UI.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "152e9e6d892d5bb21b0004fb76617578d265d45f",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T05:53:49Z",
+      "descripcion": "TA-011: Revision de la Consistencia",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "e5643871247562e1b139d523394350374040d11c",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:35:28Z",
+      "descripcion": "Update TA-003.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "f479ec43b4a03dae424cf387f06967dba2e807e4",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:34:35Z",
+      "descripcion": "RN-001: explicitar reglas de secretos y conservar evidencias",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "f3715a6031d000fa55e0055ca59b861776384df9",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:24:41Z",
+      "descripcion": "Delete docs/sprint1/TA-003_Plan_de_pruebas_y_horas.xlsx",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "4b3f774a9665ab2009144f6f087471e1e6a723a3",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:22:20Z",
+      "descripcion": "TA-035: Workflow que configura de pruebas y frontend",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "9329c3e9a1af0a3be0312460f4a998a9f42f0a45",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:20:09Z",
+      "descripcion": "Delete docs/sprint1/TA-035.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "7bbc02a544bfcb149f3e62291af05d7fe4473b90",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:18:29Z",
+      "descripcion": "TA-003: publicar plan de pruebas y plantilla de horas",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1c542a756b30cfe8854ca2c8a667e4ff2b561a23",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:18:08Z",
+      "descripcion": "Delete docs/sprint1/TA-003.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "25055dc7045c1151377fde773b5c08a98576fb91",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:17:05Z",
+      "descripcion": "TA-003",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "16e244f02496008a0223f89326670f0ec0ac003d",
+      "autor": "jhonk16",
+      "fecha": "2026-10-07T03:16:12Z",
+      "descripcion": "Delete docs/sprint1/TA-003.md",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ffe997dacf02d39033009ec0ff60429f75e4d77d",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-06T22:07:33Z",
+      "descripcion": "Merge pull request #13 from jhon1212-beep/chavez/semana6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ed91835951790a3e79ae59a410d0b9bc51484131",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-06T21:37:39Z",
+      "descripcion": "En-001 Configurar GitHub REST API",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ca3d55ae0fff195c2f5dd4f97b0faed40978371d",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-06T20:42:45Z",
+      "descripcion": "Merge pull request #11 from jhon1212-beep/chavez/semana6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "dd7ec135b19ec89d10ef69592a164f1ee88d7b46",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-06T18:32:42Z",
+      "descripcion": "Merge pull request #12 from jhon1212-beep/reyes/cierre-evidencias",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "be39e9659efb3eb67fd9f3a5320c034cd93bfa26",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T18:30:48Z",
+      "descripcion": "docs: completar horas, capturas y corrección de RN-001",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "08d45c82c839024031354d9b70a46306eb47a41a",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-06T17:23:44Z",
+      "descripcion": "AR-01: Contrato del modulo evidencias (dominio, puertos y fuente falsa)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "399ffcab750a21160347ec97274fa0a6332e4892",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-06T16:46:23Z",
+      "descripcion": "Merge pull request #10 from jhon1212-beep/reyes/correcciones-semana6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "efdce821501f7187b16dcea54a9f7887b5db9ff2",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T16:43:33Z",
+      "descripcion": "fix(tests): omitir pruebas del grafo si faltan las librerías de agentes",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "4b42812e73b810a74bc99edbbc33ad8590ee5d96",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-10-06T16:09:14Z",
+      "descripcion": "Merge pull request #9 from jhon1212-beep/reyes/semana6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "586786e73a982a481e43104f21a151509dd33f62",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T16:06:17Z",
+      "descripcion": "TA-012: grafo de supervisión con la fuente falsa",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1a74839823770a6b0395fe68d167708b9c2522e6",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T08:09:21Z",
+      "descripcion": "AR-02: contrato del módulo supervision",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "7ec494f41cca72a02ce3b4ef25c09c47824dbea8",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T07:31:57Z",
+      "descripcion": "AR-06: estado del grafo de supervisión",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "7fb1578de04c1192644cc099076eb84c5107a327",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-10-06T07:11:02Z",
+      "descripcion": "Merge pull request #8 from jhon1212-beep/reyes/semana6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "0eab6e808af750db08914e1964dede614c71ca2c",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T07:05:52Z",
+      "descripcion": "chore(security): documentar falso positivo de gitleaks",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "8485912699c0e72b3d85f7886d6a2687ff776b06",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T06:57:13Z",
+      "descripcion": "chore(security): registrar falso positivo de gitleaks en .env.example",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ef31a05e452dd5e6202bda4531f0772de3480e1f",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-10-06T06:08:35Z",
+      "descripcion": "Merge pull request #7 from jhon1212-beep/reyes/ordenar-archivos",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "6fe27b80e867715bcb901fa588634bfea912cc74",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T06:04:42Z",
+      "descripcion": "refactor: reubicar prototipo y estilos y eliminar evidencia duplicada",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "97030ad1b529e2ee8800fae11fe6ffd31f2a89e1",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-10-06T05:33:02Z",
+      "descripcion": "Merge pull request #6 from jhon1212-beep/reyes/proteger-credenciales",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1a98c5846d27180bb3e043f703f3aef67692d1f5",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T05:31:26Z",
+      "descripcion": "fix(security): excluir archivos de claves y credenciales",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "3069675675bcad45ec5441fc76f700faad4f10df",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-10-06T04:50:11Z",
+      "descripcion": "Merge pull request #5 from jhon1212-beep/reyes/limpieza-estructura",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "1388bc9439ed440c2ca367819e66404ff9fe86c7",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T04:47:56Z",
+      "descripcion": "refactor: eliminar duplicados de la estructura anterior",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "062da61aeaf5111fecb760e5a6e50db97d2f2efa",
+      "autor": "henrymondra23",
+      "fecha": "2026-10-06T03:52:25Z",
+      "descripcion": "Delete tokens.css",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "77bc9ed6a597ce95f3be396a0c683fb36833e7f8",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-10-06T03:45:15Z",
+      "descripcion": "Merge pull request #4 from jhon1212-beep/reyes/corregir-pruebas-github",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d1098a44b80de82cfb7176e91d190ada8168966f",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T03:37:41Z",
+      "descripcion": "fix(tests): adaptar pruebas GitHub a la arquitectura modular",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ce88d27bb752d4d4329f17ef61f905016e26b788",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-06T02:55:08Z",
+      "descripcion": "Merge pull request #3 from jhon1212-beep/reyes/restaurar-env-example",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "a18213bb98cbf9f294dd6a14a9cf5f52dad115c2",
+      "autor": "Luis Reyes",
+      "fecha": "2026-10-06T02:31:47Z",
+      "descripcion": "fix(config): restaurar variables documentadas en .env.example",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "4d7bb097f160c5f607dc6f1c80a9133578836547",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-04T23:32:54Z",
+      "descripcion": "Merge pull request #2 from jhon1212-beep/chavez/semana6",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "70a04e9a21b7b1cee6676d9d74a58aea5af55217",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-04T23:17:20Z",
+      "descripcion": "docs: agregar evidencia de salida real TA-006",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "76b3af268626d0811be9ff38c30deca74c332c27",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-04T22:53:17Z",
+      "descripcion": "DO-001: documento de arquitectura",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "fe987f00942dc1aa611395f1ba965f36676f0ced",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-04T22:37:50Z",
+      "descripcion": "fix: imports de Castro a la nueva ubicacion del cliente + limpiar .gitignore",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "477cdce15b9b9680ee561343c0fffcdfd8777aa6",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-04T22:34:29Z",
+      "descripcion": "refactor: monolito modular - compartido/ y los 5 modulos/",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "77927c4fe36b3b0848cbde3412f1877fcab7b65c",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-02T06:21:47Z",
+      "descripcion": "TA-006: documentación y evidencia",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "b80f0e376a539059bbb4c9c6708a87c8ff6819a7",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-02T06:17:18Z",
+      "descripcion": "TA-006: pruebas pytest del agente",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "278168207a2650f4c3e68e3a140d04a832ab72ec",
+      "autor": "jhonk16",
+      "fecha": "2026-10-02T06:06:53Z",
+      "descripcion": "Add files via upload",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "e1472ccf75871a185fdf414626eee5376798e7fe",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-02T05:52:55Z",
+      "descripcion": "TA-006: nodo de LangGraph del Agente GitHub (hasta 20 commits, normalizado)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "49780ceee8dff7369b42082dadc683d58fe13f95",
+      "autor": "jhonk16",
+      "fecha": "2026-10-02T05:49:19Z",
+      "descripcion": "Add files via upload",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "d89d76aa546e1bfe1b7421943d70cdc6246928bb",
+      "autor": "jhonk16",
+      "fecha": "2026-10-02T05:45:53Z",
+      "descripcion": "Delete .env.example",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "6a4972904a6eb1567d8f3ca89521a2dacd81eaff",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-10-02T05:22:34Z",
+      "descripcion": "TA-006: commits_detallados en el cliente de GitHub (SHA completo)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2a3ab15f9b704690fc6005e2d2d67a617138d9dc",
+      "autor": "Luis Reyes",
+      "fecha": "2026-09-30T06:57:18Z",
+      "descripcion": "SP-001: comparación LangGraph vs CrewAI, POC con Gemini y traza en LangSmith",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "91163046701234c3f59a8bcabfba98dde75cddf2",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:14:42Z",
+      "descripcion": "Add files via upload",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "2f117ab1cfe8a096ea68f0755a46cdf1b0abeb01",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:13:52Z",
+      "descripcion": "Delete scripts/__pycache__/lo",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "22b59fd0fe6ba472419da734b4708ad37c59f0d3",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:13:30Z",
+      "descripcion": "Add files via upload",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "5b239e7052d0501e8ac89cb8bd6ddaa2f1fe62c2",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:12:13Z",
+      "descripcion": "Create lo",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c3636f91bb5d1a549cfb04fc0d52a022d1ef5062",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:11:46Z",
+      "descripcion": "Delete scripts/cx",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c7793eaf02810994ee5d74c8447e3531eb277229",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:11:32Z",
+      "descripcion": "Add files via upload",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "81e1764189f99437f6de83ccc65ded32f46d62e0",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:11:07Z",
+      "descripcion": "EN-001- Configurar GitHub API",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "7463500cebd4f473827c1a161d7393925a58c23f",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:10:17Z",
+      "descripcion": "Create cx",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "40ff76b74d9c12c1e445c28ac873c0c1cb3e46a9",
+      "autor": "henrymondra23",
+      "fecha": "2026-09-30T04:09:03Z",
+      "descripcion": "Add files via upload",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "dceac6fcd22dcaf8f0567ee6e3ce8de59bacfbd1",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:08:18Z",
+      "descripcion": "Delete scripts directory",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c66c9a1084e67974cb87d4eea48ffedfd27a6672",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:07:50Z",
+      "descripcion": "Create XD",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "a252eb6266d653702f34a16a6e6c55a6cfe42a03",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:04:26Z",
+      "descripcion": "Delete config/test",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "ab8456d2eb47e5c6f0036550ece6b12109f6703a",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:02:56Z",
+      "descripcion": "EN-001-Configurar GitHub API",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "c516a85c8506381677849d9e004e31af5121c45e",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T04:01:33Z",
+      "descripcion": "Create test",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "8450aad6c728a7cedaa1ded3640f1e5379a06ba2",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T03:50:18Z",
+      "descripcion": "Delete config",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "861c094315e98dbef5ff95e431b9d8b979a66f02",
+      "autor": "jhonk16",
+      "fecha": "2026-09-30T03:49:36Z",
+      "descripcion": "Create config",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "db80dcefede637fe03b59e3959cc9bd567c629ee",
+      "autor": "Luis Reyes",
+      "fecha": "2026-09-30T00:03:03Z",
+      "descripcion": "EN-002: verificación de acceso a Notion API 2025-09-03",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "9085fa2633b4dcd0fd623b7e1a35d0e7b228530a",
+      "autor": "Luis Reyes",
+      "fecha": "2026-09-29T13:14:43Z",
+      "descripcion": "RN-001: protección de archivos de credenciales y escaneo con gitleaks",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "6b08872b4d2fbd8675e7f19da62dc3a3ec771e45",
+      "autor": "BenjaminGRUPO6",
+      "fecha": "2026-09-29T09:55:47Z",
+      "descripcion": "Archivos de credenciales (RN-001)",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "github",
+      "id_externo": "951140950fa75d2f3bc88862ae0627aeb44842a3",
+      "autor": "jhon1212-beep",
+      "fecha": "2026-09-28T06:39:15Z",
+      "descripcion": "TA-001 y TA-004: repositorio base y modelo de datos",
+      "proyecto_id": 1
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80ba-957d-d682134c19e6",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Elaborar reporte de pruebas de integración",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-15"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-804f-8e07-fb814a827575",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Desplegar backend en Render Free",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-14"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80be-9fd8-d073d6aa7d34",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Realizar pruebas E2E con Playwright",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-12"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80b3-a01c-ed192fdd97a6",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Redactar documento de arquitectura DO-001",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-12"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8015-a2f1-ccf73962f81e",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Implementar motor de reglas R1-R4",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-09"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8003-899b-fff65a854872",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Normalizar datos de evidencia en Pydantic",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-11"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8049-ab4a-c9e345f9a270",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Crear cliente HTTP para Google Drive API",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-11"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-800a-a55b-ed0d6b9c0668",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Implementar inicio de sesión JWT",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-11"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80c4-baf1-d9c64e3ac010",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Configurar integración continua en GitHub Actions",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-10"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8093-9f57-dc0d43dd65ec",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Desarrollar componentes React base",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-10"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8028-8e4d-f132e0673482",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Diseñar interfaz gráfica en Figma",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-10"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8076-8f36-c8b951bc8b53",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Crear pruebas unitarias con Pytest",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-08"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8036-99ee-f0855254719d",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Configurar variables de entorno y .env",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-08"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80b8-a6a9-ffe9328ef0fc",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Implementar adaptador de GitHub",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-07"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8071-876d-e64d68709bde",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Crear migraciones iniciales con Alembic",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-06"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80b9-90a1-c52b1a1a442a",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Diseñar esquema de base de datos PostgreSQL",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-04"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3ea2ed0d-a4c3-8040-8c65-c599792f457a",
+      "autor": "LUIS BENJAMIN REYES GUERRERO",
+      "fecha": "2026-09-29T22:15:00.000Z",
+      "descripcion": "Documentar integración de Notion",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-03"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3ea2ed0d-a4c3-80c8-b214-f1ed792044d9",
+      "autor": "LUIS BENJAMIN REYES GUERRERO",
+      "fecha": "2026-09-29T22:15:00.000Z",
+      "descripcion": "Probar agente supervisor",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-02"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3ea2ed0d-a4c3-8034-88fa-df9ed7681ed8",
+      "autor": "LUIS BENJAMIN REYES GUERRERO",
+      "fecha": "2026-09-29T22:15:00.000Z",
+      "descripcion": "Validar conexión con GitHub",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-01"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3ea2ed0d-a4c3-806f-b4f5-fedc6ad044ae",
+      "autor": "LUIS BENJAMIN REYES GUERRERO",
+      "fecha": "2026-09-29T22:14:00.000Z",
+      "descripcion": "Configurar API de Notion",
+      "proyecto_id": 1,
+      "estado": "En curso",
+      "fecha_limite": "2026-09-30"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1MV3HEbxkmwKZw5G4yJUyKG7sYlXopdYn",
+      "autor": "jhon37574",
+      "fecha": "2026-10-14T23:06:47.936Z",
+      "descripcion": "S4 Teoría.pdf",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1a6FIh5R0ETi0H4Te6KQ7YF9PfgLRKm2j",
+      "autor": "jhon37574",
+      "fecha": "2026-10-14T23:06:45.580Z",
+      "descripcion": "S5 Teoría (1).pdf",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1hIhKz7dSx35MZ3d7G7WuPtyEipCpMEdq",
+      "autor": "jhon37574",
+      "fecha": "2026-10-14T23:06:43.503Z",
+      "descripcion": "S6 Teoría.pdf",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1gIQP_5-xxKWUyb91WPm5w7Swdh3eI1OX",
+      "autor": "jhon37574",
+      "fecha": "2026-10-14T23:06:40.991Z",
+      "descripcion": "S3 Teoría.pdf",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1hpTPWyKdIToKEI9k8G3J3LvWZnRgCJhF",
+      "autor": "jhon37574",
+      "fecha": "2026-10-13T14:51:44.435Z",
+      "descripcion": "PR_B_TA-015_Agente_Supervisor_Checkpoint2.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1Q9r6pdd-vtVMaJgXvyOEEm9lrbIF1xNo",
+      "autor": "jhon37574",
+      "fecha": "2026-10-13T07:49:55.710Z",
+      "descripcion": "Correciones_S5_y_S6.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1LVzxw_-Ta00kXOxlBuj1y--9MMh1qLxN",
+      "autor": "jhon37574",
+      "fecha": "2026-10-07T04:56:29.205Z",
+      "descripcion": "TranscrIpcion S5 30-09-26.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1uCN_x2eYbupzsd0CXRBvBhwyckkQDCcP",
+      "autor": "jhon37574",
+      "fecha": "2026-10-07T04:12:56.514Z",
+      "descripcion": "TA006 evidencias (1).docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1zUjZWYt7rDiDiboToFF7ddvNNAS7Uwu2",
+      "autor": "jhon37574",
+      "fecha": "2026-10-02T06:08:18.743Z",
+      "descripcion": "Decision_de_arquitectura.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1ZX0NOLEe61kjYFxufEOxFS7E5ajqndIF",
+      "autor": "jhon37574",
+      "fecha": "2026-09-30T05:09:00.280Z",
+      "descripcion": "SP-002_Spike_Drive_vs_Jira.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    }
+  ],
+  "estado_fuentes": {
+    "github": "ok",
+    "notion": "ok",
+    "drive": "ok"
+  },
+  "errores_fuentes": {
+    "github": null,
+    "notion": null,
+    "drive": null
+  },
+  "indicadores": {
+    "I1": null,
+    "I2": null,
+    "I3": null,
+    "I4": null
+  },
+  "alertas": []
+}
