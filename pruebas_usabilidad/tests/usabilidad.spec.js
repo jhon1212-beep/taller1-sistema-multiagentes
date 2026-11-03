@@ -230,7 +230,7 @@ test.describe('U6 · Tareas del docente', () => {
       await expect(page.getByText('Supervisor: ejecución simulada iniciada')).toBeVisible({ timeout: 3000 })
     })
     await medir('T5', 'Abrir el detalle de una alerta', async a => {
-      await a(page.getByRole('button', { name: 'Ver detalle y evidencia' }).click())
+      await a(page.getByRole('button', { name: 'Ver detalle y evidencia' }).first().click())
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible({ timeout: 3000 })
     })
     await medir('T6', 'Cerrar sesión', async a => {

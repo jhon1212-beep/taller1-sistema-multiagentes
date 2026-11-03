@@ -4,7 +4,7 @@
     "descripcion": "Iniciar sesión y llegar a Mis proyectos",
     "exito": true,
     "acciones": 3,
-    "tiempo_ms": 355,
+    "tiempo_ms": 250,
     "error": ""
   },
   {
@@ -12,7 +12,7 @@
     "descripcion": "Registrar un proyecto nuevo",
     "exito": true,
     "acciones": 12,
-    "tiempo_ms": 275,
+    "tiempo_ms": 197,
     "error": ""
   },
   {
@@ -20,7 +20,7 @@
     "descripcion": "Abrir el detalle de un proyecto y volver",
     "exito": true,
     "acciones": 2,
-    "tiempo_ms": 129,
+    "tiempo_ms": 101,
     "error": ""
   },
   {
@@ -28,7 +28,7 @@
     "descripcion": "Ir al Dashboard y simular una supervisión",
     "exito": true,
     "acciones": 2,
-    "tiempo_ms": 129,
+    "tiempo_ms": 137,
     "error": ""
   },
   {
@@ -36,7 +36,7 @@
     "descripcion": "Abrir el detalle de una alerta",
     "exito": true,
     "acciones": 1,
-    "tiempo_ms": 59,
+    "tiempo_ms": 50,
     "error": ""
   },
   {
@@ -44,7 +44,7 @@
     "descripcion": "Cerrar sesión",
     "exito": true,
     "acciones": 1,
-    "tiempo_ms": 81,
+    "tiempo_ms": 62,
     "error": ""
   }
 ]
