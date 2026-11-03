@@ -1,0 +1,313 @@
+{
+  "proyecto_id": 1,
+  "fecha_corte": "2026-10-06T00:00:00Z",
+  "evidencias": [
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80ba-957d-d682134c19e6",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Elaborar reporte de pruebas de integración",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-15"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-804f-8e07-fb814a827575",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Desplegar backend en Render Free",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-14"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80be-9fd8-d073d6aa7d34",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Realizar pruebas E2E con Playwright",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-12"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80b3-a01c-ed192fdd97a6",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Redactar documento de arquitectura DO-001",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-12"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8015-a2f1-ccf73962f81e",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T15:29:00.000Z",
+      "descripcion": "Implementar motor de reglas R1-R4",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-09"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8003-899b-fff65a854872",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Normalizar datos de evidencia en Pydantic",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-11"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8049-ab4a-c9e345f9a270",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Crear cliente HTTP para Google Drive API",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-11"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-800a-a55b-ed0d6b9c0668",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Implementar inicio de sesión JWT",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-11"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80c4-baf1-d9c64e3ac010",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Configurar integración continua en GitHub Actions",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-10"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8093-9f57-dc0d43dd65ec",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Desarrollar componentes React base",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-10"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8028-8e4d-f132e0673482",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Diseñar interfaz gráfica en Figma",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-10"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8076-8f36-c8b951bc8b53",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Crear pruebas unitarias con Pytest",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-08"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8036-99ee-f0855254719d",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Configurar variables de entorno y .env",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-08"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80b8-a6a9-ffe9328ef0fc",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Implementar adaptador de GitHub",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-07"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-8071-876d-e64d68709bde",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Crear migraciones iniciales con Alembic",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-06"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3f82ed0d-a4c3-80b9-90a1-c52b1a1a442a",
+      "autor": "JHON XAVIER CHAVEZ CANAQUIRI",
+      "fecha": "2026-10-13T06:38:00.000Z",
+      "descripcion": "Diseñar esquema de base de datos PostgreSQL",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-04"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3ea2ed0d-a4c3-8040-8c65-c599792f457a",
+      "autor": "LUIS BENJAMIN REYES GUERRERO",
+      "fecha": "2026-09-29T22:15:00.000Z",
+      "descripcion": "Documentar integración de Notion",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-03"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3ea2ed0d-a4c3-80c8-b214-f1ed792044d9",
+      "autor": "LUIS BENJAMIN REYES GUERRERO",
+      "fecha": "2026-09-29T22:15:00.000Z",
+      "descripcion": "Probar agente supervisor",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-02"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3ea2ed0d-a4c3-8034-88fa-df9ed7681ed8",
+      "autor": "LUIS BENJAMIN REYES GUERRERO",
+      "fecha": "2026-09-29T22:15:00.000Z",
+      "descripcion": "Validar conexión con GitHub",
+      "proyecto_id": 1,
+      "estado": "Sin empezar",
+      "fecha_limite": "2026-10-01"
+    },
+    {
+      "fuente": "notion",
+      "id_externo": "3ea2ed0d-a4c3-806f-b4f5-fedc6ad044ae",
+      "autor": "LUIS BENJAMIN REYES GUERRERO",
+      "fecha": "2026-09-29T22:14:00.000Z",
+      "descripcion": "Configurar API de Notion",
+      "proyecto_id": 1,
+      "estado": "En curso",
+      "fecha_limite": "2026-09-30"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1MV3HEbxkmwKZw5G4yJUyKG7sYlXopdYn",
+      "autor": "jhon37574",
+      "fecha": "2026-10-14T23:06:47.936Z",
+      "descripcion": "S4 Teoría.pdf",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1a6FIh5R0ETi0H4Te6KQ7YF9PfgLRKm2j",
+      "autor": "jhon37574",
+      "fecha": "2026-10-14T23:06:45.580Z",
+      "descripcion": "S5 Teoría (1).pdf",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1hIhKz7dSx35MZ3d7G7WuPtyEipCpMEdq",
+      "autor": "jhon37574",
+      "fecha": "2026-10-14T23:06:43.503Z",
+      "descripcion": "S6 Teoría.pdf",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1gIQP_5-xxKWUyb91WPm5w7Swdh3eI1OX",
+      "autor": "jhon37574",
+      "fecha": "2026-10-14T23:06:40.991Z",
+      "descripcion": "S3 Teoría.pdf",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/pdf"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1hpTPWyKdIToKEI9k8G3J3LvWZnRgCJhF",
+      "autor": "jhon37574",
+      "fecha": "2026-10-13T14:51:44.435Z",
+      "descripcion": "PR_B_TA-015_Agente_Supervisor_Checkpoint2.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1Q9r6pdd-vtVMaJgXvyOEEm9lrbIF1xNo",
+      "autor": "jhon37574",
+      "fecha": "2026-10-13T07:49:55.710Z",
+      "descripcion": "Correciones_S5_y_S6.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1LVzxw_-Ta00kXOxlBuj1y--9MMh1qLxN",
+      "autor": "jhon37574",
+      "fecha": "2026-10-07T04:56:29.205Z",
+      "descripcion": "TranscrIpcion S5 30-09-26.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1uCN_x2eYbupzsd0CXRBvBhwyckkQDCcP",
+      "autor": "jhon37574",
+      "fecha": "2026-10-07T04:12:56.514Z",
+      "descripcion": "TA006 evidencias (1).docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1zUjZWYt7rDiDiboToFF7ddvNNAS7Uwu2",
+      "autor": "jhon37574",
+      "fecha": "2026-10-02T06:08:18.743Z",
+      "descripcion": "Decision_de_arquitectura.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "fuente": "drive",
+      "id_externo": "1ZX0NOLEe61kjYFxufEOxFS7E5ajqndIF",
+      "autor": "jhon37574",
+      "fecha": "2026-09-30T05:09:00.280Z",
+      "descripcion": "SP-002_Spike_Drive_vs_Jira.docx",
+      "proyecto_id": 1,
+      "tipo_archivo": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    }
+  ],
+  "estado_fuentes": {
+    "github": "fallo",
+    "notion": "ok",
+    "drive": "ok"
+  },
+  "errores_fuentes": {
+    "github": "GitHubError: HTTP 401 al consultar https://api.github.com/repos/jhon1212-beep/taller1-sistema-multiagentes/commits?per_page=100",
+    "notion": null,
+    "drive": null
+  },
+  "indicadores": {
+    "I1": null,
+    "I2": null,
+    "I3": null,
+    "I4": null
+  },
+  "alertas": []
+}
