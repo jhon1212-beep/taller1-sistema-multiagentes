@@ -17,7 +17,7 @@ from datetime import date, datetime, time, timezone
 from decimal import Decimal
 from typing import Any
 
-from sqlalchemy import delete, func, select
+from sqlalchemy import case, delete, func, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
@@ -75,14 +75,12 @@ class SqlSupervisionRepository:
             source_ids = self._source_ids(project_id)
             self._update_source_status(source_ids, estado)
 
-            # 1) Evidencias: upsert por (fuente_id, id_externo); reextraer no duplica.
-            evidence_ids: dict[tuple[str, str], int] = {}
-            for evidence in estado.get("evidencias") or []:
-                if evidence.fuente not in source_ids:
-                    continue
-                evidence_ids[(evidence.fuente, evidence.id_externo)] = self._upsert_evidence(
-                    evidence, source_ids[evidence.fuente], cutoff_moment
-                )
+            # 1) Evidencias: upsert por lotes y sin duplicados.
+            evidence_ids = self._upsert_evidences(
+                estado.get("evidencias") or [],
+                source_ids,
+                cutoff_moment,
+            )
 
             # 2) Indicadores: una fila por proyecto y día (reemplaza si ya existía).
             indicators = estado["indicadores"]
@@ -113,26 +111,40 @@ class SqlSupervisionRepository:
                     orm.Alerta.proyecto_id == project_id, orm.Alerta.fecha_corte == day
                 )
             )
-            saved, without_evidence = 0, 0
+
+            # Preparar inserción de alertas por lotes (RN-003).
+            alert_rows = []
+            without_evidence = 0
+
             for alert in estado.get("alertas") or []:
                 ids = [
                     evidence_ids[(alert["fuente"], external_id)]
                     for external_id in alert.get("evidencia_ids") or []
                     if (alert["fuente"], external_id) in evidence_ids
                 ]
+
                 if not ids:
-                    without_evidence += 1  # RN-003: no se guarda una alerta sin origen
+                    without_evidence += 1
                     continue
+
                 for evidence_id in ids:
-                    self._s.add(orm.Alerta(
-                        proyecto_id=project_id,
-                        evidencia_id=evidence_id,
-                        regla=alert["regla"],
-                        fecha_corte=day,
-                        explicacion=alert.get("explicacion") or "",
-                        origen_explicacion=alert.get("origen_explicacion") or "plantilla",
-                    ))
-                    saved += 1
+                    alert_rows.append({
+                        "proyecto_id": project_id,
+                        "evidencia_id": evidence_id,
+                        "regla": alert["regla"],
+                        "fecha_corte": day,
+                        "explicacion": alert.get("explicacion") or "",
+                        "origen_explicacion": (
+                            alert.get("origen_explicacion") or "plantilla"
+                        ),
+                    })
+
+            if alert_rows:
+                self._s.execute(
+                    insert(orm.Alerta).values(alert_rows)
+                )
+
+            saved = len(alert_rows)
 
             self._s.commit()
         except Exception:
@@ -153,15 +165,114 @@ class SqlSupervisionRepository:
             raise LookupError(f"El proyecto {project_id} no tiene fuentes registradas.")
         return {kind: source_id for kind, source_id in rows}
 
-    def _update_source_status(self, source_ids: dict[str, int], estado: EstadoSupervision) -> None:
-        """Marca ok/fallo en la tabla fuente (lo que ve el Dashboard)."""
+
+    def _update_source_status(
+        self,
+        source_ids: dict[str, int],
+        estado: EstadoSupervision,
+    ) -> None:
+        """Actualiza todas las fuentes mediante un único UPDATE SQL."""
+        statuses = {
+            kind: status
+            for kind, status in (estado.get("estado_fuentes") or {}).items()
+            if kind in source_ids and status in ("ok", "fallo")
+        }
+        if not statuses:
+            return
+
+        status_by_id = {source_ids[kind]: status for kind, status in statuses.items()}
+        ok_ids = [source_id for source_id, status in status_by_id.items() if status == "ok"]
         now = datetime.now(timezone.utc)
-        for kind, status in (estado.get("estado_fuentes") or {}).items():
-            if kind in source_ids and status in ("ok", "fallo"):
-                source = self._s.get(orm.Fuente, source_ids[kind])
-                source.estado = status
-                if status == "ok":
-                    source.ultima_sincronizacion = now
+
+        # Para estados de fallo, conservar la última sincronización válida.
+        new_sync = (
+            case(
+                (orm.Fuente.id.in_(ok_ids), now),
+                else_=orm.Fuente.ultima_sincronizacion,
+            )
+            if ok_ids
+            else orm.Fuente.ultima_sincronizacion
+        )
+        stmt = (
+            update(orm.Fuente)
+            .where(orm.Fuente.id.in_(list(status_by_id)))
+            .values(
+                estado=case(status_by_id, value=orm.Fuente.id, else_=orm.Fuente.estado),
+                ultima_sincronizacion=new_sync,
+            )
+        )
+        self._s.execute(stmt.execution_options(synchronize_session=False))
+
+    def _upsert_evidences(
+        self,
+        evidences: list[Evidencia],
+        source_ids: dict[str, int],
+        fallback: datetime,
+    ) -> dict[tuple[str, str], int]:
+        """Guarda evidencias por lotes y recupera sus IDs."""
+
+        rows_by_key: dict[tuple[int, str], dict[str, Any]] = {}
+
+        for evidence in evidences:
+            if evidence.fuente not in source_ids:
+                continue
+
+            source_id = source_ids[evidence.fuente]
+            key = (source_id, evidence.id_externo)
+
+            # La última evidencia repetida prevalece.
+            rows_by_key[key] = {
+                "proyecto_id": evidence.proyecto_id,
+                "fuente_id": source_id,
+                "id_externo": evidence.id_externo,
+                "autor": evidence.autor,
+                "fecha": _to_datetime(evidence.fecha, fallback),
+                "descripcion": evidence.descripcion or "",
+                "estado": getattr(evidence, "estado", None),
+                "fecha_limite": getattr(evidence, "fecha_limite", None) or None,
+                "tipo_archivo": getattr(evidence, "tipo_archivo", None),
+            }
+
+        if not rows_by_key:
+            return {}
+
+        source_names = {
+            source_id: name
+            for name, source_id in source_ids.items()
+        }
+
+        evidence_ids: dict[tuple[str, str], int] = {}
+        rows = list(rows_by_key.values())
+        batch_size = 100
+
+        for start in range(0, len(rows), batch_size):
+            batch = rows[start:start + batch_size]
+
+            statement = insert(orm.Evidencia).values(batch)
+
+            statement = statement.on_conflict_do_update(
+                index_elements=["fuente_id", "id_externo"],
+                set_={
+                    column: statement.excluded[column]
+                    for column in (
+                        "autor",
+                        "fecha",
+                        "descripcion",
+                        "estado",
+                        "fecha_limite",
+                        "tipo_archivo",
+                    )
+                },
+            ).returning(
+                orm.Evidencia.fuente_id,
+                orm.Evidencia.id_externo,
+                orm.Evidencia.id,
+            )
+
+            for source_id, external_id, row_id in self._s.execute(statement):
+                evidence_ids[(source_names[source_id], external_id)] = row_id
+
+        return evidence_ids
 
     def _upsert_evidence(self, evidence: Evidencia, source_id: int, fallback: datetime) -> int:
         row = insert(orm.Evidencia).values(
