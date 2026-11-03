@@ -1,0 +1,122 @@
+[
+  {
+    "pantalla": "login",
+    "reglas_aprobadas": 18,
+    "violaciones": [
+      {
+        "id": "color-contrast",
+        "impacto": "serious",
+        "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+        "elementos": 2,
+        "ejemplo": ".eyebrow",
+        "html": "<div class=\"eyebrow\">Supervisión de proyectos</div>"
+      }
+    ]
+  },
+  {
+    "pantalla": "proyectos",
+    "reglas_aprobadas": 16,
+    "violaciones": [
+      {
+        "id": "color-contrast",
+        "impacto": "serious",
+        "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+        "elementos": 5,
+        "ejemplo": ".eyebrow",
+        "html": "<div class=\"eyebrow\">Mis proyectos / Listado</div>"
+      }
+    ]
+  },
+  {
+    "pantalla": "nuevo",
+    "reglas_aprobadas": 16,
+    "violaciones": [
+      {
+        "id": "color-contrast",
+        "impacto": "serious",
+        "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+        "elementos": 3,
+        "ejemplo": ".eyebrow",
+        "html": "<div class=\"eyebrow\">Mis proyectos / Registrar proyecto</div>"
+      }
+    ]
+  },
+  {
+    "pantalla": "detalle",
+    "reglas_aprobadas": 21,
+    "violaciones": [
+      {
+        "id": "color-contrast",
+        "impacto": "serious",
+        "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+        "elementos": 7,
+        "ejemplo": ".eyebrow",
+        "html": "<div class=\"eyebrow\">Mis proyectos / Detalle</div>"
+      }
+    ]
+  },
+  {
+    "pantalla": "dashboard",
+    "reglas_aprobadas": 18,
+    "violaciones": [
+      {
+        "id": "aria-progressbar-name",
+        "impacto": "serious",
+        "ayuda": "ARIA progressbar nodes must have an accessible name",
+        "elementos": 1,
+        "ejemplo": ".barra",
+        "html": "<div class=\"barra\" role=\"progressbar\" aria-valuenow=\"40\" aria-valuemin=\"0\" aria-valuemax=\"100\"><span style=\"width: 40%;\"></span></div>"
+      },
+      {
+        "id": "color-contrast",
+        "impacto": "serious",
+        "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+        "elementos": 7,
+        "ejemplo": ".eyebrow",
+        "html": "<div class=\"eyebrow\">Dashboard / Resumen</div>"
+      }
+    ]
+  },
+  {
+    "pantalla": "alerta",
+    "reglas_aprobadas": 14,
+    "violaciones": [
+      {
+        "id": "color-contrast",
+        "impacto": "serious",
+        "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+        "elementos": 3,
+        "ejemplo": ".eyebrow",
+        "html": "<div class=\"eyebrow\">Dashboard / Detalle de alerta</div>"
+      }
+    ]
+  },
+  {
+    "pantalla": "historial",
+    "reglas_aprobadas": 14,
+    "violaciones": [
+      {
+        "id": "color-contrast",
+        "impacto": "serious",
+        "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+        "elementos": 3,
+        "ejemplo": ".eyebrow",
+        "html": "<div class=\"eyebrow\">Historial / Supervisión</div>"
+      }
+    ]
+  },
+  {
+    "pantalla": "sistema",
+    "reglas_aprobadas": 18,
+    "violaciones": [
+      {
+        "id": "color-contrast",
+        "impacto": "serious",
+        "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+        "elementos": 16,
+        "ejemplo": ".eyebrow",
+        "html": "<div class=\"eyebrow\">Sistema visual / Guía</div>"
+      }
+    ]
+  }
+]
