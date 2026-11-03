@@ -63,3 +63,23 @@ def test_pass_y_fail_quedan_registrados(sesion):
     assert [f.resultado for f in filas] == ["PASS", "FAIL"]
     assert filas[0].captura_url is None and filas[1].captura_url
     assert all(f.run_id_actions is not None and f.ejecutada_en.tzinfo for f in filas)
+
+
+def test_ta048_consultas_del_repositorio_sobre_postgresql(sesion):
+    """TA-048: última, historial y recuento leen la tabla `validacion` real."""
+    from app.modulos.validacion.adaptadores.sql import RepositorioValidacionesSQL
+
+    s, proyecto_id = sesion
+    repo = RepositorioValidacionesSQL(s)
+    assert repo.ultima(proyecto_id) is None and repo.contar(proyecto_id) == {"PASS": 0, "FAIL": 0}
+
+    agente = AgenteValidacion(EjecutorE2EFalso(), repo)
+    agente.validar(SolicitudValidacion(proyecto_id, "https://demo.test", "h1"))
+    agente.validar(SolicitudValidacion(proyecto_id, "https://falla.test", "h1"))
+
+    assert repo.contar(proyecto_id) == {"PASS": 1, "FAIL": 1}
+    ultima = repo.ultima(proyecto_id)
+    assert ultima.resultado.resultado == "FAIL" and ultima.resultado.captura_url
+    assert [g.resultado.resultado for g in repo.listar(proyecto_id)] == ["FAIL", "PASS"]
+    assert [g.resultado.resultado for g in repo.listar(proyecto_id, resultado="PASS")] == ["PASS"]
+    assert ultima.resultado.ejecutada_en.tzinfo is not None
