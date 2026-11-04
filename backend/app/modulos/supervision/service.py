@@ -45,6 +45,7 @@ class SupervisionService:
     def run_cutoff(self, project_id: int, references: Mapping[str, str],
                    cutoff: str | None = None) -> dict[str, Any]:
         """Ejecuta el grafo completo, guarda el corte y devuelve el consolidado."""
+        inicio_servicio = time.perf_counter()
         cutoff = cutoff or default_cutoff()
         initial = build_supervisor_input(project_id, cutoff, references)
         config = {
@@ -59,14 +60,25 @@ class SupervisionService:
         final = graph.invoke(initial, config=config)
         graph_ms = round((time.perf_counter() - started) * 1000, 1)
 
+        inicio_sql = time.perf_counter()
         saved = self._repo.guardar(final)
+        sql_ms = round((time.perf_counter() - inicio_sql) * 1000, 1)
         report = to_consolidated_report(final)
         # La lista completa de evidencias se consulta en /proyectos/{id}/commits, /tareas y /documentos.
         report.pop("evidencias", None)
-        return {**report, "guardado": saved, "duracion_grafo_ms": graph_ms}
+        servicio_ms = round((time.perf_counter() - inicio_servicio) * 1000, 1)
+        return {
+            **report,
+            "guardado": saved,
+            "duracion_grafo_ms": graph_ms,
+            "duracion_sql_ms": sql_ms,
+            "duracion_servicio_ms": servicio_ms,
+        }
 
     def indicators(self, project_id: int, day: str | None) -> dict[str, Any] | None:
-        state = self._pick(project_id, day)
+        state = self._repo.obtener_indicadores(
+            project_id, cutoff_day(day).isoformat() if day else None
+        )
         if state is None:
             return None
         return {"proyecto_id": project_id, "fecha_corte": state["fecha_corte"],
@@ -87,5 +99,4 @@ class SupervisionService:
         """Corte del día pedido o, si no se indica, el más reciente."""
         if day:
             return self._repo.obtener(project_id, cutoff_day(day).isoformat())
-        cuts = self._repo.listar(project_id)
-        return cuts[-1] if cuts else None
+        return self._repo.obtener_ultimo(project_id)

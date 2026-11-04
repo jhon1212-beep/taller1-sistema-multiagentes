@@ -306,6 +306,62 @@ class SqlSupervisionRepository:
             return None
         return self._build_state(indicator)
 
+    def obtener_indicadores(
+        self, proyecto_id: int, fecha_corte: str | None = None
+    ) -> dict[str, Any] | None:
+        """Consulta indicadores y fuentes sin reconstruir alertas."""
+        query = select(orm.Indicador).where(
+            orm.Indicador.proyecto_id == proyecto_id
+        )
+
+        if fecha_corte:
+            query = query.where(
+                orm.Indicador.fecha_corte == cutoff_day(fecha_corte)
+            )
+        else:
+            query = query.order_by(
+                orm.Indicador.fecha_corte.desc()
+            ).limit(1)
+
+        indicator = self._s.scalars(query).first()
+        if indicator is None:
+            return None
+
+        sources = dict(self._s.execute(
+            select(orm.Fuente.tipo, orm.Fuente.estado)
+            .where(orm.Fuente.proyecto_id == proyecto_id)
+        ).all())
+
+        return {
+            "fecha_corte": indicator.fecha_corte.isoformat(),
+            "indicadores": {
+                "I1": _to_float(indicator.i1_pct_completadas),
+                "I2": _to_float(indicator.i2_pct_pendientes),
+                "I3": indicator.i3_tareas_vencidas,
+                "I4": indicator.i4_dias_sin_actividad,
+            },
+            "estado_fuentes": {
+                kind: (
+                    "pendiente"
+                    if sources.get(kind, "sin_verificar") == "sin_verificar"
+                    else sources[kind]
+                )
+                for kind in SOURCES
+            },
+        }
+
+    def obtener_ultimo(self, proyecto_id: int) -> EstadoSupervision | None:
+        """Recupera solo el corte mas reciente del proyecto."""
+        indicator = self._s.scalars(
+            select(orm.Indicador)
+            .where(orm.Indicador.proyecto_id == proyecto_id)
+            .order_by(orm.Indicador.fecha_corte.desc())
+            .limit(1)
+        ).first()
+        if indicator is None:
+            return None
+        return self._build_state(indicator)
+
     def listar(self, proyecto_id: int) -> list[EstadoSupervision]:
         """Todos los cortes del proyecto, del más antiguo al más reciente."""
         indicators = self._s.scalars(
