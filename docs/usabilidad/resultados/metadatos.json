@@ -1,0 +1,74 @@
+[
+  {
+    "pantalla": "login",
+    "lang": "es",
+    "titulo_documento": "Seguimiento de proyectos académicos",
+    "h1": 1,
+    "h2": 1,
+    "landmarks_main": 0,
+    "imagenes_sin_alt": 0
+  },
+  {
+    "pantalla": "proyectos",
+    "lang": "es",
+    "titulo_documento": "Seguimiento de proyectos académicos",
+    "h1": 1,
+    "h2": 2,
+    "landmarks_main": 1,
+    "imagenes_sin_alt": 0
+  },
+  {
+    "pantalla": "nuevo",
+    "lang": "es",
+    "titulo_documento": "Seguimiento de proyectos académicos",
+    "h1": 1,
+    "h2": 0,
+    "landmarks_main": 1,
+    "imagenes_sin_alt": 0
+  },
+  {
+    "pantalla": "detalle",
+    "lang": "es",
+    "titulo_documento": "Seguimiento de proyectos académicos",
+    "h1": 1,
+    "h2": 0,
+    "landmarks_main": 1,
+    "imagenes_sin_alt": 0
+  },
+  {
+    "pantalla": "dashboard",
+    "lang": "es",
+    "titulo_documento": "Seguimiento de proyectos académicos",
+    "h1": 1,
+    "h2": 3,
+    "landmarks_main": 1,
+    "imagenes_sin_alt": 0
+  },
+  {
+    "pantalla": "alerta",
+    "lang": "es",
+    "titulo_documento": "Seguimiento de proyectos académicos",
+    "h1": 1,
+    "h2": 0,
+    "landmarks_main": 1,
+    "imagenes_sin_alt": 0
+  },
+  {
+    "pantalla": "historial",
+    "lang": "es",
+    "titulo_documento": "Seguimiento de proyectos académicos",
+    "h1": 1,
+    "h2": 0,
+    "landmarks_main": 1,
+    "imagenes_sin_alt": 0
+  },
+  {
+    "pantalla": "sistema",
+    "lang": "es",
+    "titulo_documento": "Seguimiento de proyectos académicos",
+    "h1": 1,
+    "h2": 0,
+    "landmarks_main": 1,
+    "imagenes_sin_alt": 0
+  }
+]

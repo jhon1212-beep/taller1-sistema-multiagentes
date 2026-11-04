@@ -1,0 +1,23 @@
+{
+  "casos": [
+    {
+      "caso": "Formulario vacío",
+      "mensaje_visible": true,
+      "mensaje": "El nombre del proyecto es obligatorio. No se guardó el proyecto.",
+      "es_alert": true
+    },
+    {
+      "caso": "Fecha de fin anterior al inicio",
+      "mensaje_visible": true,
+      "mensaje": "La fecha de fin debe ser igual o posterior a la fecha de inicio.",
+      "es_alert": true
+    },
+    {
+      "caso": "URL inválida",
+      "mensaje_visible": true,
+      "mensaje": "Las referencias de fuentes y la URL pública deben ser direcciones HTTP o HTTPS válidas.",
+      "es_alert": true
+    }
+  ],
+  "campos_marcados_aria_invalid": 0
+}

@@ -1,0 +1,5 @@
+...............................x........................................ [ 69%]
+...............................                                          [100%]
+=========================== short test summary info ===========================
+XFAIL tests/unit/test_demo_supervision_frontend.py::test_i2_coincide_con_el_dataset - Inconsistencia conocida: motor.py (TA-019, dataset y docs) define I2 como «Sin empezar»; motor_indicadores.py, que usa el Supervisor, lo define como «no Listo». Pendiente de acordar con Reyes.
+102 passed, 1 xfailed in 2.13s

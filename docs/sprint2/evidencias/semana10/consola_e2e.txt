@@ -1,0 +1,23 @@
+
+Running 18 tests using 2 workers
+
+  ok  1 e2e\login.spec.js:31:3 › TA-008 · Inicio de sesión del docente › CP-L1 · muestra el formulario de inicio de sesión al entrar sin sesión (893ms)
+  ok  2 e2e\dashboard.spec.js:37:3 › HU-006 · Indicadores I1–I4 › CP-D1 · muestra I1–I4 del proyecto 1 con los valores del motor (1.0s)
+  ok  3 e2e\login.spec.js:40:3 › TA-008 · Inicio de sesión del docente › CP-L2 · con credenciales válidas entra y muestra la cuenta activa (602ms)
+  ok  4 e2e\dashboard.spec.js:45:3 › HU-006 · Indicadores I1–I4 › CP-D2 · la ayuda de I1 explica la fórmula y la fecha de corte (708ms)
+  ok  5 e2e\login.spec.js:50:3 › TA-008 · Inicio de sesión del docente › CP-L3 · rechaza una contraseña incorrecta y no deja entrar (411ms)
+  ok  7 e2e\login.spec.js:58:3 › TA-008 · Inicio de sesión del docente › CP-L4 · rechaza un correo no registrado (376ms)
+  ok  6 e2e\dashboard.spec.js:54:3 › HU-006 · Indicadores I1–I4 › CP-D3 · la ayuda se abre con el teclado y se cierra con Esc (610ms)
+  ok  8 e2e\login.spec.js:65:3 › TA-008 · Inicio de sesión del docente › CP-L5 · pide completar los campos cuando se envía vacío (339ms)
+  ok 10 e2e\login.spec.js:72:3 › TA-008 · Inicio de sesión del docente › CP-L6 · una ruta privada sin sesión devuelve al login con aviso (383ms)
+  ok  9 e2e\dashboard.spec.js:64:3 › HU-006 · Indicadores I1–I4 › CP-D4 · cada indicador tiene su ayuda con la fecha de corte (586ms)
+  ok 11 e2e\login.spec.js:80:3 › TA-008 · Inicio de sesión del docente › CP-L7 · al cerrar sesión se vuelve al login y la ruta privada queda bloqueada (568ms)
+  ok 12 e2e\dashboard.spec.js:78:3 › HU-007 · Alertas R1–R4 › CP-A1 · la lista agrupa las alertas por regla (651ms)
+  ok 13 e2e\login.spec.js:92:3 › TA-008 · Inicio de sesión del docente › CP-L8 · la contraseña no se muestra en pantalla mientras se escribe (448ms)
+  ok 14 e2e\dashboard.spec.js:85:3 › HU-007 · Alertas R1–R4 › CP-A2 · el filtro deja solo las alertas de la regla elegida (674ms)
+  ok 15 e2e\dashboard.spec.js:97:5 › HU-007 · Alertas R1–R4 › CP-A3 · R1 abre su detalle con explicación y evidencia (832ms)
+  ok 16 e2e\dashboard.spec.js:97:5 › HU-007 · Alertas R1–R4 › CP-A3 · R2 abre su detalle con explicación y evidencia (853ms)
+  ok 17 e2e\dashboard.spec.js:97:5 › HU-007 · Alertas R1–R4 › CP-A3 · R3 abre su detalle con explicación y evidencia (870ms)
+  ok 18 e2e\dashboard.spec.js:97:5 › HU-007 · Alertas R1–R4 › CP-A3 · R4 abre su detalle con explicación y evidencia (878ms)
+
+  18 passed (11.5s)

@@ -1,0 +1,15 @@
+{
+  "name": "pruebas-usabilidad",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Pruebas de usabilidad y accesibilidad del frontend (Playwright + axe-core)",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.63.0"
+  }
+}

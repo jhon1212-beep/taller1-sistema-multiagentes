@@ -1,0 +1,50 @@
+[
+  {
+    "id": "T1",
+    "descripcion": "Iniciar sesión y llegar a Mis proyectos",
+    "exito": true,
+    "acciones": 3,
+    "tiempo_ms": 250,
+    "error": ""
+  },
+  {
+    "id": "T2",
+    "descripcion": "Registrar un proyecto nuevo",
+    "exito": true,
+    "acciones": 12,
+    "tiempo_ms": 197,
+    "error": ""
+  },
+  {
+    "id": "T3",
+    "descripcion": "Abrir el detalle de un proyecto y volver",
+    "exito": true,
+    "acciones": 2,
+    "tiempo_ms": 101,
+    "error": ""
+  },
+  {
+    "id": "T4",
+    "descripcion": "Ir al Dashboard y simular una supervisión",
+    "exito": true,
+    "acciones": 2,
+    "tiempo_ms": 137,
+    "error": ""
+  },
+  {
+    "id": "T5",
+    "descripcion": "Abrir el detalle de una alerta",
+    "exito": true,
+    "acciones": 1,
+    "tiempo_ms": 50,
+    "error": ""
+  },
+  {
+    "id": "T6",
+    "descripcion": "Cerrar sesión",
+    "exito": true,
+    "acciones": 1,
+    "tiempo_ms": 62,
+    "error": ""
+  }
+]

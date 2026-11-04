@@ -1,0 +1,204 @@
+
+Running 10 tests using 1 worker
+
+  ok  1 tests\usabilidad.spec.js:67:5 › U1 · Capturas por pantalla y dispositivo › capturas en escritorio (4.1s)
+  ok  2 tests\usabilidad.spec.js:67:5 › U1 · Capturas por pantalla y dispositivo › capturas en tableta (4.2s)
+  ok  3 tests\usabilidad.spec.js:67:5 › U1 · Capturas por pantalla y dispositivo › capturas en movil (4.1s)
+  x   4 tests\usabilidad.spec.js:81:3 › U2 · Accesibilidad automática (axe-core) › todas las pantallas en escritorio (9.1s)
+  ok  5 tests\usabilidad.spec.js:108:3 › U3 · Teclado y foco visible › recorrido con Tab en el login y en Mis proyectos (898ms)
+  x   6 tests\usabilidad.spec.js:141:3 › U4 · Responsive › sin desplazamiento horizontal (8.1s)
+  x   7 tests\usabilidad.spec.js:158:3 › U5 · Objetivos táctiles › tamaño de botones, enlaces y campos en móvil (3.1s)
+  ok  8 tests\usabilidad.spec.js:184:3 › U6 · Tareas del docente › T1-T5: éxito, acciones y tiempo (1.5s)
+  ok  9 tests\usabilidad.spec.js:246:3 › U7 · Errores y retroalimentación › formulario vacío, fechas inválidas y URL inválida (1.4s)
+  x  10 tests\usabilidad.spec.js:283:3 › U8 · Metadatos y estructura › idioma, título y encabezados por pantalla (3.2s)
+
+
+  1) tests\usabilidad.spec.js:81:3 › U2 · Accesibilidad automática (axe-core) › todas las pantallas en escritorio 
+
+    Error: violaciones críticas o serias de accesibilidad
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 74
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+    +     "ejemplo": ".eyebrow",
+    +     "elementos": 2,
+    +     "html": "<div class=\"eyebrow\">Supervisión de proyectos</div>",
+    +     "id": "color-contrast",
+    +     "impacto": "serious",
+    +   },
+    +   Object {
+    +     "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+    +     "ejemplo": ".eyebrow",
+    +     "elementos": 5,
+    +     "html": "<div class=\"eyebrow\">Mis proyectos / Listado</div>",
+    +     "id": "color-contrast",
+    +     "impacto": "serious",
+    +   },
+    +   Object {
+    +     "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+    +     "ejemplo": ".eyebrow",
+    +     "elementos": 3,
+    +     "html": "<div class=\"eyebrow\">Mis proyectos / Registrar proyecto</div>",
+    +     "id": "color-contrast",
+    +     "impacto": "serious",
+    +   },
+    +   Object {
+    +     "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+    +     "ejemplo": ".eyebrow",
+    +     "elementos": 7,
+    +     "html": "<div class=\"eyebrow\">Mis proyectos / Detalle</div>",
+    +     "id": "color-contrast",
+    +     "impacto": "serious",
+    +   },
+    +   Object {
+    +     "ayuda": "ARIA progressbar nodes must have an accessible name",
+    +     "ejemplo": ".barra",
+    +     "elementos": 1,
+    +     "html": "<div class=\"barra\" role=\"progressbar\" aria-valuenow=\"40\" aria-valuemin=\"0\" aria-valuemax=\"100\"><span style=\"width: 40%;\"></span></div>",
+    +     "id": "aria-progressbar-name",
+    +     "impacto": "serious",
+    +   },
+    +   Object {
+    +     "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+    +     "ejemplo": ".eyebrow",
+    +     "elementos": 7,
+    +     "html": "<div class=\"eyebrow\">Dashboard / Resumen</div>",
+    +     "id": "color-contrast",
+    +     "impacto": "serious",
+    +   },
+    +   Object {
+    +     "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+    +     "ejemplo": ".eyebrow",
+    +     "elementos": 3,
+    +     "html": "<div class=\"eyebrow\">Dashboard / Detalle de alerta</div>",
+    +     "id": "color-contrast",
+    +     "impacto": "serious",
+    +   },
+    +   Object {
+    +     "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+    +     "ejemplo": ".eyebrow",
+    +     "elementos": 3,
+    +     "html": "<div class=\"eyebrow\">Historial / Supervisión</div>",
+    +     "id": "color-contrast",
+    +     "impacto": "serious",
+    +   },
+    +   Object {
+    +     "ayuda": "Elements must meet minimum color contrast ratio thresholds",
+    +     "ejemplo": ".eyebrow",
+    +     "elementos": 16,
+    +     "html": "<div class=\"eyebrow\">Sistema visual / Guía</div>",
+    +     "id": "color-contrast",
+    +     "impacto": "serious",
+    +   },
+    + ]
+
+      101 |     guardar('axe', informe)
+      102 |     const graves = informe.flatMap(i => i.violaciones.filter(v => ['critical', 'serious'].includes(v.impacto)))
+    > 103 |     expect.soft(graves, 'violaciones críticas o serias de accesibilidad').toEqual([])
+          |                                                                           ^
+      104 |   })
+      105 | })
+      106 |
+        at C:\Users\GRLL\Downloads\taller1-sistema-multiagentes-main\taller1-sistema-multiagentes-main\pruebas_usabilidad\tests\usabilidad.spec.js:103:75
+
+    Error Context: test-results\usabilidad-U2-·-Accesibili-e82d5-las-pantallas-en-escritorio\error-context.md
+
+  2) tests\usabilidad.spec.js:141:3 › U4 · Responsive › sin desplazamiento horizontal ──────────────
+
+    Error: pantallas con desplazamiento horizontal
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 9
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "ancho_documento": 341,
+    +     "ancho_ventana": 320,
+    +     "desborda": true,
+    +     "pantalla": "detalle",
+    +     "vista": "movil_320",
+    +   },
+    + ]
+
+      151 |     }
+      152 |     guardar('responsive', informe)
+    > 153 |     expect.soft(informe.filter(i => i.desborda), 'pantallas con desplazamiento horizontal').toEqual([])
+          |                                                                                             ^
+      154 |   })
+      155 | })
+      156 |
+        at C:\Users\GRLL\Downloads\taller1-sistema-multiagentes-main\taller1-sistema-multiagentes-main\pruebas_usabilidad\tests\usabilidad.spec.js:153:93
+
+    Error Context: test-results\usabilidad-U4-·-Responsive-sin-desplazamiento-horizontal\error-context.md
+
+  3) tests\usabilidad.spec.js:158:3 › U5 · Objetivos táctiles › tamaño de botones, enlaces y campos en móvil 
+
+    Error: objetivos menores a 24 px
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 14
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "alto": 22,
+    +     "ancho": 239,
+    +     "elemento": "a",
+    +     "texto": "https://github.com/demo/seguim",
+    +   },
+    +   Object {
+    +     "alto": 22,
+    +     "ancho": 199,
+    +     "elemento": "a",
+    +     "texto": "https://notion.so/demo-backlog",
+    +   },
+    + ]
+
+      177 |     guardar('objetivos_tactiles', informe)
+      178 |     // WCAG 2.2 · 2.5.8 (AA): mínimo 24×24 px
+    > 179 |     expect.soft(informe.flatMap(i => i.menores_24px), 'objetivos menores a 24 px').toEqual([])
+          |                                                                                    ^
+      180 |   })
+      181 | })
+      182 |
+        at C:\Users\GRLL\Downloads\taller1-sistema-multiagentes-main\taller1-sistema-multiagentes-main\pruebas_usabilidad\tests\usabilidad.spec.js:179:84
+
+    Error Context: test-results\usabilidad-U5-·-Objetivos--c128e-s-enlaces-y-campos-en-móvil\error-context.md
+
+  4) tests\usabilidad.spec.js:283:3 › U8 · Metadatos y estructura › idioma, título y encabezados por pantalla 
+
+    Error: el título del documento no cambia entre pantallas
+
+    expect(received).toBeGreaterThan(expected)
+
+    Expected: > 1
+    Received:   1
+
+      300 |     guardar('metadatos', informe)
+      301 |     expect.soft(informe.filter(i => i.h1 !== 1), 'pantallas sin exactamente un h1').toEqual([])
+    > 302 |     expect.soft(new Set(informe.map(i => i.titulo_documento)).size, 'el título del documento no cambia entre pantallas').toBeGreaterThan(1)
+          |                                                                                                                          ^
+      303 |   })
+      304 | })
+      305 |
+        at C:\Users\GRLL\Downloads\taller1-sistema-multiagentes-main\taller1-sistema-multiagentes-main\pruebas_usabilidad\tests\usabilidad.spec.js:302:122
+
+    Error Context: test-results\usabilidad-U8-·-Metadatos--02b45--y-encabezados-por-pantalla\error-context.md
+
+  4 failed
+    tests\usabilidad.spec.js:81:3 › U2 · Accesibilidad automática (axe-core) › todas las pantallas en escritorio 
+    tests\usabilidad.spec.js:141:3 › U4 · Responsive › sin desplazamiento horizontal ───────────────
+    tests\usabilidad.spec.js:158:3 › U5 · Objetivos táctiles › tamaño de botones, enlaces y campos en móvil 
+    tests\usabilidad.spec.js:283:3 › U8 · Metadatos y estructura › idioma, título y encabezados por pantalla 
+  6 passed (46.6s)

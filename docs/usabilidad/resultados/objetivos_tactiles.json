@@ -1,0 +1,57 @@
+[
+  {
+    "pantalla": "proyectos",
+    "total": 13,
+    "menores_24px": [],
+    "menores_44px": 0
+  },
+  {
+    "pantalla": "nuevo",
+    "total": 18,
+    "menores_24px": [],
+    "menores_44px": 0
+  },
+  {
+    "pantalla": "detalle",
+    "total": 15,
+    "menores_24px": [
+      {
+        "elemento": "a",
+        "texto": "https://github.com/demo/seguim",
+        "ancho": 239,
+        "alto": 22
+      },
+      {
+        "elemento": "a",
+        "texto": "https://notion.so/demo-backlog",
+        "ancho": 199,
+        "alto": 22
+      }
+    ],
+    "menores_44px": 3
+  },
+  {
+    "pantalla": "dashboard",
+    "total": 7,
+    "menores_24px": [],
+    "menores_44px": 0
+  },
+  {
+    "pantalla": "alerta",
+    "total": 7,
+    "menores_24px": [],
+    "menores_44px": 0
+  },
+  {
+    "pantalla": "historial",
+    "total": 6,
+    "menores_24px": [],
+    "menores_44px": 0
+  },
+  {
+    "pantalla": "sistema",
+    "total": 9,
+    "menores_24px": [],
+    "menores_44px": 0
+  }
+]

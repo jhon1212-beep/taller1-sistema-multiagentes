@@ -1,0 +1,166 @@
+{
+  "fecha": "2026-11-03T21:52:59.214Z",
+  "proyecto_id": 1,
+  "login_rechazado": "Correo o contraseña incorrectos.",
+  "proyectos_api": [
+    "Seguimiento académico",
+    "Biblioteca digital"
+  ],
+  "proyectos_ui_coinciden": false,
+  "fuentes": {
+    "github": {
+      "columnas": [
+        "Autor",
+        "Fecha",
+        "Mensaje",
+        "SHA corto"
+      ],
+      "filas": [
+        {
+          "n": 1,
+          "ui": "Diego Paz | 2026-10-12 09:00 | Añadir estados de integración | 1e7e027",
+          "api": "Diego Paz | 2026-10-12 09:00 | Añadir estados de integración | 1e7e027",
+          "origen": "Diego Paz | 2026-10-12 09:00 | Añadir estados de integración | 1e7e027",
+          "coincide": true
+        },
+        {
+          "n": 2,
+          "ui": "Marta Ruiz | 2026-10-11 08:00 | Documentar ejecución de pruebas | c731d71",
+          "api": "Marta Ruiz | 2026-10-11 08:00 | Documentar ejecución de pruebas | c731d71",
+          "origen": "Marta Ruiz | 2026-10-11 08:00 | Documentar ejecución de pruebas | c731d71",
+          "coincide": true
+        },
+        {
+          "n": 3,
+          "ui": "Luis Vega | 2026-10-10 07:00 | Corregir filtro de fechas | 3029e14",
+          "api": "Luis Vega | 2026-10-10 07:00 | Corregir filtro de fechas | 3029e14",
+          "origen": "Luis Vega | 2026-10-10 07:00 | Corregir filtro de fechas | 3029e14",
+          "coincide": true
+        },
+        {
+          "n": 4,
+          "ui": "Ana Torres | 2026-10-09 06:00 | Mostrar tareas por proyecto | 223218f",
+          "api": "Ana Torres | 2026-10-09 06:00 | Mostrar tareas por proyecto | 223218f",
+          "origen": "Ana Torres | 2026-10-09 06:00 | Mostrar tareas por proyecto | 223218f",
+          "coincide": true
+        },
+        {
+          "n": 5,
+          "ui": "Diego Paz | 2026-10-08 05:00 | Agregar validación del formulario | f1fc930",
+          "api": "Diego Paz | 2026-10-08 05:00 | Agregar validación del formulario | f1fc930",
+          "origen": "Diego Paz | 2026-10-08 05:00 | Agregar validación del formulario | f1fc930",
+          "coincide": true
+        }
+      ],
+      "aciertos": 5,
+      "total_ui": 20,
+      "total_api": 20,
+      "total_origen": 20
+    },
+    "notion": {
+      "columnas": [
+        "Tarea",
+        "Responsable",
+        "Estado",
+        "Fecha límite"
+      ],
+      "filas": [
+        {
+          "n": 1,
+          "ui": "Inicio de sesión docente · 1 | Ana Torres | Listo | 2026-10-05",
+          "api": "Inicio de sesión docente · 1 | Ana Torres | Listo | 2026-10-05",
+          "origen": "Inicio de sesión docente · 1 | Ana Torres | Listo | 2026-10-05",
+          "coincide": true
+        },
+        {
+          "n": 2,
+          "ui": "Registro de proyecto · 2 | Luis Vega | Listo | 2026-10-06",
+          "api": "Registro de proyecto · 2 | Luis Vega | Listo | 2026-10-06",
+          "origen": "Registro de proyecto · 2 | Luis Vega | Listo | 2026-10-06",
+          "coincide": true
+        },
+        {
+          "n": 3,
+          "ui": "Listado de commits · 3 | Marta Ruiz | Listo | 2026-10-07",
+          "api": "Listado de commits · 3 | Marta Ruiz | Listo | 2026-10-07",
+          "origen": "Listado de commits · 3 | Marta Ruiz | Listo | 2026-10-07",
+          "coincide": true
+        },
+        {
+          "n": 4,
+          "ui": "Consulta de tareas · 4 | Diego Paz | Listo | 2026-10-08",
+          "api": "Consulta de tareas · 4 | Diego Paz | Listo | 2026-10-08",
+          "origen": "Consulta de tareas · 4 | Diego Paz | Listo | 2026-10-08",
+          "coincide": true
+        },
+        {
+          "n": 5,
+          "ui": "Pruebas de integración · 5 | Ana Torres | Listo | 2026-10-09",
+          "api": "Pruebas de integración · 5 | Ana Torres | Listo | 2026-10-09",
+          "origen": "Pruebas de integración · 5 | Ana Torres | Listo | 2026-10-09",
+          "coincide": true
+        }
+      ],
+      "aciertos": 5,
+      "total_ui": 20,
+      "total_api": 20,
+      "total_origen": 20
+    },
+    "drive": {
+      "columnas": [
+        "Nombre",
+        "Último editor",
+        "Última modificación",
+        "Tipo"
+      ],
+      "filas": [
+        {
+          "n": 1,
+          "ui": "Diseño de interfaz · 10 | Luis Vega | 2026-10-11 13:00 | application/vnd.google-apps.document",
+          "api": "Diseño de interfaz · 10 | Luis Vega | 2026-10-11 13:00 | application/vnd.google-apps.document",
+          "origen": "Diseño de interfaz · 10 | Luis Vega | 2026-10-11 13:00 | application/vnd.google-apps.document",
+          "coincide": true
+        },
+        {
+          "n": 2,
+          "ui": "Informe de avance · 9 | Ana Torres | 2026-10-09 13:00 | application/pdf",
+          "api": "Informe de avance · 9 | Ana Torres | 2026-10-09 13:00 | application/pdf",
+          "origen": "Informe de avance · 9 | Ana Torres | 2026-10-09 13:00 | application/pdf",
+          "coincide": true
+        },
+        {
+          "n": 3,
+          "ui": "Plan de pruebas · 8 | Diego Paz | 2026-10-07 13:00 | application/vnd.google-apps.document",
+          "api": "Plan de pruebas · 8 | Diego Paz | 2026-10-07 13:00 | application/vnd.google-apps.document",
+          "origen": "Plan de pruebas · 8 | Diego Paz | 2026-10-07 13:00 | application/vnd.google-apps.document",
+          "coincide": true
+        },
+        {
+          "n": 4,
+          "ui": "Arquitectura · 7 | Marta Ruiz | 2026-10-05 13:00 | application/pdf",
+          "api": "Arquitectura · 7 | Marta Ruiz | 2026-10-05 13:00 | application/pdf",
+          "origen": "Arquitectura · 7 | Marta Ruiz | 2026-10-05 13:00 | application/pdf",
+          "coincide": true
+        },
+        {
+          "n": 5,
+          "ui": "Plan del proyecto · 6 | Luis Vega | 2026-10-03 13:00 | application/vnd.google-apps.document",
+          "api": "Plan del proyecto · 6 | Luis Vega | 2026-10-03 13:00 | application/vnd.google-apps.document",
+          "origen": "Plan del proyecto · 6 | Luis Vega | 2026-10-03 13:00 | application/vnd.google-apps.document",
+          "coincide": true
+        }
+      ],
+      "aciertos": 5,
+      "total_ui": 10,
+      "total_api": 10,
+      "total_origen": 10
+    }
+  },
+  "alta_proyecto": {
+    "creado_en_servidor": true,
+    "id": 5
+  },
+  "desactivar_proyecto": {
+    "activo_en_servidor": false
+  }
+}
