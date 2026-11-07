@@ -17,18 +17,23 @@ jobs:
       GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      CORTE_CORREO: ${{ secrets.CORTE_CORREO }}
+      CORTE_CLAVE: ${{ secrets.CORTE_CLAVE }}
+      SUPERVISION_SOURCES: real
+      SUPERVISION_EXPLAINER: template
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r backend/requirements.txt -r backend/requirements-agentes.txt
-      - name: Levantar la API y llamar a la consolidación
+      - name: Levantar la API y llamar a la consolidación (TA-022)
         working-directory: backend
         run: |
+          set -o pipefail
           uvicorn app.main:app --port 8000 &
-          sleep 8
-          curl -sf -X POST "http://localhost:8000/RUTA-DE-REYES" | tee resultado.json
+          python scripts/ejecutar_corte.py | tee resultado.json
           echo '```json' >> $GITHUB_STEP_SUMMARY
           cat resultado.json >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY

@@ -42,6 +42,26 @@ def cargar_config() -> dict:
     }
 
 
+def token_para_base(database_id: str) -> str:
+    """Token de Notion para una base concreta.
+
+    Una integración interna de Notion solo ve su propio espacio de trabajo. Si
+    un equipo tiene su base en otro espacio, crea allí su integración y su
+    token se registra en NOTION_TOKENS (JSON «id de base: token», sin guiones
+    en el id). Las bases que no estén en NOTION_TOKENS usan NOTION_TOKEN.
+    """
+    por_base = os.getenv("NOTION_TOKENS", "").strip()
+    if por_base:
+        try:
+            tokens = {k.replace("-", "").lower(): v for k, v in json.loads(por_base).items()}
+        except (ValueError, AttributeError) as err:
+            raise NotionError("NOTION_TOKENS debe ser un JSON {\"id de base\": \"token\"}.") from err
+        token = tokens.get((database_id or "").replace("-", "").lower())
+        if token:
+            return str(token).strip()
+    return cargar_config()["token"]
+
+
 class NotionClient:
     def __init__(self, token: str, api_url: str = API_URL, timeout: int = 20):
         self.token = (token or "").strip()
@@ -105,23 +125,79 @@ class NotionClient:
             cuerpo["start_cursor"] = respuesta["next_cursor"]
 
 
+# Otras bases de Notion usan otros nombres de columna (por ejemplo, la plantilla
+# en inglés: Name, Assignee, Status, Due). Primero se busca el nombre de
+# nuestra base y sus equivalentes; si ninguno existe, la primera propiedad del
+# tipo correcto. Así el agente lee la base de cualquier equipo.
+NOMBRES_RESPONSABLE = (PROP_RESPONSABLE, "Responsables", "Asignado", "Asignados",
+                       "Encargado", "Assignee", "Assignees", "Assign", "Owner", "Person")
+NOMBRES_ESTADO = (PROP_ESTADO, "Estatus", "Status", "State")
+NOMBRES_FECHA_LIMITE = (PROP_FECHA_LIMITE, "Fecha limite", "Fecha de entrega", "Vencimiento",
+                        "Fecha", "Due", "Due date", "Deadline", "Date")
+
+# Estados equivalentes a los 3 del modelo de datos (Sin empezar, En curso, Listo).
+# Se comparan en minúsculas y sin tildes. Un estado desconocido queda en None.
+ESTADOS = {
+    "Listo": ("listo", "done", "complete", "completed", "completado", "completada",
+              "terminado", "terminada", "hecho", "finalizado", "finalizada", "cerrado"),
+    "En curso": ("en curso", "in progress", "doing", "en progreso", "en proceso",
+                 "haciendo", "en revision", "in review", "review"),
+    "Sin empezar": ("sin empezar", "not started", "to do", "todo", "to-do", "por hacer",
+                    "pendiente", "backlog", "nuevo", "no iniciado"),
+}
+
+
+def _sin_tildes(texto: str) -> str:
+    import unicodedata
+    return "".join(c for c in unicodedata.normalize("NFD", texto) if unicodedata.category(c) != "Mn")
+
+
+def normalizar_estado(nombre: str | None) -> str | None:
+    """«Done», «In progress», «Por hacer»… -> «Listo», «En curso», «Sin empezar»."""
+    if not nombre:
+        return None
+    clave = _sin_tildes(nombre).strip().lower()
+    for canonico, sinonimos in ESTADOS.items():
+        if clave in sinonimos:
+            return canonico
+    return None
+
+
+def _propiedad(props: dict, nombres: tuple[str, ...], tipos: tuple[str, ...]) -> dict:
+    """Propiedad por nombre preferido (sin distinguir mayúsculas) o, si no, por tipo."""
+    por_nombre = {_sin_tildes(k).lower(): v for k, v in props.items()}
+    for nombre in nombres:
+        valor = por_nombre.get(_sin_tildes(nombre).lower())
+        if valor is not None and valor.get("type", tipos[0]) in tipos:
+            return valor
+    for tipo in tipos:
+        for valor in props.values():
+            if valor.get("type") == tipo:
+                return valor
+    return {}
+
+
 def _normalizar_pagina(pagina: dict) -> dict:
     """Página de Notion -> dict plano con las 4 propiedades + fecha de edición."""
     props = pagina.get("properties", {})
 
-    titulo = "".join(
-        t.get("plain_text", "") for t in props.get(PROP_TAREA, {}).get("title", [])
-    )
-    personas = props.get(PROP_RESPONSABLE, {}).get("people", [])
+    titulo_prop = props.get(PROP_TAREA) or _propiedad(props, (), ("title",))
+    titulo = "".join(t.get("plain_text", "") for t in titulo_prop.get("title", []))
+
+    personas = _propiedad(props, NOMBRES_RESPONSABLE, ("people",)).get("people", [])
     nombres = [p.get("name") for p in personas if p.get("name")]
-    estado = (props.get(PROP_ESTADO, {}).get("status") or {}).get("name")
-    fecha_limite = (props.get(PROP_FECHA_LIMITE, {}).get("date") or {}).get("start")
+
+    estado_prop = _propiedad(props, NOMBRES_ESTADO, ("status", "select"))
+    estado_crudo = (estado_prop.get("status") or estado_prop.get("select") or {}).get("name")
+
+    fecha_prop = _propiedad(props, NOMBRES_FECHA_LIMITE, ("date",))
+    fecha_limite = (fecha_prop.get("date") or {}).get("start")
 
     return {
         "id": pagina.get("id"),
         "tarea": titulo,
         "responsable": ", ".join(nombres) if nombres else None,
-        "estado": estado,
+        "estado": normalizar_estado(estado_crudo),
         "fecha_limite": fecha_limite,
         "editada": pagina.get("last_edited_time"),
     }

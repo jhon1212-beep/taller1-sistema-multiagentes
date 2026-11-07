@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import date, datetime
 from typing import Literal, TypedDict
 
 
@@ -35,3 +36,18 @@ class Explicacion(TypedDict):
 
     texto: str
     origen: OrigenExplicacion
+
+
+def cutoff_day(cutoff: str | date) -> date:
+    """Día calendario del corte en su propia zona horaria (TA-018).
+
+    "2026-10-12T23:59:59-05:00" es el 12 de octubre en Lima aunque en UTC ya
+    sea 13; el docente piensa en el día local. Un corte es único por proyecto
+    y día, así que esta regla la comparten el servicio y los repositorios.
+    """
+    if isinstance(cutoff, date) and not isinstance(cutoff, datetime):
+        return cutoff
+    text = str(cutoff).strip()
+    if len(text) == 10:  # solo "YYYY-MM-DD"
+        return date.fromisoformat(text)
+    return datetime.fromisoformat(text.replace("Z", "+00:00")).date()

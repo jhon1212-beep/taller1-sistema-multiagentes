@@ -75,12 +75,21 @@ export default function DashboardApi({ proyecto, onAlerta, onValidacion, onHisto
     setEstado('cargando')
     setError('')
     try {
-      const [historial, indicadores, alertas] = await Promise.all([
-        obtenerHistorial(proyecto.id, { senal }),
+      // El historial va primero: si el proyecto aún no tiene cortes no se piden
+      // indicadores ni alertas, porque responderían 404 y el navegador lo
+      // registraría como error de consola (TA-039: 0 errores en la consola).
+      const historial = await obtenerHistorial(proyecto.id, { senal })
+      const dias = historial.cortes.map(c => c.fecha_corte)
+      setCortes([...dias].reverse())
+      if (dias.length === 0 || (diaPedido && !dias.includes(diaPedido))) {
+        setDatos(null)
+        setEstado('sin_cortes')
+        return
+      }
+      const [indicadores, alertas] = await Promise.all([
         obtenerIndicadores(proyecto.id, diaPedido, { senal }),
         obtenerAlertas(proyecto.id, diaPedido, { senal }),
       ])
-      setCortes(historial.cortes.map(c => c.fecha_corte).reverse())
       setDatos({
         indicadores,
         alertas: alertas.alertas.map(a => alertaDeApi(a, alertas.fecha_corte, proyecto)),

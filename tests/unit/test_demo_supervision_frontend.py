@@ -60,11 +60,8 @@ def test_i2_del_frontend_es_el_porcentaje_de_tareas_no_completadas():
         assert ind["I2"] == pytest.approx(100 - ind["I1"])
 
 
-@pytest.mark.xfail(
-    reason="Inconsistencia conocida: motor.py (TA-019, dataset y docs) define I2 como «Sin empezar»; "
-    "motor_indicadores.py, que usa el Supervisor, lo define como «no Listo». Pendiente de acordar con Reyes.",
-    strict=False,
-)
+# Antes era xfail: motor.py contaba solo «Sin empezar». Desde la semana 10 los dos
+# motores usan la definición del Product Backlog v6.0 («Sin empezar» o «En curso»).
 def test_i2_coincide_con_el_dataset():
     esperados = cargar_dataset()["indicadores_esperados"]
     for pid, proyecto in _supervision_del_frontend().items():

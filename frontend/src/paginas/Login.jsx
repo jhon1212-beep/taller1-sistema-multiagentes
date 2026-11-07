@@ -1,7 +1,7 @@
 /** HU-001 · Inicio de sesión del docente. */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Aviso, Boton, Campo, Pill } from '../componentes/UI.jsx'
-import { API_ACTIVA, establecerToken, iniciarSesion } from '../api.js'
+import { API_ACTIVA, establecerToken, iniciarSesion, obtenerEstado } from '../api.js'
 import { CLAVE_DEMO, CUENTAS } from '../datos/demo.js'
 
 export default function Login({ bloqueado = false, onEntrar }) {
@@ -9,6 +9,21 @@ export default function Login({ bloqueado = false, onEntrar }) {
   const [clave, setClave] = useState('')
   const [error, setError] = useState('')
   const [enviando, setEnviando] = useState(false)
+  // TA-025 · El backend gratuito se duerme tras 15 min sin uso. Al abrir el
+  // login se le pide /health para que vaya despertando mientras el docente
+  // escribe: verificando | listo | despertando (tarda más de 5 s) | sin_conexion
+  const [servidor, setServidor] = useState(API_ACTIVA ? 'verificando' : 'listo')
+
+  useEffect(() => {
+    if (!API_ACTIVA) return undefined
+    const control = new AbortController()
+    const lento = setTimeout(() => setServidor(e => (e === 'verificando' ? 'despertando' : e)), 5000)
+    obtenerEstado({ senal: control.signal })
+      .then(() => setServidor('listo'))
+      .catch(e => { if (e.name !== 'AbortError') setServidor('sin_conexion') })
+      .finally(() => clearTimeout(lento))
+    return () => { clearTimeout(lento); control.abort() }
+  }, [])
 
   /** TA-039 · Con API activa la sesión la crea el servidor (POST /auth/login). */
   async function entrarConApi() {
@@ -22,7 +37,7 @@ export default function Login({ bloqueado = false, onEntrar }) {
       setError(
         e.estado === 401
           ? 'Correo o contraseña incorrectos.'
-          : 'No se pudo conectar con el servidor. Inténtalo de nuevo en unos minutos.',
+          : 'No se pudo conectar con el servidor. Si estaba en reposo puede tardar hasta un minuto en despertar; inténtalo de nuevo.',
       )
       setEnviando(false)
     }
@@ -98,6 +113,16 @@ export default function Login({ bloqueado = false, onEntrar }) {
             onChange={e => setClave(e.target.value)}
           />
           {error && <Aviso tipo="error">{error}</Aviso>}
+          {servidor === 'despertando' && (
+            <p className="small muted" role="status">
+              Despertando el servidor; la primera conexión puede tardar hasta un minuto.
+            </p>
+          )}
+          {servidor === 'sin_conexion' && !error && (
+            <p className="small muted" role="status">
+              El servidor no responde todavía. Puedes intentar ingresar de todos modos.
+            </p>
+          )}
           <Boton type="submit" disabled={enviando}>
             {enviando ? 'Ingresando…' : 'Ingresar'}
           </Boton>

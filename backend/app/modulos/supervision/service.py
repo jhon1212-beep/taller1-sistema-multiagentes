@@ -1,7 +1,8 @@
 """TA-022: caso de uso "ejecutar un corte" y consultas del historial.
 
 Une el grafo del Supervisor (TA-015/TA-023) con el repositorio SQL (TA-018).
-No conoce FastAPI: las rutas solo traducen HTTP a estas llamadas.
+No conoce FastAPI ni PostgreSQL: recibe el repositorio por su puerto
+(RepositorioCortes) y las rutas solo traducen HTTP a estas llamadas.
 """
 from __future__ import annotations
 
@@ -11,13 +12,13 @@ from typing import Any, Mapping
 from zoneinfo import ZoneInfo
 
 from app.modulos.evidencias.puertos import FuenteEvidencia
-from app.modulos.supervision.adaptadores.sql import SqlSupervisionRepository, cutoff_day
+from app.modulos.supervision.dominio import cutoff_day
 from app.modulos.supervision.grafo.supervisor import (
     build_supervisor_graph,
     build_supervisor_input,
     to_consolidated_report,
 )
-from app.modulos.supervision.puertos import GeneradorExplicacion
+from app.modulos.supervision.puertos import GeneradorExplicacion, RepositorioCortes
 
 LIMA = ZoneInfo("America/Lima")
 RUN_NAME = "TA-022 Consolidation"
@@ -32,7 +33,7 @@ def default_cutoff() -> str:
 class SupervisionService:
     def __init__(
         self,
-        repository: SqlSupervisionRepository,
+        repository: RepositorioCortes,
         adapters: Mapping[str, FuenteEvidencia] | None = None,
         explainer: GeneradorExplicacion | None = None,
     ) -> None:

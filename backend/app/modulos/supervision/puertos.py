@@ -26,7 +26,8 @@ class RepositorioSupervision(Protocol):
     def guardar(
         self,
         estado: EstadoSupervision,
-    ) -> None:
+    ) -> Mapping[str, int] | None:
+        """Guarda un corte. El repositorio SQL devuelve cuántas filas guardó."""
         ...
 
     def obtener(
@@ -40,4 +41,25 @@ class RepositorioSupervision(Protocol):
         self,
         proyecto_id: int,
     ) -> list[EstadoSupervision]:
+        ...
+
+
+class RepositorioCortes(RepositorioSupervision, Protocol):
+    """TA-018/TA-022: consultas por corte que necesita la API de supervisión.
+
+    Amplía RepositorioSupervision sin cambiarlo; lo implementa
+    SqlSupervisionRepository. Los días se reciben como «AAAA-MM-DD».
+    """
+
+    def obtener_ultimo(self, proyecto_id: int) -> EstadoSupervision | None:
+        ...
+
+    def obtener_indicadores(
+        self,
+        proyecto_id: int,
+        fecha_corte: str | None = None,
+    ) -> dict[str, Any] | None:
+        ...
+
+    def history(self, project_id: int) -> list[dict[str, Any]]:
         ...
