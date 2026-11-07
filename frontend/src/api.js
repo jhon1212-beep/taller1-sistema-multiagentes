@@ -67,8 +67,7 @@ export const api = {
 export const obtenerEstado = (opciones) => api.get('/health', opciones)
 
 /** true si el build define VITE_API_URL; si no, las vistas usan datos de demostración. */
-export const API_ACTIVA = import.meta.env.VITE_API_URL !== undefined
-
+export const API_ACTIVA = true
 /**
  * HU-001 · Inicio de sesión del docente.
  * { token, tipo, expira_en, docente: { id, nombre, correo } }
