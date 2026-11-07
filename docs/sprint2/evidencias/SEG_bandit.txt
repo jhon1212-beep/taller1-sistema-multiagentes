@@ -1,0 +1,78 @@
+Run started:2026-11-03 21:37:34.695847+00:00
+
+Test results:
+>> Issue: [B310:blacklist] Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.
+   Severity: Medium   Confidence: High
+   CWE: CWE-22 (https://cwe.mitre.org/data/definitions/22.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b310-urllib-urlopen
+   Location: backend/app\modulos\evidencias\adaptadores\github\cliente.py:109:17
+108	        try:
+109	            with urllib.request.urlopen(peticion, timeout=self.timeout) as resp:
+110	                cuerpo = json.loads(resp.read().decode("utf-8"))
+
+--------------------------------------------------
+>> Issue: [B310:blacklist] Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.
+   Severity: Medium   Confidence: High
+   CWE: CWE-22 (https://cwe.mitre.org/data/definitions/22.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b310-urllib-urlopen
+   Location: backend/app\modulos\evidencias\adaptadores\notion\cliente.py:67:17
+66	        try:
+67	            with urllib.request.urlopen(peticion, timeout=self.timeout) as resp:
+68	                return json.loads(resp.read().decode("utf-8"))
+
+--------------------------------------------------
+>> Issue: [B310:blacklist] Audit url open for permitted schemes. Allowing use of file:/ or custom schemes is often unexpected.
+   Severity: Medium   Confidence: High
+   CWE: CWE-22 (https://cwe.mitre.org/data/definitions/22.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b310-urllib-urlopen
+   Location: backend/app\modulos\validacion\adaptadores\github_actions.py:87:17
+86	        try:
+87	            with urllib.request.urlopen(peticion, timeout=30) as r:
+88	                bruto = r.read()
+
+--------------------------------------------------
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: backend/app\modulos\validacion\adaptadores\local.py:16:0
+15	import shutil
+16	import subprocess
+17	import tempfile
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: backend/app\modulos\validacion\adaptadores\local.py:56:18
+55	        }
+56	        proceso = subprocess.run(
+57	            [node, "validar-url.mjs"],
+58	            cwd=self._e2e,
+59	            env=entorno,
+60	            capture_output=True,
+61	            text=True,
+62	            timeout=120,
+63	        )
+64	        archivo = salida / "resultado.json"
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 3480
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 2
+		Medium: 3
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 5
+Files skipped (0):

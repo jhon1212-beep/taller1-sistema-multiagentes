@@ -2,6 +2,7 @@ import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import Request
 
 from app.modulos.autenticacion.rutas import router as autenticacion_router
 from app.modulos.evidencias.rutas import router as evidencias_router
@@ -14,6 +15,16 @@ from app.modulos.evidencias.adaptadores.falso import FuenteEvidenciaFalsa
 from app.modulos.evidencias.adaptadores.github.adaptador import FuenteEvidenciaGitHub
 from app.modulos.evidencias.adaptadores.notion.adaptador import FuenteEvidenciaNotion
 from app.modulos.evidencias.adaptadores.drive.adaptador import FuenteEvidenciaDrive
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from fastapi import FastAPI, Request
+
+limiter = Limiter(key_func=get_remote_address)
+app = FastAPI()
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
 def crear_fuente_evidencias(referencias):
@@ -30,6 +41,13 @@ app = FastAPI(
     title="Agentes inteligentes para el seguimiento de proyectos de software",
     version="0.1.0",
 )
+
+@app.middleware("http")
+async def agregar_cabeceras_seguridad(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    return response
+
 
 # HU-004: el frontend (Vite, Netlify) vive en otro origen. Los orígenes
 # permitidos se configuran con CORS_ORIGINS (separados por coma); por defecto
@@ -57,5 +75,6 @@ app.include_router(validacion_router)
 
 
 @app.get("/health")
-def health() -> dict[str, str]:
+@limiter.limit("5/minute")
+def health(request: Request):  # IMPORTANTE: slowapi exige que la función reciba 'request'
     return {"status": "ok"}
