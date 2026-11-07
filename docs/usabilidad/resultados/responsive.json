@@ -1,0 +1,149 @@
+[
+  {
+    "vista": "movil_375",
+    "pantalla": "proyectos",
+    "ancho_documento": 375,
+    "ancho_ventana": 375,
+    "desborda": false
+  },
+  {
+    "vista": "movil_375",
+    "pantalla": "nuevo",
+    "ancho_documento": 375,
+    "ancho_ventana": 375,
+    "desborda": false
+  },
+  {
+    "vista": "movil_375",
+    "pantalla": "detalle",
+    "ancho_documento": 375,
+    "ancho_ventana": 375,
+    "desborda": false
+  },
+  {
+    "vista": "movil_375",
+    "pantalla": "dashboard",
+    "ancho_documento": 375,
+    "ancho_ventana": 375,
+    "desborda": false
+  },
+  {
+    "vista": "movil_375",
+    "pantalla": "alerta",
+    "ancho_documento": 375,
+    "ancho_ventana": 375,
+    "desborda": false
+  },
+  {
+    "vista": "movil_375",
+    "pantalla": "historial",
+    "ancho_documento": 375,
+    "ancho_ventana": 375,
+    "desborda": false
+  },
+  {
+    "vista": "movil_375",
+    "pantalla": "sistema",
+    "ancho_documento": 375,
+    "ancho_ventana": 375,
+    "desborda": false
+  },
+  {
+    "vista": "movil_320",
+    "pantalla": "proyectos",
+    "ancho_documento": 320,
+    "ancho_ventana": 320,
+    "desborda": false
+  },
+  {
+    "vista": "movil_320",
+    "pantalla": "nuevo",
+    "ancho_documento": 320,
+    "ancho_ventana": 320,
+    "desborda": false
+  },
+  {
+    "vista": "movil_320",
+    "pantalla": "detalle",
+    "ancho_documento": 341,
+    "ancho_ventana": 320,
+    "desborda": true
+  },
+  {
+    "vista": "movil_320",
+    "pantalla": "dashboard",
+    "ancho_documento": 320,
+    "ancho_ventana": 320,
+    "desborda": false
+  },
+  {
+    "vista": "movil_320",
+    "pantalla": "alerta",
+    "ancho_documento": 320,
+    "ancho_ventana": 320,
+    "desborda": false
+  },
+  {
+    "vista": "movil_320",
+    "pantalla": "historial",
+    "ancho_documento": 320,
+    "ancho_ventana": 320,
+    "desborda": false
+  },
+  {
+    "vista": "movil_320",
+    "pantalla": "sistema",
+    "ancho_documento": 320,
+    "ancho_ventana": 320,
+    "desborda": false
+  },
+  {
+    "vista": "zoom_200",
+    "pantalla": "proyectos",
+    "ancho_documento": 683,
+    "ancho_ventana": 683,
+    "desborda": false
+  },
+  {
+    "vista": "zoom_200",
+    "pantalla": "nuevo",
+    "ancho_documento": 683,
+    "ancho_ventana": 683,
+    "desborda": false
+  },
+  {
+    "vista": "zoom_200",
+    "pantalla": "detalle",
+    "ancho_documento": 683,
+    "ancho_ventana": 683,
+    "desborda": false
+  },
+  {
+    "vista": "zoom_200",
+    "pantalla": "dashboard",
+    "ancho_documento": 683,
+    "ancho_ventana": 683,
+    "desborda": false
+  },
+  {
+    "vista": "zoom_200",
+    "pantalla": "alerta",
+    "ancho_documento": 683,
+    "ancho_ventana": 683,
+    "desborda": false
+  },
+  {
+    "vista": "zoom_200",
+    "pantalla": "historial",
+    "ancho_documento": 683,
+    "ancho_ventana": 683,
+    "desborda": false
+  },
+  {
+    "vista": "zoom_200",
+    "pantalla": "sistema",
+    "ancho_documento": 683,
+    "ancho_ventana": 683,
+    "desborda": false
+  }
+]

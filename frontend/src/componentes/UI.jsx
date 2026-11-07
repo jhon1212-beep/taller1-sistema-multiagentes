@@ -5,6 +5,8 @@
  * construirse con estas piezas para que el estilo quede en un solo lugar.
  */
 
+import { useState } from 'react'
+
 const clases = (...xs) => xs.filter(Boolean).join(' ')
 
 /** Indicador de estado. tono: 'neutro' | 'ok' | 'warn' | 'bad' */
@@ -33,11 +35,47 @@ export function Tarjeta({ titulo, children, ...props }) {
   )
 }
 
-/** Cifra destacada con etiqueta y detalle opcional. */
-export function Estadistica({ etiqueta, valor, detalle, children }) {
+/**
+ * HU-006 · Ayuda contextual con la fórmula de un indicador.
+ *
+ * Se abre con el ratón y con el teclado (foco) y se cierra con Esc sin mover el
+ * foco (WCAG 1.4.13). El texto vive siempre en el DOM para que
+ * aria-describedby lo lea un lector de pantalla.
+ */
+export function Ayuda({ id, etiqueta, children }) {
+  const [visible, setVisible] = useState(false)
+  return (
+    <span
+      className="ayuda"
+      onMouseEnter={() => setVisible(true)}
+      onMouseLeave={() => setVisible(false)}
+    >
+      <button
+        type="button"
+        className="ayuda-btn"
+        aria-label={`Cómo se calcula: ${etiqueta}`}
+        aria-describedby={id}
+        onFocus={() => setVisible(true)}
+        onBlur={() => setVisible(false)}
+        onKeyDown={e => { if (e.key === 'Escape') setVisible(false) }}
+      >
+        ?
+      </button>
+      <span role="tooltip" id={id} className={clases('ayuda-texto', visible && 'ayuda-visible')}>
+        {children}
+      </span>
+    </span>
+  )
+}
+
+/** Cifra destacada con etiqueta, detalle y ayuda opcionales. */
+export function Estadistica({ etiqueta, valor, detalle, ayuda, children }) {
   return (
     <div className="card stat">
-      <small>{etiqueta}</small>
+      <small>
+        {etiqueta}
+        {ayuda}
+      </small>
       <strong>{valor}</strong>
       {children}
       {detalle && <small>{detalle}</small>}

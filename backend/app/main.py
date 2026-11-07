@@ -9,7 +9,7 @@ from slowapi.util import get_remote_address
 from app.modulos.autenticacion.rutas import router as autenticacion_router
 from app.modulos.evidencias.rutas import router as evidencias_router
 from app.modulos.evidencias.rutas_tareas import router as tareas_router
-from app.modulos.proyectos.rutas import router as proyectos_router
+from app.modulos.validacion.rutas import consulta_router as validacion_consulta_router
 from app.modulos.validacion.rutas import router as validacion_router
 from app.modulos.evidencias.adaptadores.compuesta import FuenteEvidenciaCompuesta
 from app.modulos.evidencias.adaptadores.falso import FuenteEvidenciaFalsa
@@ -62,6 +62,7 @@ app.include_router(proyectos_router)
 app.include_router(tareas_router)
 app.include_router(evidencias_router)
 app.include_router(validacion_router)
+app.include_router(validacion_consulta_router)
 
 
 @app.get("/health")

@@ -1,4 +1,5 @@
 /** TA-005 · Marco de la aplicación: barra lateral + contenido. */
+import { API_ACTIVA } from '../api.js'
 import { Boton } from '../componentes/UI.jsx'
 
 const SECCIONES = [
@@ -41,7 +42,9 @@ export default function Shell({ ruta, email, onNavegar, onSalir, children }) {
       <main>
         {children}
         <div className="pie">
-          Maqueta con datos de demostración · Las acciones representan el flujo propuesto.
+          {API_ACTIVA
+            ? 'Conectado al servidor · Indicadores y alertas con datos de demostración hasta TA-040.'
+            : 'Maqueta con datos de demostración · Las acciones representan el flujo propuesto.'}
         </div>
       </main>
     </div>

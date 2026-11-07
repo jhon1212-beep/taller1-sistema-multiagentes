@@ -39,6 +39,35 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
 
+  integracion-cp:
+    name: Integracion - CP-12 a CP-19 (TA-049)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            backend/requirements.txt
+            backend/requirements-agentes.txt
+      - name: Instalar dependencias
+        run: python -m pip install -r backend/requirements-agentes.txt
+      - name: Ejecutar los 8 casos (sin servicios externos)
+        run: python -m pytest tests/integration/test_cp12_cp19.py -v --junitxml=test-results/cp12-cp19.xml
+      - name: Tabla de resultados por CP en el resumen del job
+        if: always()
+        run: python tests/resumen_cp.py test-results/cp12-cp19.xml >> "$GITHUB_STEP_SUMMARY"
+      - name: Guardar el reporte de CP-12 a CP-19
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-cp12-cp19
+          path: test-results/cp12-cp19.xml
+          if-no-files-found: warn
+          retention-days: 14
+
   frontend:
     name: Frontend - build
     runs-on: ubuntu-latest

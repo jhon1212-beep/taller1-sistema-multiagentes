@@ -12,6 +12,11 @@ export class ApiError extends Error {
   }
 }
 
+// TA-039 · Token de la sesión. Vive solo en memoria: se pierde al recargar la
+// página, igual que el resto del estado de la sesión.
+let tokenSesion = null
+export const establecerToken = token => { tokenSesion = token }
+
 async function solicitar(ruta, { metodo = 'GET', cuerpo, parametros, senal } = {}) {
   const url = new URL(`${BASE_URL}${ruta}`)
   Object.entries(parametros ?? {}).forEach(([clave, valor]) => {
@@ -25,6 +30,7 @@ async function solicitar(ruta, { metodo = 'GET', cuerpo, parametros, senal } = {
       headers: {
         Accept: 'application/json',
         ...(cuerpo ? { 'Content-Type': 'application/json' } : {}),
+        ...(tokenSesion ? { Authorization: `Bearer ${tokenSesion}` } : {}),
       },
       body: cuerpo ? JSON.stringify(cuerpo) : undefined,
       signal: senal,
@@ -44,6 +50,8 @@ async function solicitar(ruta, { metodo = 'GET', cuerpo, parametros, senal } = {
 export const api = {
   get: (ruta, opciones) => solicitar(ruta, { ...opciones, metodo: 'GET' }),
   post: (ruta, cuerpo, opciones) => solicitar(ruta, { ...opciones, metodo: 'POST', cuerpo }),
+  put: (ruta, cuerpo, opciones) => solicitar(ruta, { ...opciones, metodo: 'PUT', cuerpo }),
+  patch: (ruta, opciones) => solicitar(ruta, { ...opciones, metodo: 'PATCH' }),
 }
 
 /** Estado del backend: { status: 'ok' } */
@@ -52,8 +60,33 @@ export const obtenerEstado = (opciones) => api.get('/health', opciones)
 /** true si el build define VITE_API_URL; si no, las vistas usan datos de demostración. */
 export const API_ACTIVA = true
 /**
+ * HU-001 · Inicio de sesión del docente.
+ * { token, tipo, expira_en, docente: { id, nombre, correo } }
+ */
+export const iniciarSesion = (correo, password) => api.post('/auth/login', { correo, password })
+
+/** HU-001 · Cierra la sesión en el servidor (204). */
+export const cerrarSesionApi = () => api.post('/auth/logout')
+
+/** HU-002 · Proyectos del docente (con los desactivados, para el filtro de la lista). */
+export const obtenerProyectos = (opciones) =>
+  api.get('/proyectos', { ...opciones, parametros: { incluir_inactivos: true } })
+export const crearProyecto = (cuerpo) => api.post('/proyectos', cuerpo)
+export const editarProyecto = (id, cuerpo) => api.put(`/proyectos/${id}`, cuerpo)
+export const desactivarProyecto = (id) => api.patch(`/proyectos/${id}/desactivar`)
+
+/**
  * HU-004 · Tareas del proyecto desde Notion.
  * { estado: 'ok' | 'fallo', error, total, resumen, tareas: [...] }
  */
 export const obtenerTareas = (proyectoId, opciones) =>
   api.get(`/proyectos/${proyectoId}/tareas`, opciones)
+
+/**
+ * HU-003 / HU-005 · Commits y documentos guardados del proyecto.
+ * { estado_fuente: 'ok' | 'fallo', total, items: [...] }
+ */
+export const obtenerCommits = (proyectoId, opciones) =>
+  api.get(`/proyectos/${proyectoId}/commits`, opciones)
+export const obtenerDocumentos = (proyectoId, opciones) =>
+  api.get(`/proyectos/${proyectoId}/documentos`, opciones)

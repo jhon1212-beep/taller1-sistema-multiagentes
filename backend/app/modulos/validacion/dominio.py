@@ -68,3 +68,14 @@ class ResultadoValidacion:
         datos = asdict(self)
         datos["ejecutada_en"] = self.ejecutada_en.isoformat()
         return datos
+
+
+@dataclass
+class ValidacionGuardada:
+    """TA-048 · Una validación ya registrada: su resultado más la identidad de su fila."""
+
+    id: int
+    resultado: ResultadoValidacion
+
+    def to_dict(self) -> dict:
+        return {"id": self.id, **self.resultado.to_dict()}
