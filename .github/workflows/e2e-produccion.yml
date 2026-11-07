@@ -1,0 +1,56 @@
+name: E2E contra produccion (TA-025)
+
+# Ejecuta el inicio de sesion real (CP-API1, equivalente a CP-01 con la API)
+# contra el frontend desplegado. Se lanza a mano desde la pestana Actions.
+# Secrets necesarios: E2E_CORREO y E2E_CLAVE (docente de prueba en produccion).
+
+on:
+  workflow_dispatch:
+    inputs:
+      front_url:
+        description: URL del frontend desplegado (Vercel o Netlify)
+        required: true
+      proyecto:
+        description: Nombre de un proyecto que ese docente tiene registrado
+        required: true
+      casos:
+        description: Casos a ejecutar (expresion de --grep)
+        default: CP-API1
+
+permissions:
+  contents: read
+
+jobs:
+  e2e-produccion:
+    name: E2E contra produccion
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    env:
+      E2E_FRONT_URL: ${{ inputs.front_url }}
+      E2E_PROYECTO: ${{ inputs.proyecto }}
+      E2E_CORREO: ${{ secrets.E2E_CORREO }}
+      E2E_CLAVE: ${{ secrets.E2E_CLAVE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Ejecutar los casos contra produccion
+        run: npx playwright test -c playwright.api.config.js --grep "${{ inputs.casos }}"
+      - name: Guardar el reporte
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-e2e-produccion
+          path: |
+            frontend/playwright-report-api/
+            frontend/test-results-api/
+          if-no-files-found: warn
+          retention-days: 14

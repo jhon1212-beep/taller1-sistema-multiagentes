@@ -23,23 +23,15 @@ from sqlalchemy.orm import Session
 
 from app.compartido import modelos_orm as orm
 from app.modulos.evidencias.dominio import Evidencia, EvidenciaDrive, EvidenciaNotion
+from app.modulos.supervision.dominio import cutoff_day  # noqa: F401 (se reexporta)
 from app.modulos.supervision.grafo.estado import EstadoSupervision
 
 SOURCES = ("github", "notion", "drive")
+VALID_STATES = ("Sin empezar", "En curso", "Listo")  # CHECK estado_valido (TA-004)
 
 
-def cutoff_day(cutoff: str | date) -> date:
-    """Día calendario del corte en su propia zona horaria.
-
-    "2026-10-12T23:59:59-05:00" es el 12 de octubre en Lima aunque en UTC ya
-    sea 13; el docente piensa en el día local.
-    """
-    if isinstance(cutoff, date) and not isinstance(cutoff, datetime):
-        return cutoff
-    text = str(cutoff).strip()
-    if len(text) == 10:  # solo "YYYY-MM-DD"
-        return date.fromisoformat(text)
-    return datetime.fromisoformat(text.replace("Z", "+00:00")).date()
+def _valid_state(value: str | None) -> str | None:
+    return value if value in VALID_STATES else None
 
 
 def _to_datetime(value: str | None, fallback: datetime) -> datetime:
@@ -228,7 +220,7 @@ class SqlSupervisionRepository:
                 "autor": evidence.autor,
                 "fecha": _to_datetime(evidence.fecha, fallback),
                 "descripcion": evidence.descripcion or "",
-                "estado": getattr(evidence, "estado", None),
+                "estado": _valid_state(getattr(evidence, "estado", None)),
                 "fecha_limite": getattr(evidence, "fecha_limite", None) or None,
                 "tipo_archivo": getattr(evidence, "tipo_archivo", None),
             }
@@ -282,7 +274,9 @@ class SqlSupervisionRepository:
             autor=evidence.autor,
             fecha=_to_datetime(evidence.fecha, fallback),
             descripcion=evidence.descripcion or "",
-            estado=getattr(evidence, "estado", None),
+            # El CHECK de TA-004 solo admite 3 estados: otro valor se guarda vacío
+            # para no perder el corte completo por una sola tarea.
+            estado=_valid_state(getattr(evidence, "estado", None)),
             fecha_limite=getattr(evidence, "fecha_limite", None) or None,
             tipo_archivo=getattr(evidence, "tipo_archivo", None),
         )

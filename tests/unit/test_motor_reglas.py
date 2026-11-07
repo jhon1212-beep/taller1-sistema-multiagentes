@@ -27,7 +27,7 @@ def _demo(pid):
 
 def test_proyecto_1_indicadores():
     ind, _ = evaluar(_demo(1), CORTE)
-    assert ind == {"I1": 40.0, "I2": 30.0, "I3": 4, "I4": 0}  # 8/20, 6/20, tareas 9/12/15/16
+    assert ind == {"I1": 40.0, "I2": 60.0, "I3": 4, "I4": 0}  # 8/20, 12/20, tareas 9/12/15/16
 
 
 def test_proyecto_1_alertas():
@@ -39,7 +39,7 @@ def test_proyecto_1_alertas():
 
 def test_proyecto_2_indicadores():
     ind, _ = evaluar(_demo(2), CORTE)
-    assert ind == {"I1": 37.5, "I2": 25.0, "I3": 2, "I4": 7}  # 3/8, 2/8, tareas 4 y 7, último commit 05/10
+    assert ind == {"I1": 37.5, "I2": 62.5, "I3": 2, "I4": 7}  # 3/8, 5/8, tareas 4 y 7, último commit 05/10
 
 
 def test_proyecto_2_alertas():

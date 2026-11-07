@@ -10,7 +10,8 @@ Definiciones (las descripciones de las reglas son las de
 adaptadores/plantilla.py):
 
     I1  % de tareas en estado "Listo" sobre el total de tareas (None sin tareas)
-    I2  % de tareas "Sin empezar" sobre el total de tareas (None sin tareas)
+    I2  % de tareas pendientes ("Sin empezar" o "En curso") sobre el total
+        de tareas (None sin tareas), según el Product Backlog v6.0
     I3  número de tareas vencidas (las mismas que dispara R1)
     I4  días completos entre la última evidencia de cualquier fuente y el
         corte (None si no hay ninguna evidencia)
@@ -73,9 +74,13 @@ def calcular_indicadores(evidencias: Iterable[Evidencia], fecha_corte: str) -> I
 
     if tareas:
         listas = sum(1 for t in tareas if getattr(t, "estado", None) == "Listo")
-        sin_empezar = sum(1 for t in tareas if getattr(t, "estado", None) == "Sin empezar")
+        # Product Backlog v6.0: pendientes = "Sin empezar" o "En curso" (igual que
+        # motor_indicadores.py, que usa el grafo). Antes solo se contaba "Sin empezar".
+        pendientes = sum(
+            1 for t in tareas if getattr(t, "estado", None) in ("Sin empezar", "En curso")
+        )
         i1 = round(100 * listas / len(tareas), 2)
-        i2 = round(100 * sin_empezar / len(tareas), 2)
+        i2 = round(100 * pendientes / len(tareas), 2)
     else:
         i1 = i2 = None
 
