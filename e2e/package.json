@@ -3,11 +3,15 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "TA-047 · Validación E2E con parámetros (CP-17)",
+  "description": "TA-047 · Validación E2E con parámetros (CP-17) · HU-008 · consulta de validaciones",
   "scripts": {
-    "validar": "node validar-url.mjs"
+    "validar": "node validar-url.mjs",
+    "consulta": "playwright test"
   },
   "dependencies": {
     "playwright": "^1.63.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
   }
 }

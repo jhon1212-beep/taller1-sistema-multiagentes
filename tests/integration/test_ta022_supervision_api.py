@@ -128,6 +128,11 @@ def test_indicators_alerts_and_history(api):
     alerts = client.get(f"/proyectos/{project_id}/alertas", headers=headers).json()
     assert alerts["total"] == len(cargar_dataset()["alertas_esperadas"]["1"])
     assert all(a["explicacion"] for a in alerts["alertas"])
+    # RN-003: cada alerta trae su evidencia de origen (la usa el detalle de alerta del frontend).
+    for alert in alerts["alertas"]:
+        assert alert["evidencia"]["id_externo"] == alert["evidencia_ids"][0]
+        assert alert["evidencia"]["fuente"] == alert["fuente"]
+        assert alert["evidencia"]["descripcion"]
 
     history = client.get(f"/proyectos/{project_id}/historial", headers=headers).json()
     assert history["total_cortes"] == 2

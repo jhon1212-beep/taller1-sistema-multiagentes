@@ -88,8 +88,15 @@ class SupervisionService:
         state = self._pick(project_id, day)
         if state is None:
             return None
+        # Cada alerta lleva su evidencia de origen completa (RN-003) para que el
+        # detalle de alerta del frontend no tenga que buscarla en otra ruta.
+        by_id = {(e.fuente, e.id_externo): e.to_dict() for e in state.get("evidencias", [])}
+        alerts = [
+            {**alert, "evidencia": by_id.get((alert["fuente"], (alert["evidencia_ids"] or [None])[0]))}
+            for alert in state["alertas"]
+        ]
         return {"proyecto_id": project_id, "fecha_corte": state["fecha_corte"],
-                "total": len(state["alertas"]), "alertas": state["alertas"]}
+                "total": len(alerts), "alertas": alerts}
 
     def history(self, project_id: int) -> dict[str, Any]:
         cuts = self._repo.history(project_id)

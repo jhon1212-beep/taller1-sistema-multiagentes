@@ -8,6 +8,7 @@ el reemplazo de FuenteEvidenciaFalsa una vez conectado en main.py (TA-036).
 from __future__ import annotations
 
 from app.modulos.evidencias.adaptadores.github.cliente import GitHubClient, cargar_env
+from app.modulos.evidencias.referencias import repositorio_github
 from app.modulos.evidencias.dominio import Evidencia
 
 LIMITE_COMMITS = 20  # Criterio de aceptación de TA-006: hasta 20 commits
@@ -41,5 +42,5 @@ class FuenteEvidenciaGitHub:
     ) -> list[Evidencia]:
         env = cargar_env()
         cliente = GitHubClient(token=env.get("GITHUB_TOKEN"), org=env.get("GITHUB_ORG"))
-        crudos = cliente.commits_detallados(referencia, desde=desde, maximo=limite)
+        crudos = cliente.commits_detallados(repositorio_github(referencia), desde=desde, maximo=limite)
         return [_normalizar_commit(c, proyecto_id) for c in crudos]

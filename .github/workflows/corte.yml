@@ -1,0 +1,34 @@
+name: Corte diario
+
+on:
+  schedule:
+    - cron: "0 11 * * *"   # 06:00 hora de Lima (UTC-5)
+  workflow_dispatch:
+
+jobs:
+  corte:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN_LECTURA }}
+      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+      GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r backend/requirements.txt -r backend/requirements-agentes.txt
+      - name: Levantar la API y llamar a la consolidación
+        working-directory: backend
+        run: |
+          uvicorn app.main:app --port 8000 &
+          sleep 8
+          curl -sf -X POST "http://localhost:8000/RUTA-DE-REYES" | tee resultado.json
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          cat resultado.json >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY

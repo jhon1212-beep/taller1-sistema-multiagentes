@@ -7,6 +7,7 @@ de EN-002. `referencia` es el ID de la base de datos de tareas.
 from __future__ import annotations
 
 from app.modulos.evidencias.adaptadores.notion.cliente import NotionClient, cargar_config
+from app.modulos.evidencias.referencias import base_notion
 from app.modulos.evidencias.dominio import EvidenciaNotion
 
 LIMITE_TAREAS = 20  # Criterio de aceptación de TA-007: las 20 tareas demo
@@ -41,5 +42,5 @@ class FuenteEvidenciaNotion:
         desde: str | None = None,
     ) -> list[EvidenciaNotion]:
         cliente = NotionClient(token=cargar_config()["token"])
-        tareas = cliente.tareas(referencia, desde=desde, maximo=limite)
+        tareas = cliente.tareas(base_notion(referencia), desde=desde, maximo=limite)
         return [_normalizar_tarea(t, proyecto_id) for t in tareas]

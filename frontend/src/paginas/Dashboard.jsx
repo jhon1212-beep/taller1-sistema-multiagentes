@@ -1,25 +1,64 @@
-/** TA-020 · Dashboard consolidado: indicadores, estado de fuentes y alerta. */
+/**
+ * TA-020 · Dashboard consolidado: indicadores, estado de fuentes y alertas.
+ * HU-006 · Indicadores I1–I4 con la fórmula y la fecha de corte en una ayuda.
+ * HU-007 · Lista de alertas R1–R4, filtrable por regla.
+ */
 import { useState } from 'react'
-import { Aviso, Barra, Boton, Encabezado, Estadistica, Pill } from '../componentes/UI.jsx'
+import { API_ACTIVA } from '../api.js'
+import { Aviso, Ayuda, Barra, Boton, Encabezado, Estadistica, Pill } from '../componentes/UI.jsx'
+import ListaAlertas from '../componentes/ListaAlertas.jsx'
+import DashboardApi from './DashboardApi.jsx'
+import { FECHA_CORTE, SUPERVISION_DEMO } from '../datos/demo_supervision.js'
+import { INDICADORES, fechaHoraUtc, fechaUtc, formatoIndicador } from '../datos/indicadores.js'
 
-/** Fuentes de evidencia del prototipo, con lo que aporta cada una. */
+/** Fuentes de evidencia del prototipo y el nombre de lo que aporta cada una. */
 const FUENTES = [
-  { id: 'github', nombre: 'GitHub', aporta: 'Commits', cantidad: 20 },
-  { id: 'notion', nombre: 'Notion', aporta: 'Tareas', cantidad: 20 },
-  { id: 'drive', nombre: 'Google Drive', aporta: 'Documentos', cantidad: 10 },
+  { id: 'github', nombre: 'GitHub', aporta: 'commits' },
+  { id: 'notion', nombre: 'Notion', aporta: 'tareas' },
+  { id: 'drive', nombre: 'Google Drive', aporta: 'documentos' },
 ]
 
-export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimular, onAlerta }) {
+/** Ayuda de un indicador: fórmula, cifras del proyecto y fecha de corte. */
+function AyudaIndicador({ id, sup }) {
+  const { tareas_total: total, tareas_listas: listas, ultima_actividad: ultima } = sup.detalle
+  const cifras = {
+    I1: `${listas} de ${total} tareas están en «Listo».`,
+    I2: `${total - listas} de ${total} tareas están sin empezar o en curso.`,
+    I3: `${sup.indicadores.I3} tareas no están «Listo» y ya pasó su fecha límite.`,
+    I4: `Última actividad: ${fechaUtc(ultima)}.`,
+  }[id]
+  return (
+    <Ayuda id={`ayuda-${id}`} etiqueta={`${id} · ${INDICADORES[id].etiqueta}`}>
+      <b>{INDICADORES[id].formula}</b>
+      <br />
+      {cifras}
+      <br />
+      Fecha de corte: {fechaHoraUtc(FECHA_CORTE)}
+    </Ayuda>
+  )
+}
+
+/**
+ * TA-040 · Con API activa el Dashboard lee los cortes reales del servidor;
+ * sin ella se mantiene la demostración (la usan las pruebas E2E de HU-006/HU-007).
+ */
+export default function Dashboard(props) {
+  return API_ACTIVA ? <DashboardApi {...props} /> : <DashboardDemo {...props} />
+}
+
+function DashboardDemo({ proyecto, notionFallo, ultimaCorrida, onSimular, onAlerta }) {
   const [traza, setTraza] = useState(null)
+  const sup = SUPERVISION_DEMO[proyecto.id]
 
   function simular() {
     const fecha = new Date().toLocaleString('es-PE')
     onSimular(fecha)
+    const n = sup?.detalle.evidencias ?? { github: 0, notion: 0, drive: 0 }
     setTraza([
       'Supervisor: ejecución simulada iniciada',
-      'GitHub: 20 commits · OK',
-      `Notion: ${notionFallo ? '401/403 simulado · fallo controlado' : '20 tareas · OK'}`,
-      'Drive: 10 documentos · OK',
+      `GitHub: ${n.github} commits · OK`,
+      `Notion: ${notionFallo ? '401/403 simulado · fallo controlado' : `${n.notion} tareas · OK`}`,
+      `Drive: ${n.drive} documentos · OK`,
       'Analista: salida ilustrativa disponible',
       `Supervisor: consolidado ${notionFallo ? 'parcial' : 'completo'} registrado en Historial`,
     ])
@@ -36,21 +75,58 @@ export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimu
         accion={<Boton onClick={simular}>Simular supervisión</Boton>}
       />
 
-      <Aviso>
-        Fecha de corte de ejemplo: 06/10/2026. Valores ilustrativos; no acreditan el motor I1–I4
-        ni las reglas R1–R4.
-      </Aviso>
+      {sup ? (
+        <Aviso>
+          Fecha de corte: <b>{fechaHoraUtc(FECHA_CORTE)}</b>. Indicadores y alertas calculados por el
+          motor de reglas (TA-019) sobre el dataset de demostración (TA-017).
+        </Aviso>
+      ) : (
+        <Aviso>
+          Este proyecto no tiene evidencia de demostración: los indicadores y las alertas se
+          calcularán cuando se conecten sus fuentes.
+        </Aviso>
+      )}
+
+      {sup && notionFallo && (
+        <Aviso tipo="error">
+          Notion no está disponible: los indicadores I1, I2 e I3 se calculan con la última lectura.
+        </Aviso>
+      )}
 
       <section aria-labelledby="dash-indicadores">
         <h2 id="dash-indicadores" className="seccion">Indicadores del proyecto</h2>
-        <div className="grid cuatro">
-          <Estadistica etiqueta="Tareas completadas" valor="40 %" detalle="8 de 20 tareas · Notion">
-            <Barra porcentaje={40} />
-          </Estadistica>
-          <Estadistica etiqueta="Tareas pendientes" valor="12" detalle="Incluye tareas en progreso · Notion" />
-          <Estadistica etiqueta="Commits registrados" valor="20" detalle="Datos de demostración · GitHub" />
-          <Estadistica etiqueta="Documentos" valor="10" detalle="Datos de demostración · Google Drive" />
-        </div>
+        {sup ? (
+          <div className="grid cuatro">
+            <Estadistica
+              etiqueta={`${INDICADORES.I1.etiqueta} (I1)`}
+              valor={formatoIndicador('I1', sup.indicadores.I1)}
+              detalle={`${sup.detalle.tareas_listas} de ${sup.detalle.tareas_total} tareas · Notion`}
+              ayuda={<AyudaIndicador id="I1" sup={sup} />}
+            >
+              <Barra porcentaje={sup.indicadores.I1} />
+            </Estadistica>
+            <Estadistica
+              etiqueta={`${INDICADORES.I2.etiqueta} (I2)`}
+              valor={formatoIndicador('I2', sup.indicadores.I2)}
+              detalle="Sin empezar y en curso · Notion"
+              ayuda={<AyudaIndicador id="I2" sup={sup} />}
+            />
+            <Estadistica
+              etiqueta={`${INDICADORES.I3.etiqueta} (I3)`}
+              valor={formatoIndicador('I3', sup.indicadores.I3)}
+              detalle="Fecha límite anterior al corte · Notion"
+              ayuda={<AyudaIndicador id="I3" sup={sup} />}
+            />
+            <Estadistica
+              etiqueta={`${INDICADORES.I4.etiqueta} (I4)`}
+              valor={formatoIndicador('I4', sup.indicadores.I4)}
+              detalle={`Última actividad: ${fechaUtc(sup.detalle.ultima_actividad)}`}
+              ayuda={<AyudaIndicador id="I4" sup={sup} />}
+            />
+          </div>
+        ) : (
+          <p className="muted">Sin datos que mostrar.</p>
+        )}
       </section>
 
       <section aria-labelledby="dash-fuentes">
@@ -60,6 +136,7 @@ export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimu
         <div className="grid tres">
           {FUENTES.map(f => {
             const caida = f.id === 'notion' && notionFallo
+            const cantidad = sup?.detalle.evidencias[f.id] ?? 0
             return (
               <article className="card fuente-card" key={f.id}>
                 <div className="fuente-cab">
@@ -67,7 +144,7 @@ export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimu
                   <Pill tono={caida ? 'bad' : 'ok'}>{caida ? 'Integración fallida' : 'Disponible'}</Pill>
                 </div>
                 <p className="muted small">
-                  {caida ? 'Sin datos: error de autorización simulado' : `${f.cantidad} ${f.aporta.toLowerCase()} leídos`}
+                  {caida ? 'Sin datos: error de autorización simulado' : `${cantidad} ${f.aporta} leídos`}
                 </p>
                 <small className="muted">Última lectura: {ultimaCorrida}</small>
               </article>
@@ -77,18 +154,16 @@ export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimu
       </section>
 
       <section aria-labelledby="dash-alerta">
-        <h2 id="dash-alerta" className="seccion">Alertas</h2>
-        <article className="card">
-          <Pill tono="warn">Requiere revisión docente</Pill>
-          <h3 style={{ marginTop: 'var(--sp-4)' }}>Entregable con fecha vencida</h3>
-          <p>
-            La tarea «Documentar pruebas» continúa pendiente después de la fecha de entrega del
-            ejemplo.
-          </p>
-          <Boton variante="secundario" onClick={onAlerta}>
-            Ver detalle y evidencia
-          </Boton>
-        </article>
+        <h2 id="dash-alerta" className="seccion">
+          Alertas{sup ? ` · ${sup.alertas.length}` : ''}
+        </h2>
+        {sup && sup.alertas.length > 0 ? (
+          <ListaAlertas alertas={sup.alertas} onAlerta={onAlerta} />
+        ) : (
+          <article className="card">
+            <p>No hay alertas para este proyecto en la fecha de corte.</p>
+          </article>
+        )}
       </section>
 
       <article className="card">

@@ -1,12 +1,32 @@
 /** HU-001 · Inicio de sesión del docente. */
 import { useState } from 'react'
 import { Aviso, Boton, Campo, Pill } from '../componentes/UI.jsx'
+import { API_ACTIVA, establecerToken, iniciarSesion } from '../api.js'
 import { CLAVE_DEMO, CUENTAS } from '../datos/demo.js'
 
 export default function Login({ bloqueado = false, onEntrar }) {
   const [correo, setCorreo] = useState('')
   const [clave, setClave] = useState('')
   const [error, setError] = useState('')
+  const [enviando, setEnviando] = useState(false)
+
+  /** TA-039 · Con API activa la sesión la crea el servidor (POST /auth/login). */
+  async function entrarConApi() {
+    setEnviando(true)
+    try {
+      const sesion = await iniciarSesion(correo.trim(), clave)
+      establecerToken(sesion.token)
+      setError('')
+      onEntrar(sesion.docente.correo)
+    } catch (e) {
+      setError(
+        e.estado === 401
+          ? 'Correo o contraseña incorrectos.'
+          : 'No se pudo conectar con el servidor. Inténtalo de nuevo en unos minutos.',
+      )
+      setEnviando(false)
+    }
+  }
 
   function enviar(e) {
     e.preventDefault()
@@ -16,6 +36,10 @@ export default function Login({ bloqueado = false, onEntrar }) {
     // es confuso y manda a revisar donde no toca.
     if (!correo.trim() || !clave) {
       setError('Completa el correo y la contraseña para continuar.')
+      return
+    }
+    if (API_ACTIVA) {
+      entrarConApi()
       return
     }
     if (CUENTAS.includes(correo.trim()) && clave === CLAVE_DEMO) {
@@ -74,20 +98,24 @@ export default function Login({ bloqueado = false, onEntrar }) {
             onChange={e => setClave(e.target.value)}
           />
           {error && <Aviso tipo="error">{error}</Aviso>}
-          <Boton type="submit">Ingresar</Boton>
+          <Boton type="submit" disabled={enviando}>
+            {enviando ? 'Ingresando…' : 'Ingresar'}
+          </Boton>
         </form>
 
-        <div className="login-foot">
-          <strong>Recorrido de demostración</strong>
-          <br />
-          Correo: docente1@demo.test
-          <br />
-          Contraseña: {CLAVE_DEMO}
-          <br />
-          <span className="muted">
-            Cuentas ficticias docente1 a docente5. No ingreses credenciales reales.
-          </span>
-        </div>
+        {!API_ACTIVA && (
+          <div className="login-foot">
+            <strong>Recorrido de demostración</strong>
+            <br />
+            Correo: docente1@demo.test
+            <br />
+            Contraseña: {CLAVE_DEMO}
+            <br />
+            <span className="muted">
+              Cuentas ficticias docente1 a docente5. No ingreses credenciales reales.
+            </span>
+          </div>
+        )}
       </div>
     </div>
   )

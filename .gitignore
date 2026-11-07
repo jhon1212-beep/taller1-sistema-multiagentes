@@ -44,3 +44,10 @@ test-results/
 
 # Estado local de la CLI de Netlify
 .netlify/
+
+# HU-008: reporte HTML de Playwright (se regenera)
+e2e/playwright-report/
+
+# TA-040 · resultados de las pruebas E2E contra la API real
+frontend/test-results-api/
+frontend/playwright-report-api/

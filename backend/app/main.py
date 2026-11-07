@@ -8,8 +8,25 @@ from app.modulos.evidencias.rutas import router as evidencias_router
 from app.modulos.proyectos.rutas import router as proyectos_router
 from app.modulos.evidencias.rutas import router as router_evidencias
 from app.modulos.evidencias.rutas_tareas import router as tareas_router
+from app.modulos.validacion.rutas import consulta_router as validacion_consulta_router
 from app.modulos.validacion.rutas import router as validacion_router
 from app.modulos.supervision.rutas import router as supervision_router
+from app.modulos.evidencias.adaptadores.compuesta import FuenteEvidenciaCompuesta
+from app.modulos.evidencias.adaptadores.falso import FuenteEvidenciaFalsa
+from app.modulos.evidencias.adaptadores.github.adaptador import FuenteEvidenciaGitHub
+from app.modulos.evidencias.adaptadores.notion.adaptador import FuenteEvidenciaNotion
+from app.modulos.evidencias.adaptadores.drive.adaptador import FuenteEvidenciaDrive
+
+
+def crear_fuente_evidencias(referencias):
+    if os.getenv("FUENTE_EVIDENCIAS", "real") == "falsa":
+        return FuenteEvidenciaFalsa()
+    return FuenteEvidenciaCompuesta({
+        referencias["github"]: FuenteEvidenciaGitHub(),
+        referencias["notion"]: FuenteEvidenciaNotion(),
+        referencias["drive"]: FuenteEvidenciaDrive(),
+    })
+
 
 app = FastAPI(
     title="Agentes inteligentes para el seguimiento de proyectos de software",
@@ -40,6 +57,7 @@ app.include_router(tareas_router)
 app.include_router(evidencias_router)
 app.include_router(router_evidencias)
 app.include_router(validacion_router)
+app.include_router(validacion_consulta_router)
 
 # TA-022: consolidación, indicadores, alertas e historial.
 app.include_router(supervision_router)
