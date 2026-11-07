@@ -19,7 +19,7 @@ import SistemaVisual from './paginas/SistemaVisual.jsx'
 import Alerta from './paginas/Alerta.jsx'
 import { Aviso, Boton, Encabezado } from './componentes/UI.jsx'
 import {
-  API_ACTIVA, cerrarSesionApi, crearProyecto, desactivarProyecto, editarProyecto,
+  API_ACTIVA, alExpirarSesion, cerrarSesionApi, crearProyecto, desactivarProyecto, editarProyecto,
   establecerToken, obtenerProyectos,
 } from './api.js'
 import { PROYECTOS_INICIALES } from './datos/demo.js'
@@ -52,6 +52,7 @@ export default function App() {
   const [ultimaCorrida, setUltimaCorrida] = useState('Sin ejecución en esta sesión')
   const [aviso, setAviso] = useState('')
   const [alertaActual, setAlertaActual] = useState(null)
+  const [pestanaDetalle, setPestanaDetalle] = useState('resumen')
 
   // El hash manda: cualquier cambio (navegación, atrás/adelante, enlace
   // directo) entra por aquí.
@@ -82,6 +83,17 @@ export default function App() {
     const id = setTimeout(() => setAviso(''), 4000)
     return () => clearTimeout(id)
   }, [aviso])
+
+  // TA-040 · Si el token vence (o el servidor cambió de JWT_SECRET), se vuelve al login.
+  useEffect(() => {
+    alExpirarSesion(() => {
+      establecerToken(null)
+      setProyectos([])
+      setSesion(null)
+      setAviso('Tu sesión venció. Vuelve a iniciar sesión.')
+      window.location.hash = 'login'
+    })
+  }, [])
 
   const proyecto = proyectos.find(p => p.id === actual) ?? proyectos[0]
   const requiereSesion = RUTAS_PRIVADAS.includes(ruta)
@@ -179,8 +191,8 @@ export default function App() {
 
   const bandaDemo = API_ACTIVA ? (
     <div className="demo">
-      <strong>Conectado al servidor.</strong> Sesión, proyectos y evidencias son reales; los
-      indicadores y las alertas siguen siendo de demostración hasta TA-040.
+      <strong>Conectado al servidor.</strong> Sesión, proyectos, evidencias, indicadores, alertas,
+      historial y validación se leen de la API y de PostgreSQL.
     </div>
   ) : (
     <div className="demo">
@@ -225,7 +237,7 @@ export default function App() {
     ) : (
       <Proyectos
         proyectos={proyectos}
-        onAbrir={id => { setActual(id); setAlertaActual(null); navegar('detalle') }}
+        onAbrir={id => { setActual(id); setAlertaActual(null); setPestanaDetalle('resumen'); navegar('detalle') }}
         onEditar={id => { setActual(id); navegar('editar') }}
         onNuevo={() => navegar('nuevo')}
         onAlternar={alternarProyecto}
@@ -241,6 +253,8 @@ export default function App() {
     ),
     detalle: (
       <Detalle
+        key={`${proyecto?.id}-${pestanaDetalle}`}
+        pestanaInicial={pestanaDetalle}
         proyecto={proyecto}
         notionFallo={notionFallo}
         onNotionFallo={setNotionFallo}
@@ -255,10 +269,12 @@ export default function App() {
         ultimaCorrida={ultimaCorrida}
         onSimular={registrarCorrida}
         onAlerta={a => { setAlertaActual(a); navegar('alerta') }}
+        onValidacion={() => { setPestanaDetalle('validacion'); navegar('detalle') }}
+        onHistorial={() => navegar('historial')}
       />
     ),
     alerta: <Alerta proyecto={proyecto} alerta={alertaActual} onVolver={() => navegar('dashboard')} />,
-    historial: <Historial corridas={corridas} onDashboard={() => navegar('dashboard')} />,
+    historial: <Historial proyecto={proyecto} corridas={corridas} onDashboard={() => navegar('dashboard')} />,
     sistema: <SistemaVisual onEjemplo={() => setAviso('Ejemplo del componente botón')} />,
   }
 
@@ -266,6 +282,19 @@ export default function App() {
     <>
       {bandaDemo}
       <Shell ruta={SECCION[ruta] ?? 'proyectos'} email={sesion} onNavegar={navegar} onSalir={salir}>
+        {API_ACTIVA && proyectos.length > 1 && ['dashboard', 'historial'].includes(ruta) && (
+          <label className="campo-corte selector-proyecto no-imprimir">
+            Proyecto
+            <select
+              value={proyecto?.id ?? ''}
+              onChange={e => { setActual(Number(e.target.value)); setAlertaActual(null) }}
+            >
+              {proyectos.map(p => (
+                <option key={p.id} value={p.id}>{p.nombre}{p.activo ? '' : ' (desactivado)'}</option>
+              ))}
+            </select>
+          </label>
+        )}
         {!proyecto && ['editar', 'detalle', 'dashboard', 'alerta'].includes(ruta)
           ? sinProyecto
           : vistas[ruta] ?? vistas.proyectos}

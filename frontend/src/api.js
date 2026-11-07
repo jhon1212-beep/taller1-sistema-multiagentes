@@ -17,6 +17,11 @@ export class ApiError extends Error {
 let tokenSesion = null
 export const establecerToken = token => { tokenSesion = token }
 
+// TA-040 · Si el servidor responde 401 con una sesión abierta (token vencido o
+// servidor reiniciado con otro JWT_SECRET), App cierra la sesión y avisa.
+let alVencerSesion = () => {}
+export const alExpirarSesion = funcion => { alVencerSesion = funcion }
+
 async function solicitar(ruta, { metodo = 'GET', cuerpo, parametros, senal } = {}) {
   const url = new URL(`${BASE_URL}${ruta}`)
   Object.entries(parametros ?? {}).forEach(([clave, valor]) => {
@@ -41,7 +46,11 @@ async function solicitar(ruta, { metodo = 'GET', cuerpo, parametros, senal } = {
   }
 
   if (!respuesta.ok) {
-    const detalle = await respuesta.text().catch(() => '')
+    const texto = await respuesta.text().catch(() => '')
+    // FastAPI responde { "detail": "..." }; se guarda ese mensaje para mostrarlo tal cual.
+    let detalle = texto
+    try { detalle = JSON.parse(texto).detail ?? texto } catch { /* no era JSON */ }
+    if (respuesta.status === 401 && tokenSesion && ruta !== '/auth/login') alVencerSesion()
     throw new ApiError(`Error ${respuesta.status} en ${ruta}`, respuesta.status, detalle)
   }
   return respuesta.status === 204 ? null : respuesta.json()
@@ -90,3 +99,50 @@ export const obtenerCommits = (proyectoId, opciones) =>
   api.get(`/proyectos/${proyectoId}/commits`, opciones)
 export const obtenerDocumentos = (proyectoId, opciones) =>
   api.get(`/proyectos/${proyectoId}/documentos`, opciones)
+
+// -- Sprint 2 · Supervisión (TA-022, módulo supervision) -------------------------
+
+/**
+ * TA-022 · Ejecuta los agentes (Supervisor → GitHub + Notion + Drive → motor → explicación)
+ * y guarda el corte. fechaCorte en ISO 8601 con zona; sin ella, fin del día en Lima.
+ * { proyecto_id, fecha_corte, fuentes: { github: { estado, error, evidencias } … },
+ *   total_evidencias, indicadores, alertas, guardado, duracion_grafo_ms, duracion_servicio_ms }
+ */
+export const ejecutarConsolidacion = (proyectoId, fechaCorte, opciones) =>
+  api.post(`/proyectos/${proyectoId}/consolidacion`,
+    fechaCorte ? { fecha_corte: fechaCorte } : {}, opciones)
+
+/**
+ * HU-006 · I1–I4 de un corte (AAAA-MM-DD; sin fecha, el más reciente). 404 si no hay corte.
+ * { proyecto_id, fecha_corte, indicadores: { I1, I2, I3, I4 }, estado_fuentes }
+ */
+export const obtenerIndicadores = (proyectoId, fechaCorte, opciones) =>
+  api.get(`/proyectos/${proyectoId}/indicadores`,
+    { ...opciones, parametros: { fecha_corte: fechaCorte } })
+
+/**
+ * HU-007 · Alertas R1–R4 explicadas de un corte, cada una con su evidencia de origen.
+ * { proyecto_id, fecha_corte, total, alertas: [{ regla, fuente, evidencia_ids,
+ *   explicacion, origen_explicacion, evidencia }] }
+ */
+export const obtenerAlertas = (proyectoId, fechaCorte, opciones) =>
+  api.get(`/proyectos/${proyectoId}/alertas`,
+    { ...opciones, parametros: { fecha_corte: fechaCorte } })
+
+/**
+ * HU-009 · Todos los cortes del proyecto, del más antiguo al más reciente.
+ * { proyecto_id, total_cortes, cortes: [{ fecha_corte, indicadores, total_alertas,
+ *   alertas_por_regla, validacion }] }
+ */
+export const obtenerHistorial = (proyectoId, opciones) =>
+  api.get(`/proyectos/${proyectoId}/historial`, opciones)
+
+// -- Sprint 2 · Validación funcional (TA-021, HU-008) ----------------------------
+
+/** TA-021 · Dispara CP-17 (GitHub Actions) y espera su resultado. ValidacionOut (201). */
+export const ejecutarValidacion = (proyectoId, opciones) =>
+  api.post('/validaciones', { proyecto_id: proyectoId }, opciones)
+
+/** HU-008 · Historial de CP-17: { proyecto_id, resumen: { PASS, FAIL }, items: [...] } */
+export const obtenerValidaciones = (proyectoId, opciones) =>
+  api.get(`/proyectos/${proyectoId}/validaciones`, { ...opciones, parametros: { limite: 10 } })

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 from app.modulos.evidencias.adaptadores.drive.cliente import DriveClient
+from app.modulos.evidencias.referencias import carpeta_drive
 from app.modulos.evidencias.dominio import EvidenciaDrive
 
 def _normalizar_archivo(archivo: dict, proyecto_id: int) -> EvidenciaDrive:
@@ -28,5 +29,5 @@ class FuenteEvidenciaDrive:
         desde: str | None = None,
     ) -> list[EvidenciaDrive]:
         cliente = DriveClient(os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON"))
-        crudos = cliente.archivos_de_carpeta(referencia, maximo=limite)
+        crudos = cliente.archivos_de_carpeta(carpeta_drive(referencia), maximo=limite)
         return [_normalizar_archivo(a, proyecto_id) for a in crudos]

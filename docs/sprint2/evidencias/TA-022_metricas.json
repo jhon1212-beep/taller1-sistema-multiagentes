@@ -1,0 +1,310 @@
+{
+  "generado_en": "2026-11-04T04:38:33+00:00",
+  "exactitud": {
+    "proyecto_1": {
+      "alertas_esperadas": 6,
+      "alertas_obtenidas": 6,
+      "precision_pct": 100.0,
+      "exhaustividad_pct": 100.0,
+      "indicadores_coinciden": 3,
+      "indicadores_total": 4,
+      "diferencias": {
+        "I2": {
+          "obtenido": 60.0,
+          "json_ta017": 30.0
+        }
+      }
+    },
+    "proyecto_2": {
+      "alertas_esperadas": 7,
+      "alertas_obtenidas": 7,
+      "precision_pct": 100.0,
+      "exhaustividad_pct": 100.0,
+      "indicadores_coinciden": 3,
+      "indicadores_total": 4,
+      "diferencias": {
+        "I2": {
+          "obtenido": 62.5,
+          "json_ta017": 25.0
+        }
+      }
+    }
+  },
+  "tiempos_grafo": {
+    "grafo_sin_latencia_ms": {
+      "n": 5,
+      "media": 32.8,
+      "desv_est": 7.7,
+      "min": 23.1,
+      "p50": 30.9,
+      "p95": 44.3,
+      "max": 44.3
+    },
+    "latencia_simulada_por_fuente_ms": 300.0,
+    "lectura_paralela_ms": {
+      "n": 5,
+      "media": 349.5,
+      "desv_est": 9.7,
+      "min": 341.6,
+      "p50": 344.5,
+      "p95": 363.5,
+      "max": 363.5
+    },
+    "lectura_secuencial_ms": {
+      "n": 5,
+      "media": 907.6,
+      "desv_est": 8.1,
+      "min": 902.1,
+      "p50": 905.2,
+      "p95": 921.7,
+      "max": 921.7
+    },
+    "aceleracion_paralelo": 2.6,
+    "nota_comparabilidad": "Comparación exploratoria: paralelo incluye todo el grafo; secuencial solo mide consultas a fuentes. No prueba speedup exacto."
+  },
+  "resiliencia": {
+    "escenarios": {
+      "github": {
+        "corte_completado": true,
+        "fuentes_ok": 2,
+        "fuente_marcada_fallo": true,
+        "alertas_falsas_de_la_fuente_caida": 0
+      },
+      "notion": {
+        "corte_completado": true,
+        "fuentes_ok": 2,
+        "fuente_marcada_fallo": true,
+        "alertas_falsas_de_la_fuente_caida": 0
+      },
+      "drive": {
+        "corte_completado": true,
+        "fuentes_ok": 2,
+        "fuente_marcada_fallo": true,
+        "alertas_falsas_de_la_fuente_caida": 0
+      }
+    },
+    "cortes_completados": "3/3"
+  },
+  "privacidad": {
+    "prompts_revisados": 13,
+    "nombres_reales_en_prompts": 0
+  },
+  "costo": {
+    "costo_servicios_soles": 0,
+    "llamadas_gemini_por_corte_hoy": {
+      "1": 6,
+      "2": 7
+    },
+    "limite_diario_gratuito_gemini": 20,
+    "nota": "Estimación del documento base, no consumo real ni cuota verificada. Este ensayo utiliza template y no invoca Gemini."
+  },
+  "api": {
+    "entorno": "local (TestClient + PostgreSQL 16)",
+    "peticiones_por_ruta": 10,
+    "rutas": {
+      "POST /consolidacion": {
+        "n": 10,
+        "media": 1368.4,
+        "desv_est": 212.4,
+        "min": 1239.0,
+        "p50": 1277.5,
+        "p95": 1945.8,
+        "max": 1945.8,
+        "errores": 0,
+        "codigos_http": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "muestras_ms": [
+          1286.9,
+          1268.0,
+          1266.9,
+          1945.8,
+          1431.3,
+          1239.0,
+          1264.9,
+          1252.1,
+          1347.9,
+          1381.3
+        ],
+        "cumple_menos_de_2s": true,
+        "desglose_post": [
+          {
+            "http_ms": 1286.9,
+            "grafo_ms": 31.3,
+            "sql_ms": 733.1,
+            "servicio_ms": 783.6
+          },
+          {
+            "http_ms": 1268.0,
+            "grafo_ms": 29.5,
+            "sql_ms": 738.5,
+            "servicio_ms": 786.2
+          },
+          {
+            "http_ms": 1266.9,
+            "grafo_ms": 19.1,
+            "sql_ms": 730.8,
+            "servicio_ms": 779.1
+          },
+          {
+            "http_ms": 1945.8,
+            "grafo_ms": 30.0,
+            "sql_ms": 1090.8,
+            "servicio_ms": 1136.9
+          },
+          {
+            "http_ms": 1431.3,
+            "grafo_ms": 15.3,
+            "sql_ms": 893.4,
+            "servicio_ms": 922.6
+          },
+          {
+            "http_ms": 1239.0,
+            "grafo_ms": 18.9,
+            "sql_ms": 714.4,
+            "servicio_ms": 756.1
+          },
+          {
+            "http_ms": 1264.9,
+            "grafo_ms": 38.5,
+            "sql_ms": 720.3,
+            "servicio_ms": 772.5
+          },
+          {
+            "http_ms": 1252.1,
+            "grafo_ms": 18.8,
+            "sql_ms": 723.7,
+            "servicio_ms": 755.2
+          },
+          {
+            "http_ms": 1347.9,
+            "grafo_ms": 19.0,
+            "sql_ms": 811.9,
+            "servicio_ms": 841.4
+          },
+          {
+            "http_ms": 1381.3,
+            "grafo_ms": 29.3,
+            "sql_ms": 717.5,
+            "servicio_ms": 774.7
+          }
+        ]
+      },
+      "GET /indicadores": {
+        "n": 10,
+        "media": 1084.7,
+        "desv_est": 1093.3,
+        "min": 662.2,
+        "p50": 716.4,
+        "p95": 4181.8,
+        "max": 4181.8,
+        "errores": 0,
+        "codigos_http": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "muestras_ms": [
+          763.6,
+          673.2,
+          673.0,
+          669.3,
+          662.2,
+          671.4,
+          4181.8,
+          1012.0,
+          781.3,
+          759.5
+        ],
+        "cumple_menos_de_2s": false
+      },
+      "GET /alertas": {
+        "n": 10,
+        "media": 784.4,
+        "desv_est": 20.0,
+        "min": 757.3,
+        "p50": 778.9,
+        "p95": 816.9,
+        "max": 816.9,
+        "errores": 0,
+        "codigos_http": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "muestras_ms": [
+          806.5,
+          806.4,
+          816.9,
+          778.2,
+          767.6,
+          766.1,
+          757.3,
+          779.6,
+          791.8,
+          773.6
+        ],
+        "cumple_menos_de_2s": true
+      },
+      "GET /historial": {
+        "n": 10,
+        "media": 1156.9,
+        "desv_est": 11.5,
+        "min": 1145.2,
+        "p50": 1153.5,
+        "p95": 1184.0,
+        "max": 1184.0,
+        "errores": 0,
+        "codigos_http": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ],
+        "muestras_ms": [
+          1163.8,
+          1149.8,
+          1184.0,
+          1164.3,
+          1153.1,
+          1151.0,
+          1145.2,
+          1153.8,
+          1156.8,
+          1147.0
+        ],
+        "cumple_menos_de_2s": true
+      }
+    },
+    "cortes_en_historial": 2
+  }
+}

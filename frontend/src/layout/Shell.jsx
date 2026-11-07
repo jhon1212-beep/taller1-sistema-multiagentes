@@ -43,7 +43,7 @@ export default function Shell({ ruta, email, onNavegar, onSalir, children }) {
         {children}
         <div className="pie">
           {API_ACTIVA
-            ? 'Conectado al servidor · Indicadores y alertas con datos de demostración hasta TA-040.'
+            ? 'Conectado al servidor · Datos reales de la API y de PostgreSQL.'
             : 'Maqueta con datos de demostración · Las acciones representan el flujo propuesto.'}
         </div>
       </main>

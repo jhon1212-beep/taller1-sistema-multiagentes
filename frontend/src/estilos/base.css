@@ -383,3 +383,53 @@ h2.seccion {
   font-size: var(--fs-sm);
   overflow-wrap: anywhere;
 }
+
+/* --- TA-040 · Controles de la fecha de corte ------------- */
+.acciones-corte {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+.campo-corte {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+.campo-corte input,
+.campo-corte select {
+  width: auto;
+  margin-top: var(--sp-1);
+}
+.barra-corte {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- HU-008 · Validación funcional (CP-17) --------------- */
+.validacion-resultado {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-4);
+}
+.validacion-resultado .pill { font-size: var(--fs-base); }
+
+/* --- HU-009 · Reporte imprimible ------------------------- */
+.solo-imprimir { display: none; }
+@media print {
+  .demo, aside, .toast, .pie, .no-imprimir { display: none !important; }
+  .shell { display: block; }
+  main { padding: 0; }
+  .solo-imprimir { display: block; }
+  .card { box-shadow: none; border: 1px solid var(--line); break-inside: avoid; }
+  body { background: var(--panel); }
+}
+.selector-proyecto { max-width: 360px; margin-bottom: var(--sp-4); }

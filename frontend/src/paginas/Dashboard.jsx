@@ -4,9 +4,12 @@
  * HU-007 · Lista de alertas R1–R4, filtrable por regla.
  */
 import { useState } from 'react'
+import { API_ACTIVA } from '../api.js'
 import { Aviso, Ayuda, Barra, Boton, Encabezado, Estadistica, Pill } from '../componentes/UI.jsx'
+import ListaAlertas from '../componentes/ListaAlertas.jsx'
+import DashboardApi from './DashboardApi.jsx'
 import { FECHA_CORTE, SUPERVISION_DEMO } from '../datos/demo_supervision.js'
-import { INDICADORES, REGLAS, fechaHoraUtc, fechaUtc, formatoIndicador } from '../datos/indicadores.js'
+import { INDICADORES, fechaHoraUtc, fechaUtc, formatoIndicador } from '../datos/indicadores.js'
 
 /** Fuentes de evidencia del prototipo y el nombre de lo que aporta cada una. */
 const FUENTES = [
@@ -35,62 +38,15 @@ function AyudaIndicador({ id, sup }) {
   )
 }
 
-function ListaAlertas({ alertas, onAlerta }) {
-  const [filtro, setFiltro] = useState('todas')
-  const reglas = Object.keys(REGLAS)
-  const visibles = filtro === 'todas' ? alertas : alertas.filter(a => a.regla === filtro)
-
-  return (
-    <>
-      <div className="filtros" role="group" aria-label="Filtrar alertas por regla">
-        {['todas', ...reglas].map(r => {
-          const cantidad = r === 'todas' ? alertas.length : alertas.filter(a => a.regla === r).length
-          return (
-            <button
-              type="button"
-              key={r}
-              className="filtro"
-              aria-pressed={filtro === r}
-              onClick={() => setFiltro(r)}
-            >
-              {r === 'todas' ? 'Todas' : r} ({cantidad})
-            </button>
-          )
-        })}
-      </div>
-
-      {visibles.length === 0 && <p className="muted">No hay alertas con este filtro.</p>}
-
-      <ul className="lista-alertas" aria-label="Alertas del proyecto">
-        {visibles.map(a => {
-          const regla = REGLAS[a.regla]
-          return (
-            <li className="card alerta-item" key={a.id}>
-              <div className="alerta-cab">
-                <Pill>{a.regla}</Pill>
-                <h3>{regla.titulo}</h3>
-                <Pill>{regla.fuente}</Pill>
-              </div>
-              <p>
-                <b>{a.evidencia.titulo}</b>
-                {a.evidencia.responsable ? ` · ${a.evidencia.responsable}` : ''}
-              </p>
-              <Boton
-                variante="secundario"
-                aria-label={`Ver detalle y evidencia: ${a.regla} ${regla.titulo}, ${a.evidencia.titulo}`}
-                onClick={() => onAlerta(a)}
-              >
-                Ver detalle y evidencia
-              </Boton>
-            </li>
-          )
-        })}
-      </ul>
-    </>
-  )
+/**
+ * TA-040 · Con API activa el Dashboard lee los cortes reales del servidor;
+ * sin ella se mantiene la demostración (la usan las pruebas E2E de HU-006/HU-007).
+ */
+export default function Dashboard(props) {
+  return API_ACTIVA ? <DashboardApi {...props} /> : <DashboardDemo {...props} />
 }
 
-export default function Dashboard({ proyecto, notionFallo, ultimaCorrida, onSimular, onAlerta }) {
+function DashboardDemo({ proyecto, notionFallo, ultimaCorrida, onSimular, onAlerta }) {
   const [traza, setTraza] = useState(null)
   const sup = SUPERVISION_DEMO[proyecto.id]
 

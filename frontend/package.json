@@ -11,7 +11,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:api": "playwright test -c playwright.api.config.js"
   },
   "dependencies": {
     "react": "^19.3.0",

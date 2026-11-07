@@ -1,9 +1,13 @@
 /** HU-003 / HU-004 · Detalle del proyecto con sus fuentes de evidencia. */
 import { useEffect, useState } from 'react'
-import { API_ACTIVA, obtenerCommits, obtenerDocumentos, obtenerTareas } from '../api.js'
+import {
+  API_ACTIVA, ejecutarValidacion, obtenerCommits, obtenerDocumentos, obtenerTareas, obtenerValidaciones,
+} from '../api.js'
 import { Aviso, Boton, Encabezado, Estadistica, Pill, Tabla, Tabs, fechaCorta } from '../componentes/UI.jsx'
 import { COMMITS, DOCUMENTOS, TAREAS, tonoEstado } from '../datos/demo.js'
 import { fechaCorta16 } from '../datos/proyectos_api.js'
+import { fechaHoraUtc } from '../datos/indicadores.js'
+import { mensajeError } from '../datos/supervision_api.js'
 
 const PESTANAS = {
   resumen: 'Resumen',
@@ -168,6 +172,111 @@ function DocumentosApi({ proyecto }) {
   )
 }
 
+/**
+ * HU-008 / TA-044 · Validación funcional CP-17 leída de la API.
+ * Muestra el último resultado y el historial; «Ejecutar validación» dispara el
+ * workflow e2e.yml (TA-021) y muestra «en ejecución» hasta recibir el resultado.
+ */
+function ValidacionApi({ proyecto }) {
+  const [datos, setDatos] = useState(null)
+  const [error, setError] = useState('')
+  const [ejecutando, setEjecutando] = useState(false)
+
+  useEffect(() => {
+    const control = new AbortController()
+    setDatos(null)
+    setError('')
+    obtenerValidaciones(proyecto.id, { senal: control.signal })
+      .then(setDatos)
+      .catch(e => { if (e.name !== 'AbortError') setError(mensajeError(e, 'No se pudo leer la validación')) })
+    return () => control.abort()
+  }, [proyecto.id])
+
+  async function ejecutar() {
+    setEjecutando(true)
+    setError('')
+    try {
+      const nueva = await ejecutarValidacion(proyecto.id)
+      setDatos(d => ({
+        ...d,
+        resumen: { ...d?.resumen, [nueva.resultado]: (d?.resumen?.[nueva.resultado] ?? 0) + 1 },
+        items: [nueva, ...(d?.items ?? [])],
+      }))
+    } catch (e) {
+      setError(mensajeError(e, 'No se pudo ejecutar la validación'))
+    } finally {
+      setEjecutando(false)
+    }
+  }
+
+  const ultima = datos?.items?.[0]
+
+  return (
+    <article className="card">
+      <div className="head">
+        <div>
+          <div className="eyebrow">HU-008 · CP-17</div>
+          <h2>Verificación de la aplicación</h2>
+          <p className="muted">
+            <b>URL registrada:</b> {proyecto.url} · <b>Elemento esperado:</b> <code>{proyecto.selector}</code>
+          </p>
+        </div>
+        <Boton onClick={ejecutar} disabled={ejecutando || !proyecto.activo}>
+          {ejecutando ? 'En ejecución…' : 'Ejecutar validación'}
+        </Boton>
+      </div>
+
+      <Aviso>
+        CP-17 comprueba que la URL pública responda (HTTP 200) y que el elemento configurado esté
+        presente. No evalúa la calidad global del código del equipo.
+      </Aviso>
+
+      {ejecutando && (
+        <p role="status" className="validacion-resultado">
+          <Pill tono="warn">En ejecución</Pill>
+          El workflow de GitHub Actions está verificando la URL; puede tardar uno o dos minutos.
+        </p>
+      )}
+
+      {error && <Aviso tipo="error">{error}</Aviso>}
+      {!datos && !error && <p className="muted">Cargando validaciones…</p>}
+
+      {datos && !ultima && !ejecutando && (
+        <p className="muted">Todavía no hay validaciones de este proyecto.</p>
+      )}
+
+      {ultima && (
+        <>
+          <h3>Último resultado</h3>
+          <div className="validacion-resultado">
+            <Pill tono={ultima.resultado === 'PASS' ? 'ok' : 'bad'}>{ultima.resultado}</Pill>
+            <span>{fechaHoraUtc(ultima.ejecutada_en)}</span>
+            <span>Duración: {(ultima.duracion_ms / 1000).toFixed(1)} s</span>
+            {ultima.captura_url && (
+              <a href={ultima.captura_url} target="_blank" rel="noopener noreferrer">Ver captura del fallo</a>
+            )}
+          </div>
+          <p className="small muted">
+            Total registrado: {datos.resumen?.PASS ?? 0} PASS · {datos.resumen?.FAIL ?? 0} FAIL.
+          </p>
+          <Tabla
+            columnas={['Fecha', 'Resultado', 'Duración', 'Ejecución de Actions', 'Captura']}
+            filas={datos.items.map(v => [
+              fechaHoraUtc(v.ejecutada_en),
+              <Pill key={v.id} tono={v.resultado === 'PASS' ? 'ok' : 'bad'}>{v.resultado}</Pill>,
+              `${(v.duracion_ms / 1000).toFixed(1)} s`,
+              String(v.run_id_actions),
+              v.captura_url
+                ? <a key={`c${v.id}`} href={v.captura_url} target="_blank" rel="noopener noreferrer">Abrir</a>
+                : '—',
+            ])}
+          />
+        </>
+      )}
+    </article>
+  )
+}
+
 /** Cifras del Resumen leídas de la API (los datos de ejemplo solo valen para la demostración). */
 function ResumenApi({ proyecto }) {
   const commits = useConsulta(obtenerCommits, proyecto.id).datos
@@ -187,8 +296,8 @@ function ResumenApi({ proyecto }) {
   )
 }
 
-export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver, onDashboard }) {
-  const [pestana, setPestana] = useState('resumen')
+export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver, onDashboard, pestanaInicial = 'resumen' }) {
+  const [pestana, setPestana] = useState(pestanaInicial)
 
   return (
     <>
@@ -351,7 +460,9 @@ export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver
         </article>
       )}
 
-      {pestana === 'validacion' && (
+      {pestana === 'validacion' && API_ACTIVA && <ValidacionApi proyecto={proyecto} />}
+
+      {pestana === 'validacion' && !API_ACTIVA && (
         <article className="card">
           <h2>Verificación de la aplicación</h2>
           <p>

@@ -16,10 +16,10 @@ export function Pill({ tono = 'neutro', children }) {
 }
 
 /** Botón. variante: 'primario' | 'secundario' | 'peligro' */
-export function Boton({ variante = 'primario', children, ...props }) {
+export function Boton({ variante = 'primario', className, children, ...props }) {
   const mapa = { primario: '', secundario: 'btn-sec', peligro: 'btn-danger' }
   return (
-    <button className={clases('btn', mapa[variante])} {...props}>
+    <button className={clases('btn', mapa[variante], className)} {...props}>
       {children}
     </button>
   )

@@ -3,7 +3,7 @@
  *
  * Las fórmulas son las del motor de TA-019 (backend/app/modulos/supervision/
  * motor_indicadores.py). Los valores no se calculan aquí: llegan ya calculados
- * (hoy de demo_supervision.js, desde TA-040 de la API).
+ * (demo_supervision.js sin API; con API, de las rutas de TA-022 desde TA-040).
  */
 
 export const INDICADORES = {
