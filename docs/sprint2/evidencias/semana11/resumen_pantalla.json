@@ -1,0 +1,26 @@
+{
+  "proyecto1": 1,
+  "proyecto2": 2,
+  "pantalla": {
+    "I1": "40 %",
+    "I2": "60 %",
+    "I3": "4",
+    "I4": "0"
+  },
+  "resultadoPass": "PASS",
+  "resultadoFail": "FAIL",
+  "ocultosEnImpresion": [
+    "none",
+    "none",
+    "none",
+    "none"
+  ],
+  "visiblesSoloImpresion": [
+    "block"
+  ],
+  "textoEmision": "Reporte emitido el 10/11/2026, 11:19:33 a. m. (hora de Lima). Cada corte corresponde al fin del día indicado.",
+  "reglas": [
+    "R1",
+    "R2"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "proyecto_id": 1,
+  "fecha_corte": "2026-10-12",
+  "indicadores": {
+    "I1": 40,
+    "I2": 60,
+    "I3": 4,
+    "I4": 0
+  },
+  "estado_fuentes": {
+    "github": "ok",
+    "notion": "ok",
+    "drive": "ok"
+  }
+}

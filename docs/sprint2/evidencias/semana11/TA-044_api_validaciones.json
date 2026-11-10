@@ -1,0 +1,38 @@
+{
+  "proyecto1": {
+    "proyecto_id": 1,
+    "resumen": {
+      "PASS": 1,
+      "FAIL": 0
+    },
+    "items": [
+      {
+        "id": 1,
+        "proyecto_id": 1,
+        "resultado": "PASS",
+        "duracion_ms": 1200,
+        "ejecutada_en": "2026-11-10T16:19:33.591211+00:00",
+        "run_id_actions": 1000000001,
+        "captura_url": null
+      }
+    ]
+  },
+  "proyecto2": {
+    "proyecto_id": 2,
+    "resumen": {
+      "PASS": 0,
+      "FAIL": 1
+    },
+    "items": [
+      {
+        "id": 2,
+        "proyecto_id": 2,
+        "resultado": "FAIL",
+        "duracion_ms": 1200,
+        "ejecutada_en": "2026-11-10T16:19:34.546078+00:00",
+        "run_id_actions": 1000000001,
+        "captura_url": "https://ejemplo.invalid/artefactos/1000000001/captura.png"
+      }
+    ]
+  }
+}

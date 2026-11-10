@@ -1,0 +1,121 @@
+{
+  "proyecto_id": 1,
+  "fecha_corte": "2026-10-12",
+  "total": 6,
+  "alertas": [
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p1-12"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: tarea-p1-12.",
+      "origen_explicacion": "plantilla",
+      "evidencia": {
+        "fuente": "notion",
+        "id_externo": "tarea-p1-12",
+        "autor": "Diego Paz",
+        "fecha": "2026-10-10T15:00:00+00:00",
+        "descripcion": "Registro de proyecto · 12",
+        "proyecto_id": 1,
+        "estado": "En curso",
+        "fecha_limite": "2026-10-09"
+      }
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p1-09"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: tarea-p1-09.",
+      "origen_explicacion": "plantilla",
+      "evidencia": {
+        "fuente": "notion",
+        "id_externo": "tarea-p1-09",
+        "autor": "Ana Torres",
+        "fecha": "2026-10-02T15:00:00+00:00",
+        "descripcion": "Consulta de tareas · 9",
+        "proyecto_id": 1,
+        "estado": "En curso",
+        "fecha_limite": "2026-10-07"
+      }
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p1-16"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: tarea-p1-16.",
+      "origen_explicacion": "plantilla",
+      "evidencia": {
+        "fuente": "notion",
+        "id_externo": "tarea-p1-16",
+        "autor": "Diego Paz",
+        "fecha": "2026-09-29T15:00:00+00:00",
+        "descripcion": "Inicio de sesión docente · 16",
+        "proyecto_id": 1,
+        "estado": "Sin empezar",
+        "fecha_limite": "2026-10-10"
+      }
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p1-15"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: tarea-p1-15.",
+      "origen_explicacion": "plantilla",
+      "evidencia": {
+        "fuente": "notion",
+        "id_externo": "tarea-p1-15",
+        "autor": "Marta Ruiz",
+        "fecha": "2026-09-28T15:00:00+00:00",
+        "descripcion": "Pruebas de integración · 15",
+        "proyecto_id": 1,
+        "estado": "Sin empezar",
+        "fecha_limite": "2026-10-08"
+      }
+    },
+    {
+      "regla": "R2",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p1-10"
+      ],
+      "explicacion": "Regla R2: Tarea en curso sin ediciones durante mas de 7 dias. Fuente: notion. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: tarea-p1-10.",
+      "origen_explicacion": "plantilla",
+      "evidencia": {
+        "fuente": "notion",
+        "id_externo": "tarea-p1-10",
+        "autor": "Luis Vega",
+        "fecha": "2026-10-03T15:00:00+00:00",
+        "descripcion": "Pruebas de integración · 10",
+        "proyecto_id": 1,
+        "estado": "En curso",
+        "fecha_limite": "2026-10-20"
+      }
+    },
+    {
+      "regla": "R2",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "tarea-p1-09"
+      ],
+      "explicacion": "Regla R2: Tarea en curso sin ediciones durante mas de 7 dias. Fuente: notion. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: tarea-p1-09.",
+      "origen_explicacion": "plantilla",
+      "evidencia": {
+        "fuente": "notion",
+        "id_externo": "tarea-p1-09",
+        "autor": "Ana Torres",
+        "fecha": "2026-10-02T15:00:00+00:00",
+        "descripcion": "Consulta de tareas · 9",
+        "proyecto_id": 1,
+        "estado": "En curso",
+        "fecha_limite": "2026-10-07"
+      }
+    }
+  ]
+}
