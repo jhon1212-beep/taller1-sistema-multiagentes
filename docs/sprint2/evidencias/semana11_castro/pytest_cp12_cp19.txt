@@ -1,0 +1,19 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\COMPUTER\AppData\Local\Temp\claude\5f0112192d772ad7\f8ef57d7-a48d-41d7-afe5-a4bb399d3f8d\scratchpad\venv\Scripts\python.exe
+rootdir: D:\taller1-sistema-multiagentes-main
+configfile: pytest.ini
+plugins: anyio-4.16.0, langsmith-0.14.17, platformdirs-4.14.5
+collecting ... collected 8 items
+
+tests/integration/test_cp12_cp19.py::test_cp12_r1_tarea_vencida_con_su_evidencia PASSED [ 12%]
+tests/integration/test_cp12_cp19.py::test_cp13_r2_tarea_en_curso_sin_ediciones_con_su_evidencia PASSED [ 25%]
+tests/integration/test_cp12_cp19.py::test_cp14_r3_repositorio_sin_commits_con_su_evidencia PASSED [ 37%]
+tests/integration/test_cp12_cp19.py::test_cp15_r4_carpeta_de_drive_sin_cambios_con_su_evidencia PASSED [ 50%]
+tests/integration/test_cp12_cp19.py::test_cp16_el_prompt_de_gemini_no_lleva_nombres_reales PASSED [ 62%]
+tests/integration/test_cp12_cp19.py::test_cp17_validacion_funcional_pass_y_fail_registradas_y_consultables PASSED [ 75%]
+tests/integration/test_cp12_cp19.py::test_cp18_una_fuente_caida_no_dispara_alertas_de_inactividad PASSED [ 87%]
+tests/integration/test_cp12_cp19.py::test_cp19_error_429_de_gemini_usa_la_plantilla_y_lo_marca_en_cada_alerta PASSED [100%]
+
+- generated xml file: D:\taller1-sistema-multiagentes-main\docs\sprint2\evidencias\semana11_castro\cp12-cp19.xml -
+============================== 8 passed in 0.72s ==============================
+

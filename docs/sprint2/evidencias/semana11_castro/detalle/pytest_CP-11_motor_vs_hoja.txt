@@ -1,0 +1,17 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\COMPUTER\AppData\Local\Temp\claude\5f0112192d772ad7\f8ef57d7-a48d-41d7-afe5-a4bb399d3f8d\scratchpad\venv\Scripts\python.exe
+rootdir: D:\taller1-sistema-multiagentes-main
+configfile: pytest.ini
+plugins: anyio-4.16.0, langsmith-0.14.17, platformdirs-4.14.5
+collecting ... collected 7 items
+
+tests/unit/test_motor_indicadores.py::test_cp11_coincide_con_la_hoja PASSED [ 14%]
+tests/unit/test_motor_indicadores.py::test_la_fecha_de_corte_es_configurable PASSED [ 28%]
+tests/unit/test_motor_indicadores.py::test_sin_tareas_i1_i2_son_none PASSED [ 42%]
+tests/unit/test_motor_indicadores.py::test_limite_el_mismo_dia_del_corte_no_esta_vencida PASSED [ 57%]
+tests/unit/test_motor_indicadores.py::test_sin_actividad_genera_r3_y_r4_sin_evidencia_asociada PASSED [ 71%]
+tests/unit/test_motor_indicadores.py::test_fecha_de_corte_invalida PASSED [ 85%]
+tests/unit/test_motor_indicadores.py::test_acepta_evidencias_dataclass PASSED [100%]
+
+============================== 7 passed in 0.13s ==============================
+

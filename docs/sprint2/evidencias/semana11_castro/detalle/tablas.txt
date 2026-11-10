@@ -1,0 +1,13 @@
+s2_pruebas=# \dt
+
+ public | alembic_version    | tabla
+ public | alerta             | tabla
+ public | docente            | tabla
+ public | evidencia          | tabla
+ public | fuente             | tabla
+ public | indicador          | tabla
+ public | integrante         | tabla
+ public | proyecto           | tabla
+ public | validacion         | tabla
+
+(9 filas)
