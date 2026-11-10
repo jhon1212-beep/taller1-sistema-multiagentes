@@ -1,0 +1,8 @@
+{
+  "R1": {
+    "explicacion": "Regla R1\nNotion\nExplicación: plantilla\n¿Por qué se generó?\n\nTarea no completada con fecha limite anterior al corte.\n\nRegla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: tarea-p1-12.\n\nLa alerta describe una situación del proyecto a partir de la evidencia; no asigna notas ni juzga a ningún estudiante."
+  },
+  "R2": {
+    "explicacion": "Regla R2\nNotion\nExplicación: plantilla\n¿Por qué se generó?\n\nTarea en curso sin ediciones durante mas de 7 dias.\n\nRegla R2: Tarea en curso sin ediciones durante mas de 7 dias. Fuente: notion. Fecha de corte: 2026-10-12T23:59:59-05:00. Referencias de evidencia: tarea-p1-10.\n\nLa alerta describe una situación del proyecto a partir de la evidencia; no asigna notas ni juzga a ningún estudiante."
+  }
+}

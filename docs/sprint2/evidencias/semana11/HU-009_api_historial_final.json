@@ -1,0 +1,54 @@
+{
+  "proyecto_id": 1,
+  "total_cortes": 3,
+  "cortes": [
+    {
+      "fecha_corte": "2026-10-06",
+      "indicadores": {
+        "I1": 50,
+        "I2": 50,
+        "I3": 0,
+        "I4": 0
+      },
+      "total_alertas": 0,
+      "alertas_por_regla": {},
+      "validacion": null
+    },
+    {
+      "fecha_corte": "2026-10-12",
+      "indicadores": {
+        "I1": 40,
+        "I2": 60,
+        "I3": 4,
+        "I4": 0
+      },
+      "total_alertas": 6,
+      "alertas_por_regla": {
+        "R1": 4,
+        "R2": 2
+      },
+      "validacion": null
+    },
+    {
+      "fecha_corte": "2026-11-10",
+      "indicadores": {
+        "I1": 40,
+        "I2": 60,
+        "I3": 12,
+        "I4": 29
+      },
+      "total_alertas": 20,
+      "alertas_por_regla": {
+        "R1": 12,
+        "R2": 6,
+        "R3": 1,
+        "R4": 1
+      },
+      "validacion": {
+        "resultado": "PASS",
+        "duracion_ms": 1200,
+        "ejecutada_en": "2026-11-10T16:19:33.591211+00:00"
+      }
+    }
+  ]
+}

@@ -298,7 +298,9 @@ th, td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--line);
   main { padding: var(--sp-5); }
 }
 @media (max-width: 700px) {
-  .shell { grid-template-columns: 1fr; }
+  /* TA-024 · minmax(0, 1fr): sin esto, una tabla ancha estira la columna y desborda la página. */
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  main { min-width: 0; }
   aside { padding: var(--sp-4); }
   nav { display: flex; flex-wrap: wrap; }
   .perfil { margin: 0; padding-top: var(--sp-2); }
