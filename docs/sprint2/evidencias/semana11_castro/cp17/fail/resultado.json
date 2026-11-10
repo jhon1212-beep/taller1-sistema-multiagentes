@@ -1,0 +1,9 @@
+{
+  "proyecto_id": 1,
+  "url_publica": "http://127.0.0.1:5173",
+  "elemento_verificar": "#elemento-que-no-existe",
+  "resultado": "FAIL",
+  "duracion_ms": 12404,
+  "ejecutada_en": "2026-11-10T16:51:30.790Z",
+  "detalle": "locator.waitFor: Timeout 10000ms exceeded."
+}

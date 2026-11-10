@@ -1,0 +1,21 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\COMPUTER\AppData\Local\Temp\claude\5f0112192d772ad7\f8ef57d7-a48d-41d7-afe5-a4bb399d3f8d\scratchpad\venv\Scripts\python.exe
+rootdir: D:\taller1-sistema-multiagentes-main
+configfile: pytest.ini
+plugins: anyio-4.16.0, langsmith-0.14.17, platformdirs-4.14.5
+collecting ... collected 11 items
+
+tests/integration/test_ta018_cutoff_history.py::test_cutoff_day_uses_local_calendar_day PASSED [  9%]
+tests/integration/test_ta018_cutoff_history.py::test_one_cutoff_per_project_and_day_is_persisted PASSED [ 18%]
+tests/integration/test_ta018_cutoff_history.py::test_saved_values_match_the_ta017_spreadsheet PASSED [ 27%]
+tests/integration/test_ta018_cutoff_history.py::test_history_returns_two_cutoffs_in_order PASSED [ 36%]
+tests/integration/test_ta018_cutoff_history.py::test_unknown_cutoff_returns_none PASSED [ 45%]
+tests/integration/test_ta022_supervision_api.py::test_routes_require_token PASSED [ 54%]
+tests/integration/test_ta022_supervision_api.py::test_other_teacher_cannot_see_the_project PASSED [ 63%]
+tests/integration/test_ta022_supervision_api.py::test_consolidation_runs_the_graph_and_saves_the_cut PASSED [ 72%]
+tests/integration/test_ta022_supervision_api.py::test_indicators_alerts_and_history PASSED [ 81%]
+tests/integration/test_ta022_supervision_api.py::test_errors_are_clear PASSED [ 90%]
+tests/integration/test_ta022_supervision_api.py::test_each_route_answers_in_less_than_two_seconds PASSED [100%]
+
+============================= 11 passed in 4.91s ==============================
+

@@ -1,0 +1,30 @@
+﻿..s..s...s...s....s...s...............................ssssssssss.s...... [ 22%]
+.....................................................................F.. [ 44%]
+.........ss............................................................. [ 66%]
+........................................................................ [ 89%]
+...................................                                      [100%]
+================================== FAILURES ===================================
+_____________ test_credenciales_excluidas_y_plantilla_versionable _____________
+
+    def test_credenciales_excluidas_y_plantilla_versionable():
+        paths = [
+            '.env', '.env.local', '.env.production', 'backend/.env',
+            'service-account-drive.json', 'config/service-account-demo.json',
+            'client_secret_demo.json', 'credentials.json', 'token.json',
+            'private.pem', 'private.key',
+        ]
+        result = subprocess.run(
+            ['git', 'check-ignore', '--no-index', '-z', '--stdin'],
+            input='\0'.join(paths) + '\0', cwd=ROOT, text=True, capture_output=True,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: fatal: not a git repository (or any of the parent directories): .git
+E         
+E       assert 128 == 0
+E        +  where 128 = CompletedProcess(args=['git', 'check-ignore', '--no-index', '-z', '--stdin'], returncode=128, stdout='', stderr='fatal: not a git repository (or any of the parent directories): .git\n').returncode
+
+tests\test_seguridad_secretos.py:19: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_seguridad_secretos.py::test_credenciales_excluidas_y_plantilla_versionable
+1 failed, 303 passed, 19 skipped in 7.04s
+

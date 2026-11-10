@@ -1,0 +1,19 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\COMPUTER\AppData\Local\Temp\claude\5f0112192d772ad7\f8ef57d7-a48d-41d7-afe5-a4bb399d3f8d\scratchpad\venv\Scripts\python.exe
+rootdir: D:\taller1-sistema-multiagentes-main
+configfile: pytest.ini
+plugins: anyio-4.16.0, langsmith-0.14.17, platformdirs-4.14.5
+collecting ... collected 9 items
+
+tests/integration/test_explainable_alerts.py::test_graph_adds_evaluate_and_explain_after_consolidate PASSED [ 11%]
+tests/integration/test_explainable_alerts.py::test_cp12_to_cp15_one_alert_per_rule_with_its_evidence[R1-notion-expected_ids0] PASSED [ 22%]
+tests/integration/test_explainable_alerts.py::test_cp12_to_cp15_one_alert_per_rule_with_its_evidence[R2-notion-expected_ids1] PASSED [ 33%]
+tests/integration/test_explainable_alerts.py::test_cp12_to_cp15_one_alert_per_rule_with_its_evidence[R3-github-expected_ids2] PASSED [ 44%]
+tests/integration/test_explainable_alerts.py::test_cp12_to_cp15_one_alert_per_rule_with_its_evidence[R4-drive-expected_ids3] PASSED [ 55%]
+tests/integration/test_explainable_alerts.py::test_indicators_are_no_longer_none PASSED [ 66%]
+tests/integration/test_explainable_alerts.py::test_no_real_name_is_sent_to_gemini PASSED [ 77%]
+tests/integration/test_explainable_alerts.py::test_cp19_gemini_429_falls_back_to_template_and_marks_every_alert PASSED [ 88%]
+tests/integration/test_explainable_alerts.py::test_failed_source_does_not_trigger_inactivity_alerts PASSED [100%]
+
+============================== 9 passed in 0.78s ==============================
+

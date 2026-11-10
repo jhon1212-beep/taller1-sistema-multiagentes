@@ -1,0 +1,9 @@
+{
+  "proyecto_id": 1,
+  "url_publica": "http://127.0.0.1:5173",
+  "elemento_verificar": "h1",
+  "resultado": "PASS",
+  "duracion_ms": 5503,
+  "ejecutada_en": "2026-11-10T16:51:17.632Z",
+  "detalle": "Elemento «h1» visible en http://127.0.0.1:5173"
+}

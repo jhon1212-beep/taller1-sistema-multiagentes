@@ -1,0 +1,92 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\COMPUTER\AppData\Local\Temp\claude\5f0112192d772ad7\f8ef57d7-a48d-41d7-afe5-a4bb399d3f8d\scratchpad\venv\Scripts\python.exe
+rootdir: D:\taller1-sistema-multiagentes-main
+configfile: pytest.ini
+plugins: anyio-4.16.0, langsmith-0.14.17, platformdirs-4.14.5
+collecting ... collected 73 items
+
+tests/integration/test_cp01_cp08.py::test_cp01_commits_con_autor_y_fecha_por_proyecto PASSED [  1%]
+tests/integration/test_cp01_cp08.py::test_cp01_los_dos_equipos_no_se_mezclan PASSED [  2%]
+tests/integration/test_cp01_cp08.py::test_cp01_prs_e_issues_en_el_dataset SKIPPED [  4%]
+tests/integration/test_cp01_cp08.py::test_cp02_limite_de_github_degrada_solo_esa_fuente PASSED [  5%]
+tests/integration/test_cp01_cp08.py::test_cp02_otro_equipo_sigue_procesandose_tras_el_limite PASSED [  6%]
+tests/integration/test_cp01_cp08.py::test_cp02_reintento_programado SKIPPED [  8%]
+tests/integration/test_cp01_cp08.py::test_cp03_campos_faltantes_se_identifican_sin_omitir_la_tarea PASSED [  9%]
+tests/integration/test_cp01_cp08.py::test_cp03_dataset_demo_conserva_responsable_estado_y_fecha PASSED [ 10%]
+tests/integration/test_cp01_cp08.py::test_cp04_drive_entrega_documentos_con_fecha_y_tipo PASSED [ 12%]
+tests/integration/test_cp01_cp08.py::test_cp04_entregables_existentes_faltantes_y_desactualizados SKIPPED [ 13%]
+tests/integration/test_cp01_cp08.py::test_cp05_consolidado_por_equipo_y_semana_sin_mezclar PASSED [ 15%]
+tests/integration/test_cp01_cp08.py::test_cp05_primera_semana_contiene_las_tres_fuentes PASSED [ 16%]
+tests/integration/test_cp01_cp08.py::test_cp05_repetir_la_sincronizacion_no_duplica PASSED [ 17%]
+tests/integration/test_cp01_cp08.py::test_cp05_api_consolidada_por_equipo_y_semana SKIPPED [ 19%]
+tests/integration/test_cp01_cp08.py::test_cp06_avance_pasa_de_25_a_50_por_ciento PASSED [ 20%]
+tests/integration/test_cp01_cp08.py::test_cp06_dataset_demo_coincide_con_los_valores_esperados PASSED [ 21%]
+tests/integration/test_cp01_cp08.py::test_cp07_reglas_con_evidencia_de_origen_en_los_dos_escenarios PASSED [ 23%]
+tests/integration/test_cp01_cp08.py::test_cp07_umbrales_en_el_limite_son_exclusivos PASSED [ 24%]
+tests/integration/test_cp01_cp08.py::test_cp07_semaforo_de_riesgo SKIPPED [ 26%]
+tests/integration/test_cp01_cp08.py::test_cp08_un_docente_no_accede_a_proyectos_de_otro PASSED [ 27%]
+tests/integration/test_cp01_cp08.py::test_cp08_api_rechaza_el_acceso_cruzado_con_404 PASSED [ 28%]
+tests/integration/test_cp01_cp08.py::test_cp08_sin_sesion_valida_no_hay_docente PASSED [ 30%]
+tests/integration/test_cp01_cp08.py::test_cp08_estudiante_solo_consulta_su_equipo_y_anonimo_es_rechazado SKIPPED [ 31%]
+tests/integration/test_cp12_cp19.py::test_cp12_r1_tarea_vencida_con_su_evidencia PASSED [ 32%]
+tests/integration/test_cp12_cp19.py::test_cp13_r2_tarea_en_curso_sin_ediciones_con_su_evidencia PASSED [ 34%]
+tests/integration/test_cp12_cp19.py::test_cp14_r3_repositorio_sin_commits_con_su_evidencia PASSED [ 35%]
+tests/integration/test_cp12_cp19.py::test_cp15_r4_carpeta_de_drive_sin_cambios_con_su_evidencia PASSED [ 36%]
+tests/integration/test_cp12_cp19.py::test_cp16_el_prompt_de_gemini_no_lleva_nombres_reales PASSED [ 38%]
+tests/integration/test_cp12_cp19.py::test_cp17_validacion_funcional_pass_y_fail_registradas_y_consultables PASSED [ 39%]
+tests/integration/test_cp12_cp19.py::test_cp18_una_fuente_caida_no_dispara_alertas_de_inactividad PASSED [ 41%]
+tests/integration/test_cp12_cp19.py::test_cp19_error_429_de_gemini_usa_la_plantilla_y_lo_marca_en_cada_alerta PASSED [ 42%]
+tests/integration/test_explainable_alerts.py::test_graph_adds_evaluate_and_explain_after_consolidate PASSED [ 43%]
+tests/integration/test_explainable_alerts.py::test_cp12_to_cp15_one_alert_per_rule_with_its_evidence[R1-notion-expected_ids0] PASSED [ 45%]
+tests/integration/test_explainable_alerts.py::test_cp12_to_cp15_one_alert_per_rule_with_its_evidence[R2-notion-expected_ids1] PASSED [ 46%]
+tests/integration/test_explainable_alerts.py::test_cp12_to_cp15_one_alert_per_rule_with_its_evidence[R3-github-expected_ids2] PASSED [ 47%]
+tests/integration/test_explainable_alerts.py::test_cp12_to_cp15_one_alert_per_rule_with_its_evidence[R4-drive-expected_ids3] PASSED [ 49%]
+tests/integration/test_explainable_alerts.py::test_indicators_are_no_longer_none PASSED [ 50%]
+tests/integration/test_explainable_alerts.py::test_no_real_name_is_sent_to_gemini PASSED [ 52%]
+tests/integration/test_explainable_alerts.py::test_cp19_gemini_429_falls_back_to_template_and_marks_every_alert PASSED [ 53%]
+tests/integration/test_explainable_alerts.py::test_failed_source_does_not_trigger_inactivity_alerts PASSED [ 54%]
+tests/integration/test_grafo_supervision.py::test_grafo_consolida_las_tres_fuentes_sin_duplicados PASSED [ 56%]
+tests/integration/test_grafo_supervision.py::test_grafo_consulta_cada_referencia_con_el_proyecto PASSED [ 57%]
+tests/integration/test_grafo_supervision.py::test_grafo_no_mezcla_evidencias_de_otro_proyecto PASSED [ 58%]
+tests/integration/test_grafo_supervision.py::test_grafo_continua_si_una_fuente_falla PASSED [ 60%]
+tests/integration/test_grafo_supervision.py::test_grafo_rechaza_referencias_incompletas PASSED [ 61%]
+tests/integration/test_supervisor_graph.py::test_graph_follows_supervisor_pattern PASSED [ 63%]
+tests/integration/test_supervisor_graph.py::test_cp10_invokes_three_agents_and_returns_one_consolidated_ok PASSED [ 64%]
+tests/integration/test_supervisor_graph.py::test_cutoff_discards_later_evidence_and_counts_it PASSED [ 65%]
+tests/integration/test_supervisor_graph.py::test_failed_source_is_marked_and_others_continue PASSED [ 67%]
+tests/integration/test_supervisor_graph.py::test_source_without_adapter_or_reference_fails_without_being_called PASSED [ 68%]
+tests/integration/test_supervisor_graph.py::test_no_source_remains_pending_even_without_any_adapter PASSED [ 69%]
+tests/integration/test_supervisor_graph.py::test_consolidate_removes_duplicates_and_other_projects PASSED [ 71%]
+tests/integration/test_supervisor_graph.py::test_invalid_cutoff_stops_before_calling_sources PASSED [ 72%]
+tests/integration/test_ta018_cutoff_history.py::test_cutoff_day_uses_local_calendar_day PASSED [ 73%]
+tests/integration/test_ta018_cutoff_history.py::test_one_cutoff_per_project_and_day_is_persisted PASSED [ 75%]
+tests/integration/test_ta018_cutoff_history.py::test_saved_values_match_the_ta017_spreadsheet PASSED [ 76%]
+tests/integration/test_ta018_cutoff_history.py::test_history_returns_two_cutoffs_in_order PASSED [ 78%]
+tests/integration/test_ta018_cutoff_history.py::test_unknown_cutoff_returns_none PASSED [ 79%]
+tests/integration/test_ta022_supervision_api.py::test_routes_require_token PASSED [ 80%]
+tests/integration/test_ta022_supervision_api.py::test_other_teacher_cannot_see_the_project PASSED [ 82%]
+tests/integration/test_ta022_supervision_api.py::test_consolidation_runs_the_graph_and_saves_the_cut PASSED [ 83%]
+tests/integration/test_ta022_supervision_api.py::test_indicators_alerts_and_history PASSED [ 84%]
+tests/integration/test_ta022_supervision_api.py::test_errors_are_clear PASSED [ 86%]
+tests/integration/test_ta022_supervision_api.py::test_each_route_answers_in_less_than_two_seconds PASSED [ 87%]
+tests/integration/test_ta037_cp10_real_sources.py::test_cp10_check_with_demo_dataset PASSED [ 89%]
+tests/integration/test_ta037_cp10_real_sources.py::test_cp10_with_real_sources SKIPPED [ 90%]
+tests/unit/test_motor_indicadores.py::test_cp11_coincide_con_la_hoja PASSED [ 91%]
+tests/unit/test_motor_indicadores.py::test_la_fecha_de_corte_es_configurable PASSED [ 93%]
+tests/unit/test_motor_indicadores.py::test_sin_tareas_i1_i2_son_none PASSED [ 94%]
+tests/unit/test_motor_indicadores.py::test_limite_el_mismo_dia_del_corte_no_esta_vencida PASSED [ 95%]
+tests/unit/test_motor_indicadores.py::test_sin_actividad_genera_r3_y_r4_sin_evidencia_asociada PASSED [ 97%]
+tests/unit/test_motor_indicadores.py::test_fecha_de_corte_invalida PASSED [ 98%]
+tests/unit/test_motor_indicadores.py::test_acepta_evidencias_dataclass PASSED [100%]
+
+- generated xml file: D:\taller1-sistema-multiagentes-main\docs\sprint2\evidencias\semana11_castro\integracion_sprint2.xml -
+=========================== short test summary info ===========================
+SKIPPED [1] tests\integration\test_cp01_cp08.py:94: BLOQUEADO (parcial): el dataset solo contiene commits; PR e issues se verifican contra la API real (docs/sprint1/pruebas-github-por-caso).
+SKIPPED [1] tests\integration\test_cp01_cp08.py:126: BLOQUEADO (parcial): el código registra reintento_en_segundos pero no programa la ejecución futura (ver TA-003, CP-02).
+SKIPPED [1] tests\integration\test_cp01_cp08.py:200: BLOQUEADO: falta el conector real de Drive y la clasificación existente / faltante / desactualizado con lista de entregables y umbral.
+SKIPPED [1] tests\integration\test_cp01_cp08.py:240: BLOQUEADO (parcial): no existe aún la API consolidada por equipo y semana; se verifica el consolidado del grafo de TA-015.
+SKIPPED [1] tests\integration\test_cp01_cp08.py:298: BLOQUEADO: la clasificación verde/amarillo/rojo y sus umbrales aprobados no están implementados; hoy solo existen las alertas R1-R4.
+SKIPPED [1] tests\integration\test_cp01_cp08.py:344: BLOQUEADO: el servidor aún usa docente_actual() = 1 (temporal) y no hay rol estudiante; falta enlazar AR-04 a las rutas y el control por rol.
+SKIPPED [1] tests\integration\test_ta037_cp10_real_sources.py:72: CP-10 real: faltan variables en .env: GITHUB_TOKEN, CP10_GITHUB_REPO, NOTION_TOKEN, NOTION_DATABASE_ID, GOOGLE_SERVICE_ACCOUNT_JSON, GOOGLE_DRIVE_FOLDER_ID
+======================== 66 passed, 7 skipped in 5.57s ========================
+

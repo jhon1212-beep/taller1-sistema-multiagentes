@@ -1,0 +1,27 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.7.0 -- C:\Users\COMPUTER\AppData\Local\Temp\claude\5f0112192d772ad7\f8ef57d7-a48d-41d7-afe5-a4bb399d3f8d\scratchpad\venv\Scripts\python.exe
+rootdir: D:\taller1-sistema-multiagentes-main
+configfile: pytest.ini
+plugins: anyio-4.16.0, langsmith-0.14.17, platformdirs-4.14.5
+collecting ... collected 15 items
+
+tests/integration/test_supervisor_graph.py::test_graph_follows_supervisor_pattern PASSED [  6%]
+tests/integration/test_supervisor_graph.py::test_cp10_invokes_three_agents_and_returns_one_consolidated_ok PASSED [ 13%]
+tests/integration/test_supervisor_graph.py::test_cutoff_discards_later_evidence_and_counts_it PASSED [ 20%]
+tests/integration/test_supervisor_graph.py::test_failed_source_is_marked_and_others_continue PASSED [ 26%]
+tests/integration/test_supervisor_graph.py::test_source_without_adapter_or_reference_fails_without_being_called PASSED [ 33%]
+tests/integration/test_supervisor_graph.py::test_no_source_remains_pending_even_without_any_adapter PASSED [ 40%]
+tests/integration/test_supervisor_graph.py::test_consolidate_removes_duplicates_and_other_projects PASSED [ 46%]
+tests/integration/test_supervisor_graph.py::test_invalid_cutoff_stops_before_calling_sources PASSED [ 53%]
+tests/integration/test_grafo_supervision.py::test_grafo_consolida_las_tres_fuentes_sin_duplicados PASSED [ 60%]
+tests/integration/test_grafo_supervision.py::test_grafo_consulta_cada_referencia_con_el_proyecto PASSED [ 66%]
+tests/integration/test_grafo_supervision.py::test_grafo_no_mezcla_evidencias_de_otro_proyecto PASSED [ 73%]
+tests/integration/test_grafo_supervision.py::test_grafo_continua_si_una_fuente_falla PASSED [ 80%]
+tests/integration/test_grafo_supervision.py::test_grafo_rechaza_referencias_incompletas PASSED [ 86%]
+tests/integration/test_ta037_cp10_real_sources.py::test_cp10_check_with_demo_dataset PASSED [ 93%]
+tests/integration/test_ta037_cp10_real_sources.py::test_cp10_with_real_sources SKIPPED [100%]
+
+=========================== short test summary info ===========================
+SKIPPED [1] tests\integration\test_ta037_cp10_real_sources.py:72: CP-10 real: faltan variables en .env: GITHUB_TOKEN, CP10_GITHUB_REPO, NOTION_TOKEN, NOTION_DATABASE_ID, GOOGLE_SERVICE_ACCOUNT_JSON, GOOGLE_DRIVE_FOLDER_ID
+======================== 14 passed, 1 skipped in 0.84s ========================
+
