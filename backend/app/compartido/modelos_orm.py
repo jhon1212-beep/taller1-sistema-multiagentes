@@ -175,12 +175,12 @@ class Indicador(Base):
 
 
 class Alerta(Base):
-    """Alerta R1–R4 con su evidencia de origen (RN-003) y su explicación."""
+    """Alerta R1–R5 con su evidencia de origen (RN-003) y su explicación."""
 
     __tablename__ = "alerta"
     __table_args__ = (
         UniqueConstraint("proyecto_id", "fecha_corte", "regla", "evidencia_id"),
-        CheckConstraint("regla IN ('R1', 'R2', 'R3', 'R4')", name="regla_valida"),
+        CheckConstraint("regla IN ('R1', 'R2', 'R3', 'R4', 'R5')", name="regla_valida"),
         CheckConstraint(
             "origen_explicacion IN ('gemini', 'plantilla')", name="origen_valido"
         ),

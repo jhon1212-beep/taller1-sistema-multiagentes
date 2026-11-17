@@ -1,5 +1,5 @@
 /**
- * HU-006 / HU-007 · Textos de los indicadores I1–I4 y de las reglas R1–R4.
+ * HU-006 / HU-007 · Textos de los indicadores I1–I4 y de las reglas R1–R5.
  *
  * Las fórmulas son las del motor de TA-019 (backend/app/modulos/supervision/
  * motor_indicadores.py). Los valores no se calculan aquí: llegan ya calculados
@@ -34,6 +34,7 @@ export const REGLAS = {
   R2: { titulo: 'Tarea en curso sin ediciones', fuente: 'Notion' },
   R3: { titulo: 'Repositorio sin commits', fuente: 'GitHub' },
   R4: { titulo: 'Carpeta de Drive sin cambios', fuente: 'Google Drive' },
+  R5: { titulo: 'Commit a revisar', fuente: 'GitHub' },
 }
 
 const pad = n => String(n).padStart(2, '0')

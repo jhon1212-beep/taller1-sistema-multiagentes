@@ -67,10 +67,14 @@ class Pseudonymizer:
 
     def scrub(self, text: str | None) -> str:
         """Elimina los nombres conocidos y limita el tamaño del texto."""
+        return self.scrub_long(text)[:MAX_DESCRIPTION]
+
+    def scrub_long(self, text: str | None) -> str:
+        """Como scrub(), sin recortar: para el motivo de R5, que debe llegar completo."""
         cleaned = text or ""
         for pattern, alias in self._patterns:
             cleaned = pattern.sub(alias, cleaned)
-        return cleaned[:MAX_DESCRIPTION]
+        return cleaned
 
     def evidence_context(self, evidence: Any) -> dict[str, Any]:
         """Prepara campos permitidos para el prompt de Gemini."""

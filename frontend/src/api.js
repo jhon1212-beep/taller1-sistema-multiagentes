@@ -121,7 +121,7 @@ export const obtenerIndicadores = (proyectoId, fechaCorte, opciones) =>
     { ...opciones, parametros: { fecha_corte: fechaCorte } })
 
 /**
- * HU-007 · Alertas R1–R4 explicadas de un corte, cada una con su evidencia de origen.
+ * HU-007 · Alertas R1–R5 explicadas de un corte, cada una con su evidencia de origen.
  * { proyecto_id, fecha_corte, total, alertas: [{ regla, fuente, evidencia_ids,
  *   explicacion, origen_explicacion, evidencia }] }
  */

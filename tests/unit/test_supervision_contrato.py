@@ -72,7 +72,7 @@ def test_plantilla_rechaza_regla_o_fuente_incorrectas():
     generador = GeneradorExplicacionPlantilla()
 
     with pytest.raises(ValueError, match="desconocida"):
-        generador.generar(crear_alerta("R5", "notion"), CORTE)
+        generador.generar(crear_alerta("R9", "notion"), CORTE)
 
     with pytest.raises(ValueError, match="fuente"):
         generador.generar(crear_alerta("R1", "github"), CORTE)

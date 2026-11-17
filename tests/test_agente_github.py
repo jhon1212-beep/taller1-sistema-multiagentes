@@ -86,6 +86,7 @@ def test_agente_github_pide_como_maximo_20_commits(monkeypatch):
     assert len(estado["evidencias"]) == 20
     assert estado["error"] is None
 
+    # Los 6 campos comunes de AR-01 + lo que R5 necesita del commit (EvidenciaGitHub).
     assert set(estado["evidencias"][0]) == {
         "fuente",
         "id_externo",
@@ -93,6 +94,10 @@ def test_agente_github_pide_como_maximo_20_commits(monkeypatch):
         "fecha",
         "descripcion",
         "proyecto_id",
+        "archivos",
+        "adiciones",
+        "eliminaciones",
+        "es_merge",
     }
     assert all(
         evidencia["proyecto_id"] == PROYECTO_ID

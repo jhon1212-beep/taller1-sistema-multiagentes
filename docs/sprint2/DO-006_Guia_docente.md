@@ -111,7 +111,7 @@ Pase el ratón o pulse **?** en cada tarjeta para ver la fórmula.
 ## 7. Alertas y su evidencia
 
 Las alertas las detecta un motor de reglas; la inteligencia artificial solo redacta la
-explicación. Use los filtros **R1–R4** para ver una regla.
+explicación. Use los filtros **R1–R5** para ver una regla.
 
 | Regla | Se genera cuando… | Fuente |
 |---|---|---|
@@ -119,6 +119,7 @@ explicación. Use los filtros **R1–R4** para ver una regla.
 | **R2** · Tarea en curso sin ediciones | Una tarea «En curso» no se edita hace más de 7 días | Notion |
 | **R3** · Repositorio sin commits | No hubo commits en los 7 días previos al corte | GitHub |
 | **R4** · Carpeta sin cambios | No se modificó ningún documento en 14 días | Drive (solo si está registrada) |
+| **R5** · Commit a revisar | El mensaje de un commit de la última semana no coincide con los archivos que cambió (por ejemplo, dice «agrega pruebas» y solo cambió el README) | GitHub |
 
 Pulse **Ver detalle y evidencia** para ver la explicación, la evidencia que la respalda
 (tarea, commit o documento) y su enlace. La explicación indica si la redactó Gemini o la
@@ -126,7 +127,12 @@ plantilla del sistema; el contenido de la alerta es el mismo en ambos casos.
 
 ![Detalle de alerta](evidencias/semana11_castro/e2e_api/03_alerta.png)
 
-> El sistema **no asigna notas**: las alertas son señales para que usted revise.
+> El sistema **no asigna notas**: las alertas son señales para que usted revise. En R5,
+> la explicación empieza con el motivo exacto (qué decía el commit y qué archivos cambió).
+> Es una *posible* incoherencia: un mensaje mal redactado también la genera. Use
+> **Abrir la evidencia en GitHub** para ver el commit y decidir.
+
+![Alerta R5 con su motivo y el botón al commit](evidencias/semana12/r5_alerta_commit.png)
 
 ## 8. Validación funcional de la aplicación (CP-17)
 

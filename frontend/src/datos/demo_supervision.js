@@ -10,7 +10,8 @@ export const DESCRIPCION_REGLAS = {
   "R1": "Tarea no completada con fecha limite anterior al corte.",
   "R2": "Tarea en curso sin ediciones durante mas de 7 dias.",
   "R3": "Repositorio sin commits en los 7 dias previos al corte.",
-  "R4": "Carpeta sin documentos modificados en los 14 dias previos al corte."
+  "R4": "Carpeta sin documentos modificados en los 14 dias previos al corte.",
+  "R5": "Commit con posible incoherencia entre su mensaje y los archivos que modifica."
 }
 
 export const SUPERVISION_DEMO = {

@@ -212,6 +212,21 @@ class GitHubClient:
             })
         return salida
 
+    def detalle_commit(self, repo: str, sha: str) -> dict:
+        """GET /repos/{org}/{repo}/commits/{sha} — archivos y líneas cambiadas (R5).
+
+        GitHub devuelve hasta 300 archivos por commit; para comparar con el
+        mensaje basta con sus nombres y el total de líneas.
+        """
+        datos, _ = self._get(f"{self._repo_ruta(repo)}/commits/{sha}")
+        estadisticas = datos.get("stats") or {}
+        return {
+            "archivos": [f.get("filename") for f in datos.get("files") or [] if f.get("filename")],
+            "adiciones": estadisticas.get("additions", 0),
+            "eliminaciones": estadisticas.get("deletions", 0),
+            "es_merge": len(datos.get("parents") or []) > 1,
+        }
+
     def branches(self, repo: str) -> list[str]:
         """GET /repos/{org}/{repo}/branches"""
         return [b.get("name") for b in self._paginado(f"{self._repo_ruta(repo)}/branches")]

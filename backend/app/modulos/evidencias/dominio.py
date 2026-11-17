@@ -43,3 +43,18 @@ class EvidenciaDrive(Evidencia):
     """TA-017: Evidencia + el tipo de archivo propio de Drive."""
 
     tipo_archivo: str | None = None
+
+
+@dataclass
+class EvidenciaGitHub(Evidencia):
+    """R5: Evidencia + lo que el commit cambió, para comparar con su mensaje.
+
+    ``archivos`` es None cuando no se pudo leer el detalle del commit (o la
+    evidencia viene del dataset): en ese caso R5 no se evalúa para ese commit.
+    No se guarda en la base; solo se usa durante el corte.
+    """
+
+    archivos: list[str] | None = None
+    adiciones: int | None = None
+    eliminaciones: int | None = None
+    es_merge: bool = False
