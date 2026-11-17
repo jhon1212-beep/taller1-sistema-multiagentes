@@ -203,11 +203,11 @@ $env:DATABASE_URL="postgresql+psycopg://..."; python -m pytest -q   # suite comp
 
 ### 2.1 Integraciones externas
 
-| Fuente | Cliente | Credencial | Qué se lee | Fallo controlado |
-|---|---|---|---|---|
-| GitHub REST | `evidencias/adaptadores/github/cliente.py` | `GITHUB_TOKEN` (fine-grained, solo lectura) | Commits de la rama principal | `GitHubError` / `RateLimitError`; 403 de límite se informa sin reintentar |
-| Notion API (2025-09-03) | `adaptadores/notion/cliente.py` | `NOTION_TOKEN` o `NOTION_TOKENS` (`{"id de base": "token"}` para bases de otros equipos) | Tareas: Tarea, Responsable, Estado, Fecha límite | `NotionAuthError` (401/403) y `NotionError` |
-| Google Drive v3 | `adaptadores/drive/cliente.py` | `GOOGLE_SERVICE_ACCOUNT_JSON` (cuenta de servicio, `drive.readonly`) | Archivos de la carpeta y subcarpetas (hasta 3 niveles) | `DriveError`. **Opcional** por proyecto |
+| Fuente | Cliente | Credencial | Qué se lee | Fallo controlado | Permisos y limites |
+|---|---|---|---|---|---|
+| GitHub REST | `evidencias/adaptadores/github/cliente.py` | `GITHUB_TOKEN` (fine-grained, solo lectura) | Commits de la rama principal | `GitHubError` / `RateLimitError`; 403 de límite se informa sin reintentar |Permisos de lectura (Contents, Pull requests, Issues, Metadata: Read-only). Límite: 5,000 peticiones/hora autenticado (según docs/github-api.md)|
+| Notion API (2025-09-03) | `adaptadores/notion/cliente.py` | `NOTION_TOKEN` o `NOTION_TOKENS` (`{"id de base": "token"}` para bases de otros equipos) | Tareas: Tarea, Responsable, Estado, Fecha límite | `NotionAuthError` (401/403) y `NotionError` |Permisos de lectura de contenido (Read content) sobre la base compartida. Límite: 3 peticiones/segundo en promedio (API estándar)|
+| Google Drive v3 | `adaptadores/drive/cliente.py` | `GOOGLE_SERVICE_ACCOUNT_JSON` (cuenta de servicio, `drive.readonly`) | Archivos de la carpeta y subcarpetas (hasta 3 niveles) | `DriveError`. **Opcional** por proyecto |Permisos de solo lectura (drive.readonly mediante Service Account). Límite: 20,000 consultas cada 100 segundos por proyecto (según tu captura EN-004_cuota.png)|
 
 Las referencias se registran como enlaces del navegador; `evidencias/referencias.py`
 extrae `org/repo`, el id de la base de Notion y el de la carpeta. Qué debe permitir cada
