@@ -26,7 +26,7 @@ una carpeta de Google Drive, y le muestra el avance, las alertas y su evidencia.
 Si los datos no coinciden, verá un mensaje de error sin indicar cuál de los dos falló
 (por seguridad). Tras varios intentos fallidos el acceso se bloquea unos minutos.
 
-![Inicio de sesión](../sprint1/evidencias/login/01_formulario.png)
+![Inicio de sesión](evidencias/semana12_mondragon/capturas/escritorio_login.png)
 
 ## 3. Mis proyectos
 
