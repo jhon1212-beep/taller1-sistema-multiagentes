@@ -47,7 +47,7 @@ flowchart LR
 | `supervisor` | `grafo/supervisor.py` (bloque F) | Valida la fecha de corte (ISO 8601 con zona). Marca `fallo` las fuentes obligatorias sin adaptador o sin referencia y `no_configurada` a Drive si el proyecto no la registró |
 | `github_agent`, `notion_agent`, `drive_agent` | bloque H | Corren en paralelo con `Send`. Piden evidencias a su adaptador con reintento y tiempo máximo (TA-030), descartan las posteriores al corte y escriben su estado. Un fallo no detiene a los demás (RN-002) |
 | `consolidate` | bloque I | Une las evidencias sin duplicados (`fuente` + `id_externo`) y las ordena por fecha |
-| `evaluate` | bloque I2 → `motor_indicadores.py` | Calcula I1–I4 y R1–R4. Descarta las alertas de fuentes en `fallo` o `no_configurada`: la falta de datos no prueba inactividad |
+| `evaluate` | bloque I2 → `motor_indicadores.py` | Calcula I1–I4 y R1–R5. Descarta las alertas de fuentes en `fallo` o `no_configurada`: la falta de datos no prueba inactividad |
 | `explain` | bloque I3 → `explicacion.py` | Seudonimiza y pide **todas** las explicaciones del corte en una sola solicitud a Gemini (TA-046). Si falla, la plantilla explica todas |
 
 El estado del grafo (`SupervisorState`) usa reductores para que los agentes escriban en
@@ -66,10 +66,32 @@ para la lista de evidencias.
 | R2 | Tarea `En curso` sin ediciones en más de 7 días | Notion |
 | R3 | Repositorio sin commits en los 7 días previos al corte | GitHub |
 | R4 | Carpeta sin documentos modificados en los 14 días previos | Drive |
+| R5 | Commit de los 7 días previos cuyo mensaje no coincide con los archivos que cambió | GitHub |
 
 Toda alerta lleva el `id_externo` de la evidencia que la respalda (RN-003). El
 repositorio no guarda una alerta sin evidencia; el checklist
 `backend/scripts/verificar_trazabilidad.py` lo comprueba contra la base.
+
+### 1.3.1 R5 · Coherencia entre commit y código
+
+Pedida por el docente para detectar commits cuyo mensaje no corresponde a lo que
+subieron. `supervision/coherencia.py` compara el mensaje con los **nombres de los
+archivos y las líneas cambiadas** (el agente de GitHub los lee con
+`GET /repos/{org}/{repo}/commits/{sha}`). No lee el código ni pregunta a un LLM:
+
+| Caso | Ejemplo |
+|---|---|
+| El commit no cambia el contenido de ningún archivo | «feat: historial completo» vacío |
+| Dice haber escrito pruebas y no tocó nada de pruebas | «test: pruebas del login» que solo cambia `README.md` |
+| Anuncia código (`feat`, `fix`, «implementa»…) y solo cambió documentación o imágenes | «feat: agente Drive» con solo `.md` y `.png` |
+| Nombra un archivo que no modificó | «fix: corrige Login.jsx» que cambia `Proyectos.jsx` |
+
+No se evalúan los merges ni los commits sin detalle. El **motivo** calculado siempre
+aparece en la explicación (lo redacte Gemini o la plantilla) y a Gemini va sin nombres
+reales. La alerta dice «posible incoherencia»: no prueba que el estudiante mintió, y el
+docente la revisa con el botón que abre el commit. Sobre el historial del propio
+repositorio (236 commits) marcó 3, los tres incoherencias reales.
+`GITHUB_DETALLE_COMMITS=0` la apaga si la cuota de GitHub se ajusta.
 
 ### 1.4 Fuentes obligatorias y opcionales
 

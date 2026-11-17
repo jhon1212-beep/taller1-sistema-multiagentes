@@ -53,6 +53,7 @@ Evidencia: `python backend/scripts/ta030_tres_ejecuciones.py` (3 ejecuciones con
 | I3 | Tareas no `Listo` con fecha límite anterior al día de corte |
 | I4 | Días entre la última evidencia (GitHub, Notion o Drive) y el corte |
 | R1–R4 | Tarea vencida, tarea estancada (más de 7 días), repositorio sin commits en 7 días, Drive sin cambios en 14 días |
+| R5 | Commit de los últimos 7 días cuyo mensaje no coincide con los archivos que cambió (`coherencia.py`); el motivo siempre llega al docente |
 
 `motor.py` (TA-019) y `motor_indicadores.py` (TA-023) dan los mismos valores;
 lo comprueban `test_motor_reglas.py` y `test_i2_coincide_con_el_dataset`.

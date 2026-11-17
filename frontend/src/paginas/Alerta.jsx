@@ -1,6 +1,6 @@
 /**
  * TA-016 · Detalle de una alerta con su causa y evidencia.
- * HU-007 · La alerta es una de R1–R4: se muestra la regla, la explicación y el
+ * HU-007 · La alerta es una de R1–R5: se muestra la regla, la explicación y el
  * registro de origen (tarea, commit o documento) que la disparó.
  */
 import { useState } from 'react'
@@ -11,7 +11,7 @@ import { API_ACTIVA } from '../api.js'
 import { textoCorte, tipoArchivo } from '../datos/supervision_api.js'
 
 /** Filas «etiqueta: valor» de la evidencia, según de qué fuente venga. */
-function filasEvidencia(ev) {
+function filasEvidencia(ev, regla) {
   if (ev.tipo === 'tarea') {
     return [
       ['Tarea', ev.titulo],
@@ -24,7 +24,7 @@ function filasEvidencia(ev) {
   }
   if (ev.tipo === 'commit') {
     return [
-      ['Último commit', ev.titulo],
+      [regla === 'R5' ? 'Commit' : 'Último commit', ev.titulo],
       ['Autor', ev.responsable],
       ['Fecha', fechaHoraUtc(ev.fecha)],
       ['SHA corto', ev.sha],
@@ -77,6 +77,13 @@ export default function Alerta({ proyecto, alerta, onVolver }) {
         <h2 id="alerta-explicacion">¿Por qué se generó?</h2>
         <p>{DESCRIPCION_REGLAS[alerta.regla]}</p>
         <p className="explicacion">{alerta.explicacion}</p>
+        {alerta.regla === 'R5' && (
+          <Aviso>
+            Posible incoherencia entre el mensaje del commit y los archivos que modifica. No prueba
+            que el estudiante haya mentido: un mensaje mal redactado o un commit combinado también la
+            generan. Abra el commit para revisarlo.
+          </Aviso>
+        )}
         <p className="small muted">
           La alerta describe una situación del proyecto a partir de la evidencia; no asigna notas
           ni juzga a ningún estudiante.
@@ -85,7 +92,7 @@ export default function Alerta({ proyecto, alerta, onVolver }) {
 
       <article className="card" aria-labelledby="alerta-evidencia">
         <h2 id="alerta-evidencia">Evidencia de origen</h2>
-        {filasEvidencia(alerta.evidencia).map(([etiqueta, valor]) => (
+        {filasEvidencia(alerta.evidencia, alerta.regla).map(([etiqueta, valor]) => (
           <p key={etiqueta}>
             <b>{etiqueta}:</b> {valor}
           </p>

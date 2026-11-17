@@ -10,6 +10,7 @@ DESCRIPCIONES = {
     "R2": "Tarea en curso sin ediciones durante mas de 7 dias.",
     "R3": "Repositorio sin commits en los 7 dias previos al corte.",
     "R4": "Carpeta sin documentos modificados en los 14 dias previos al corte.",
+    "R5": "Commit con posible incoherencia entre su mensaje y los archivos que modifica.",
 }
 
 FUENTES_POR_REGLA = {
@@ -17,7 +18,11 @@ FUENTES_POR_REGLA = {
     "R2": "notion",
     "R3": "github",
     "R4": "drive",
+    "R5": "github",
 }
+
+# R5 no acusa: el docente revisa el commit y decide.
+NOTA_R5 = "Revise el commit antes de sacar conclusiones; la alerta no asigna nota ni juicio."
 
 
 class GeneradorExplicacionPlantilla:
@@ -41,8 +46,9 @@ class GeneradorExplicacionPlantilla:
         if not referencias:
             referencias = "sin referencias disponibles"
 
+        motivo = f"{alerta['motivo']} {NOTA_R5} " if alerta.get("motivo") else ""
         texto = (
-            f"Regla {regla}: {DESCRIPCIONES[regla]} "
+            f"Regla {regla}: {DESCRIPCIONES[regla]} {motivo}"
             f"Fuente: {alerta['fuente']}. "
             f"Fecha de corte: {fecha_corte}. "
             f"Referencias de evidencia: {referencias}."

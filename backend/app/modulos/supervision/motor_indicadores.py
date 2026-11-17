@@ -1,4 +1,4 @@
-"""TA-019: motor determinista de indicadores I1-I4 y reglas R1-R4.
+"""TA-019: motor determinista de indicadores I1-I4 y reglas R1-R5.
 
 No usa LLM ni consulta fuentes: recibe las evidencias ya consolidadas y una
 fecha de corte configurable, y devuelve indicadores y alertas (sin explicacion).
@@ -9,6 +9,7 @@ from __future__ import annotations
 from datetime import date, datetime, timedelta, timezone
 from typing import Any, Iterable, Mapping
 
+from app.modulos.supervision.coherencia import revisar_commit
 from app.modulos.supervision.dominio import Alerta, Indicadores
 
 ESTADO_LISTO = "Listo"
@@ -16,6 +17,7 @@ ESTADO_EN_CURSO = "En curso"
 VENTANA_R2_DIAS = 7   # tarea en curso sin ediciones
 VENTANA_R3_DIAS = 7   # repositorio sin commits
 VENTANA_R4_DIAS = 14  # carpeta sin documentos modificados
+VENTANA_R5_DIAS = 7   # commits revisados: los de la última semana antes del corte
 
 
 def _campo(evidencia: Any, nombre: str) -> Any:
@@ -119,7 +121,7 @@ def calcular_indicadores(evidencias: Iterable[Any], fecha_corte: str) -> Indicad
 
 
 def evaluar_reglas(evidencias: Iterable[Any], fecha_corte: str) -> list[Alerta]:
-    """Evalua R1-R4 y devuelve alertas sin explicacion (la agrega otro componente)."""
+    """Evalua R1-R5 y devuelve alertas sin explicacion (la agrega otro componente)."""
     corte = _parsear_corte(fecha_corte)
     todas = _hasta_corte(evidencias, corte)
     por_fuente = {f: [e for e in todas if _campo(e, "fuente") == f] for f in ("github", "notion", "drive")}
@@ -147,6 +149,19 @@ def evaluar_reglas(evidencias: Iterable[Any], fecha_corte: str) -> list[Alerta]:
         desde = corte - timedelta(days=dias)
         if not any((f := parsear_fecha(_campo(e, "fecha"))) is not None and f >= desde for e in evs):
             alertas.append(alerta(regla, fuente, _ids_recientes(evs)))
+
+    # R5: commit cuyo mensaje no coincide con lo que cambió (coherencia.py)
+    desde_r5 = corte - timedelta(days=VENTANA_R5_DIAS)
+    for c in por_fuente["github"]:
+        fecha = parsear_fecha(_campo(c, "fecha"))
+        if fecha is None or fecha < desde_r5:
+            continue
+        motivo = revisar_commit(
+            _campo(c, "descripcion"), _campo(c, "archivos"),
+            _campo(c, "adiciones"), _campo(c, "eliminaciones"), bool(_campo(c, "es_merge")),
+        )
+        if motivo:
+            alertas.append({**alerta("R5", "github", [str(_campo(c, "id_externo"))]), "motivo": motivo})
 
     return alertas
 

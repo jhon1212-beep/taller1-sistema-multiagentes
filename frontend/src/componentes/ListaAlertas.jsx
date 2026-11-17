@@ -1,4 +1,4 @@
-/** HU-007 · Lista de alertas R1–R4, filtrable por regla (demo y API usan la misma). */
+/** HU-007 · Lista de alertas R1–R5, filtrable por regla (demo y API usan la misma). */
 import { useState } from 'react'
 import { Boton, Pill } from './UI.jsx'
 import { REGLAS } from '../datos/indicadores.js'

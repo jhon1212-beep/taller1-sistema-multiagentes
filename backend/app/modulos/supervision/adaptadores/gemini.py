@@ -49,6 +49,10 @@ For EACH alert below, write 2 or 3 neutral sentences in Spanish explaining why i
 was raised and what should be checked. Use ONLY the facts given for that alert.
 Do not invent names or numbers. Refer to people only by their pseudonyms.
 
+When an alert has a "reason", it was computed by deterministic rules: restate it
+faithfully, do not claim the student lied, and suggest that the teacher open the
+commit to check it.
+
 Answer with a JSON array of exactly {count} strings and nothing else: the string
 at position i explains the alert whose "index" is i, in the same order.
 
@@ -73,6 +77,7 @@ def build_batch_prompt(
             "description": DESCRIPCIONES.get(alerta["regla"], ""),
             "source": alerta["fuente"],
             "evidence": list(contexto) if contexto else {"evidencia_ids": alerta["evidencia_ids"]},
+            **({"reason": alerta["motivo"]} if alerta.get("motivo") else {}),
         })
     return BATCH_PROMPT_TEMPLATE.format(
         count=len(alertas),
@@ -107,7 +112,7 @@ def parse_batch_answer(text: str, expected: int) -> list[str]:
 def _response_text(response: Any) -> str:
     """Extrae el texto de una respuesta de Gemini o un objeto simulado."""
     text = getattr(response, "text", None)
-    if callable(text):
+    if not isinstance(text, str) and callable(text):
         text = text()
     if not isinstance(text, str):
         content = getattr(response, "content", response)

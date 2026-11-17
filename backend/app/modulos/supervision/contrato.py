@@ -12,7 +12,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict
 
 Fuente = Literal["github", "notion", "drive"]
-Regla = Literal["R1", "R2", "R3", "R4"]
+Regla = Literal["R1", "R2", "R3", "R4", "R5"]
 Origen = Literal["gemini", "plantilla"]
 
 

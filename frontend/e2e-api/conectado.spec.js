@@ -183,3 +183,43 @@ test('CP-API7 · commits, tareas y documentos tienen un botón para abrir el ori
   await page.getByRole('button', { name: /Mis proyectos/ }).first().click()
   await page.locator('.card', { hasText: nombre }).first().getByRole('button', { name: 'Desactivar' }).click()
 })
+
+test('CP-API8 · R5 muestra el motivo de la incoherencia y abre el commit en GitHub', async ({ page }) => {
+  // Se simula un corte con una alerta R5: el dataset de TA-017 no trae los archivos de cada commit.
+  const sha = 'fedcba9876543210fedcba9876543210fedcba98'
+  const motivo = 'El mensaje «test: pruebas del login» dice agregar pruebas, pero no se modificó ningún ' +
+    'archivo de pruebas. Archivos modificados: README.md.'
+  const dia = '2026-10-12'
+  await page.route('**/proyectos/*/historial', r => r.fulfill({ json: {
+    proyecto_id: 1, total_cortes: 1,
+    cortes: [{ fecha_corte: dia, indicadores: { I1: 50, I2: 50, I3: 0, I4: 1 }, total_alertas: 1,
+      alertas_por_regla: { R5: 1 }, validacion: null }] } }))
+  await page.route('**/proyectos/*/indicadores**', r => r.fulfill({ json: {
+    proyecto_id: 1, fecha_corte: dia, indicadores: { I1: 50, I2: 50, I3: 0, I4: 1 },
+    estado_fuentes: { github: 'ok', notion: 'ok', drive: 'no_configurada' } } }))
+  await page.route('**/proyectos/*/alertas**', r => r.fulfill({ json: {
+    proyecto_id: 1, fecha_corte: dia, total: 1,
+    alertas: [{ regla: 'R5', fuente: 'github', evidencia_ids: [sha], origen_explicacion: 'gemini',
+      explicacion: `${motivo}\n\nConviene abrir el commit y comparar su mensaje con los cambios.`,
+      evidencia: { fuente: 'github', id_externo: sha, autor: 'Integrante 1', fecha: '2026-10-12T10:00:00Z',
+        descripcion: 'test: pruebas del login', proyecto_id: 1 } }] } }))
+
+  const nombre = `Proyecto R5 ${Date.now()}`
+  await entrar(page)
+  await registrarProyecto(page, nombre)
+  await page.locator('.card', { hasText: nombre }).first().getByRole('button', { name: 'Ver proyecto' }).click()
+  await page.getByRole('button', { name: 'Ver Dashboard' }).click()
+
+  await expect(page.getByRole('button', { name: 'R5 (1)' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Commit a revisar' })).toBeVisible()
+  await page.getByRole('button', { name: /Ver detalle y evidencia: R5/ }).click()
+
+  await expect(page.locator('.explicacion')).toContainText(motivo)
+  await expect(page.getByText('No prueba que el estudiante haya mentido')).toBeVisible()
+  await expect(page.getByRole('link', { name: /Abrir la evidencia en GitHub/ }))
+    .toHaveAttribute('href', `https://github.com/octocat/Hello-World/commit/${sha}`)
+  await page.screenshot({ path: 'test-results-api/09_alerta_r5_commit.png', fullPage: true })
+
+  await page.getByRole('button', { name: /Mis proyectos/ }).first().click()
+  await page.locator('.card', { hasText: nombre }).first().getByRole('button', { name: 'Desactivar' }).click()
+})

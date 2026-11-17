@@ -42,6 +42,28 @@ Evidencia: `evidencias/semana12/drive_opcional_01_dashboard.png`, `_02_pestana_d
 `_03_registro.png` (generadas con la API local y el dataset de TA-017). Con el mismo
 dataset, quitar Drive deja I1–I4 iguales (40 %, 60 %, 4, 0) y las 6 alertas R1–R2.
 
+## R5 · Coherencia entre commit y código (pedido del docente)
+
+Alcance nuevo solicitado por el docente: avisar cuando el mensaje de un commit no
+corresponde a lo que el commit cambió, con su justificación y un botón al commit.
+
+| Capa | Cambio |
+|---|---|
+| Agente GitHub | `cliente.detalle_commit`: archivos, líneas y si es merge (`GET /commits/{sha}`). Si falla, el commit sigue siendo evidencia y solo se omite R5. `GITHUB_DETALLE_COMMITS=0` lo apaga |
+| Dominio | `EvidenciaGitHub` (archivos, adiciones, eliminaciones, es_merge); no se guarda en la base |
+| Regla | `supervision/coherencia.py` (determinista, sin LLM) y R5 en `motor_indicadores.py` para los commits de los 7 días previos al corte |
+| Explicación | El motivo va en el prompt (seudonimizado) y el grafo garantiza que aparezca en la explicación |
+| Base | Migración `0002`: `alerta.regla` admite R5 |
+| Frontend | Filtro R5, título «Commit a revisar», aviso de que no prueba una mentira y botón al commit |
+
+Validación sobre el historial real del repositorio: de 236 commits (todas las ramas),
+la primera versión marcaba 9; tras excluir «plan/informe de pruebas» y aceptar rutas
+con «prueba/test», marca 3, los tres incoherencias reales (dos «Delete X» que en
+realidad agregaron 10 archivos y un commit vacío).
+
+Pruebas: `tests/unit/test_r5_coherencia_commits.py` (30) y CP-API8.
+Evidencia: `evidencias/semana12/r5_alerta_commit.png`.
+
 ## DO-005 · Documentación técnica del sistema multiagente
 
 `docs/tecnica.md`, sección 1: grafo con diagrama, nodos, indicadores y reglas, fuentes

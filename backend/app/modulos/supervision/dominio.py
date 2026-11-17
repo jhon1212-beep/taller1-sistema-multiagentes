@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from datetime import date, datetime
-from typing import Literal, TypedDict
+from typing import Literal, NotRequired, TypedDict
 
 
 Fuente = Literal["github", "notion", "drive"]
 EstadoFuente = Literal["pendiente", "ok", "fallo", "no_configurada"]
 # Drive es opcional: si el proyecto no la registra, no es un fallo ni genera R4.
 FUENTES_OPCIONALES: frozenset[str] = frozenset({"drive"})
-ReglaAlerta = Literal["R1", "R2", "R3", "R4"]
+ReglaAlerta = Literal["R1", "R2", "R3", "R4", "R5"]
 OrigenExplicacion = Literal["gemini", "plantilla"]
 
 
@@ -31,6 +31,8 @@ class Alerta(TypedDict):
     evidencia_ids: list[str]
     explicacion: str | None
     origen_explicacion: OrigenExplicacion | None
+    # R5: por qué el commit parece incoherente (lo calcula coherencia.py, no un LLM).
+    motivo: NotRequired[str]
 
 
 class Explicacion(TypedDict):

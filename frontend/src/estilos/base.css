@@ -387,6 +387,7 @@ h2.seccion {
   font-family: var(--font-mono);
   font-size: var(--fs-sm);
   overflow-wrap: anywhere;
+  white-space: pre-line; /* R5: el motivo y la redacción van en párrafos separados */
 }
 
 /* --- TA-040 · Controles de la fecha de corte ------------- */

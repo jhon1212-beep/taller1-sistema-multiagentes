@@ -135,6 +135,14 @@ def _sort_key(evidence: Evidencia) -> tuple[int, str]:
     return (1, evidence.fecha) if evidence.fecha else (0, "")
 
 
+def _with_reason(alert: Mapping[str, Any], text: str) -> str:
+    """R5: el motivo determinista siempre llega al docente, lo redacte quien lo redacte."""
+    reason = alert.get("motivo")
+    if not reason or reason in text:
+        return text
+    return f"{reason}\n\n{text}"
+
+
 # Bloque D. Entrada del grafo
 
 def build_supervisor_input(
@@ -331,7 +339,7 @@ def build_supervisor_graph(
 
     # Bloque I2. Evaluación determinista de indicadores y alertas.
     def evaluate(state: SupervisorState) -> dict:
-        """Calcula I1-I4 y R1-R4 sin pedir decisiones a un LLM."""
+        """Calcula I1-I4 y R1-R5 sin pedir decisiones a un LLM."""
         result = run_engine(state.get("evidencias") or [], state["fecha_corte"])
         failed = {
             source
@@ -357,11 +365,16 @@ def build_supervisor_graph(
         alerts = state.get("alertas") or []
         pseudonymizer = Pseudonymizer.from_evidences(evidences)
         contexts = [pseudonymizer.alert_context(alert, evidences) for alert in alerts]
+        # R5: el motivo cita el mensaje del commit; a Gemini va sin nombres reales.
+        prompt_alerts = [
+            {**alert, "motivo": pseudonymizer.scrub_long(alert["motivo"])} if alert.get("motivo") else alert
+            for alert in alerts
+        ]
         explanations = explicar_en_lote(
-            explanation_generator, alerts, state["fecha_corte"], contexts
+            explanation_generator, prompt_alerts, state["fecha_corte"], contexts
         )
         return {"alertas": [
-            {**alert, "explicacion": e["texto"], "origen_explicacion": e["origen"]}
+            {**alert, "explicacion": _with_reason(alert, e["texto"]), "origen_explicacion": e["origen"]}
             for alert, e in zip(alerts, explanations)
         ]}
 

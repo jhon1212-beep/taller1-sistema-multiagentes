@@ -2,7 +2,7 @@
  * TA-040 · Dashboard conectado a la API real de supervisión (TA-022).
  *
  * HU-006 · I1–I4 del corte elegido, con su fórmula y la fecha de corte.
- * HU-007 · Alertas R1–R4 del mismo corte, cada una con su evidencia de origen.
+ * HU-007 · Alertas R1–R5 del mismo corte, cada una con su evidencia de origen.
  * TA-020 · Estado de GitHub, Notion y Google Drive y espacio de validación (CP-17).
  *
  * «Ejecutar supervisión» llama a POST /proyectos/{id}/consolidacion: el backend
