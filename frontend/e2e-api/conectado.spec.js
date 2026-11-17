@@ -41,6 +41,22 @@ async function ejecutarCorte(page, dia) {
   await expect(page.locator('.traza')).toContainText(`corte ${dia}`)
 }
 
+/** Registra un proyecto por el formulario (Drive solo si se indica) y vuelve a Mis proyectos. */
+async function registrarProyecto(page, nombre, { drive = '' } = {}) {
+  await page.getByRole('button', { name: '+ Registrar proyecto' }).click()
+  await page.getByLabel('Nombre del proyecto').fill(nombre)
+  await page.getByLabel('Curso').fill('Taller Integrador 1')
+  await page.getByLabel('Fecha de inicio').fill('2026-09-21')
+  await page.getByLabel('Fecha de fin').fill('2026-12-04')
+  await page.getByLabel(/Integrantes del equipo/).fill('Integrante 1, Integrante 2')
+  await page.getByLabel('Repositorio de GitHub').fill('https://github.com/octocat/Hello-World')
+  await page.getByLabel('Base de tareas de Notion').fill('https://www.notion.so/base-demo-0123456789abcdef0123456789abcdef')
+  if (drive) await page.getByLabel(/Carpeta de Google Drive/).fill(drive)
+  await page.getByLabel('URL pública de la aplicación').fill('https://example.com')
+  await page.getByLabel('Elemento a verificar (selector CSS)').fill('h1')
+  await page.getByRole('button', { name: 'Guardar proyecto' }).click()
+}
+
 const tarjeta = (page, etiqueta) => page.locator('.stat', { hasText: etiqueta })
 
 test('CP-API1 · inicia sesión contra el backend y lista los proyectos reales', async ({ page }) => {
@@ -107,18 +123,8 @@ test('CP-API5 · la validación web muestra y reejecuta CP-17', async ({ page })
 test('CP-API6 · un proyecto sin carpeta de Drive se registra y la muestra como no configurada', async ({ page }) => {
   const nombre = `Proyecto sin Drive ${Date.now()}`
   await entrar(page)
-  await page.getByRole('button', { name: '+ Registrar proyecto' }).click()
-  await page.getByLabel('Nombre del proyecto').fill(nombre)
-  await page.getByLabel('Curso').fill('Taller Integrador 1')
-  await page.getByLabel('Fecha de inicio').fill('2026-09-21')
-  await page.getByLabel('Fecha de fin').fill('2026-12-04')
-  await page.getByLabel(/Integrantes del equipo/).fill('Integrante 1, Integrante 2')
-  await page.getByLabel('Repositorio de GitHub').fill('https://github.com/octocat/Hello-World')
-  await page.getByLabel('Base de tareas de Notion').fill('https://www.notion.so/base-demo-0123456789abcdef0123456789abcdef')
   // La carpeta de Google Drive queda vacía a propósito: es opcional.
-  await page.getByLabel('URL pública de la aplicación').fill('https://example.com')
-  await page.getByLabel('Elemento a verificar (selector CSS)').fill('h1')
-  await page.getByRole('button', { name: 'Guardar proyecto' }).click()
+  await registrarProyecto(page, nombre)
 
   const tarjetaProyecto = page.locator('.card', { hasText: nombre }).first()
   await expect(tarjetaProyecto).toBeVisible()
@@ -129,6 +135,51 @@ test('CP-API6 · un proyecto sin carpeta de Drive se registra y la muestra como 
   await page.screenshot({ path: 'test-results-api/07_proyecto_sin_drive.png', fullPage: true })
 
   // Se desactiva para no dejar el proyecto de prueba activo en la lista del docente.
+  await page.getByRole('button', { name: /Mis proyectos/ }).first().click()
+  await page.locator('.card', { hasText: nombre }).first().getByRole('button', { name: 'Desactivar' }).click()
+})
+
+test('CP-API7 · commits, tareas y documentos tienen un botón para abrir el original', async ({ page }) => {
+  // Se simulan las 3 listas con identificadores reales: el proyecto demo usa el
+  // dataset de TA-017, cuyos ids no existen en GitHub, Notion ni Drive.
+  const sha = '0123456789abcdef0123456789abcdef01234567'
+  const tareaId = '2a1b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d'
+  const archivoId = '1AbCdEfGhIjKlMnOpQrStUvWxYz012345'
+  await page.route('**/proyectos/*/commits', r => r.fulfill({ json: {
+    proyecto_id: 1, fuente: 'github', estado_fuente: 'ok', ultima_extraccion: null, total: 1,
+    items: [{ sha, autor: 'Integrante 1', fecha: '2026-10-12T10:00:00Z', mensaje: 'feat: login' }] } }))
+  await page.route('**/proyectos/*/tareas', r => r.fulfill({ json: {
+    proyecto_id: 1, fuente: 'notion', estado: 'ok', error: null, total: 1,
+    resumen: { listo: 0, en_curso: 1, sin_empezar: 0, sin_responsable: 0 },
+    tareas: [{ id: tareaId, tarea: 'Pantalla de login', responsable: 'Integrante 1', estado: 'En curso',
+      fecha_limite: '2026-10-20', editada: '2026-10-12T10:00:00Z' }] } }))
+  await page.route('**/proyectos/*/documentos', r => r.fulfill({ json: {
+    proyecto_id: 1, fuente: 'drive', estado_fuente: 'ok', ultima_extraccion: null, total: 1,
+    items: [{ id: archivoId, nombre: 'Informe final.pdf', ultimo_editor: 'Integrante 2',
+      fecha: '2026-10-11T09:00:00Z', tipo: 'application/pdf' }] } }))
+
+  // Proyecto con enlaces reales: con ellos se arma la URL del commit (repositorio) y de los demás.
+  const nombre = `Proyecto con enlaces ${Date.now()}`
+  await entrar(page)
+  await registrarProyecto(page, nombre, { drive: 'https://drive.google.com/drive/folders/carpeta-demo' })
+  const tarjetaProyecto = page.locator('.card', { hasText: nombre }).first()
+  await tarjetaProyecto.getByRole('button', { name: 'Ver proyecto' }).click()
+
+  await page.getByRole('tab', { name: 'GitHub' }).click()
+  await expect(page.getByRole('link', { name: 'Abrir el commit 0123456 en GitHub' }))
+    .toHaveAttribute('href', `https://github.com/octocat/Hello-World/commit/${sha}`)
+
+  await page.getByRole('tab', { name: 'Notion' }).click()
+  await expect(page.getByRole('link', { name: 'Abrir la tarea «Pantalla de login» en Notion' }))
+    .toHaveAttribute('href', `https://www.notion.so/${tareaId.replace(/-/g, '')}`)
+
+  await page.getByRole('tab', { name: 'Google Drive' }).click()
+  const abrir = page.getByRole('link', { name: 'Abrir «Informe final.pdf» en Google Drive' })
+  await expect(abrir).toHaveAttribute('href', `https://drive.google.com/file/d/${archivoId}/view`)
+  await expect(abrir).toHaveAttribute('target', '_blank')
+  await expect(page.getByRole('cell', { name: 'PDF', exact: true })).toBeVisible()
+  await page.screenshot({ path: 'test-results-api/08_abrir_documento_drive.png', fullPage: true })
+
   await page.getByRole('button', { name: /Mis proyectos/ }).first().click()
   await page.locator('.card', { hasText: nombre }).first().getByRole('button', { name: 'Desactivar' }).click()
 })

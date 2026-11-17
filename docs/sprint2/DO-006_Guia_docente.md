@@ -66,10 +66,15 @@ Lector). El equipo técnico se lo indica a cada grupo.
 | Pestaña | Qué muestra |
 |---|---|
 | **Resumen** | Totales de commits, tareas terminadas y documentos; enlaces de las fuentes |
-| **GitHub** | Últimos commits: autor, fecha (UTC), mensaje |
-| **Notion** | Tareas con responsable, estado y fecha límite |
-| **Google Drive** | Documentos de la carpeta. Si el grupo no la registró, lo indica |
+| **GitHub** | Últimos commits: autor, fecha (UTC), mensaje. **Abrir** muestra el commit en GitHub |
+| **Notion** | Tareas con responsable, estado y fecha límite. **Abrir** muestra la tarea en Notion |
+| **Google Drive** | Documentos de la carpeta con su tipo (PDF, Documento, Hoja de cálculo, Imagen…). **Abrir** abre el archivo en Drive. Si el grupo no registró la carpeta, lo indica |
 | **Validación web** | Resultado de la verificación de la aplicación (sección 8) |
+
+El botón **Abrir** lleva al original en una pestaña nueva; usted necesita tener acceso a ese
+repositorio, tarea o archivo con su propia cuenta.
+
+![Pestaña Google Drive con el botón Abrir](evidencias/semana12/enlaces_abrir_documento_drive.png)
 
 Pulse **Ver Dashboard** para ver indicadores y alertas.
 

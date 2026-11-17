@@ -118,6 +118,20 @@ export function Tabla({ columnas, filas, vacio = 'Sin datos para mostrar.' }) {
   )
 }
 
+/**
+ * Enlace con forma de botón que abre el registro original (commit, tarea o
+ * archivo) en una pestaña nueva. Sin URL muestra «—»: p. ej., datos de demostración.
+ */
+export function EnlaceExterno({ href, descripcion, children = 'Abrir' }) {
+  if (!href) return <span className="muted">—</span>
+  return (
+    <a className="btn btn-sec btn-enlace" href={href} target="_blank" rel="noopener noreferrer"
+      aria-label={descripcion}>
+      {children}
+    </a>
+  )
+}
+
 /** Navegación por pestañas accesible. */
 export function Tabs({ opciones, activa, onCambio }) {
   return (

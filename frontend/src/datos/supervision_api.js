@@ -66,6 +66,23 @@ export function enlaceEvidencia(fuente, id, proyecto) {
   return null
 }
 
+/** Tipo MIME de Drive → nombre corto para el docente («application/pdf» → «PDF»). */
+const TIPOS_DRIVE = [
+  [/pdf$/, 'PDF'],
+  [/google-apps\.document$|wordprocessingml|msword/, 'Documento'],
+  [/google-apps\.spreadsheet$|spreadsheetml|ms-excel|csv$/, 'Hoja de cálculo'],
+  [/google-apps\.presentation$|presentationml|ms-powerpoint/, 'Presentación'],
+  [/^image\//, 'Imagen'],
+  [/^video\//, 'Video'],
+  [/zip|rar|7z|compressed/, 'Comprimido'],
+  [/^text\//, 'Texto'],
+]
+
+export function tipoArchivo(mime) {
+  if (!mime) return '—'
+  return TIPOS_DRIVE.find(([patron]) => patron.test(mime))?.[1] ?? 'Archivo'
+}
+
 /**
  * Fecha de corte para POST /consolidacion: fin del día elegido en hora de Lima,
  * igual que el valor por defecto del backend («AAAA-MM-DDT23:59:59-05:00»).

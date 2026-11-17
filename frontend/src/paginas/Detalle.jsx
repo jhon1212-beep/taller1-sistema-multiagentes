@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react'
 import {
   API_ACTIVA, ejecutarValidacion, obtenerCommits, obtenerDocumentos, obtenerTareas, obtenerValidaciones,
 } from '../api.js'
-import { Aviso, Boton, Encabezado, Estadistica, Pill, Tabla, Tabs, fechaCorta } from '../componentes/UI.jsx'
+import { Aviso, Boton, EnlaceExterno, Encabezado, Estadistica, Pill, Tabla, Tabs, fechaCorta } from '../componentes/UI.jsx'
 import { COMMITS, DOCUMENTOS, TAREAS, tonoEstado } from '../datos/demo.js'
 import { fechaCorta16 } from '../datos/proyectos_api.js'
 import { fechaHoraUtc } from '../datos/indicadores.js'
-import { mensajeError } from '../datos/supervision_api.js'
+import { enlaceEvidencia, mensajeError, tipoArchivo } from '../datos/supervision_api.js'
 
 const PESTANAS = {
   resumen: 'Resumen',
@@ -77,7 +77,7 @@ function TareasNotionApi({ proyecto }) {
             {datos.resumen.sin_empezar} · Sin responsable: {datos.resumen.sin_responsable}
           </p>
           <Tabla
-            columnas={['Tarea', 'Responsable', 'Estado', 'Fecha límite']}
+            columnas={['Tarea', 'Responsable', 'Estado', 'Fecha límite', 'Notion']}
             filas={datos.tareas.map(t => [
               t.tarea,
               t.responsable ?? 'Sin responsable',
@@ -85,6 +85,8 @@ function TareasNotionApi({ proyecto }) {
                 {t.estado ?? 'Sin estado'}
               </Pill>,
               t.fecha_limite ?? '—',
+              <EnlaceExterno key={`n-${t.id}`} href={enlaceEvidencia('notion', t.id, proyecto)}
+                descripcion={`Abrir la tarea «${t.tarea}» en Notion`} />,
             ])}
           />
         </>
@@ -160,8 +162,12 @@ function CommitsApi({ proyecto }) {
       descripcion="Últimos commits guardados del proyecto, del más reciente al más antiguo. Fechas en UTC."
       unidad="commits"
       estado={estado}
-      columnas={['Autor', 'Fecha', 'Mensaje', 'SHA corto']}
-      filas={items => items.map(c => [c.autor, fechaCorta16(c.fecha), c.mensaje, <code key={c.sha}>{c.sha.slice(0, 7)}</code>])}
+      columnas={['Autor', 'Fecha', 'Mensaje', 'SHA corto', 'GitHub']}
+      filas={items => items.map(c => [
+        c.autor, fechaCorta16(c.fecha), c.mensaje, <code key={c.sha}>{c.sha.slice(0, 7)}</code>,
+        <EnlaceExterno key={`g-${c.sha}`} href={enlaceEvidencia('github', c.sha, proyecto)}
+          descripcion={`Abrir el commit ${c.sha.slice(0, 7)} en GitHub`} />,
+      ])}
     />
   )
 }
@@ -175,8 +181,12 @@ function DocumentosApi({ proyecto }) {
       descripcion="Documentos guardados de la carpeta del proyecto, del más reciente al más antiguo. Fechas en UTC."
       unidad="documentos"
       estado={estado}
-      columnas={['Nombre', 'Último editor', 'Última modificación', 'Tipo']}
-      filas={items => items.map(d => [d.nombre, d.ultimo_editor, fechaCorta16(d.fecha), d.tipo ?? '—'])}
+      columnas={['Nombre', 'Último editor', 'Última modificación', 'Tipo', 'Drive']}
+      filas={items => items.map(d => [
+        d.nombre, d.ultimo_editor, fechaCorta16(d.fecha), tipoArchivo(d.tipo),
+        <EnlaceExterno key={`d-${d.id}`} href={enlaceEvidencia('drive', d.id, proyecto)}
+          descripcion={`Abrir «${d.nombre}» en Google Drive`} />,
+      ])}
     />
   )
 }

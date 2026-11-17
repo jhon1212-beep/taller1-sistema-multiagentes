@@ -4,11 +4,11 @@
  * registro de origen (tarea, commit o documento) que la disparó.
  */
 import { useState } from 'react'
-import { Aviso, Boton, Encabezado, Pill, fechaCorta } from '../componentes/UI.jsx'
+import { Aviso, Boton, EnlaceExterno, Encabezado, Pill, fechaCorta } from '../componentes/UI.jsx'
 import { FECHA_CORTE, DESCRIPCION_REGLAS } from '../datos/demo_supervision.js'
 import { REGLAS, fechaHoraUtc } from '../datos/indicadores.js'
 import { API_ACTIVA } from '../api.js'
-import { textoCorte } from '../datos/supervision_api.js'
+import { textoCorte, tipoArchivo } from '../datos/supervision_api.js'
 
 /** Filas «etiqueta: valor» de la evidencia, según de qué fuente venga. */
 function filasEvidencia(ev) {
@@ -34,7 +34,7 @@ function filasEvidencia(ev) {
     ['Último documento modificado', ev.titulo],
     ['Último editor', ev.responsable],
     ['Última modificación', fechaHoraUtc(ev.fecha)],
-    ['Tipo de archivo', ev.tipo_archivo ?? '—'],
+    ['Tipo de archivo', tipoArchivo(ev.tipo_archivo)],
     ['Identificador', ev.id],
   ]
 }
@@ -92,9 +92,10 @@ export default function Alerta({ proyecto, alerta, onVolver }) {
         ))}
         {alerta.evidencia.enlace && (
           <p>
-            <a href={alerta.evidencia.enlace} target="_blank" rel="noopener noreferrer">
+            <EnlaceExterno href={alerta.evidencia.enlace}
+              descripcion={`Abrir la evidencia en ${regla.fuente} (pestaña nueva)`}>
               Abrir la evidencia en {regla.fuente}
-            </a>
+            </EnlaceExterno>
           </p>
         )}
 
