@@ -93,3 +93,12 @@ def test_commits_pide_como_maximo_20(cliente, monkeypatch):
     cliente.get("/proyectos/1/commits")
 
     assert llamadas[0] == ("github", 20)
+
+def test_documentos_incluyen_id_para_abrir_el_archivo(cliente, monkeypatch):
+    """El frontend arma https://drive.google.com/file/d/<id>/view con este id."""
+    _simular(monkeypatch, (_fuente("ok"), [_evidencia(id_externo="1AbC_dEf", tipo_archivo="application/pdf")]))
+
+    item = cliente.get("/proyectos/1/documentos").json()["items"][0]
+
+    assert item["id"] == "1AbC_dEf"
+    assert item["tipo"] == "application/pdf"

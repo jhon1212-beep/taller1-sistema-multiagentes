@@ -147,6 +147,9 @@ main { max-width: 1500px; width: 100%; padding: var(--sp-6) var(--sp-6); }
 }
 .btn-sec    { background: var(--panel); color: var(--brand); border-color: var(--line); }
 .btn-danger { background: var(--badbg); color: var(--bad);   border-color: var(--bad); }
+/* Enlace «Abrir» dentro de una tabla: misma forma que .btn-sec, más compacto. */
+.btn-enlace { display: inline-block; padding: var(--sp-1) var(--sp-3); font-size: var(--fs-sm);
+              text-decoration: none; white-space: nowrap; }
 .acciones   { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
 
 /* --- Formularios ----------------------------------------- */

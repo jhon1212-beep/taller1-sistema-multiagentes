@@ -54,6 +54,8 @@ def listar_tareas(proyecto_id: int, sesion: Session = Depends(obtener_sesion)):
 def listar_documentos(proyecto_id: int, sesion: Session = Depends(obtener_sesion)):
     return _responder(
         proyecto_id, "drive",
-        lambda e: {"nombre": e.descripcion, "ultimo_editor": e.autor, "fecha": e.fecha, "tipo": e.tipo_archivo},
+        # "id" permite al frontend armar el enlace para abrir el archivo en Drive.
+        lambda e: {"id": e.id_externo, "nombre": e.descripcion, "ultimo_editor": e.autor,
+                   "fecha": e.fecha, "tipo": e.tipo_archivo},
         sesion,
     )
