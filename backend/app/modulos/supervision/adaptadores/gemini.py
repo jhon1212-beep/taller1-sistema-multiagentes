@@ -107,7 +107,7 @@ def parse_batch_answer(text: str, expected: int) -> list[str]:
 def _response_text(response: Any) -> str:
     """Extrae el texto de una respuesta de Gemini o un objeto simulado."""
     text = getattr(response, "text", None)
-    if callable(text):
+    if not isinstance(text, str) and callable(text):
         text = text()
     if not isinstance(text, str):
         content = getattr(response, "content", response)

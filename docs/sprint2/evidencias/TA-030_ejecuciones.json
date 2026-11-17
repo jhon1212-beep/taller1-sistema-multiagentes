@@ -1,0 +1,71 @@
+{
+  "corte": "2026-11-17T23:59:59-05:00",
+  "fuentes_registradas": [
+    "drive",
+    "github",
+    "notion"
+  ],
+  "proyecto_langsmith": "grupo8-sp001",
+  "explicador": "gemini",
+  "politica": {
+    "intentos": "2",
+    "espera_s": "2",
+    "tiempo_maximo_s": "90"
+  },
+  "ejecuciones": [
+    {
+      "ejecucion": 1,
+      "inicio": "2026-11-17T00:16:18-05:00",
+      "duracion_total_ms": 17655.3,
+      "fuentes": {
+        "github": {
+          "estado": "ok",
+          "error": null,
+          "evidencias": 20,
+          "fuera_de_corte": 0
+        },
+        "notion": {
+          "estado": "ok",
+          "error": null,
+          "evidencias": 20,
+          "fuera_de_corte": 0
+        },
+        "drive": {
+          "estado": "ok",
+          "error": null,
+          "evidencias": 10,
+          "fuera_de_corte": 0
+        }
+      },
+      "estabilidad": {
+        "github": {
+          "intentos": 1,
+          "duracion_ms": 10707.8
+        },
+        "notion": {
+          "intentos": 1,
+          "duracion_ms": 1095.5
+        },
+        "drive": {
+          "intentos": 1,
+          "duracion_ms": 2097.3
+        }
+      },
+      "total_evidencias": 50,
+      "indicadores": {
+        "I1": 25.0,
+        "I2": 75.0,
+        "I3": 15,
+        "I4": 1
+      },
+      "alertas_por_regla": {
+        "R1": 15,
+        "R2": 5,
+        "R4": 1
+      },
+      "origen_explicaciones": {
+        "gemini": 21
+      }
+    }
+  ]
+}
