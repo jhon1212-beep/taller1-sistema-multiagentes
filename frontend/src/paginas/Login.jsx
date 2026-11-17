@@ -1,6 +1,6 @@
 /** HU-001 · Inicio de sesión del docente. */
 import { useEffect, useState } from 'react'
-import { Aviso, Boton, Campo, Pill } from '../componentes/UI.jsx'
+import { Aviso, Boton, Campo } from '../componentes/UI.jsx'
 import { API_ACTIVA, establecerToken, iniciarSesion, obtenerEstado } from '../api.js'
 import { CLAVE_DEMO, CUENTAS } from '../datos/demo.js'
 
@@ -66,7 +66,7 @@ export default function Login({ bloqueado = false, onEntrar }) {
   }
 
   return (
-    <div className="login-wrap">
+    <main className="login-wrap">
       <div className="login-intro">
         <div className="eyebrow">Supervisión de proyectos</div>
         <h1>La evidencia de tus proyectos, en un solo lugar.</h1>
@@ -78,7 +78,6 @@ export default function Login({ bloqueado = false, onEntrar }) {
           <li>Tareas y responsables desde Notion.</li>
           <li>Documentos, alertas y seguimiento por proyecto.</li>
         </ul>
-        <Pill>HU-001 · Inicio de sesión docente</Pill>
       </div>
 
       <div className="card login-card">
@@ -142,6 +141,6 @@ export default function Login({ bloqueado = false, onEntrar }) {
           </div>
         )}
       </div>
-    </div>
+    </main>
   )
 }

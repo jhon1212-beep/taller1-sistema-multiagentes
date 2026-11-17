@@ -330,7 +330,7 @@ export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver
         descripcion={`${proyecto.curso} · ${proyecto.integrantes}`}
         accion={
           <Boton variante="secundario" onClick={onVolver}>
-            Mis proyectos
+            Volver a Mis proyectos
           </Boton>
         }
       />

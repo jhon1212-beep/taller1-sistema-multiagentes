@@ -1,0 +1,42 @@
+[
+  {
+    "pantalla": "login",
+    "reglas_aprobadas": 18,
+    "violaciones": []
+  },
+  {
+    "pantalla": "proyectos",
+    "reglas_aprobadas": 16,
+    "violaciones": []
+  },
+  {
+    "pantalla": "nuevo",
+    "reglas_aprobadas": 16,
+    "violaciones": []
+  },
+  {
+    "pantalla": "detalle",
+    "reglas_aprobadas": 21,
+    "violaciones": []
+  },
+  {
+    "pantalla": "dashboard",
+    "reglas_aprobadas": 22,
+    "violaciones": []
+  },
+  {
+    "pantalla": "alerta",
+    "reglas_aprobadas": 14,
+    "violaciones": []
+  },
+  {
+    "pantalla": "historial",
+    "reglas_aprobadas": 14,
+    "violaciones": []
+  },
+  {
+    "pantalla": "sistema",
+    "reglas_aprobadas": 18,
+    "violaciones": []
+  }
+]

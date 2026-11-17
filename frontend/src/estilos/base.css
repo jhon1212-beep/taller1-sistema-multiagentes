@@ -257,7 +257,9 @@ th, td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--line);
   padding: var(--sp-3) 0;
   border-bottom: 1px solid var(--line);
 }
-.fuente a { overflow-wrap: anywhere; }
+/* TA-031 · H5/H6: los enlaces largos se parten y miden al menos 24 px de alto (WCAG 2.5.8). */
+.fuente { min-width: 0; flex-wrap: wrap; }
+.fuente a { overflow-wrap: anywhere; word-break: break-word; display: inline-block; padding: var(--sp-1) 0; min-width: 0; }
 
 /* --- Sistema visual -------------------------------------- */
 .muestras { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
@@ -307,7 +309,7 @@ th, td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--line);
   aside { padding: var(--sp-4); }
   nav { display: flex; flex-wrap: wrap; }
   .perfil { margin: 0; padding-top: var(--sp-2); }
-  .dos, .cuatro, .login-wrap { grid-template-columns: 1fr; }
+  .dos, .cuatro, .login-wrap { grid-template-columns: minmax(0, 1fr); } /* TA-031 · H5: minmax(0, …) evita que el contenido ancho estire la columna */
   .login-intro { display: none; }
   .head { align-items: flex-start; flex-direction: column; }
   main { padding: var(--sp-4); }
@@ -439,3 +441,23 @@ h2.seccion {
   body { background: var(--panel); }
 }
 .selector-proyecto { max-width: 360px; margin-bottom: var(--sp-4); }
+
+/* --- TA-031 · H3: campo inválido señalado más allá del color ---- */
+[aria-invalid="true"] {
+  border-color: var(--bad);
+  border-width: 2px;
+  background: var(--badbg);
+}
+
+/* --- TA-031 · H5: tooltips de ayuda sin desbordar en móvil --- */
+@media (max-width: 700px) {
+  .ayuda-texto {
+    position: fixed !important;
+    left: var(--sp-4) !important;
+    right: var(--sp-4) !important;
+    top: auto !important;
+    bottom: var(--sp-4);
+    width: auto;
+    max-width: none;
+  }
+}

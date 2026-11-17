@@ -84,12 +84,13 @@ export function Estadistica({ etiqueta, valor, detalle, ayuda, children }) {
 }
 
 /** Barra de progreso. porcentaje: 0-100 */
-export function Barra({ porcentaje }) {
+export function Barra({ porcentaje, etiqueta = 'Progreso' }) {
   const valor = Math.max(0, Math.min(100, Number(porcentaje) || 0))
   return (
     <div
       className="barra"
       role="progressbar"
+      aria-label={etiqueta}
       aria-valuenow={valor}
       aria-valuemin={0}
       aria-valuemax={100}

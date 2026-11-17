@@ -103,7 +103,7 @@ function DashboardDemo({ proyecto, notionFallo, ultimaCorrida, onSimular, onAler
               detalle={`${sup.detalle.tareas_listas} de ${sup.detalle.tareas_total} tareas · Notion`}
               ayuda={<AyudaIndicador id="I1" sup={sup} />}
             >
-              <Barra porcentaje={sup.indicadores.I1} />
+              <Barra porcentaje={sup.indicadores.I1} etiqueta="Indicador I1" />
             </Estadistica>
             <Estadistica
               etiqueta={`${INDICADORES.I2.etiqueta} (I2)`}
