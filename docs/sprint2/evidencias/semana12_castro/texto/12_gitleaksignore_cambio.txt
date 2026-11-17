@@ -1,0 +1,16 @@
+PS> git show 5369a84 -- .gitleaksignore
+5369a84 jhonk16: TA-052: regresión final (pytest 377, Playwright 18) y escaneo gitleaks sin hallazgos
+diff --git a/.gitleaksignore b/.gitleaksignore
+index e7b551f..0e2ad76 100644
+--- a/.gitleaksignore
++++ b/.gitleaksignore
+@@ -1,2 +1,9 @@
+ # Falso positivo histórico: LANGSMITH_API_KEY estaba vacía (longitud 0).
+ e9de2dd70bbd6c759fe797a381c959b2c74daad4:.env.example:generic-api-key:28
++
++# Falso positivo (TA-052): contrasena fija solo para la base de pruebas, no es un secreto real.
++a937753ebe94e3a5935a04b156e3fc1817689ced:tests/integration/test_ta022_supervision_api.py:generic-api-key:25
++# Falso positivo (TA-052): variable 'secreto' que se lee de JWT_SECRET; no hay valor literal.
++4a4269951906903dc8dd74b124b6fc86e42e2ed5:backend/app/modulos/autenticacion/rutas.py:generic-api-key:60
++# Falso positivo (TA-052): LANGSMITH_API_KEY vacia en la plantilla (mismo caso que arriba, otro commit).
++a18213bb98cbf9f294dd6a14a9cf5f52dad115c2:.env.example:generic-api-key:28

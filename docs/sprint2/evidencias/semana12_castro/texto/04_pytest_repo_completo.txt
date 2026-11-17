@@ -1,0 +1,36 @@
+..s..s...s...s....s...s............s........................ssssssssss.s [ 18%]
+........................................................................ [ 36%]
+..................ss.................................................... [ 54%]
+........................................................................ [ 72%]
+...s.........................................s.......................... [ 90%]
+.......................................                                  [100%]
+============================== warnings summary ===============================
+..\..\..\..\0f4ed512ffd60a81\441a28bb-6d9a-42ee-9ca8-e5c3d7ea7d69\scratchpad\venv\Lib\site-packages\slowapi\extension.py:720
+  C:\Users\GRLL\AppData\Local\Temp\claude\0f4ed512ffd60a81\441a28bb-6d9a-42ee-9ca8-e5c3d7ea7d69\scratchpad\venv\Lib\site-packages\slowapi\extension.py:720: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(func):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+SKIPPED [1] tests\integration\test_cp01_cp08.py:94: BLOQUEADO (parcial): el dataset solo contiene commits; PR e issues se verifican contra la API real (docs/sprint1/pruebas-github-por-caso).
+SKIPPED [1] tests\integration\test_cp01_cp08.py:126: BLOQUEADO (parcial): el código registra reintento_en_segundos pero no programa la ejecución futura (ver TA-003, CP-02).
+SKIPPED [1] tests\integration\test_cp01_cp08.py:200: BLOQUEADO: falta el conector real de Drive y la clasificación existente / faltante / desactualizado con lista de entregables y umbral.
+SKIPPED [1] tests\integration\test_cp01_cp08.py:240: BLOQUEADO (parcial): no existe aún la API consolidada por equipo y semana; se verifica el consolidado del grafo de TA-015.
+SKIPPED [1] tests\integration\test_cp01_cp08.py:298: BLOQUEADO: la clasificación verde/amarillo/rojo y sus umbrales aprobados no están implementados; hoy solo existen las alertas R1-R4.
+SKIPPED [1] tests\integration\test_cp01_cp08.py:344: BLOQUEADO: el servidor aún usa docente_actual() = 1 (temporal) y no hay rol estudiante; falta enlazar AR-04 a las rutas y el control por rol.
+SKIPPED [1] tests\integration\test_drive_opcional.py:112: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta018_cutoff_history.py:75: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta018_cutoff_history.py:92: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta018_cutoff_history.py:109: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta018_cutoff_history.py:128: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta022_supervision_api.py:87: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta022_supervision_api.py:94: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta022_supervision_api.py:100: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta022_supervision_api.py:113: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta022_supervision_api.py:142: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta022_supervision_api.py:153: Falta DATABASE_URL.
+SKIPPED [1] tests\integration\test_ta037_cp10_real_sources.py:72: CP-10 real: faltan variables en .env: GITHUB_TOKEN, CP10_GITHUB_REPO, NOTION_TOKEN, NOTION_DATABASE_ID, GOOGLE_SERVICE_ACCOUNT_JSON, GOOGLE_DRIVE_FOLDER_ID
+SKIPPED [1] tests\test_validacion_postgres.py:54: Falta DATABASE_URL.
+SKIPPED [1] tests\test_validacion_postgres.py:68: Falta DATABASE_URL.
+SKIPPED [1] tests\unit\test_r5_coherencia_commits.py:194: Falta DATABASE_URL.
+SKIPPED [1] tests\unit\test_ta030_estabilidad.py:178: Falta DATABASE_URL.
+377 passed, 22 skipped, 1 warning in 6.50s

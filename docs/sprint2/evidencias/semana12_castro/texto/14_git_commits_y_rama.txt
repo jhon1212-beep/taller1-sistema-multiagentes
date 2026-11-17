@@ -1,0 +1,26 @@
+PS> git log --oneline -3
+5f0abee TA-051 y TA-032: documento de la semana 12 de Castro (fórmulas verificadas y preparación del piloto)
+5369a84 TA-052: regresión final (pytest 377, Playwright 18) y escaneo gitleaks sin hallazgos
+93fab2e Merge pull request #40 from jhon1212-beep/mondragon/semana12
+
+PS> git ls-remote origin castro/semana12
+5f0abee602eb1ed79c0b7fa08ac015e89a3363e6  refs/heads/castro/semana12
+
+PS> git diff --stat origin/main castro/semana12
+ .gitleaksignore                                    |   7 +++
+ .../Semana12_Castro_TA-032_TA-051_TA-052.docx      | Bin 0 -> 179898 bytes
+ .../sprint2/evidencias/TA-052/barrido_secretos.txt |   6 ++
+ .../evidencias/TA-052/captura_barrido_secretos.png | Bin 0 -> 17086 bytes
+ .../evidencias/TA-052/captura_formulas_TA-051.png  | Bin 0 -> 32738 bytes
+ .../sprint2/evidencias/TA-052/captura_gitleaks.png | Bin 0 -> 28698 bytes
+ .../evidencias/TA-052/captura_playwright_demo.png  | Bin 0 -> 75144 bytes
+ docs/sprint2/evidencias/TA-052/captura_pytest.png  | Bin 0 -> 25091 bytes
+ docs/sprint2/evidencias/TA-052/gitleaks.json       |   1 +
+ docs/sprint2/evidencias/TA-052/gitleaks.txt        |  16 +++++
+ .../TA-052/gitleaks_antes_de_ignorar.json          |  65 +++++++++++++++++++++
+ .../sprint2/evidencias/TA-052/gitleaks_resumen.txt |  17 ++++++
+ docs/sprint2/evidencias/TA-052/playwright_demo.txt |  23 ++++++++
+ .../evidencias/TA-052/prueba_formulas_TA-051.txt   |  16 +++++
+ docs/sprint2/evidencias/TA-052/pytest.txt          |  36 ++++++++++++
+ docs/sprint2/evidencias/TA-052/pytest.xml          |   1 +
+ 16 files changed, 188 insertions(+)

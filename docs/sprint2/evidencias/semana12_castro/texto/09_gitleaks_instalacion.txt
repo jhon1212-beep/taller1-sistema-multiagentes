@@ -1,0 +1,6 @@
+PS> winget list --id Gitleaks.Gitleaks
+Nombre   Id                Versión Origen
+Gitleaks Gitleaks.Gitleaks 8.30.1  winget
+
+PS> gitleaks version
+8.30.1

@@ -1,0 +1,17 @@
+PS> py --version
+Python 3.14.6
+
+PS> node --version
+v24.22.1
+
+PS> git --version
+git version 2.55.0.windows.2
+
+PS> gitleaks version
+8.30.1
+
+PS> git log -1 --format='%h %s' main
+93fab2e Merge pull request #40 from jhon1212-beep/mondragon/semana12
+
+PS> git branch --show-current
+castro/semana12

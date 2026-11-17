@@ -1,0 +1,10 @@
+PS> pytest tests/test_seguridad_secretos.py tests/test_seguridad.py -v
+tests/test_seguridad_secretos.py::test_credenciales_excluidas_y_plantilla_versionable PASSED
+tests/test_seguridad_secretos.py::test_variables_sensibles_documentadas_sin_valores PASSED
+tests/test_seguridad.py::test_payload_sql_no_causa_error_500[' OR '1'='1] PASSED
+tests/test_seguridad.py::test_payload_sql_no_causa_error_500[1; DROP TABLE docente;--] PASSED
+tests/test_seguridad.py::test_payload_sql_no_causa_error_500[' UNION SELECT NULL--] PASSED
+tests/test_seguridad.py::test_payload_sql_no_causa_error_500[admin'--] PASSED
+tests/test_seguridad.py::test_docs_no_filtra_stacktrace PASSED
+tests/test_seguridad.py::test_cabeceras_basicas PASSED
+======================== 8 passed, 1 warning in 1.39s =========================

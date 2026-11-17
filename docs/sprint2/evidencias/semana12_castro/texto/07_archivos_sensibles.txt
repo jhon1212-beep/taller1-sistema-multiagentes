@@ -1,0 +1,23 @@
+PS> git ls-files | Select-String '\.env$|\.pem$|\.key$|credentials|service-account|\.pfx$'
+(sin coincidencias: ningún archivo sensible está versionado)
+
+PS> git ls-files | Select-String '\.env'
+.env.example
+
+PS> Get-Content .gitignore | Select-String 'env|secret|credential|service-account|key'
+1:# Secretos: nunca se suben (RN-001)
+2:.env
+3:.env.*
+4:!.env.example
+10:.venv/
+11:venv/
+30:*.key
+31:*service-account*.json
+32:*credentials*.json
+35:client_secret_*.json
+36:credentials.json
+
+PS> git check-ignore -v .env backend/.env credenciales.json service-account.json
+.gitignore:2:.env	.env
+.gitignore:2:.env	backend/.env
+.gitignore:31:*service-account*.json	service-account.json

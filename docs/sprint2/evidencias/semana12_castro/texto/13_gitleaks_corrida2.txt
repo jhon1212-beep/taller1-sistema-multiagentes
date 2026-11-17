@@ -1,0 +1,5 @@
+PS> gitleaks detect --source . --log-opts="--all --no-textconv" --redact   (con el .gitleaksignore actualizado)
+INF 155 commits scanned.
+INF scanned ~12376893 bytes (12.38 MB) in 737ms
+INF no leaks found
+exit code: 0

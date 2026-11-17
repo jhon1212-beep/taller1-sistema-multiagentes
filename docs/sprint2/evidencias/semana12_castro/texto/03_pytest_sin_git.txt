@@ -1,0 +1,9 @@
+PS> cd taller1-sistema-multiagentes-main   (carpeta descargada, sin .git)
+PS> python -m pytest -q
+E       AssertionError: fatal: not a git repository (or any of the parent directories): .git
+E         
+E       assert 128 == 0
+E        +  where 128 = CompletedProcess(args=['git', 'check-ignore', '--no-index', '-z', '--stdin'], returncode=128, stdout='', stderr='fatal: not a git repository (or a
+tests\test_seguridad_secretos.py:19: AssertionError
+FAILED tests/test_seguridad_secretos.py::test_credenciales_excluidas_y_plantilla_versionable
+1 failed, 376 passed, 22 skipped, 1 warning in 8.97s

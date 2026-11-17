@@ -1,0 +1,23 @@
+PS> Get-Content gitleaks.json | ConvertFrom-Json   (valores censurados)
+
+Hallazgo 1
+  Regla   : generic-api-key
+  Archivo : tests/integration/test_ta022_supervision_api.py:25
+  Commit  : a937753e  (Luis Reyes, 2026-11-03)
+  Secreto : REDACTED
+  Huella  : a937753ebe94e3a5935a04b156e3fc1817689ced:tests/integration/t...
+
+Hallazgo 2
+  Regla   : generic-api-key
+  Archivo : backend/app/modulos/autenticacion/rutas.py:60
+  Commit  : 4a426995  (Claude Code, 2026-10-20)
+  Secreto : REDACTED
+  Huella  : 4a4269951906903dc8dd74b124b6fc86e42e2ed5:backend/app/modulos...
+
+Hallazgo 3
+  Regla   : generic-api-key
+  Archivo : .env.example:28
+  Commit  : a18213bb  (Luis Reyes, 2026-10-06)
+  Secreto : REDACTED
+  Huella  : a18213bb98cbf9f294dd6a14a9cf5f52dad115c2:.env.example:generi...
+

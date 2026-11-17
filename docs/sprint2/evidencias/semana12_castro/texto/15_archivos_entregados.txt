@@ -1,0 +1,21 @@
+PS> Get-ChildItem docs\sprint2\evidencias\TA-052 | Select Name,Length
+barrido_secretos.txt                               362 bytes
+captura_barrido_secretos.png                     17086 bytes
+captura_formulas_TA-051.png                      32738 bytes
+captura_gitleaks.png                             28698 bytes
+captura_playwright_demo.png                      75144 bytes
+captura_pytest.png                               25091 bytes
+gitleaks.json                                        3 bytes
+gitleaks.txt                                       511 bytes
+gitleaks_antes_de_ignorar.json                    3108 bytes
+gitleaks_resumen.txt                               878 bytes
+playwright_demo.txt                               2841 bytes
+prueba_formulas_TA-051.txt                        1163 bytes
+pytest.txt                                        3804 bytes
+pytest.xml                                       59263 bytes
+
+PS> Get-ChildItem docs\sprint2 | Where Name -like 'Semana12*'
+Semana12_Castro_TA-032_TA-051_TA-052.docx                 179898 bytes
+Semana12_Entrega_conjunta.md                                3374 bytes
+Semana12_Mondragon_TA-031_DO-006_TA-050.docx              775391 bytes
+Semana12_Reyes_TA-030_DO-005.md                             5230 bytes
