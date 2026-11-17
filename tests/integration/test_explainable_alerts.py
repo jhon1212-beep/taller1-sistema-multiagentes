@@ -1,4 +1,7 @@
 """TA-023: integra el Supervisor, motor, seudonimización y respaldo."""
+import json
+import re
+
 import pytest
 
 pytest.importorskip("langgraph")
@@ -28,6 +31,11 @@ class FakeLLM:
         self.prompts.append(prompt)
         if self.error:
             raise self.error
+        # TA-046: el prompt por lote pide un arreglo JSON con un texto por alerta.
+        count = re.search(r"exactly (\d+) strings", prompt)
+        if count:
+            texts = [f"Explanation {i} produced by Gemini." for i in range(int(count.group(1)))]
+            return type("Response", (), {"text": json.dumps(texts)})()
         return type("Response", (), {"text": "Explanation produced by Gemini."})()
 
 
@@ -83,7 +91,9 @@ def test_indicators_are_no_longer_none():
 def test_no_real_name_is_sent_to_gemini():
     llm = FakeLLM()
     report = run(explainer=GeminiExplanationGenerator(llm, min_interval_seconds=0))
-    assert len(llm.prompts) == len(report["alertas"]) == 7
+    # TA-046: una sola solicitud a Gemini para las 7 alertas del corte.
+    assert len(report["alertas"]) == 7
+    assert len(llm.prompts) == 1
     sent = "\n".join(llm.prompts)
     assert not [name for name in REAL_NAMES if name in sent]
     assert "Member 1" in sent

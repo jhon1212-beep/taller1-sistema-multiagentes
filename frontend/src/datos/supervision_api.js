@@ -93,6 +93,8 @@ export const ESTADO_FUENTE = {
   ok: { texto: 'Disponible', tono: 'ok' },
   fallo: { texto: 'Integración fallida', tono: 'bad' },
   pendiente: { texto: 'Sin sincronizar', tono: 'warn' },
+  // Drive es opcional: el proyecto no registró la carpeta (no es un fallo).
+  no_configurada: { texto: 'No configurada', tono: 'neutro' },
 }
 
 /** Mensaje claro para el docente a partir de un ApiError. */

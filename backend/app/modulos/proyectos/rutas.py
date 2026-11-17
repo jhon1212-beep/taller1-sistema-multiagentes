@@ -37,7 +37,8 @@ class IntegranteIn(BaseModel):
 class FuentesIn(BaseModel):
     github: str = Field(min_length=1, max_length=500)
     notion: str = Field(min_length=1, max_length=500)
-    drive: str = Field(min_length=1, max_length=500)
+    # Opcional: sin carpeta de Drive el Supervisor la marca "no_configurada".
+    drive: str | None = Field(default=None, max_length=500)
 
 
 class ProyectoIn(BaseModel):
@@ -81,7 +82,7 @@ def _a_dominio(datos: ProyectoIn, docente_id: int) -> Proyecto:
         url_publica=datos.url_publica,
         elemento_verificar=datos.elemento_verificar,
         integrantes=[Integrante(i.nombre, i.correo) for i in datos.integrantes],
-        fuentes=datos.fuentes.model_dump(),
+        fuentes={t: r for t, r in datos.fuentes.model_dump().items() if r},
     )
 
 

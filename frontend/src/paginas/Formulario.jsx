@@ -7,6 +7,9 @@ const VACIO = {
   github: '', notion: '', drive: '', url: '', selector: '',
 }
 
+// Drive es opcional: hay equipos que no usan una carpeta compartida.
+const OPCIONALES = ['drive']
+
 const esURL = valor => {
   try {
     return ['http:', 'https:'].includes(new URL(valor).protocol)
@@ -20,11 +23,12 @@ export default function Formulario({ proyecto, onGuardar, onCancelar }) {
   const [error, setError] = useState('')
   const editando = Boolean(proyecto)
 
-  const campo = (clave, etiqueta, type = 'text') => (
+  const campo = (clave, etiqueta, type = 'text', ayuda) => (
     <Campo
       etiqueta={etiqueta}
       type={type}
-      required
+      required={!OPCIONALES.includes(clave)}
+      ayuda={ayuda}
       value={datos[clave] ?? ''}
       onChange={e => setDatos({ ...datos, [clave]: e.target.value })}
     />
@@ -39,13 +43,15 @@ export default function Formulario({ proyecto, onGuardar, onCancelar }) {
     if (!limpio.nombre) {
       return setError('El nombre del proyecto es obligatorio. No se guardó el proyecto.')
     }
-    if (Object.values(limpio).some(v => !v) || !limpio.integrantes.split(',').some(v => v.trim())) {
-      return setError('Completa todos los campos y registra al menos un integrante.')
+    const faltante = Object.entries(limpio).some(([k, v]) => !v && !OPCIONALES.includes(k))
+    if (faltante || !limpio.integrantes.split(',').some(v => v.trim())) {
+      return setError('Completa todos los campos obligatorios y registra al menos un integrante.')
     }
     if (limpio.inicio > limpio.fin) {
       return setError('La fecha de fin debe ser igual o posterior a la fecha de inicio.')
     }
-    if (!['github', 'notion', 'drive', 'url'].every(k => esURL(limpio[k]))) {
+    const enlaces = ['github', 'notion', 'url', ...(limpio.drive ? ['drive'] : [])]
+    if (!enlaces.every(k => esURL(limpio[k]))) {
       return setError(
         'Las referencias de fuentes y la URL pública deben ser direcciones HTTP o HTTPS válidas.',
       )
@@ -60,7 +66,7 @@ export default function Formulario({ proyecto, onGuardar, onCancelar }) {
       <Encabezado
         antetitulo={`Mis proyectos / ${editando ? 'Editar' : 'Registrar'} proyecto`}
         titulo={editando ? 'Editar proyecto' : 'Registrar proyecto académico'}
-        descripcion="Todos los campos son obligatorios. El equipo se registra como información del proyecto."
+        descripcion="Todos los campos son obligatorios salvo la carpeta de Google Drive. El equipo se registra como información del proyecto."
         accion={
           <Boton variante="secundario" onClick={onCancelar}>
             Volver a Mis proyectos
@@ -90,7 +96,12 @@ export default function Formulario({ proyecto, onGuardar, onCancelar }) {
           <h3>2. Fuentes de evidencia</h3>
           {campo('github', 'Repositorio de GitHub', 'url')}
           {campo('notion', 'Base de tareas de Notion', 'url')}
-          {campo('drive', 'Carpeta de Google Drive', 'url')}
+          {campo(
+            'drive',
+            'Carpeta de Google Drive (opcional)',
+            'url',
+            'Déjalo vacío si el equipo no usa Drive: no se evalúa la regla R4 y la fuente aparece como «No configurada».',
+          )}
         </article>
 
         <article className="card">

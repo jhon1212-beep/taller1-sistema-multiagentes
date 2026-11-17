@@ -32,10 +32,13 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 def crear_fuente_evidencias(referencias):
     if os.getenv("FUENTE_EVIDENCIAS", "real") == "falsa":
         return FuenteEvidenciaFalsa()
+    adaptadores = {
+        "github": FuenteEvidenciaGitHub,
+        "notion": FuenteEvidenciaNotion,
+        "drive": FuenteEvidenciaDrive,  # opcional: solo si el proyecto la registró
+    }
     return FuenteEvidenciaCompuesta({
-        referencias["github"]: FuenteEvidenciaGitHub(),
-        referencias["notion"]: FuenteEvidenciaNotion(),
-        referencias["drive"]: FuenteEvidenciaDrive(),
+        referencias[tipo]: crear() for tipo, crear in adaptadores.items() if referencias.get(tipo)
     })
 
 

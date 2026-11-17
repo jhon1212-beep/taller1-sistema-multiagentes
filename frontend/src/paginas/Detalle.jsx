@@ -120,7 +120,10 @@ function FuenteApi({ eyebrow, titulo, descripcion, unidad, estado, columnas, fil
           <h2>{titulo}</h2>
           <p className="muted">{descripcion}</p>
         </div>
-        {datos && <Pill tono={datos.estado_fuente === 'ok' ? 'ok' : 'warn'}>{datos.total} {unidad}</Pill>}
+        {datos && datos.estado_fuente === 'no_configurada' && <Pill>No configurada</Pill>}
+        {datos && datos.estado_fuente !== 'no_configurada' && (
+          <Pill tono={datos.estado_fuente === 'ok' ? 'ok' : 'warn'}>{datos.total} {unidad}</Pill>
+        )}
       </div>
 
       {!datos && !error && <p className="muted">Cargando…</p>}
@@ -133,11 +136,17 @@ function FuenteApi({ eyebrow, titulo, descripcion, unidad, estado, columnas, fil
         </Aviso>
       )}
 
-      {datos && datos.estado_fuente !== 'ok' && (
+      {datos && datos.estado_fuente === 'no_configurada' && (
+        <Aviso>
+          El proyecto no registró esta fuente. Es opcional: puedes agregarla editando el proyecto.
+        </Aviso>
+      )}
+
+      {datos && datos.estado_fuente === 'fallo' && (
         <Aviso>La fuente todavía no se ha sincronizado con éxito; se muestra lo último guardado.</Aviso>
       )}
 
-      {datos && <Tabla columnas={columnas} filas={filas(datos.items)} vacio="Todavía no hay registros guardados." />}
+      {datos && datos.estado_fuente !== 'no_configurada' && <Tabla columnas={columnas} filas={filas(datos.items)} vacio="Todavía no hay registros guardados." />}
     </article>
   )
 }
@@ -290,8 +299,12 @@ function ResumenApi({ proyecto }) {
         etiqueta="Tareas terminadas"
         valor={valor(tareas, d => (d.estado === 'ok' ? `${d.resumen.listo} / ${d.total}` : '—'))}
       />
-      <Estadistica etiqueta="Documentos guardados" valor={valor(documentos, d => d.total)} />
-      <Estadistica etiqueta="Fuentes previstas" valor="3" />
+      <Estadistica
+        etiqueta="Documentos guardados"
+        valor={proyecto.drive ? valor(documentos, d => d.total) : 'No configurada'}
+      />
+      {/* Drive es opcional: el proyecto puede tener 2 o 3 fuentes. */}
+      <Estadistica etiqueta="Fuentes previstas" valor={proyecto.drive ? '3' : '2'} />
     </div>
   )
 }
@@ -337,9 +350,13 @@ export default function Detalle({ proyecto, notionFallo, onNotionFallo, onVolver
               ].map(([nombre, enlace]) => (
                 <div className="fuente" key={nombre}>
                   <b>{nombre}</b>
-                  <a href={enlace} target="_blank" rel="noopener noreferrer">
-                    {enlace}
-                  </a>
+                  {enlace ? (
+                    <a href={enlace} target="_blank" rel="noopener noreferrer">
+                      {enlace}
+                    </a>
+                  ) : (
+                    <span className="muted">No configurada (opcional)</span>
+                  )}
                 </div>
               ))}
             </article>

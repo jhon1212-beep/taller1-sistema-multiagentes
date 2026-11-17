@@ -4,6 +4,7 @@ from __future__ import annotations
 from typing import Any, Mapping, Sequence
 
 from app.modulos.supervision.dominio import Alerta, Explicacion
+from app.modulos.supervision.explicacion import explicar_en_lote
 from app.modulos.supervision.puertos import GeneradorExplicacion
 
 RATE_LIMIT = "rate_limit"
@@ -45,3 +46,22 @@ class ResilientExplanationGenerator:
                 "detalle": type(error).__name__,
             })
             return self._fallback.generar(alerta, fecha_corte, contexto=contexto)
+
+    def generar_lote(
+        self,
+        alertas: Sequence[Alerta],
+        fecha_corte: str,
+        contextos: Sequence[Sequence[Mapping[str, Any]]] | None = None,
+    ) -> list[Explicacion]:
+        """TA-046: una solicitud por corte; si falla, la plantilla explica todas."""
+        if not alertas:
+            return []
+        try:
+            return explicar_en_lote(self._primary, alertas, fecha_corte, contextos)
+        except Exception as error:  # 429, JSON inválido, número de textos distinto…
+            motivo, detalle = classify_error(error), type(error).__name__
+            self.fallbacks.extend(
+                {"regla": a["regla"], "motivo": motivo, "detalle": detalle} for a in alertas
+            )
+            return explicar_en_lote(self._fallback, alertas, fecha_corte, contextos)
+

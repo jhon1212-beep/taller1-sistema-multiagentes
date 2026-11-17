@@ -103,3 +103,32 @@ test('CP-API5 · la validación web muestra y reejecuta CP-17', async ({ page })
   await expect(page.locator('.validacion-resultado .pill').first()).toHaveText(/PASS|FAIL/)
   await page.screenshot({ path: 'test-results-api/06_validacion.png', fullPage: true })
 })
+
+test('CP-API6 · un proyecto sin carpeta de Drive se registra y la muestra como no configurada', async ({ page }) => {
+  const nombre = `Proyecto sin Drive ${Date.now()}`
+  await entrar(page)
+  await page.getByRole('button', { name: '+ Registrar proyecto' }).click()
+  await page.getByLabel('Nombre del proyecto').fill(nombre)
+  await page.getByLabel('Curso').fill('Taller Integrador 1')
+  await page.getByLabel('Fecha de inicio').fill('2026-09-21')
+  await page.getByLabel('Fecha de fin').fill('2026-12-04')
+  await page.getByLabel(/Integrantes del equipo/).fill('Integrante 1, Integrante 2')
+  await page.getByLabel('Repositorio de GitHub').fill('https://github.com/octocat/Hello-World')
+  await page.getByLabel('Base de tareas de Notion').fill('https://www.notion.so/base-demo-0123456789abcdef0123456789abcdef')
+  // La carpeta de Google Drive queda vacía a propósito: es opcional.
+  await page.getByLabel('URL pública de la aplicación').fill('https://example.com')
+  await page.getByLabel('Elemento a verificar (selector CSS)').fill('h1')
+  await page.getByRole('button', { name: 'Guardar proyecto' }).click()
+
+  const tarjetaProyecto = page.locator('.card', { hasText: nombre }).first()
+  await expect(tarjetaProyecto).toBeVisible()
+  await expect(tarjetaProyecto.getByText('Google Drive')).toHaveCount(0)
+  await tarjetaProyecto.getByRole('button', { name: 'Ver proyecto' }).click()
+  await expect(page.getByText('No configurada (opcional)')).toBeVisible()
+  await expect(page.locator('.stat', { hasText: 'Fuentes previstas' })).toContainText('2')
+  await page.screenshot({ path: 'test-results-api/07_proyecto_sin_drive.png', fullPage: true })
+
+  // Se desactiva para no dejar el proyecto de prueba activo en la lista del docente.
+  await page.getByRole('button', { name: /Mis proyectos/ }).first().click()
+  await page.locator('.card', { hasText: nombre }).first().getByRole('button', { name: 'Desactivar' }).click()
+})

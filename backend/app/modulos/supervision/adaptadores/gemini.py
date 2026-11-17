@@ -44,6 +44,66 @@ def build_explanation_prompt(
     )
 
 
+BATCH_PROMPT_TEMPLATE = """You support a teacher reviewing student software projects.
+For EACH alert below, write 2 or 3 neutral sentences in Spanish explaining why it
+was raised and what should be checked. Use ONLY the facts given for that alert.
+Do not invent names or numbers. Refer to people only by their pseudonyms.
+
+Answer with a JSON array of exactly {count} strings and nothing else: the string
+at position i explains the alert whose "index" is i, in the same order.
+
+Cutoff: {cutoff}
+Alerts:
+{alerts}
+"""
+
+
+def build_batch_prompt(
+    alertas: Sequence[Alerta],
+    fecha_corte: str,
+    contextos: Sequence[Sequence[Mapping[str, Any]]] | None = None,
+) -> str:
+    """TA-046: un solo prompt con todas las alertas del corte, ya seudonimizadas."""
+    items = []
+    for index, alerta in enumerate(alertas):
+        contexto = contextos[index] if contextos else None
+        items.append({
+            "index": index,
+            "rule": alerta["regla"],
+            "description": DESCRIPCIONES.get(alerta["regla"], ""),
+            "source": alerta["fuente"],
+            "evidence": list(contexto) if contexto else {"evidencia_ids": alerta["evidencia_ids"]},
+        })
+    return BATCH_PROMPT_TEMPLATE.format(
+        count=len(alertas),
+        cutoff=fecha_corte,
+        alerts=json.dumps(items, ensure_ascii=False, indent=2),
+    )
+
+
+def parse_batch_answer(text: str, expected: int) -> list[str]:
+    """Lee el arreglo JSON de la respuesta; cualquier forma inesperada es un error.
+
+    Gemini a veces envuelve el JSON en ```json ... ```; se retira ese marco.
+    Un número de textos distinto al de alertas, o un texto vacío, se rechaza
+    para que el respaldo use la plantilla en vez de asignar mal una explicación.
+    """
+    cleaned = text.strip()
+    if cleaned.startswith("```"):
+        cleaned = cleaned.strip("`")
+        cleaned = cleaned[cleaned.find("["):] if "[" in cleaned else cleaned
+    start, end = cleaned.find("["), cleaned.rfind("]")
+    if start == -1 or end == -1:
+        raise ValueError("Gemini did not return a JSON array.")
+    data = json.loads(cleaned[start:end + 1])
+    if not isinstance(data, list) or len(data) != expected:
+        raise ValueError(f"Gemini returned {len(data) if isinstance(data, list) else 0} texts for {expected} alerts.")
+    texts = [str(item).strip() for item in data]
+    if not all(texts):
+        raise ValueError("Gemini returned an empty explanation.")
+    return texts
+
+
 def _response_text(response: Any) -> str:
     """Extrae el texto de una respuesta de Gemini o un objeto simulado."""
     text = getattr(response, "text", None)
@@ -83,12 +143,21 @@ class GeminiExplanationGenerator:
         """Crea el cliente real solo cuando es necesario."""
         from langchain_google_genai import ChatGoogleGenerativeAI
 
+        # TA-046: razonamiento reducido. GEMINI_THINKING_BUDGET (tokens, 0 = sin
+        # razonamiento) o GEMINI_REASONING_EFFORT (low | medium | high) se pasan
+        # solo si están definidas, porque no todos los modelos aceptan ambas.
+        extra: dict[str, Any] = {}
+        if os.getenv("GEMINI_THINKING_BUDGET", "").strip():
+            extra["thinking_budget"] = int(os.environ["GEMINI_THINKING_BUDGET"])
+        if os.getenv("GEMINI_REASONING_EFFORT", "").strip():
+            extra["reasoning_effort"] = os.environ["GEMINI_REASONING_EFFORT"].strip()
         return ChatGoogleGenerativeAI(
             model=model or os.environ["GEMINI_MODEL"],
             google_api_key=api_key or os.environ["GEMINI_API_KEY"],
             temperature=0,
             max_retries=0,
-            timeout=30,
+            timeout=60,
+            **extra,
         )
 
     def _throttle(self) -> None:
@@ -114,3 +183,19 @@ class GeminiExplanationGenerator:
         if not text:
             raise ValueError("Gemini returned an empty response.")
         return {"texto": text, "origen": "gemini"}
+
+    def generar_lote(
+        self,
+        alertas: Sequence[Alerta],
+        fecha_corte: str,
+        contextos: Sequence[Sequence[Mapping[str, Any]]] | None = None,
+    ) -> list[Explicacion]:
+        """TA-046: una sola solicitud a Gemini por proyecto y corte."""
+        if not alertas:
+            return []
+        self._throttle()
+        prompt = build_batch_prompt(alertas, fecha_corte, contextos)
+        if self._llm is None:
+            self._llm = self._create_llm(self._model, self._api_key)
+        texts = parse_batch_answer(_response_text(self._llm.invoke(prompt)), len(alertas))
+        return [{"texto": text, "origen": "gemini"} for text in texts]

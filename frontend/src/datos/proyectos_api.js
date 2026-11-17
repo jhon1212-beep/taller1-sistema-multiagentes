@@ -17,7 +17,7 @@ export function deApi(p) {
     integrantes: p.integrantes.map(i => i.nombre).join(', '),
     github: p.fuentes.github,
     notion: p.fuentes.notion,
-    drive: p.fuentes.drive,
+    drive: p.fuentes.drive ?? '', // Drive es opcional
     url: p.url_publica,
     selector: p.elemento_verificar,
     activo: p.activo,
@@ -37,7 +37,7 @@ export function aApi(d) {
       .map(n => n.trim())
       .filter(Boolean)
       .map(nombre => ({ nombre, correo: null })),
-    fuentes: { github: d.github, notion: d.notion, drive: d.drive },
+    fuentes: { github: d.github, notion: d.notion, drive: d.drive || null },
   }
 }
 

@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python
+rootdir: .
+configfile: pytest.ini
+plugins: platformdirs-4.13.5, anyio-4.15.1, langsmith-0.14.17
+collecting ... collected 9 items
+
+tests/test_rutas_evidencias.py::test_ruta_responde_con_estado_ok[commits-github-extra0-sha] PASSED [ 11%]
+tests/test_rutas_evidencias.py::test_ruta_responde_con_estado_ok[tareas-notion-extra1-tarea] PASSED [ 22%]
+tests/test_rutas_evidencias.py::test_ruta_responde_con_estado_ok[documentos-drive-extra2-nombre] PASSED [ 33%]
+tests/test_rutas_evidencias.py::test_ruta_informa_fallo_de_la_fuente[commits-github-extra0-sha] PASSED [ 44%]
+tests/test_rutas_evidencias.py::test_ruta_informa_fallo_de_la_fuente[tareas-notion-extra1-tarea] PASSED [ 55%]
+tests/test_rutas_evidencias.py::test_ruta_informa_fallo_de_la_fuente[documentos-drive-extra2-nombre] PASSED [ 66%]
+tests/test_rutas_evidencias.py::test_fuente_no_registrada_se_reporta_como_no_configurada PASSED [ 77%]
+tests/test_rutas_evidencias.py::test_proyecto_inexistente_devuelve_404 PASSED [ 88%]
+tests/test_rutas_evidencias.py::test_commits_pide_como_maximo_20 PASSED  [100%]
+
+============================== 9 passed in 0.41s ===============================

@@ -7,7 +7,9 @@ from typing import Literal, TypedDict
 
 
 Fuente = Literal["github", "notion", "drive"]
-EstadoFuente = Literal["pendiente", "ok", "fallo"]
+EstadoFuente = Literal["pendiente", "ok", "fallo", "no_configurada"]
+# Drive es opcional: si el proyecto no la registra, no es un fallo ni genera R4.
+FUENTES_OPCIONALES: frozenset[str] = frozenset({"drive"})
 ReglaAlerta = Literal["R1", "R2", "R3", "R4"]
 OrigenExplicacion = Literal["gemini", "plantilla"]
 

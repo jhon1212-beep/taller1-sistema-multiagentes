@@ -18,6 +18,9 @@ con el dataset controlado de TA-017: sin red, sin claves y sin base de datos.
 criterios de aceptación de docs/specs/TA-023.md y las reglas de comportamiento de
 ese documento; confirmar con el plan de pruebas del equipo.
 """
+import json
+import re
+
 import pytest
 
 pytest.importorskip("langgraph")
@@ -54,6 +57,11 @@ class LLMFalso:
         self.prompts.append(prompt)
         if self.error:
             raise self.error
+        # TA-046: el prompt por lote pide un arreglo JSON con un texto por alerta.
+        cantidad = re.search(r"exactly (\d+) strings", prompt)
+        if cantidad:
+            textos = [f"Explicación {i} redactada por el modelo." for i in range(int(cantidad.group(1)))]
+            return type("Respuesta", (), {"text": json.dumps(textos, ensure_ascii=False)})()
         return type("Respuesta", (), {"text": "Explicación redactada por el modelo."})()
 
 
@@ -107,7 +115,8 @@ def test_cp16_el_prompt_de_gemini_no_lleva_nombres_reales():
     llm = LLMFalso()
     informe = consolidar(GeminiExplanationGenerator(llm, min_interval_seconds=0))
     enviado = "\n".join(llm.prompts)
-    assert len(llm.prompts) == len(informe["alertas"]) == 7
+    assert len(informe["alertas"]) == 7
+    assert len(llm.prompts) == 1  # TA-046: una sola solicitud por proyecto y corte
     assert not [n for n in NOMBRES_REALES if n in enviado]
     assert "Member 1" in enviado
     assert {a["origen_explicacion"] for a in informe["alertas"]} == {"gemini"}

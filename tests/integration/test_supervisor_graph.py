@@ -256,7 +256,7 @@ def test_failed_source_is_marked_and_others_continue(adapters):
 def test_source_without_adapter_or_reference_fails_without_being_called(adapters):
     """Verifica fuentes incompletas por falta de adaptador o referencia."""
 
-    # Drive no tendrá referencia.
+    # Drive no tendrá referencia (es opcional).
     references = {
         "github": "owner/repo",
         "notion": "base-demo",
@@ -275,25 +275,32 @@ def test_source_without_adapter_or_reference_fails_without_being_called(adapters
         references=references,
     )
 
-    # GitHub puede ejecutarse; Notion y Drive deben quedar en fallo.
+    # GitHub se ejecuta; Notion falla; Drive sin referencia queda no configurada.
     assert final["estado_fuentes"] == {
         "github": "ok",
         "notion": "fallo",
-        "drive": "fallo",
+        "drive": "no_configurada",
     }
 
-    # Se distingue claramente la causa de cada fallo.
+    # Se distingue claramente la causa de cada estado.
     assert (
         final["errores_fuentes"]["notion"]
         == NO_ADAPTER_ERROR
     )
-    assert (
-        final["errores_fuentes"]["drive"]
-        == NO_REFERENCE_ERROR
-    )
+    assert final["errores_fuentes"]["drive"] is None
 
     # Drive no debe ser invocado si no tiene referencia.
     assert drive.calls == []
+
+
+def test_required_source_without_reference_still_fails(adapters):
+    """GitHub y Notion siguen siendo obligatorias: sin referencia es un fallo."""
+
+    final = run(adapters, references={"notion": "base-demo", "drive": "folder-demo"})
+
+    assert final["estado_fuentes"]["github"] == "fallo"
+    assert final["errores_fuentes"]["github"] == NO_REFERENCE_ERROR
+    assert adapters["github"].calls == []
 
 
 def test_no_source_remains_pending_even_without_any_adapter():

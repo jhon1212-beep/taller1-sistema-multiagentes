@@ -1,0 +1,50 @@
+# TA-025 · Blueprint de Render (plan gratuito) para el backend.
+# Mismos valores que la guía de despliegue en Render y Neon. Se puede crear el
+# servicio a mano desde el panel o con «New > Blueprint» apuntando a este archivo.
+# Los valores marcados con sync: false se escriben en el panel (nunca en el repo).
+services:
+  - type: web
+    name: grupo8-backend
+    runtime: python
+    plan: free
+    region: virginia            # Render no tiene región en Sudamérica; Neon está en São Paulo
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirements-agentes.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    # Sin healthCheckPath: /health tiene límite de 5 peticiones por minuto (slowapi)
+    # y el chequeo periódico de Render lo agotaría.
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: DATABASE_URL         # postgresql+psycopg://...neon.tech/...?sslmode=require
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CORS_ORIGINS         # URL del frontend (Vercel o Netlify), sin barra final
+        sync: false
+      - key: SUPERVISION_SOURCES
+        value: real
+      - key: SUPERVISION_EXPLAINER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: NOTION_TOKEN
+        sync: false
+      - key: NOTION_TOKENS        # opcional: {"id de base": "token"} para bases de otros equipos
+        sync: false
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON   # opcional: solo si algún proyecto usa Drive
+        sync: false
+      - key: LANGSMITH_API_KEY
+        sync: false
+      - key: LANGSMITH_TRACING
+        value: "true"
+      - key: LANGSMITH_PROJECT
+        value: grupo8-sp001
+      - key: SUPERVISION_SOURCE_ATTEMPTS
+        value: "2"
+      - key: SUPERVISION_SOURCE_TIMEOUT_S
+        value: "60"               # un corte no debe dejar esperando al docente más de ~1 min por fuente

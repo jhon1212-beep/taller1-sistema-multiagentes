@@ -43,9 +43,9 @@ function trazaDe(r) {
   const fuente = id => {
     const f = r.fuentes?.[id] ?? {}
     const nombre = FUENTES.find(x => x.id === id).nombre
-    return f.estado === 'ok'
-      ? `${nombre}: ${f.evidencias} evidencias · OK`
-      : `${nombre}: ${f.error ?? 'fallo'} · fallo controlado`
+    if (f.estado === 'ok') return `${nombre}: ${f.evidencias} evidencias · OK`
+    if (f.estado === 'no_configurada') return `${nombre}: no configurada en el proyecto · se omite`
+    return `${nombre}: ${f.error ?? 'fallo'} · fallo controlado`
   }
   const origenes = [...new Set((r.alertas ?? []).map(a => a.origen_explicacion))].join(', ') || '—'
   return [
@@ -147,6 +147,8 @@ export default function DashboardApi({ proyecto, onAlerta, onValidacion, onHisto
   const ejecucionDelCorte = ejecucion && ejecucion.fecha_corte.slice(0, 10) === diaMostrado ? ejecucion : null
   const estados = ind?.estado_fuentes ?? {}
   const disponibles = FUENTES.filter(f => estados[f.id] === 'ok').length
+  // Drive es opcional: si el proyecto no la registró no cuenta en el total.
+  const configuradas = FUENTES.filter(f => estados[f.id] !== 'no_configurada').length
 
   const accion = (
     <div className="acciones-corte">
@@ -250,7 +252,7 @@ export default function DashboardApi({ proyecto, onAlerta, onValidacion, onHisto
             <Estadistica
               etiqueta={`${INDICADORES.I4.etiqueta} (I4)`}
               valor={formatoIndicador('I4', ind.indicadores.I4)}
-              detalle="Desde la última evidencia · 3 fuentes"
+              detalle="Desde la última evidencia · fuentes registradas"
               ayuda={<AyudaIndicador id="I4" valor={ind.indicadores.I4} dia={diaMostrado} />}
             />
           </div>
@@ -261,7 +263,7 @@ export default function DashboardApi({ proyecto, onAlerta, onValidacion, onHisto
 
       <section aria-labelledby="dash-fuentes">
         <h2 id="dash-fuentes" className="seccion">
-          Estado de las fuentes{ind ? ` · ${disponibles} de ${FUENTES.length} disponibles` : ''}
+          Estado de las fuentes{ind ? ` · ${disponibles} de ${configuradas} disponibles` : ''}
         </h2>
         <div className="grid tres">
           {FUENTES.map(f => {
@@ -274,11 +276,13 @@ export default function DashboardApi({ proyecto, onAlerta, onValidacion, onHisto
                   <Pill tono={e.tono}>{e.texto}</Pill>
                 </div>
                 <p className="muted small">
-                  {leida
-                    ? leida.estado === 'ok'
-                      ? `${leida.evidencias} ${f.aporta} leídos en esta ejecución`
-                      : leida.error
-                    : 'Estado registrado en la última sincronización.'}
+                  {estados[f.id] === 'no_configurada'
+                    ? 'El proyecto no registró esta fuente; no se evalúa su regla.'
+                    : leida
+                      ? leida.estado === 'ok'
+                        ? `${leida.evidencias} ${f.aporta} leídos en esta ejecución`
+                        : leida.error
+                      : 'Estado registrado en la última sincronización.'}
                 </p>
                 <small className="muted">Referencia: {proyecto[f.id] || '—'}</small>
               </article>

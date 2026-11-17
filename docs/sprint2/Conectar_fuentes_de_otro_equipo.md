@@ -10,7 +10,9 @@ Pega los enlaces tal como salen en el navegador. El backend extrae el identifica
 |---|---|---|
 | GitHub | `https://github.com/org/repo` | `org/repo` |
 | Notion | `https://app.notion.com/p/Tareas-<32 caracteres>` o `https://www.notion.so/...` | el id de la base |
-| Drive | `https://drive.google.com/drive/folders/<id>?usp=sharing` | el id de la carpeta |
+| Drive (opcional) | `https://drive.google.com/drive/folders/<id>?usp=sharing` | el id de la carpeta |
+
+GitHub y Notion son obligatorias. **Drive es opcional**: si el equipo no usa una carpeta compartida, el campo se deja vacío. En ese caso la fuente aparece como «No configurada», no se evalúa la regla R4 y los indicadores I1–I3 no cambian (salen de Notion); I4 se calcula con la última evidencia de GitHub y Notion.
 
 ## Lo que el equipo debe permitir
 
@@ -43,12 +45,12 @@ Una integración interna de Notion solo ve su propio espacio de trabajo. Por eso
 
   Un estado distinto (por ejemplo `Bloqueado`) se guarda vacío: la tarea cuenta como no terminada y no se pierde el corte.
 
-### Google Drive
+### Google Drive (solo si el equipo la registra)
 - Compartir la carpeta del proyecto, como **Lector**, con el correo de la cuenta de servicio (el `client_email` del JSON del sistema). Que la carpeta sea «cualquiera con el enlace» no basta para la API.
 - Se leen los documentos de la carpeta y de sus subcarpetas, hasta 3 niveles y 50 carpetas. También funciona dentro de unidades compartidas.
 
 ## Cómo comprobarlo
 
-1. Registrar el proyecto con sus 3 enlaces.
+1. Registrar el proyecto con sus enlaces (2 o 3, según use Drive).
 2. Abrir el Detalle del proyecto y revisar las pestañas GitHub, Notion y Google Drive.
 3. En el Dashboard, pulsar «Ejecutar supervisión». Las tarjetas de fuentes deben decir «Disponible». Si una dice «Integración fallida», el mensaje indica cuál de los permisos anteriores falta. Las otras fuentes siguen funcionando (RN-002).

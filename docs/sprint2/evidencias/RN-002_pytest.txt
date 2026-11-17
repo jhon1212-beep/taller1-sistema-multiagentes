@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.18, pytest-9.1.1, pluggy-1.6.0 -- /usr/local/bin/python
+rootdir: .
+configfile: pytest.ini
+plugins: platformdirs-4.13.5, anyio-4.15.1, langsmith-0.14.17
+collecting ... collected 8 items
+
+tests/test_fallos_fuentes.py::test_cp16_github_caido_queda_en_fallo PASSED [ 12%]
+tests/test_fallos_fuentes.py::test_cp08_token_de_notion_invalido_queda_en_fallo PASSED [ 25%]
+tests/test_github_resiliencia.py::test_limite_http_se_convierte_en_error_controlado[403] PASSED [ 37%]
+tests/test_github_resiliencia.py::test_limite_http_se_convierte_en_error_controlado[429] PASSED [ 50%]
+tests/test_github_resiliencia.py::test_fallo_api_se_convierte_en_error_controlado[error0] PASSED [ 62%]
+tests/test_github_resiliencia.py::test_fallo_api_se_convierte_en_error_controlado[error1] PASSED [ 75%]
+tests/test_github_resiliencia.py::test_fallo_conserva_datos_y_continua_con_otro_equipo[error0-rate_limit] PASSED [ 87%]
+tests/test_github_resiliencia.py::test_fallo_conserva_datos_y_continua_con_otro_equipo[error1-error_api] PASSED [100%]
+
+============================== 8 passed in 0.27s ===============================

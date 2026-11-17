@@ -299,7 +299,9 @@ def cost() -> dict:
     alerts = {p: len(run_graph(build_source_adapters("dataset"), p)["alertas"]) for p in (1, 2)}
     return {
         "costo_servicios_soles": 0,
-        "llamadas_gemini_por_corte_hoy": alerts,  # una por alerta (TA-023)
+        # TA-046: una solicitud por proyecto y corte si hay alertas (antes, una por alerta).
+        "alertas_por_corte": alerts,
+        "llamadas_gemini_por_corte_hoy": {p: (1 if n else 0) for p, n in alerts.items()},
         "limite_diario_gratuito_gemini": 20,
         "nota": (
             "Estimación del documento base, no consumo real ni cuota verificada. "

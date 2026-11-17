@@ -8,10 +8,30 @@ indicadores y reglas, alertas explicables, historial por corte y API de consulta
 `START -> supervisor -> [github_agent | notion_agent | drive_agent] -> consolidate -> evaluate -> explain -> END`
 
 - `supervisor`: valida las referencias de las fuentes y la fecha de corte.
-- `github_agent`, `notion_agent`, `drive_agent`: corren en paralelo (`Send`), obtienen evidencias y registran su fallo sin detener a los demás (RN-002).
+- `github_agent`, `notion_agent`, `drive_agent`: corren en paralelo (`Send`), obtienen evidencias y registran su fallo sin detener a los demás (RN-002). Desde TA-030 reintentan una vez los errores transitorios (5xx, 429, red) y cortan por tiempo una fuente colgada (`estabilidad.py`).
 - `consolidate`: une las evidencias y elimina duplicados por fuente e identificador.
 - `evaluate`: ejecuta `motor_indicadores.evaluar`, sin LLM, para I1–I4 y R1–R4.
-- `explain`: arma un contexto seudonimizado y usa el puerto `GeneradorExplicacion`.
+- `explain`: arma un contexto seudonimizado y pide **todas** las explicaciones del corte en una sola solicitud (TA-046, `explicacion.py`); si falla, la plantilla explica todas.
+
+### Drive opcional
+
+GitHub y Notion son obligatorias; Drive no. Si el proyecto no registró la carpeta,
+el Supervisor no despacha al agente Drive y marca la fuente `no_configurada`
+(no es un `fallo` y no lleva error). El nodo `evaluate` descarta las alertas de
+esa fuente, así que R4 no se emite. I1–I3 salen de Notion y no cambian; I4 usa la
+última evidencia de las fuentes registradas. Lo cubre `tests/integration/test_drive_opcional.py`.
+
+### Estabilidad con fuentes reales (TA-030)
+
+| Variable | Por defecto | Qué controla |
+|---|---|---|
+| `SUPERVISION_SOURCE_ATTEMPTS` | 2 | Intentos por fuente (solo se reintentan errores transitorios) |
+| `SUPERVISION_RETRY_BACKOFF_S` | 2 | Segundos de espera antes de reintentar |
+| `SUPERVISION_SOURCE_TIMEOUT_S` | 90 | Tiempo máximo por fuente; pasado, la fuente queda en `fallo` |
+
+Las credenciales inválidas, los permisos y las referencias mal escritas no se
+reintentan. El consolidado trae `estabilidad`: intentos y duración de cada agente.
+Evidencia: `python backend/scripts/ta030_tres_ejecuciones.py` (3 ejecuciones con trazas `TA-030`).
 
 ## Arquitectura hexagonal
 
@@ -90,3 +110,8 @@ Las pruebas de TA-018 y TA-022 necesitan `DATABASE_URL` con una base migrada. Si
 - No se imprimen claves de API.
 - El prompt incluye solo campos seleccionados, con los autores cambiados por `Member N`.
 - La protección cubre los nombres de autores conocidos. Para usar otros datos reales hace falta un control de privacidad más amplio.
+
+## Contrato y trazabilidad (TA-045, RN-003)
+
+- Modelos de respuesta de las 4 rutas: `contrato.py`. Contrato completo: `docs/api/openapi.json` (`python backend/scripts/exportar_openapi.py`).
+- Checklist de trazabilidad contra la base: `python backend/scripts/verificar_trazabilidad.py` (consultas en `docs/sprint2/RN-003_trazabilidad.sql`).
