@@ -8,6 +8,7 @@ from __future__ import annotations
 from dataclasses import replace
 
 from app.modulos.proyectos.dominio import (
+    FUENTES_OBLIGATORIAS,
     TIPOS_FUENTE,
     Proyecto,
     ProyectoInvalido,
@@ -28,13 +29,22 @@ def validar(proyecto: Proyecto) -> None:
         raise ProyectoInvalido("El proyecto necesita al menos 1 integrante.")
     if any(not i.nombre.strip() for i in proyecto.integrantes):
         raise ProyectoInvalido("Todos los integrantes deben tener nombre.")
-    for tipo in TIPOS_FUENTE:
-        if not proyecto.fuentes.get(tipo, "").strip():
+    for tipo in FUENTES_OBLIGATORIAS:
+        if not (proyecto.fuentes.get(tipo) or "").strip():
             raise ProyectoInvalido(f"Falta la referencia de la fuente {tipo}.")
+    desconocidas = set(proyecto.fuentes) - set(TIPOS_FUENTE)
+    if desconocidas:
+        raise ProyectoInvalido(f"Fuente no admitida: {', '.join(sorted(desconocidas))}.")
     if not proyecto.url_publica.startswith(("http://", "https://")):
         raise ProyectoInvalido("La URL pública debe empezar con http:// o https://.")
     if not proyecto.elemento_verificar.strip():
         raise ProyectoInvalido("El elemento a verificar es obligatorio.")
+
+
+def _sin_fuentes_vacias(proyecto: Proyecto) -> Proyecto:
+    """Drive es opcional: una referencia vacía equivale a no registrarla."""
+    fuentes = {t: r.strip() for t, r in proyecto.fuentes.items() if r and r.strip()}
+    return replace(proyecto, fuentes=fuentes)
 
 
 class ServicioProyectos:
@@ -42,6 +52,7 @@ class ServicioProyectos:
         self._repo = repositorio
 
     def registrar(self, proyecto: Proyecto) -> Proyecto:
+        proyecto = _sin_fuentes_vacias(proyecto)
         validar(proyecto)
         return self._repo.crear(proyecto)
 
@@ -56,7 +67,9 @@ class ServicioProyectos:
 
     def editar(self, docente_id: int, proyecto_id: int, nuevo: Proyecto) -> Proyecto:
         actual = self.obtener(docente_id, proyecto_id)
-        cambiado = replace(nuevo, id=actual.id, docente_id=actual.docente_id, activo=actual.activo)
+        cambiado = _sin_fuentes_vacias(
+            replace(nuevo, id=actual.id, docente_id=actual.docente_id, activo=actual.activo)
+        )
         validar(cambiado)
         return self._repo.actualizar(cambiado)
 

@@ -18,11 +18,14 @@ def _responder(proyecto_id, tipo, convertir, sesion, limite=None):
     if resultado is None:
         raise HTTPException(status_code=404, detail="Proyecto no encontrado")
     fuente, evidencias = resultado
-    ok = fuente is not None and fuente.estado == "ok"
+    if fuente is None:
+        estado = "no_configurada"  # el proyecto no registró esta fuente (Drive es opcional)
+    else:
+        estado = "ok" if fuente.estado == "ok" else "fallo"
     return {
         "proyecto_id": proyecto_id,
         "fuente": tipo,
-        "estado_fuente": "ok" if ok else "fallo",
+        "estado_fuente": estado,
         "ultima_extraccion": fuente.ultima_sincronizacion if fuente else None,
         "total": len(evidencias),
         "items": [convertir(e) for e in evidencias],

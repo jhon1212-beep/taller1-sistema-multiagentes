@@ -1,0 +1,155 @@
+{
+  "proyecto_id": 1,
+  "fecha_corte": "2026-11-04T23:59:59-05:00",
+  "fuentes": {
+    "github": {
+      "estado": "ok",
+      "error": null,
+      "evidencias": 9,
+      "fuera_de_corte": 11
+    },
+    "notion": {
+      "estado": "ok",
+      "error": null,
+      "evidencias": 10,
+      "fuera_de_corte": 10
+    },
+    "drive": {
+      "estado": "ok",
+      "error": null,
+      "evidencias": 10,
+      "fuera_de_corte": 0
+    }
+  },
+  "total_evidencias": 29,
+  "indicadores": {
+    "I1": 0.0,
+    "I2": 100.0,
+    "I3": 10,
+    "I4": 0
+  },
+  "alertas": [
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3f82ed0d-a4c3-80ba-957d-d682134c19e6"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3f82ed0d-a4c3-80ba-957d-d682134c19e6.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3f82ed0d-a4c3-80be-9fd8-d073d6aa7d34"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3f82ed0d-a4c3-80be-9fd8-d073d6aa7d34.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3f82ed0d-a4c3-80b3-a01c-ed192fdd97a6"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3f82ed0d-a4c3-80b3-a01c-ed192fdd97a6.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3f82ed0d-a4c3-8015-a2f1-ccf73962f81e"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3f82ed0d-a4c3-8015-a2f1-ccf73962f81e.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3f82ed0d-a4c3-8049-ab4a-c9e345f9a270"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3f82ed0d-a4c3-8049-ab4a-c9e345f9a270.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3f82ed0d-a4c3-80c4-baf1-d9c64e3ac010"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3f82ed0d-a4c3-80c4-baf1-d9c64e3ac010.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3f82ed0d-a4c3-8093-9f57-dc0d43dd65ec"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3f82ed0d-a4c3-8093-9f57-dc0d43dd65ec.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3f82ed0d-a4c3-8036-99ee-f0855254719d"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3f82ed0d-a4c3-8036-99ee-f0855254719d.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3ea2ed0d-a4c3-8034-88fa-df9ed7681ed8"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3ea2ed0d-a4c3-8034-88fa-df9ed7681ed8.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R1",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3ea2ed0d-a4c3-806f-b4f5-fedc6ad044ae"
+      ],
+      "explicacion": "Regla R1: Tarea no completada con fecha limite anterior al corte. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3ea2ed0d-a4c3-806f-b4f5-fedc6ad044ae.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R2",
+      "fuente": "notion",
+      "evidencia_ids": [
+        "3ea2ed0d-a4c3-806f-b4f5-fedc6ad044ae"
+      ],
+      "explicacion": "Regla R2: Tarea en curso sin ediciones durante mas de 7 dias. Fuente: notion. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 3ea2ed0d-a4c3-806f-b4f5-fedc6ad044ae.",
+      "origen_explicacion": "plantilla"
+    },
+    {
+      "regla": "R4",
+      "fuente": "drive",
+      "evidencia_ids": [
+        "1MV3HEbxkmwKZw5G4yJUyKG7sYlXopdYn"
+      ],
+      "explicacion": "Regla R4: Carpeta sin documentos modificados en los 14 dias previos al corte. Fuente: drive. Fecha de corte: 2026-11-04T23:59:59-05:00. Referencias de evidencia: 1MV3HEbxkmwKZw5G4yJUyKG7sYlXopdYn.",
+      "origen_explicacion": "plantilla"
+    }
+  ],
+  "estabilidad": {
+    "github": {
+      "intentos": 1,
+      "duracion_ms": 2956.6
+    },
+    "notion": {
+      "intentos": 1,
+      "duracion_ms": 1570.3
+    },
+    "drive": {
+      "intentos": 1,
+      "duracion_ms": 2246.7
+    }
+  }
+}

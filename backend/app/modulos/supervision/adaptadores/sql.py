@@ -27,6 +27,16 @@ from app.modulos.supervision.dominio import cutoff_day  # noqa: F401 (se reexpor
 from app.modulos.supervision.grafo.estado import EstadoSupervision
 
 SOURCES = ("github", "notion", "drive")
+
+
+def _source_status(sources: dict[str, str], kind: str) -> str:
+    """Estado guardado en la tabla fuente, en el vocabulario del contrato.
+
+    Sin fila para esa fuente el proyecto no la registró (Drive es opcional).
+    """
+    if kind not in sources:
+        return "no_configurada"
+    return "pendiente" if sources[kind] == "sin_verificar" else sources[kind]
 VALID_STATES = ("Sin empezar", "En curso", "Listo")  # CHECK estado_valido (TA-004)
 
 
@@ -334,14 +344,7 @@ class SqlSupervisionRepository:
                 "I3": indicator.i3_tareas_vencidas,
                 "I4": indicator.i4_dias_sin_actividad,
             },
-            "estado_fuentes": {
-                kind: (
-                    "pendiente"
-                    if sources.get(kind, "sin_verificar") == "sin_verificar"
-                    else sources[kind]
-                )
-                for kind in SOURCES
-            },
+            "estado_fuentes": {kind: _source_status(sources, kind) for kind in SOURCES},
         }
 
     def obtener_ultimo(self, proyecto_id: int) -> EstadoSupervision | None:
@@ -410,11 +413,7 @@ class SqlSupervisionRepository:
             # cambiado después del corte (la tabla evidencia guarda la última versión).
             "evidencias": list(evidences.values()),
             # Estado actual de cada fuente: el modelo de TA-004 no lo guarda por corte.
-            "estado_fuentes": {
-                kind: ("pendiente" if sources.get(kind, "sin_verificar") == "sin_verificar"
-                       else sources[kind])
-                for kind in SOURCES
-            },
+            "estado_fuentes": {kind: _source_status(sources, kind) for kind in SOURCES},
             "errores_fuentes": {kind: None for kind in SOURCES},
             "indicadores": {
                 "I1": _to_float(indicator.i1_pct_completadas),

@@ -52,3 +52,15 @@ class GeneradorExplicacionPlantilla:
             "texto": texto,
             "origen": "plantilla",
         }
+
+    def generar_lote(
+        self,
+        alertas: Sequence[Alerta],
+        fecha_corte: str,
+        contextos: Sequence[Sequence[Mapping[str, Any]]] | None = None,
+    ) -> list[Explicacion]:
+        """TA-046: misma interfaz por lote; la plantilla no consume cuota."""
+        return [
+            self.generar(alerta, fecha_corte, contexto=contextos[i] if contextos else None)
+            for i, alerta in enumerate(alertas)
+        ]

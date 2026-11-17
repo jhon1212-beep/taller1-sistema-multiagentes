@@ -20,6 +20,22 @@ class GeneradorExplicacion(Protocol):
         ...
 
 
+class GeneradorExplicacionLote(Protocol):
+    """TA-046: explica todas las alertas de un corte en una sola solicitud.
+
+    Devuelve una explicación por alerta, en el mismo orden. Es opcional: un
+    generador que solo implementa ``generar`` se usa alerta por alerta.
+    """
+
+    def generar_lote(
+        self,
+        alertas: Sequence[Alerta],
+        fecha_corte: str,
+        contextos: Sequence[Sequence[Mapping[str, Any]]] | None = None,
+    ) -> list[Explicacion]:
+        ...
+
+
 class RepositorioSupervision(Protocol):
     """Contrato para guardar y consultar cortes por proyecto."""
 

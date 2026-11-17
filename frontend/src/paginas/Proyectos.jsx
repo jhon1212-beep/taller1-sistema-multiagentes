@@ -48,7 +48,7 @@ export default function Proyectos({ proyectos, onAbrir, onEditar, onNuevo, onAlt
               <div className="acciones small">
                 <Pill>GitHub</Pill>
                 <Pill>Notion</Pill>
-                <Pill>Google Drive</Pill>
+                {p.drive ? <Pill>Google Drive</Pill> : null}
               </div>
 
               <div className="acciones" style={{ marginTop: 'var(--sp-4)' }}>

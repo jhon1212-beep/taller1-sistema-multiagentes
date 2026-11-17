@@ -21,6 +21,12 @@ from app.compartido import modelos_orm as orm
 from app.compartido.db import obtener_sesion
 from app.modulos.autenticacion.rutas import docente_actual
 from app.modulos.supervision.adaptadores.sql import SqlSupervisionRepository
+from app.modulos.supervision.contrato import (
+    AlertasCorteOut,
+    ConsolidacionOut,
+    HistorialOut,
+    IndicadoresCorteOut,
+)
 from app.modulos.supervision.service import SupervisionService
 from app.modulos.supervision.sources import build_explainer, build_source_adapters
 
@@ -80,7 +86,7 @@ def _day(value: str | None) -> str | None:
 
 
 # -- rutas -------------------------------------------------------------------
-@router.post("/consolidacion")
+@router.post("/consolidacion", response_model=ConsolidacionOut)
 def run_consolidation(
     body: CutoffIn | None = None,
     project: orm.Proyecto = Depends(owned_project),
@@ -100,7 +106,7 @@ def run_consolidation(
         raise HTTPException(status_code=409, detail=str(error))
 
 
-@router.get("/indicadores")
+@router.get("/indicadores", response_model=IndicadoresCorteOut)
 def get_indicators(
     fecha_corte: str | None = Query(default=None),
     project: orm.Proyecto = Depends(owned_project),
@@ -112,7 +118,7 @@ def get_indicators(
     return result
 
 
-@router.get("/alertas")
+@router.get("/alertas", response_model=AlertasCorteOut)
 def get_alerts(
     fecha_corte: str | None = Query(default=None),
     project: orm.Proyecto = Depends(owned_project),
@@ -124,7 +130,7 @@ def get_alerts(
     return result
 
 
-@router.get("/historial")
+@router.get("/historial", response_model=HistorialOut)
 def get_history(
     project: orm.Proyecto = Depends(owned_project),
     service: SupervisionService = Depends(get_query_service),

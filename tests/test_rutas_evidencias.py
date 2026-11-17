@@ -71,12 +71,13 @@ def test_ruta_informa_fallo_de_la_fuente(cliente, monkeypatch, ruta, tipo, extra
     assert cuerpo["items"] == []
 
 
-def test_fuente_no_registrada_se_reporta_como_fallo(cliente, monkeypatch):
+def test_fuente_no_registrada_se_reporta_como_no_configurada(cliente, monkeypatch):
+    """Drive es opcional: si el proyecto no la registró no es un fallo."""
     _simular(monkeypatch, (None, []))
 
     cuerpo = cliente.get("/proyectos/1/documentos").json()
 
-    assert cuerpo["estado_fuente"] == "fallo"
+    assert cuerpo["estado_fuente"] == "no_configurada"
     assert cuerpo["ultima_extraccion"] is None
 
 

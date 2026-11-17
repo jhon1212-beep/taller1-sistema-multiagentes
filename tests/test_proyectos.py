@@ -66,11 +66,29 @@ def test_sin_integrantes_no_se_guarda(cliente):
     assert r.status_code == 422
 
 
-def test_falta_una_fuente_no_se_guarda(cliente):
-    fuentes = {**PROYECTO_VALIDO["fuentes"]}
-    del fuentes["drive"]
-    r = cliente.post("/proyectos", json={**PROYECTO_VALIDO, "fuentes": fuentes})
-    assert r.status_code == 422
+def test_falta_una_fuente_obligatoria_no_se_guarda(cliente):
+    for obligatoria in ("github", "notion"):
+        fuentes = {**PROYECTO_VALIDO["fuentes"]}
+        del fuentes[obligatoria]
+        r = cliente.post("/proyectos", json={**PROYECTO_VALIDO, "fuentes": fuentes})
+        assert r.status_code == 422, obligatoria
+
+
+def test_drive_es_opcional(cliente):
+    """Un proyecto sin carpeta de Drive se registra solo con GitHub y Notion."""
+    for sin_drive in ({}, {"drive": None}, {"drive": "   "}):
+        fuentes = {k: v for k, v in PROYECTO_VALIDO["fuentes"].items() if k != "drive"}
+        r = cliente.post("/proyectos", json={**PROYECTO_VALIDO, "fuentes": {**fuentes, **sin_drive}})
+        assert r.status_code == 201, sin_drive
+        assert r.json()["fuentes"]["drive"] is None
+
+
+def test_quitar_drive_al_editar(cliente):
+    creado = cliente.post("/proyectos", json=PROYECTO_VALIDO).json()
+    fuentes = {**PROYECTO_VALIDO["fuentes"], "drive": ""}
+    r = cliente.put(f"/proyectos/{creado['id']}", json={**PROYECTO_VALIDO, "fuentes": fuentes})
+    assert r.status_code == 200
+    assert r.json()["fuentes"]["drive"] is None
 
 
 def test_fechas_invertidas_no_se_guardan(cliente):

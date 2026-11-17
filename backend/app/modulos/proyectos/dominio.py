@@ -9,6 +9,10 @@ from dataclasses import dataclass, field
 from datetime import date
 
 TIPOS_FUENTE = ("github", "notion", "drive")
+# GitHub y Notion son obligatorias; Drive es opcional (hay equipos que no usan
+# una carpeta compartida). Un proyecto sin Drive simplemente no la registra.
+FUENTES_OBLIGATORIAS = ("github", "notion")
+FUENTES_OPCIONALES = ("drive",)
 
 
 class ProyectoInvalido(ValueError):
@@ -35,6 +39,6 @@ class Proyecto:
     url_publica: str
     elemento_verificar: str
     integrantes: list[Integrante]
-    fuentes: dict[str, str]  # {"github": ..., "notion": ..., "drive": ...}
+    fuentes: dict[str, str]  # {"github": ..., "notion": ...[, "drive": ...]}
     activo: bool = True
     id: int | None = None

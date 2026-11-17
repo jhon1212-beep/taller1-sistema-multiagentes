@@ -104,7 +104,7 @@ Esta separación evita acoplamiento y permite que los adaptadores y componentes 
 ## 6. Decisiones registradas (SP-001 y SP-002)
 
 - **SP-001 (Reyes):** LangGraph sobre CrewAI para orquestar los agentes, por su soporte de grafos con bifurcaciones condicionales y su integración con LangSmith para trazabilidad.
-- **SP-002:** gestor de tareas Notion (ya en uso por el equipo).
+- **SP-002 (Chávez):** Google Drive como tercera fuente frente a Jira Cloud (Notion ya cubre las tareas). Desde la semana 12, Drive es opcional por proyecto. Detalle: `docs/sprint1/SP-002.md`.
 
 ## 7. Próximos pasos
 

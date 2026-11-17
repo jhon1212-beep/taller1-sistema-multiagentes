@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import operator
+import time
 from datetime import datetime, timezone
 from typing import Annotated, Any, Callable, Mapping, TypedDict
 
@@ -12,6 +13,7 @@ from langgraph.types import Send
 from app.modulos.evidencias.dominio import Evidencia
 from app.modulos.evidencias.puertos import FuenteEvidencia
 from app.modulos.supervision.dominio import (
+    FUENTES_OPCIONALES,
     Alerta,
     EstadoFuente,
     Fuente,
@@ -19,6 +21,8 @@ from app.modulos.supervision.dominio import (
 )
 from app.modulos.supervision.grafo.estado import crear_estado_inicial
 from app.modulos.supervision.motor_indicadores import evaluar as evaluate_indicators
+from app.modulos.supervision.estabilidad import RetryPolicy, call_with_retry
+from app.modulos.supervision.explicacion import explicar_en_lote
 from app.modulos.supervision.pseudonymizer import Pseudonymizer
 from app.modulos.supervision.puertos import GeneradorExplicacion
 from app.modulos.supervision.adaptadores.plantilla import GeneradorExplicacionPlantilla
@@ -70,6 +74,8 @@ class SupervisorState(TypedDict):
     alertas: list[Alerta]
     raw_evidence: Annotated[list[Evidencia], operator.add]
     source_details: Annotated[dict[Fuente, dict[str, int]], merge_dicts]
+    # TA-030: intentos y duración de cada agente (medición de estabilidad).
+    source_runs: Annotated[dict[Fuente, dict[str, float]], merge_dicts]
 
 
 class AgentTask(TypedDict):
@@ -157,9 +163,11 @@ def build_supervisor_graph(
     adapters: Mapping[Fuente, FuenteEvidencia],
     engine: Engine | None = None,
     explainer: GeneradorExplicacion | None = None,
+    retry_policy: RetryPolicy | None = None,
 ):
     """Construye el Supervisor con cálculo de alertas y explicaciones."""
     run_engine = engine if engine is not None else evaluate_indicators
+    policy = retry_policy if retry_policy is not None else RetryPolicy.from_env()
     explanation_generator = explainer if explainer is not None else GeneradorExplicacionPlantilla()
 
     # Bloque E. Qué fuentes se pueden consultar
@@ -198,6 +206,11 @@ def build_supervisor_graph(
                 statuses[source] = "fallo"
                 errors[source] = NO_ADAPTER_ERROR
 
+            elif not references.get(source) and source in FUENTES_OPCIONALES:
+                # Drive opcional: no consultarla no es un fallo.
+                statuses[source] = "no_configurada"
+                errors[source] = None
+
             elif not references.get(source):
                 statuses[source] = "fallo"
                 errors[source] = NO_REFERENCE_ERROR
@@ -235,16 +248,27 @@ def build_supervisor_graph(
         def source_agent(task: AgentTask) -> dict:
             """Consulta el adaptador de la fuente y aplica el corte."""
             cutoff = parse_cutoff(task["fecha_corte"])
+            started = time.perf_counter()
+
+            def elapsed_ms() -> float:
+                return round((time.perf_counter() - started) * 1000, 1)
 
             try:
-                fetched = adapter.obtener_evidencias(
-                    referencia=task["reference"],
-                    proyecto_id=task["proyecto_id"],
+                # TA-030: reintento de errores transitorios y tiempo máximo por fuente.
+                fetched, attempts = call_with_retry(
+                    lambda: adapter.obtener_evidencias(
+                        referencia=task["reference"],
+                        proyecto_id=task["proyecto_id"],
+                    ),
+                    policy,
                 )
 
             except Exception as error:
                 # Una fuente caída no debe detener a las demás.
                 return {
+                    "source_runs": {
+                        source: {"intentos": getattr(error, "attempts", 1), "duracion_ms": elapsed_ms()}
+                    },
                     "estado_fuentes": {source: "fallo"},
                     "errores_fuentes": {
                         source: f"{type(error).__name__}: {error}"
@@ -272,6 +296,7 @@ def build_supervisor_graph(
 
             return {
                 "raw_evidence": kept,
+                "source_runs": {source: {"intentos": attempts, "duracion_ms": elapsed_ms()}},
                 "estado_fuentes": {source: "ok"},
                 "errores_fuentes": {source: None},
                 "source_details": {
@@ -311,9 +336,10 @@ def build_supervisor_graph(
         failed = {
             source
             for source, status in (state.get("estado_fuentes") or {}).items()
-            if status == "fallo"
+            if status in ("fallo", "no_configurada")
         }
-        # La falta de datos de una fuente caída no demuestra inactividad.
+        # La falta de datos de una fuente caída (o no registrada, como Drive
+        # cuando es opcional) no demuestra inactividad.
         alerts = [
             dict(alert) for alert in result["alertas"]
             if alert["fuente"] not in failed
@@ -322,21 +348,22 @@ def build_supervisor_graph(
 
     # Bloque I3. Explicaciones sin revelar nombres reales a Gemini.
     def explain(state: SupervisorState) -> dict:
-        """Redacta una explicación para cada alerta mediante el puerto AR-02."""
+        """Redacta las explicaciones de todas las alertas del corte.
+
+        TA-046: con un generador por lote (Gemini) es UNA solicitud por proyecto
+        y corte, para respetar el límite gratuito de solicitudes diarias.
+        """
         evidences = state.get("evidencias") or []
+        alerts = state.get("alertas") or []
         pseudonymizer = Pseudonymizer.from_evidences(evidences)
-        explained = []
-        for alert in state.get("alertas") or []:
-            context = pseudonymizer.alert_context(alert, evidences)
-            explanation = explanation_generator.generar(
-                alert, state["fecha_corte"], contexto=context
-            )
-            explained.append({
-                **alert,
-                "explicacion": explanation["texto"],
-                "origen_explicacion": explanation["origen"],
-            })
-        return {"alertas": explained}
+        contexts = [pseudonymizer.alert_context(alert, evidences) for alert in alerts]
+        explanations = explicar_en_lote(
+            explanation_generator, alerts, state["fecha_corte"], contexts
+        )
+        return {"alertas": [
+            {**alert, "explicacion": e["texto"], "origen_explicacion": e["origen"]}
+            for alert, e in zip(alerts, explanations)
+        ]}
 
     # Bloque J. Armado del grafo
     graph = StateGraph(SupervisorState)
@@ -428,4 +455,6 @@ def to_consolidated_report(
         ],
         "indicadores": dict(state["indicadores"]),
         "alertas": list(state["alertas"]),
+        # TA-030: intentos y duración por agente; solo de las fuentes consultadas.
+        "estabilidad": dict(state.get("source_runs") or {}),
     }
