@@ -12,20 +12,20 @@
 :root{
   /* --- 1. Color · marca ------------------------------------ */
   --brand:      #1f4e78;   /* azul institucional (primario)  */
-  --brand2:     #2e75b6;   /* azul de acción / enlaces       */
+  --brand2:     #246099;   /* azul de acción / enlaces (TA-031: contraste ≥ 4,5:1) */
   --soft:       #eaf2fb;   /* fondo azul tenue (hover, chips) */
 
   /* --- 2. Color · superficie y texto ---------------------- */
   --bg:         #f4f6fa;   /* fondo de la aplicación         */
   --panel:      #ffffff;   /* tarjetas y paneles             */
   --ink:        #1b2333;   /* texto principal                */
-  --muted:      #6b7488;   /* texto secundario               */
+  --muted:      #596277;   /* texto secundario (TA-031: contraste ≥ 4,5:1) */
   --line:       #e2e6ee;   /* bordes y separadores           */
 
   /* --- 3. Color · estado (semáforo de riesgo) ------------- */
-  --ok:         #1f9d55;   /* verde  · en curso              */
-  --warn:       #e0a100;   /* amarillo · atención            */
-  --bad:        #d64545;   /* rojo · riesgo                  */
+  --ok:         #187a42;   /* verde  · en curso (TA-031: contraste ≥ 4,5:1) */
+  --warn:       #8f6700;   /* ámbar  · atención (TA-031: contraste ≥ 4,5:1) */
+  --bad:        #b92d2d;   /* rojo · riesgo (TA-031: contraste ≥ 4,5:1) */
   --okbg:       #e6f6ec;   /* fondo verde   (badges)         */
   --warnbg:     #fff6da;   /* fondo amarillo(badges)         */
   --badbg:      #fde9e9;   /* fondo rojo    (badges)         */

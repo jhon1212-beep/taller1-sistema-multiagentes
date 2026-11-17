@@ -37,6 +37,12 @@ const SECCION = {
   historial: 'historial', sistema: 'sistema',
 }
 
+const TITULOS = {
+  login: 'Iniciar sesión', proyectos: 'Mis proyectos', nuevo: 'Registrar proyecto',
+  editar: 'Editar proyecto', detalle: 'Detalle del proyecto', dashboard: 'Dashboard',
+  alerta: 'Detalle de alerta', historial: 'Historial', sistema: 'Sistema visual',
+}
+
 /** La ruta vive en el hash de la URL; esta es la única lectura de esa fuente. */
 const rutaDeHash = () => window.location.hash.slice(1) || 'login'
 
@@ -63,6 +69,11 @@ export default function App() {
   }, [])
 
   useEffect(() => { window.scrollTo(0, 0) }, [ruta])
+
+  // TA-031 · Cada vista tiene su propio título de documento (pestaña, historial, lectores de pantalla).
+  useEffect(() => {
+    document.title = `${TITULOS[ruta] ?? 'Mis proyectos'} · Seguimiento de proyectos académicos`
+  }, [ruta])
 
   /**
    * Navega cambiando el hash, que a su vez actualiza el estado.

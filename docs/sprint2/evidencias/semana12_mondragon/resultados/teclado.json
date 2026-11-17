@@ -1,0 +1,72 @@
+{
+  "login": [
+    {
+      "etiqueta": "input",
+      "texto": "",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "button",
+      "texto": "Ingresar",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "body",
+      "texto": "Prototipo navegable · Datos simulados. A",
+      "foco_visible": false
+    },
+    {
+      "etiqueta": "input",
+      "texto": "",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "input",
+      "texto": "",
+      "foco_visible": true
+    }
+  ],
+  "entro_con_enter": true,
+  "proyectos": [
+    {
+      "etiqueta": "button",
+      "texto": "Mis proyectos",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "button",
+      "texto": "Dashboard",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "button",
+      "texto": "Historial",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "button",
+      "texto": "Sistema visual",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "button",
+      "texto": "Cerrar sesión",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "button",
+      "texto": "+ Registrar proyecto",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "select",
+      "texto": "Proyectos activos\nTodos los proyectos",
+      "foco_visible": true
+    },
+    {
+      "etiqueta": "button",
+      "texto": "Ver proyecto",
+      "foco_visible": true
+    }
+  ]
+}

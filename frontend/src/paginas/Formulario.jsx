@@ -21,13 +21,16 @@ const esURL = valor => {
 export default function Formulario({ proyecto, onGuardar, onCancelar }) {
   const [datos, setDatos] = useState({ ...VACIO, ...(proyecto || {}) })
   const [error, setError] = useState('')
+  const [invalidos, setInvalidos] = useState({})
   const editando = Boolean(proyecto)
 
   const campo = (clave, etiqueta, type = 'text', ayuda) => (
     <Campo
       etiqueta={etiqueta}
       type={type}
+      name={clave}
       required={!OPCIONALES.includes(clave)}
+      aria-invalid={invalidos[clave] ? 'true' : undefined}
       ayuda={ayuda}
       value={datos[clave] ?? ''}
       onChange={e => setDatos({ ...datos, [clave]: e.target.value })}
@@ -40,23 +43,39 @@ export default function Formulario({ proyecto, onGuardar, onCancelar }) {
       Object.keys(VACIO).map(k => [k, String(datos[k] ?? '').trim()]),
     )
 
-    if (!limpio.nombre) {
-      return setError('El nombre del proyecto es obligatorio. No se guardó el proyecto.')
+    // TA-031 · H3: se validan todos los campos a la vez, se marcan los inválidos
+    // (aria-invalid) y el foco va al primero.
+    const errs = {}
+    const mensajes = []
+    const marcar = (claves, msg) => {
+      claves.forEach(k => { errs[k] = true })
+      mensajes.push(msg)
     }
-    const faltante = Object.entries(limpio).some(([k, v]) => !v && !OPCIONALES.includes(k))
-    if (faltante || !limpio.integrantes.split(',').some(v => v.trim())) {
-      return setError('Completa todos los campos obligatorios y registra al menos un integrante.')
+    if (!limpio.nombre) marcar(['nombre'], 'El nombre del proyecto es obligatorio.')
+    const faltan = Object.entries(limpio)
+      .filter(([k, v]) => !v && k !== 'nombre' && k !== 'integrantes' && !OPCIONALES.includes(k))
+      .map(([k]) => k)
+    if (faltan.length) marcar(faltan, 'Completa todos los campos obligatorios.')
+    if (!limpio.integrantes.split(',').some(v => v.trim())) {
+      marcar(['integrantes'], 'Registra al menos un integrante.')
     }
-    if (limpio.inicio > limpio.fin) {
-      return setError('La fecha de fin debe ser igual o posterior a la fecha de inicio.')
+    if (limpio.inicio && limpio.fin && limpio.inicio > limpio.fin) {
+      marcar(['fin'], 'La fecha de fin debe ser igual o posterior a la fecha de inicio.')
     }
-    const enlaces = ['github', 'notion', 'url', ...(limpio.drive ? ['drive'] : [])]
-    if (!enlaces.every(k => esURL(limpio[k]))) {
-      return setError(
-        'Las referencias de fuentes y la URL pública deben ser direcciones HTTP o HTTPS válidas.',
-      )
+    const urlsMalas = ['github', 'notion', 'url', 'drive'].filter(k => limpio[k] && !esURL(limpio[k]))
+    if (urlsMalas.length) {
+      marcar(urlsMalas, 'Las referencias de fuentes y la URL pública deben ser direcciones HTTP o HTTPS válidas.')
     }
 
+    if (mensajes.length) {
+      setInvalidos(errs)
+      setError(mensajes.join(' '))
+      const primero = Object.keys(VACIO).find(k => errs[k])
+      requestAnimationFrame(() => e.target.elements[primero]?.focus())
+      return
+    }
+
+    setInvalidos({})
     setError('')
     onGuardar(limpio)
   }
@@ -86,7 +105,9 @@ export default function Formulario({ proyecto, onGuardar, onCancelar }) {
           <Campo
             etiqueta="Integrantes del equipo (al menos uno; separados por coma)"
             as="textarea"
+            name="integrantes"
             required
+            aria-invalid={invalidos.integrantes ? 'true' : undefined}
             value={datos.integrantes}
             onChange={e => setDatos({ ...datos, integrantes: e.target.value })}
           />

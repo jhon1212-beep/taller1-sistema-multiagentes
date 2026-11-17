@@ -235,7 +235,7 @@ export default function DashboardApi({ proyecto, onAlerta, onValidacion, onHisto
               detalle="Tareas en «Listo» · Notion"
               ayuda={<AyudaIndicador id="I1" valor={ind.indicadores.I1} dia={diaMostrado} />}
             >
-              <Barra porcentaje={ind.indicadores.I1 ?? 0} />
+              <Barra porcentaje={ind.indicadores.I1 ?? 0} etiqueta="Indicador I1" />
             </Estadistica>
             <Estadistica
               etiqueta={`${INDICADORES.I2.etiqueta} (I2)`}
