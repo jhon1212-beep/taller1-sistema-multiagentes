@@ -1,0 +1,16 @@
+﻿gitleaks : 
+En línea: 15 Carácter: 1
++ gitleaks detect --source . --log-opts="--all --no-textconv" --report- ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    ○
+    │╲
+    │ ○
+    ○ ░
+    ░    gitleaks
+
+12:05PM INF 154 commits scanned.
+12:05PM INF scanned ~12304432 bytes (12.30 MB) in 760ms
+12:05PM INF no leaks found

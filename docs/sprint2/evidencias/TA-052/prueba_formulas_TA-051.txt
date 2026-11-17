@@ -1,0 +1,16 @@
+Prueba de las formulas de TA-051_Tabulacion_piloto.xlsx con datos SINTETICOS (no son datos del piloto)
+Entrada: 9 tareas (7 "Si, sin ayuda", 1 con ayuda, 1 "No"), SUS = 5,1,5,1,5,1,5,1,5,2 y utilidad = 5,4,4,5,3,4
+
+Medida                              Valor   Esperado a mano   Criterio        Cumple
+Tareas sin ayuda (de 9)             7       7                 >= 7            Si
+Tasa de exito sin ayuda             78 %    7/9 = 77,8 %      >= 80 %         No
+Tareas dentro del tiempo meta       56 %    5/9 = 55,6 %      >= 70 %         No
+Tareas con >= 3 errores             2       2                 Registrar       -
+Problemas de severidad 3-4          2       2                 Issues          -
+Puntaje SUS                         97,5    39 x 2,5 = 97,5   >= 68           Si
+Utilidad promedio                   4,17    25/6 = 4,17       >= 4            Si
+Utilidad minima                     3       3                 ninguna < 3     Si
+
+Resultado: las formulas calculan lo esperado.
+Hallazgo: con 7 de 9 la tasa es 77,8 %, y el criterio dice ">= 80 % (>= 7 de 9)". Ambas condiciones no coinciden:
+80 % de 9 tareas son 7,2, o sea que haria falta 8 de 9.

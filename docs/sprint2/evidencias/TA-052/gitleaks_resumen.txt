@@ -1,0 +1,17 @@
+PS> gitleaks version
+8.30.1
+
+PS> gitleaks detect --source . --log-opts="--all --no-textconv" --redact
+INF 154 commits scanned.
+INF scanned ~12.30 MB
+WRN leaks found: 3                      (primera corrida; reporte: gitleaks_antes_de_ignorar.json)
+
+Los 3 hallazgos (regla generic-api-key) son falsos positivos:
+  1. tests/integration/test_ta022_supervision_api.py:25   contrasena fija solo para la base de pruebas
+  2. backend/app/modulos/autenticacion/rutas.py:60        variable "secreto" leida de JWT_SECRET; sin valor literal
+  3. .env.example:28                                      LANGSMITH_API_KEY vacia (otro commit del caso ya ignorado)
+Se agregaron sus huellas a .gitleaksignore, con la justificacion de cada una.
+
+PS> gitleaks detect --source . --log-opts="--all --no-textconv" --redact
+INF 154 commits scanned.
+INF no leaks found                      (exit code 0)
